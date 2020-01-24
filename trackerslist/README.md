@@ -1,3 +1,3 @@
 **Trackers list**
 
-List of trackers for torrent programs.
+My list of trackers for torrent programs.
