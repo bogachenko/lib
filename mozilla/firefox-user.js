@@ -956,11 +956,6 @@ user_pref("webgl.disable-fail-if-major-performance-caveat", true);
 // Управление геймпадом
 user_pref("dom.gamepad.enabled", false);
 
-// Pointer events
-// События указателя
-user_pref("dom.w3c_pointer_events.enabled", false);
-user_pref("dom.pointer-lock.enabled", false);
-
 // Shield
 // Щит
 user_pref("app.normandy.enabled", false);

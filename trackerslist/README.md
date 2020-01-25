@@ -4,7 +4,7 @@ My list of trackers for torrent programs.
 
 *Using*
 
-RAW link
-`https://raw.githubusercontent.com/bogachenko/lib/master/trackerslist/trackerslist.txt`
-or
+RAW link<br>
+`https://raw.githubusercontent.com/bogachenko/lib/master/trackerslist/trackerslist.txt`<br>
+or<br>
 `https://git.io/JvqOB`
