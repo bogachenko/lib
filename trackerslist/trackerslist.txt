@@ -218,6 +218,7 @@ http://tracker.tntvillage.scambioetico.org:2710/announce
 http://tracker.torrentbay.to:6969/announce
 http://tracker.torrentyorg.pl/announce
 http://tracker.torrentyorg.pl:80/announce
+http://tracker.trackerfix.com/announce
 http://tracker.trackerfix.com:80/announce
 http://tracker.tvunderground.org.ru:3218/announce
 http://tracker.uw0.xyz:6969/announce
@@ -283,10 +284,15 @@ https://tracker.torrentsnows.com:443/announce
 https://tracker.vectahosting.eu:2053/announce
 https://tracker6.lelux.fi:443/announce
 https://www.wareztorrent.com/announce
+udp://10.rarbg.com/announce
 udp://104.238.198.186:8000/announce
 udp://107.150.14.110:6969/announce
 udp://109.121.134.121:1337/announce
 udp://109.248.43.36:6969/announce
+udp://11.rarbg.com/announce
+udp://11.rarbg.com:80/announce
+udp://11.rarbg.me/announce
+udp://11.rarbg.me:80/announce
 udp://114.55.113.60:6969/announce
 udp://128.199.70.66:5944/announce
 udp://151.80.120.114:2710/announce
@@ -380,6 +386,7 @@ udp://exodus.desync.com:6969
 udp://exodus.desync.com:6969/announce
 udp://explodie.org:6969
 udp://explodie.org:6969/announce
+udp://glotorrents.com:6969/announce
 udp://glotorrents.pw:6969/announce
 udp://inferno.demonoid.pw:3418/announce
 udp://ipv4.tracker.harry.lu:80/announce
@@ -388,8 +395,10 @@ udp://ipv6.tracker.harry.lu:80/announce
 udp://ipv6.tracker.zerobytes.xyz:16661
 udp://ipv6.tracker.zerobytes.xyz:16661/announce
 udp://mgtracker.org:2710/announce
+udp://mgtracker.org:6969
 udp://newtoncity.org:6969/announce
 udp://open.demonii.com:1337
+udp://open.demonii.com:1337/announce
 udp://open.demonii.si:1337/announce
 udp://open.nyap2p.com:6969/announce
 udp://open.stealth.si:80/announce
@@ -402,6 +411,7 @@ udp://p4p.arenabg.ch:1337/announce
 udp://p4p.arenabg.com:1337
 udp://p4p.arenabg.com:1337/announce
 udp://peerfect.org:6969/announce
+udp://public.popcorn-tracker.org:6969
 udp://public.popcorn-tracker.org:6969/announce
 udp://qg.lorzl.gq:2710/announce
 udp://retracker.akado-ural.ru:80/announce
@@ -428,8 +438,10 @@ udp://tracker.aletorrenty.pl:2710/announce
 udp://tracker.birkenwald.de:6969/announce
 udp://tracker.bittor.pw:1337/announce
 udp://tracker.blackunicorn.xyz:6969
+udp://tracker.ccc.de:80
 udp://tracker.coppersurfer.tk:6969
 udp://tracker.coppersurfer.tk:6969/announce
+udp://tracker.coppersurfer.tk:80
 udp://tracker.cyberia.is:6969/announce
 udp://tracker.cypherpunks.ru:6969/announce
 udp://tracker.desu.sh:6969/announce
@@ -449,6 +461,7 @@ udp://tracker.ilibr.org:6969/announce
 udp://tracker.ilibr.org:80/announce
 udp://tracker.internetwarriors.net:1337
 udp://tracker.internetwarriors.net:1337/announce
+udp://tracker.istole.it:80/announce
 udp://tracker.justseed.it:1337/announce
 udp://tracker.kamigami.org:2710/announce
 udp://tracker.kicks-ass.net:80/announce
@@ -463,6 +476,7 @@ udp://tracker.msm8916.com:6969/announce
 udp://tracker.nextrp.ru:6969/announce
 udp://tracker.nyaa.uk:6969/announce
 udp://tracker.open-internet.nl:6969/announce
+udp://tracker.openbittorrent.com
 udp://tracker.openbittorrent.com:80
 udp://tracker.openbittorrent.com:80/announce
 udp://tracker.opentrackr.org:1337
@@ -472,6 +486,7 @@ udp://tracker.pirateparty.gr:6969/
 udp://tracker.pirateparty.gr:6969/announce
 udp://tracker.piratepublic.com:1337/announce
 udp://tracker.port443.xyz:6969/announce
+udp://tracker.publicbt.com:80
 udp://tracker.publicbt.com:80/announce
 udp://tracker.sbsub.com:2710/announce
 udp://tracker.sith.su:80/announce
@@ -480,9 +495,11 @@ udp://tracker.sktorrent.net:6969/announce
 udp://tracker.skyts.net:6969/announce
 udp://tracker.supertracker.net:1337/announce
 udp://tracker.swateam.org.uk:2710/announce
+udp://tracker.thepornvilla.com:6969/announce
 udp://tracker.tiny-vps.com:6969/announce
 udp://tracker.torrent.eu.org:451/announce
 udp://tracker.torrentbay.to:6969/announce
+udp://tracker.trackerfix.com:80/announce
 udp://tracker.tvunderground.org.ru:3218/announce
 udp://tracker.uw0.xyz:6969/announce
 udp://tracker.vanitycore.co:6969/announce
