@@ -13,25 +13,21 @@ timedatectl set-ntp true
 echo 'Cоздание разделов'
 (
   echo o;
-
   echo n;
-  echo;
-  echo;
+  echo p;
+  echo 1;
   echo;
   echo +100M;
-
   echo n;
+  echo p;
+  echo 2;
   echo;
-  echo;
-  echo;
-  echo +20G;
-
+  echo +30G;
   echo n;
+  echo p;
+  echo 3;
   echo;
-  echo;
-  echo;
-  echo +1024M;
-
+  echo +8192M;
   echo n;
   echo p;
   echo;
