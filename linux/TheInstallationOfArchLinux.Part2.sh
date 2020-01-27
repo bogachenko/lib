@@ -10,7 +10,7 @@ username='bogachenko'
 echo 'Прописываем имя компьютера'
 echo $hostname > /etc/hostname
 
-echo '3.4 Добавляем русскую локаль системы'
+echo 'Добавляем русский и английский язык для системы'
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen 
 
@@ -27,7 +27,7 @@ echo 'FONT=cyr-sun16' >> /etc/vconsole.conf
 echo 'Создадим загрузочный RAM диск'
 mkinitcpio -p linux
 
-echo '3.5 Устанавливаем загрузчик'
+echo 'Устанавливаем загрузчик'
 pacman -Syy
 pacman -S grub --noconfirm 
 grub-install /dev/sda

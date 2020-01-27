@@ -11,32 +11,7 @@ echo 'Синхронизация системных часов'
 timedatectl set-ntp true
 
 echo 'Cоздание разделов'
-(
-  echo o;
-  echo n;
-  echo p;
-  echo 1;
-  echo;
-  echo +100M;
-  echo n;
-  echo p;
-  echo 2;
-  echo;
-  echo +30G;
-  echo n;
-  echo p;
-  echo 3;
-  echo;
-  echo +8192M;
-  echo n;
-  echo p;
-  echo;
-  echo;
-  echo a;
-  echo 1;
-
-  echo w;
-) | fdisk /dev/sda
+cfdisk
 
 echo 'Ваша разметка диска'
 fdisk -l
