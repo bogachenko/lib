@@ -11,40 +11,16 @@ echo 'Синхронизация системных часов'
 timedatectl set-ntp true
 
 echo 'Cоздание разделов'
-(
-  echo o;
-  echo n;
-  echo p;
-  echo 1;
-  echo;
-  echo +100M;
-  echo n;
-  echo p;
-  echo 2;
-  echo;
-  echo +30G;
-  echo n;
-  echo p;
-  echo 3;
-  echo;
-  echo +8192M;
-  echo n;
-  echo p;
-  echo;
-  echo;
-  echo a;
-  echo 1;
-  echo w;
-) | fdisk /dev/sda
+cfdisk
 
 echo 'Ваша разметка диска'
 fdisk -l
 
 echo 'Форматирование дисков'
-mkfs.ext2  /dev/sda1 -L boot
-mkfs.ext4  /dev/sda2 -L root
+mkfs.ext2 /dev/sda1 -L boot
+mkfs.ext4 /dev/sda2 -L root
 mkswap /dev/sda3 -L swap
-mkfs.ext4  /dev/sda4 -L home
+mkfs.ext4 /dev/sda4 -L home
 
 echo 'Монтирование дисков'
 mount /dev/sda2 /mnt
@@ -62,10 +38,10 @@ genfstab -pU /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 
 echo 'Прописываем имя компьютера'
-echo bogachenko > /etc/hostname
+echo "bogachenko" >> /etc/hostname
 
 echo 'Добавляем русский и английский язык для системы'
-echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen 
 
 echo 'Обновим текущую локаль системы'
