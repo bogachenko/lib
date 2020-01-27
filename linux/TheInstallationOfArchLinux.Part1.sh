@@ -60,3 +60,4 @@ pacstrap /mnt base base-devel linux linux-firmware vim dhcpcd netctl
 echo 'Настройка системы'
 genfstab -pU /mnt >> /mnt/etc/fstab
 
+arch-chroot /mnt sh -c "$(curl -fsSL https://git.io/JvmCd)"

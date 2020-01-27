@@ -4,8 +4,8 @@
 # Author: Bogachenko Vyacheslav
 # Mail: bogachenkove@gmail.com
 
-read -p "Введите имя компьютера: " hostname
-read -p "Введите имя пользователя: " username
+hostname='bogachenko'
+username='bogachenko'
 
 echo 'Прописываем имя компьютера'
 echo $hostname > /etc/hostname
@@ -67,13 +67,15 @@ echo 'Ставим иксы и драйвера'
 pacman -S $gui_install
 
 echo "Какое DE ставим?"
-read -p "1 - XFCE, 2 - KDE, 3 - Openbox: " vm_setting
+read -p "1 - XFCE, 2 - KDE, 3 - Openbox, 4 - i3 WM: " vm_setting
 if [[ $vm_setting == 1 ]]; then
-  pacman -S xfce4 xfce4-goodies --noconfirm
+  pacman -Sy xfce4 xfce4-goodies --noconfirm
 elif [[ $vm_setting == 2 ]]; then
-  pacman -Sy plasma-meta kdebase --noconfirm
-elif [[ $vm_setting == 3 ]]; then  
-  pacman -S  openbox xfce4-terminal
+  pacman -Sy plasma-meta kdebase plasma-wayland-session --noconfirm
+elif [[ $vm_setting == 3 ]]; then
+  pacman -Sy  openbox xfce4-terminal
+elif [[ $vm_setting == 4 ]]; then
+  pacman -Sy i3 --noconfirm
 fi
 
 echo 'Cтавим DM'
