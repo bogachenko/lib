@@ -7,12 +7,18 @@
 loadkeys ru
 setfont cyr-sun16
 timedatectl set-ntp true
-cfdisk
+
+echo "Вы хотите использовать cfdisk или fdisk для создания разделов диска?"
+read -p "1 - cfdisk, 0 - fdisk: " mark_disk
+if [[ $mark_disk == 0 ]]; then
+	cfdisk
+elif [[ $mark_disk == 1 ]]; then
+	fdisk /dev/sda
+fi
 fdisk -l
-mkfs.ext2 /dev/sda1 -L boot
-mkfs.ext4 /dev/sda2 -L root
-mkswap /dev/sda3 -L swap
-mkfs.ext4 /dev/sda4 -L home
+
+parted
+
 mount /dev/sda2 /mnt
 mkdir /mnt/{boot,home}
 mount /dev/sda1 /mnt/boot
@@ -65,3 +71,4 @@ systemctl enable lxdm
 pacman -S ttf-liberation ttf-dejavu --noconfirm
 pacman -S networkmanager network-manager-applet ppp --noconfirm
 systemctl enable NetworkManager
+exit
