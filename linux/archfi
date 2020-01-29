@@ -4,27 +4,35 @@
 # Author: Bogachenko Vyacheslav
 # Mail: bogachenkove@gmail.com
 
-loadkeys ru
-setfont cyr-sun16
-timedatectl set-ntp true
-
-echo "Вы хотите использовать cfdisk или fdisk для создания разделов диска?"
-read -p "1 - cfdisk, 0 - fdisk: " mark_disk
-if [[ $mark_disk == 0 ]]; then
-	cfdisk
-elif [[ $mark_disk == 1 ]]; then
-	fdisk /dev/sda
+echo "Choose language: "
+read -p "1 - Russian, 0 - English: " lang_change
+if [[ $lang_change == 0 ]]; then
+	loadkeys ru
+	setfont cyr-sun16
+elif [[ $lang_change == 1 ]]; then
+	loadkeys en
 fi
-fdisk -l
 
+timedatectl set-ntp true
 parted
-
 mount /dev/sda2 /mnt
 mkdir /mnt/{boot,home}
 mount /dev/sda1 /mnt/boot
 swapon /dev/sda3
 mount /dev/sda4 /mnt/home
-pacstrap /mnt base base-devel linux linux-firmware vim dhcpcd netctl
+
+echo "Checking network connection."
+echo "Please wait..."
+ping google.com -c 1 >/dev/null 2>&1
+
+if [ $? != "0" ]
+then
+    echo "Network error, please check network connection"
+    echo "exiting..."
+    exit
+fi
+
+pacstrap /mnt base base-devel linux linux-firmware vim dhcpcd netctl zsh
 genfstab -pU /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 echo "bogachenko" >> /etc/hostname
