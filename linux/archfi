@@ -4,16 +4,38 @@
 # Author: Bogachenko Vyacheslav
 # Mail: bogachenkove@gmail.com
 
-echo "Choose language: "
-read -p "1 - Russian, 0 - English: " lang_change
-if [[ $lang_change == 0 ]]; then
-	loadkeys ru
-	setfont cyr-sun16
-elif [[ $lang_change == 1 ]]; then
-	loadkeys en
+HEADER="Arch Linux Fast Installer"
+CHROOT="arch-chroot /mnt"
+EXIT_MSG="You have exited the archfi-script!" 
+
+loadkeys us
+KEY_MAP="us"
+timedatectl set-ntp true
+
+if [ -d "/sys/firmware/efi/efivars" ]
+then
+    BOOT_MODE="UEFI"
+else
+    BOOT_MODE="BIOS"
 fi
 
-timedatectl set-ntp true
+echo "Checking network connection."
+echo "Please wait..."
+ping google.com -c 1 >/dev/null 2>&1
+
+if [ $? != "0" ]
+	echo "Good, you have an internet connection!"
+then
+    echo "Network error, please check network connection!"
+    exit
+fi
+
+sleep 5
+
+title="Hello"
+msg="Welcome to the fast installer of Arch Linux!"
+dialog --no-cancel --title "$title" --backtitle "$HEADER" --msgbox "$msg" 9 45
+
 parted
 mount /dev/sda2 /mnt
 mkdir /mnt/{boot,home}
@@ -21,16 +43,6 @@ mount /dev/sda1 /mnt/boot
 swapon /dev/sda3
 mount /dev/sda4 /mnt/home
 
-echo "Checking network connection."
-echo "Please wait..."
-ping google.com -c 1 >/dev/null 2>&1
-
-if [ $? != "0" ]
-then
-    echo "Network error, please check network connection"
-    echo "exiting..."
-    exit
-fi
 
 pacstrap /mnt base base-devel linux linux-firmware vim dhcpcd netctl zsh
 genfstab -pU /mnt >> /mnt/etc/fstab
@@ -80,3 +92,5 @@ pacman -S ttf-liberation ttf-dejavu --noconfirm
 pacman -S networkmanager network-manager-applet ppp --noconfirm
 systemctl enable NetworkManager
 exit
+umount -R /mnt
+reboot
