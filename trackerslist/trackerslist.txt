@@ -1005,6 +1005,12 @@ udp://wambo.club:1337/announce
 udp://www.loushao.net:8080/announce
 udp://xxxtor.com:2710/announce
 udp://z.crazyhd.com:2710/announce
+udp:/ntost12.xyz:6969/announce
+http://bt.dmhy.net/annonuce
+http://ipv4.tracker.harry.lu/annouce
+http://share.dmhy.me/annonuce
+udp:/ndrotracker.biz:1337/announce
+udp:/tracker.org:6969/announce
 udp://zephir.monocul.us:6969/announce
 udp://zer0day.ch:1337
 udp://zer0day.ch:1337/announce
