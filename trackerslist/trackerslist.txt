@@ -182,6 +182,7 @@ http://btfile.sdo.com:6961/announce
 http://bttrack.9you.com:8080/announce
 http://bttracker.debian.org:6969/announce
 http://carapax.net:6969/announce
+http://cx42light.cn:39652/announce
 http://defaultro.top:6960/announce
 http://denis.stalker.h3q.com/announce
 http://denis.stalker.h3q.com/announce.php
@@ -313,6 +314,7 @@ http://rotracker.ohys.net/announce
 http://rotracker.ohys.net:80/announce
 http://rstracker.ohys.net/announce
 http://rstracker.ohys.net:80/announce
+http://rutracker.ohys.net:80/announce
 http://sandrotracker.biz:1337/announce
 http://sd-95.allfon.net:2710/announce
 http://secure.pow7.com/announce
@@ -383,6 +385,7 @@ http://tracker.acg.gg:2710/announce
 http://tracker.acgnx.se/announce
 http://tracker.acgnx.se:80/announce
 http://tracker.aletorrenty.pl:2710/announce
+http://tracker.animeun.com:6969/announce
 http://tracker.anirena.com/announce
 http://tracker.anirena.com:6969/announce
 http://tracker.anirena.com:80/announce
@@ -418,7 +421,8 @@ http://tracker.devil-torrents.pl/announce
 http://tracker.devil-torrents.pl:80/announce
 http://tracker.dler.org:6969/announce
 http://tracker.dm258.cn:7070/announce
-http://tracker.dm258.cn:7070/announce��
+http://tracker.dm258.cn:7070/announce
+http://tracker.dmcomic.org:2710/announce
 http://tracker.dmguo.com:2710/announce
 http://tracker.dmhy.org:8000/announce
 http://tracker.dutchtracking.com/announce
@@ -458,6 +462,8 @@ http://tracker.kisssub.org:2015/announce
 http://tracker.kisssub.org:80/announce
 http://tracker.ktxp.com:6868/announce
 http://tracker.ktxp.com:7070/announce
+http://tracker.ktxp.org:6868/announce
+http://tracker.ktxp.org:7070/announce
 http://tracker.kuroy.me:5944/announce
 http://tracker.lelux.fi/announce
 http://tracker.lelux.fi:80/announce
@@ -489,6 +495,7 @@ http://tracker.publicbt.com/announce
 http://tracker.publicbt.com:80/announce
 http://tracker.publictorrent.net/announce
 http://tracker.publictorrent.net:80/announce
+http://tracker.saiyaman.info:7979/announce
 http://tracker.sandrotracker.biz:6969/announce
 http://tracker.sbsub.com:2710/announce
 http://tracker.seedboxing.tk:9000/announce
@@ -623,6 +630,7 @@ https://p2pdl.com:443/announce
 https://rt.msk-server.ga:443/announce
 https://rt6.msk-server.ga:443/announce
 https://share.dmhy.org/
+https://share.dmhy.org/annonuce
 https://t-115.rhcloud.com/only_for_ylbud
 https://t.overflow.biz:443/announce
 https://t.quic.ws/announce
@@ -968,6 +976,7 @@ udp://tracker.sbsub.com:2710/announce
 udp://tracker.sith.su:80/announce
 udp://tracker.sktorrent.net:6969
 udp://tracker.sktorrent.net:6969/announce
+udp://tracker.skynetcloud.site:6969/announce
 udp://tracker.skynetcloud.tk:6969/announce
 udp://tracker.skyts.net:6969/announce
 udp://tracker.supertracker.net:1337/announce
@@ -1005,12 +1014,6 @@ udp://wambo.club:1337/announce
 udp://www.loushao.net:8080/announce
 udp://xxxtor.com:2710/announce
 udp://z.crazyhd.com:2710/announce
-udp:/ntost12.xyz:6969/announce
-http://bt.dmhy.net/annonuce
-http://ipv4.tracker.harry.lu/annouce
-http://share.dmhy.me/annonuce
-udp:/ndrotracker.biz:1337/announce
-udp:/tracker.org:6969/announce
 udp://zephir.monocul.us:6969/announce
 udp://zer0day.ch:1337
 udp://zer0day.ch:1337/announce
