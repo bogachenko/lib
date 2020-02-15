@@ -198,6 +198,35 @@ user_pref("browser.bookmarks.max_backups", 3);
 //		2 = Ничего не делать
 user_pref("browser.backspace_action", 2);
 
+// Activity stream expansion
+// Расширение Activity stream
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
+user_pref("browser.newtabpage.activity-stream.default.sites", "");
+user_pref("browser.library.activity-stream.enabled", false);
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.cfr", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.cfr-fxa", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.message-groups", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.onboarding", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.whats-new-panel", "");
+user_pref("browser.newtabpage.activity-stream.discoverystream.config", "");
+user_pref("browser.newtabpage.activity-stream.discoverystream.enabled", false);
+user_pref("browser.newtabpage.activity-stream.discoverystream.endpointSpocsClear", "");
+user_pref("browser.newtabpage.activity-stream.discoverystream.endpoints", "");
+user_pref("browser.newtabpage.activity-stream.feeds.aboutpreferences", false);
+user_pref("browser.newtabpage.activity-stream.feeds.asrouterfeed", false);
+user_pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false);
+user_pref("browser.newtabpage.activity-stream.feeds.favicon", false);
+user_pref("browser.newtabpage.activity-stream.feeds.newtabinit", false);
+user_pref("browser.newtabpage.activity-stream.feeds.places", false);
+user_pref("browser.newtabpage.activity-stream.feeds.prefs", false);
+user_pref("browser.newtabpage.activity-stream.feeds.section.topstories.options", false);
+user_pref("browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines", "");
+user_pref("browser.newtabpage.activity-stream.pocketCta", "");
+user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion.endpoint", "");
+user_pref("browser.newtabpage.activity-stream.showSponsored", false);
+
 // WebRTC (Web Real-Time Communication)
 // Peer-to-peer data transfer and WebRTC that lets you know your real IP. WebRTC provides voice communication, video chats, P2P file sharing between browser applications without the use of third-party add-ons.
 // WebRTC (Веб Связь в Реальном Времени)
