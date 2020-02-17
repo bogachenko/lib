@@ -227,6 +227,15 @@ user_pref("browser.newtabpage.activity-stream.pocketCta", "");
 user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion.endpoint", "");
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
 
+// Защита от отслеживания
+// Tracking protection
+user_pref("privacy.trackingprotection.enabled", false);
+user_pref("privacy.trackingprotection.pbmode.enabled", false);
+user_pref("privacy.trackingprotection.fingerprinting.enabled", false);
+user_pref("privacy.trackingprotection.cryptomining.enabled", false);
+user_pref("privacy.socialtracking.block_cookies.enabled", false);
+user_pref("privacy.trackingprotection.socialtracking.enabled", false);
+
 // WebRTC (Web Real-Time Communication)
 // Peer-to-peer data transfer and WebRTC that lets you know your real IP. WebRTC provides voice communication, video chats, P2P file sharing between browser applications without the use of third-party add-ons.
 // WebRTC (Веб Связь в Реальном Времени)
