@@ -440,7 +440,6 @@ http://tracker.devil-torrents.pl/announce
 http://tracker.devil-torrents.pl:80/announce
 http://tracker.dler.org:6969/announce
 http://tracker.dm258.cn:7070/announce
-http://tracker.dm258.cn:7070/announce
 http://tracker.dmcomic.org:2710/announce
 http://tracker.dmguo.com:2710/announce
 http://tracker.dmhy.org:8000/announce
