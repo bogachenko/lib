@@ -311,6 +311,9 @@ user_pref("toolkit.telemetry.ecosystemtelemetry.enabled", false);
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion", false);
+user_pref("browser.newtabpage.activity-stream.feeds.sections", false);
+user_pref("browser.newtabpage.activity-stream.feeds.systemtick", false);
+user_pref("browser.newtabpage.activity-stream.filterAdult", false);
 
 // Health report details
 // This feature collects advanced information about the health of the browser and sends it to Mozilla servers, in particular: the number of falls, information about slow loading. It includes data on hardware, operating system, browser version, installed add-ons (number and type), intra-browser events, rendering, session recovery, session duration, profile age, number of pages visited.
