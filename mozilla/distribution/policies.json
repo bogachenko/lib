@@ -1,0 +1,12 @@
+{
+  "policies": {
+    "OverridePostUpdatePage": "",
+    "DisableFeedbackCommands": true,
+    "DisableFirefoxStudies": true,
+	"DisableFirefoxScreenshots": true,
+    "DisablePocket": true,
+    "DisableSystemAddonUpdate": true,
+    "DisableTelemetry": true,
+    "NewTabPage": true
+  }
+}
