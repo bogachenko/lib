@@ -2,7 +2,7 @@
 
 // Warning in "about:config"
 // Предупреждение в "about:config"
-user_pref("general.warnOnAboutConfig", false);
+user_pref("general.aboutConfig.enable", false);
 
 // Warning about closing multiple tabs
 // Предупреждение о закрытии нескольких вкладок
@@ -1008,3 +1008,26 @@ user_pref("browser.safebrowsing.downloads.remote.block_dangerous", false);
 user_pref("browser.safebrowsing.downloads.remote.block_dangerous_host", false);
 user_pref("browser.safebrowsing.downloads.remote.block_potentially_unwanted", false);
 user_pref("browser.safebrowsing.downloads.remote.block_uncommon", false);
+
+// Content blocking
+// Блокировка контента
+user_pref("browser.contentblocking.category", "custom");
+user_pref("browser.contentblocking.cfr-milestone.enabled", false);
+user_pref("browser.contentblocking.control-center.ui.showBlockedLabels", false);
+user_pref("browser.contentblocking.cryptomining.preferences.ui.enabled", false);
+user_pref("browser.contentblocking.database.enabled", false);
+user_pref("browser.contentblocking.fingerprinting.preferences.ui.enabled", false);
+user_pref("browser.contentblocking.report.lockwise.enabled", false);
+user_pref("browser.contentblocking.report.monitor.enabled", false);
+user_pref("browser.contentblocking.report.cookie.url", "");
+user_pref("browser.contentblocking.report.cryptominer.url", "");
+user_pref("browser.contentblocking.report.fingerprinter.url", "");
+user_pref("browser.contentblocking.report.lockwise.how_it_works.url", "");
+user_pref("browser.contentblocking.report.lockwise.url", "");
+user_pref("browser.contentblocking.report.monitor.how_it_works.url", "");
+user_pref("browser.contentblocking.report.monitor.sign_in_url", "");
+user_pref("browser.contentblocking.report.monitor.url", "");
+user_pref("browser.contentblocking.report.proxy_extension.url", "");
+user_pref("browser.contentblocking.report.social.url", "");
+user_pref("browser.contentblocking.report.tracker.url", "");
+user_pref("browser.contentblocking.reportBreakage.url", "");
