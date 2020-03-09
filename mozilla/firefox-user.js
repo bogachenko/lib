@@ -4,10 +4,6 @@
 // Предупреждение в "about:config"
 user_pref("general.warnOnAboutConfig", false);
 
-// Warning in "about:networking"
-// Предупреждение в "about:networking"
-user_pref("network.warnOnAboutNetworking", false);
-
 // Warning about closing multiple tabs
 // Предупреждение о закрытии нескольких вкладок
 user_pref("browser.tabs.warnOnClose", true);
@@ -25,6 +21,7 @@ user_pref("browser.shell.checkDefaultBrowser", false);
 // Открытие страниц "Добро пожаловать и что нового?"
 user_pref("browser.startup.homepage_override.mstone", "ignore");
 user_pref("startup.homepage_welcome_url", "");
+user_pref("startup.homepage_welcome_url.additional", "");
 user_pref("startup.homepage_override_url", "");
 user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
 
@@ -55,14 +52,6 @@ user_pref("browser.newtabpage.enabled", false);
 // Preloading a new tab
 // Предварительная загрузка новой вкладки
 user_pref("browser.newtab.preload", false);
-
-// Mouse wheel button action when clicked
-//		TRUE = Open in new tab
-//		FALSE = Open in new window
-// Действие кнопки колесика мыши при нажатии по ссылке
-//		TRUE = Открывать в новой вкладке
-//		FALSE = Открывать в новом окне
-user_pref("browser.tabs.opentabfor.middleclick", false);
 
 // Opening tabs and external applications in the background
 //		TRUE = Open such tabs in the background
@@ -107,6 +96,8 @@ user_pref("browser.urlbar.speculativeConnect.enabled", false);
 user_pref("browser.urlbar.suggest.history", false);
 user_pref("browser.urlbar.suggest.bookmark", false);
 user_pref("browser.urlbar.suggest.openpage", false);
+user_pref("browser.urlbar.suggest.searches", false);
+user_pref("browser.urlbar.delay", 0);
 
 // Alternative search engines in the address bar
 // Альтернативные поисковые системы в адресной строке
@@ -123,7 +114,6 @@ user_pref("browser.urlbar.oneOffSearches", false);
 // Remember the search history and form data
 // Помнить историю поиска и данные формы
 user_pref("browser.formfill.enable", false);
-user_pref("browser.formfill.expire_days", 0);
 
 // Remember your browsing and download history
 // Помните историю посещений и загрузок
@@ -204,6 +194,8 @@ user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", fa
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
 user_pref("browser.newtabpage.activity-stream.default.sites", "");
 user_pref("browser.library.activity-stream.enabled", false);
+user_pref("browser.newtabpage.activity-stream.showSearch", false);
+user_pref("browser.newtabpage.activity-stream.sectionOrder", "");
 user_pref("browser.newtabpage.activity-stream.asrouter.providers.cfr", "");
 user_pref("browser.newtabpage.activity-stream.asrouter.providers.cfr-fxa", "");
 user_pref("browser.newtabpage.activity-stream.asrouter.providers.message-groups", "");
@@ -226,6 +218,16 @@ user_pref("browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcu
 user_pref("browser.newtabpage.activity-stream.pocketCta", "");
 user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion.endpoint", "");
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
+user_pref("browser.newtabpage.activity-stream.section.highlights.includeVisited", false);
+user_pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
+user_pref("browser.newtabpage.activity-stream.section.highlights.includeDownloads", false);
+user_pref("browser.newtabpage.activity-stream.section.highlights.includeBookmarks", false);
+user_pref("browser.newtabpage.activity-stream.prerender", false);
+user_pref("browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts", false);
+user_pref("browser.newtabpage.activity-stream.improvesearch.noDefaultSearchTile", false);
+user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
+user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
+user_pref("browser.newtabpage.activity-stream.telemetry.ping.endpoint", "");
 
 // Защита от отслеживания
 // Tracking protection
@@ -235,6 +237,7 @@ user_pref("privacy.trackingprotection.fingerprinting.enabled", false);
 user_pref("privacy.trackingprotection.cryptomining.enabled", false);
 user_pref("privacy.socialtracking.block_cookies.enabled", false);
 user_pref("privacy.trackingprotection.socialtracking.enabled", false);
+user_pref("privacy.trackingprotection.introURL", "");
 
 // WebRTC (Web Real-Time Communication)
 // Peer-to-peer data transfer and WebRTC that lets you know your real IP. WebRTC provides voice communication, video chats, P2P file sharing between browser applications without the use of third-party add-ons.
@@ -278,9 +281,6 @@ user_pref("permissions.default.microphone", 2);
 //		TRUE = Не воспроизводить
 //		FALSE = Воспроизводить
 user_pref("media.block-autoplay-until-in-foreground", true);
-
-// WEBM
-user_pref("media.mediasource.webm.enabled", true);
 
 // Telemetry
 // This feature sends data about usage, browser performance, user interface features, memory and hardware configurations, as well as real IP to Mozilla servers. In addition, information may be collected about the sites visited.
@@ -351,7 +351,9 @@ user_pref("browser.ping-centre.production.endpoint", "");
 // Учет геолокации
 // Firefox располагает встроенными средствами передачи геоданных (вашего местонахождения). При этом используются сведения, получаемые от геолокационных средств операционной системы, сетей Wi-Fi, телефонных и интернет-операторов, а также реальный IP-адрес. Кроме того, вышеперечисленные данные отсылаются на серверы Google.
 user_pref("geo.enabled", false);
-user_pref("browser.geolocation.warning.infoURL", "");
+user_pref("geo.provider.ms-windows-location", false);
+user_pref("geo.provider.use_corelocation", false);
+user_pref("geo.provider.use_gpsd", false);
 
 // GeoIP-based search results
 // Результаты поиска на основе GeoIP
@@ -363,10 +365,6 @@ user_pref("browser.search.geoip.timeout", 0);
 // Геопозиционирования браузера (GeoIP) при работе с поисковыми серверами
 user_pref("browser.search.geoSpecificDefaults", false);
 user_pref("browser.search.geoSpecificDefaults.url", "");
-
-// Use the application language over the language of your operating system in the regional settings
-// Использовать язык приложения поверх языка вашей операционной системы в региональных настройках
-user_pref("intl.regional_prefs.use_os_locales", false);
 
 // Recommended themes and extensions
 // Рекомендованные темы и расширения
@@ -403,6 +401,8 @@ user_pref("media.gmp-manager.cert.checkAttributes", false);
 user_pref("media.gmp.trial-create.enabled", false);
 user_pref("media.gmp-widevinecdm.enabled", false);
 user_pref("media.gmp-widevinecdm.visible", false);
+user_pref("media.gmp-gmpopenh264.visible", false);
+user_pref("media.gmp-manager.url", false);
 
 // Digital rights management (DRM)
 // Управление цифровыми правами (DRM)
@@ -458,7 +458,6 @@ user_pref("dom.webnotifications.serviceworker.enabled", false);
 user_pref("dom.push.enabled", false);
 user_pref("dom.push.connection.enabled", false);
 user_pref("dom.push.serverURL", "");
-user_pref("dom.push.userAgentID", "");
 
 // Disk cache
 // Кэш-диска
@@ -516,8 +515,8 @@ user_pref("browser.sessionstore.resume_from_crash", false);
 // Интервал между сохранением сеансов
 user_pref("browser.sessionstore.interval", 60000);
 
-// Firefox recovery after Windows restart
-// Восстановление Firefox после перезагрузки Windows
+// Firefox recovery after OS restart
+// Восстановление Firefox после перезагрузки OS
 user_pref("toolkit.winRegisterApplicationRestart", false);
 
 // Cookies
@@ -553,8 +552,7 @@ user_pref("network.cookie.lifetimePolicy", 2);
 // [NOTE] Disabling this feature will break many sites. You would better use add-ons for full control.
 // API Индексированных баз данных
 // [ЗАМЕТКА] Отключение этой функции поломает много сайтов. Вам лучше использовать дополнения для полного контроля.
-// user_pref("dom.indexedDB.enabled", false); 
-user_pref("dom.indexedDB.experimental", false);
+// user_pref("dom.indexedDB.enabled", false);
 
 // Storage API
 // [NOTE] Disables another way for sites to store their data on the users personal computer.
@@ -589,10 +587,6 @@ user_pref("media.webspeech.recognition.enable", false);
 // Сбор HTML-видеостатистики
 user_pref("media.video_stats.enabled", false);
 
-// AV1 Video codec
-// Видеокодек AV1
-user_pref("media.av1.enabled", true);
-
 // Types of content
 // Типы содержимого
 user_pref("gecko.handlerService.schemes.mailto.0.name", "");
@@ -622,6 +616,10 @@ user_pref("dom.ipc.plugins.flash.subprocess.crashreporter.enabled", false);
 user_pref("signon.autofillForms", false);
 user_pref("signon.autofillForms.http", false);
 
+// Show password notifications for hacked sites
+// Показывать уведомления о паролях для взломанных сайтов
+user_pref("signon.management.page.breach-alerts.enabled", false);
+
 // Smooth scrolling
 // [NOTE] Recommended for brake applications, hardware failures, and problems with the video card.
 // Плавная прокрутка
@@ -640,11 +638,7 @@ user_pref("lightweightThemes.update.enabled", false);
 //		0 = Рабочий стол
 //		1 = Загрузки
 //		2 = Последняя используемая папка
-// user_pref("browser.download.folderList", 0);
-
-// Request to save files
-// Запрос на сохранение файлов
-user_pref("browser.download.useDownloadDir", false);
+user_pref("browser.download.folderList", 1);
 
 // Adding downloads to the list of recent system documents
 // Добавление загрузок в список последних документов системы
@@ -682,9 +676,10 @@ user_pref("browser.urlbar.maxHistoricalSearchSuggestions", 0);
 // Ограничения WebExtension для определенных доменов Mozilla
 user_pref("extensions.webextensions.restrictedDomains", "");
 
-// Warning when websites try to install add-ons
-// Предупреждение при попытке веб-сайтов установить дополнения
-user_pref("xpinstall.whitelist.required", true);
+// Install add-ons without signatures and display a request to install add-ons in the browser
+// Установка дополнений без подписей и вывод запроса на установку дополнений в браузер
+// user_pref("xpinstall.whitelist.required", true);
+user_pref("xpinstall.signatures.required", false);
 
 // Fullscreen API
 // [WARNING] Allows you to identify the browser by means of browser fingerprints.
@@ -921,12 +916,6 @@ user_pref("dom.reporting.testing.enabled", false);
 // Добавление сайтов из Alexa Top 500 в список автозаполнения адресной строки
 user_pref("browser.urlbar.usepreloadedtopurls.enabled", false);
 
-// OS geolocation service
-// Служба геолокации ОС
-user_pref("geo.provider.ms-windows-location", false);
-user_pref("geo.provider.use_corelocation", false);
-user_pref("geo.provider.use_gpsd", false);
-
 // Limited window.opener protection
 // Ограниченная защита window.opener
 user_pref("dom.targetBlankNoOpener.enabled", true);
@@ -1001,6 +990,7 @@ user_pref("dom.gamepad.enabled", false);
 // Щит
 user_pref("app.normandy.enabled", false);
 user_pref("app.normandy.api_url", "");
+user_pref("app.normandy.first_run", false);
 
 // Updating system add-ons
 // Обновление системных дополнений
