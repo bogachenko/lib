@@ -19,7 +19,6 @@ http://1337.abcvg.info:80/announce
 http://139.99.100.97:8080/announce
 http://149.28.95.5:2710/announce
 http://153.92.6.117:80/announce
-https://tracker.nitrix.me:443/announce
 http://153.92.6.87:80/announce
 http://157.7.202.64:8080/announce
 http://158.69.146.212:7777/announce
@@ -82,6 +81,7 @@ http://51.158.23.91:80/announce
 http://51.254.244.161:6969/announce
 http://51.254.249.186:6969/announce
 http://51.38.230.101:80/announce
+http://51.68.122.172/announce
 http://51.68.122.172:80/announce
 http://51.79.71.167:80/announce
 http://51.83.109.116:2710/announce
@@ -145,6 +145,8 @@ http://[2001:bc8:4728:7b00::1]/announce
 http://[2a01:4f8:200:2241::ac15:173]/announce
 http://[2a02:c205:2026:1682::1]:443/announce
 http://[2a04:ac00:1:3dd8::1:2710]:2710/announce
+http://academic-p2p.appspot.com/announce
+http://academic-p2p.carlosdelfino.eti.br/announce
 http://acg.rip:6699/announce
 http://agusiq-torrents.pl:6969/announce
 http://amigacity.xyz:6969/announce
@@ -180,6 +182,7 @@ http://bt.evrl.to:80/announce
 http://bt.fasttorrent.net:2713/announce
 http://bt.henbt.com:2710/announce
 http://bt.ktkj.com:8080/announce
+http://bt.okmp3.ru:2710/announce
 http://bt.popgo.net:7456/announce
 http://bt.pusacg.org:8080/announce
 http://bt.sc-ol.com:2710/announce
@@ -289,6 +292,7 @@ http://open.lolicon.eu:7777/announce
 http://open.miotracker.com/announce
 http://open.miotracker.com:80/announce
 http://open.nyaatorrents.info:6544/announce
+http://open.touki.ru/announce
 http://open.touki.ru/announce.php
 http://open.touki.ru:80/announce.php
 http://open.trackerlist.xyz/announce
@@ -372,8 +376,10 @@ http://share.newdmhy.net:8000/announce
 http://shareservi.xyz:6960/announce
 http://siambit.org/announce.php
 http://siambit.org:80/announce.php
+http://sndabt.sdo.com/announce
 http://special.pwtorrents.net/announce.php
 http://sub4all.org:2710/announce
+http://sugoi.pomf.se/announce
 http://sukebei.tracker.wf:8888/announce
 http://t.acg.rip:6699/announce
 http://t.nyaatracker.com/announce
@@ -389,6 +395,7 @@ http://t2.popgo.org:7456/annonce
 http://t2.pow7.com/announce
 http://t2.pow7.com:80/announce
 http://tc-boxing.com/announce.php
+http://theheartofchronic.com/announce.php
 http://therightsize.net:1337/announce
 http://therightsize.net:80/announce
 http://thetracker.org./announce
@@ -447,9 +454,11 @@ http://tracker.bittorrent.am/announce.php
 http://tracker.bittorrent.am/announceName
 http://tracker.bittorrent.am:80/announce
 http://tracker.bittorrent.am:80/announce.php
+http://tracker.blazing.de/announce
 http://tracker.bt4g.com:2095/announce
 http://tracker.btcake.com/announce
 http://tracker.btcake.com:80/announce
+http://tracker.btchdtv.com/announce
 http://tracker.btsync.gq:233/announce
 http://tracker.bz/announce
 http://tracker.bz:80/announce
@@ -461,6 +470,7 @@ http://tracker.comicat.org:80/announce
 http://tracker.coppersurfer.tk:6969/announce
 http://tracker.corpscorp.online/announce
 http://tracker.corpscorp.online:80/announce
+http://tracker.csze.com/announce
 http://tracker.cypherpunks.ru:6969/announce
 http://tracker.darli.net:6611/announce
 http://tracker.deadfrog.us:42426/announce
@@ -677,12 +687,14 @@ https://51.158.23.91:443/announce
 https://54.37.157.173:443/announce
 https://78.47.80.133:443/announce
 https://84.178.67.176:1337/announce
+https://bigfoot1942.sektori.org/announce
 https://bt.proxy-for.ga:443/announce
 https://cernet-tracker.appspot.com/announce
 https://cernet-tracker.appspot.com:443/announce
 https://evening-badlands-6215.herokuapp.com/announce
 https://evening-badlands-6215.herokuapp.com:443/announce
 https://ipv6.torrent.ubuntu.com/announce
+https://lgtracker.org/announce
 https://linetorrent.xyz/announce
 https://linetorrent.xyz:443/announce
 https://open.acgnxtracker.com/announce
@@ -736,6 +748,7 @@ https://tracker.lelux.fi/announce
 https://tracker.lelux.fi:443/announce
 https://tracker.nanoha.org/announce
 https://tracker.nanoha.org:443/announce
+https://tracker.nitrix.me:443/announce
 https://tracker.no-dmca.ninja:2087/announce
 https://tracker.nullrebel.com:443/announce
 https://tracker.nyaa.tk:443/announce
@@ -925,6 +938,7 @@ udp://bt1.archive.org:6969/announce
 udp://bt2.54new.com:8080/announce
 udp://bt2.archive.org:6969/announce
 udp://carapax.net:6969/announce
+udp://chihaya.de:6969/announce
 udp://chihaya.toss.li:9696/announce
 udp://coppersurfer.tk:6969/announce
 udp://cx42light.cn:39652/announce
