@@ -279,6 +279,7 @@ http://mpggalaxy.mine.nu:6969/announce
 http://nbz.f3322.net:36006/announce
 http://newtoncity.org:6969/announce
 http://node.611.to:9000/announce
+http://novaopcj.icu:10325/announce
 http://npserver.intranet.pw:4201/announce
 http://npupt.com/announce.php
 http://npupt.com:80/announce.php
@@ -442,6 +443,7 @@ http://tracker.36dm.com:2710/scrape
 http://tracker.acg.gg:1578/announce
 http://tracker.acg.gg:2710/announce
 http://tracker.acgnx.se/announce
+http://tracker.acgnx.se/scrape
 http://tracker.acgnx.se:80/announce
 http://tracker.aletorrenty.pl:2710/announce
 http://tracker.animeun.com:6969/announce
