@@ -40,6 +40,7 @@ http://185.83.215.123:6969/announce
 http://188.165.253.109:1337/announce
 http://188.190.120.74/announce
 http://188.190.120.74:80/announce
+http://191.254.33.123:6969/announce
 http://191.254.33.7:6969/announce
 http://193.107.16.156:2710/announce
 http://194.106.216.222/announce
@@ -58,6 +59,7 @@ http://213.159.215.198:6970/announce
 http://213.163.67.56:1337/announce
 http://220.162.244.175:53880/announce
 http://220.173.37.217:6969/announce
+http://220.173.39.135:6969/announce
 http://222.186.43.219:7070/announce
 http://3.223.119.4:80/announce
 http://3.234.122.223:80/announce
@@ -80,6 +82,7 @@ http://51.158.111.87:2710/announce
 http://51.158.23.91:80/announce
 http://51.254.244.161:6969/announce
 http://51.254.249.186:6969/announce
+http://51.255.140.206:80/announce
 http://51.38.230.101:80/announce
 http://51.68.122.172/announce
 http://51.68.122.172:80/announce
@@ -92,6 +95,7 @@ http://52.58.128.163:6969/announce
 http://52.72.164.242:80/announce
 http://52.72.245.79:80/announce
 http://54.165.216.26:80/announce
+http://54.37.106.164:80/announce
 http://54.37.157.173:80/announce
 http://54.39.179.91:6699/announce
 http://54.39.98.124/announce
@@ -147,6 +151,7 @@ http://[2a02:c205:2026:1682::1]:443/announce
 http://[2a04:ac00:1:3dd8::1:2710]:2710/announce
 http://academic-p2p.appspot.com/announce
 http://academic-p2p.carlosdelfino.eti.br/announce
+http://academic-p2p.carlosdelfino.eti.br:80/announce
 http://acg.rip:6699/announce
 http://agusiq-torrents.pl:6969/announce
 http://amigacity.xyz:6969/announce
@@ -378,6 +383,7 @@ http://shareservi.xyz:6960/announce
 http://siambit.org/announce.php
 http://siambit.org:80/announce.php
 http://sndabt.sdo.com/announce
+http://sndabt.sdo.com:80/announce
 http://special.pwtorrents.net/announce.php
 http://sub4all.org:2710/announce
 http://sugoi.pomf.se/announce
@@ -397,6 +403,7 @@ http://t2.pow7.com/announce
 http://t2.pow7.com:80/announce
 http://tc-boxing.com/announce.php
 http://theheartofchronic.com/announce.php
+http://theheartofchronic.com:80/announce.php
 http://therightsize.net:1337/announce
 http://therightsize.net:80/announce
 http://thetracker.org./announce
@@ -621,6 +628,7 @@ http://tracker1.itzmx.com:8080/announce
 http://tracker1.torrentino.com/announce
 http://tracker1.torrentino.com:80/announce
 http://tracker1.wasabii.com.tw:6969/announce
+http://tracker114514.top:11450/announce
 http://tracker2.dler.org/announce
 http://tracker2.dler.org:80/announce
 http://tracker2.istole.it:60500/announce
@@ -787,6 +795,7 @@ udp://11.rarbg.com/announce
 udp://11.rarbg.com:80/announce
 udp://11.rarbg.me/announce
 udp://11.rarbg.me:80/announce
+udp://113.196.127.197:6969/announce
 udp://114.55.113.60:6969/announce
 udp://128.199.70.66:5944/announce
 udp://139.99.100.97:8080/announce
@@ -801,6 +810,7 @@ udp://159.100.245.181:6969/announce
 udp://165.227.0.51:6969/announce
 udp://165.231.0.116:80/announce
 udp://168.235.67.63:6969/announce
+udp://173.82.240.104:6969/announce
 udp://176.113.68.66:6961/announce
 udp://176.113.68.67:6961/announce
 udp://176.113.71.19:6961/announce
@@ -822,6 +832,7 @@ udp://191.101.229.236:1337/announce
 udp://194.106.216.222:80/announce
 udp://194.143.148.21:2710/announce
 udp://194.182.165.153:6969/announce
+udp://194.26.183.158:6969/announce
 udp://195.123.209.37:1337/announce
 udp://195.123.209.40:80/announce
 udp://207.180.241.35:2710/announce
@@ -836,10 +847,12 @@ udp://212.1.226.176:2710/announce
 udp://212.47.227.58:6969/announce
 udp://213.163.67.56:1337/announce
 udp://217.76.183.53:80/announce
+udp://218.5.40.213:2710/announce
 udp://218.5.40.50:2710/announce
 udp://218.5.41.120:2710/announce
 udp://218.5.42.126:2710/announce
 udp://218.5.42.95:2710/announce
+udp://220.173.39.135:6969/announce
 udp://223.16.205.65:6969/announce
 udp://23.95.32.130:6969/announce
 udp://31.210.170.169:2710/announce
