@@ -1,3 +1,5 @@
+# List of public BitTorrent trackers.
+
 http://0123456789nonexistent.com/announce
 http://0123456789nonexistent.com:80/announce
 http://0d.kebhana.mx:443/announce

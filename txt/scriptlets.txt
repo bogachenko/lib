@@ -1,4 +1,4 @@
-# Collection of scriptlets to be used for injection/redirection on specific domains.
+# Collection of scriptlets to be used for injection in uBlock Origin.
 
 # eval-logger
 # example.com##+js(eval-logger)
