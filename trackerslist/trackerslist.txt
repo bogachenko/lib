@@ -1174,6 +1174,9 @@ udp://z.crazyhd.com:2710/announce
 udp://zephir.monocul.us:6969/announce
 udp://zer0day.ch:1337
 udp://zer0day.ch:1337/announce
+http://xbtrutor.com:2710/announce
+http://retracker.local/announce
+udp://opentor.org:2710
 udp://zer0day.to:1337/announce
 udp:/ndrotracker.biz:1337/announce
 udp:/ntost12.xyz:6969/announce

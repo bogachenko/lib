@@ -1,0 +1,511 @@
+# Collection of scriptlets to be used for injection/redirection on specific domains.
+
+# eval-logger
+# example.com##+js(eval-logger)
+eval-logger.js application/javascript
+(() => {
+	'use strict';
+	let z = window.eval,
+		log = console.log.bind(console);
+	window.eval = function(a) {
+		log('uBO: eval("%s")', String(a));
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+# decodeURIComponent-defuser
+noduc.js application/javascript
+(() => {
+    let needle = '{{1}}';
+    if (needle === '' || needle === '{{1}}') {
+        needle = '.?';
+    } else if (needle.slice(0, 1) === '/' && needle.slice(-1) === '/') {
+        needle = needle.slice(1, -1);
+    } else {
+        needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    needle = new RegExp(needle);
+    realnoduc = window.decodeURIComponent;
+    window.decodeURIComponent = function(a) {
+        if (!needle.test(a.toString())) {
+            realnoduc.call(window, a);
+        }
+    }.bind(window);
+})();
+
+# decodeURIComponent-logger
+duc-logger.js application/javascript
+(() => {
+    let z = window.decodeURIComponent,
+        log = console.log.bind(console);
+    window.decodeURIComponent = function(a) {
+        log('uBO: decodeURIComponent("%s")', a.toString());
+        return z.apply(this, arguments);
+    }.bind(window);
+})();
+
+# encodeURIComponent-defuser
+noeuc.js application/javascript
+(() => {
+    let needle = '{{1}}';
+    if (needle === '' || needle === '{{1}}') {
+        needle = '.?';
+    } else if (needle.slice(0, 1) === '/' && needle.slice(-1) === '/') {
+        needle = needle.slice(1, -1);
+    } else {
+        needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    needle = new RegExp(needle);
+    realnoeuc = window.encodeURIComponent;
+    window.encodeURIComponent = function(a) {
+        if (!needle.test(a.toString())) {
+            realnoeuc.call(window, a);
+        }
+    }.bind(window);
+})();
+
+# encodeURIComponent-logger
+euc-logger.js application/javascript
+(() => {
+    let z = window.encodeURIComponent,
+        log = console.log.bind(console);
+    window.encodeURIComponent = function(a) {
+        log('uBO: encodeURIComponent("%s")', a.toString());
+        return z.apply(this, arguments);
+    }.bind(window);
+})();
+
+# parseInt-defuser
+nopi.js application/javascript
+(() => {
+    let needle = '{{1}}';
+    if (needle === '' || needle === '{{1}}') {
+        needle = '.?';
+    } else if (needle.slice(0, 1) === '/' && needle.slice(-1) === '/') {
+        needle = needle.slice(1, -1);
+    } else {
+        needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    needle = new RegExp(needle);
+    realnopi = window.parseInt;
+    window.parseInt = function(a) {
+        if (!needle.test(String(a))) {
+            realnopi.call(window, a);
+        }
+    }.bind(window);
+})();
+
+# parseInt-logger
+nopi-logger.js application/javascript
+(() => {
+	let z = window.parseInt,
+		log = console.log.bind(console);
+	window.parseInt = function(a) {
+		log('uBO: parseInt("%s")', String(a));
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+# String.fromCharCode-defuser
+schar.js application/javascript
+(() => {
+    let needle = '{{1}}';
+    if (needle === '' || needle === '{{1}}') {
+        needle = '.?';
+    } else if (needle.slice(0, 1) === '/' && needle.slice(-1) === '/') {
+        needle = needle.slice(1, -1);
+    } else {
+        needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    needle = new RegExp(needle);
+    realschar = window.String.fromCharCode;
+    window.String.fromCharCode = function(a) {
+        if (!needle.test(String(a))) {
+            realschar.call(window, a);
+        }
+    }.bind(window);
+})();
+
+# String.fromCharCode-logger
+schar-logger.js application/javascript
+(() => {
+    let z = window.String.fromCharCode,
+        log = console.log.bind(console);
+    window.String.fromCharCode = function(a) {
+        log('uBO: String.fromCharCode("%s")', String(a));
+        return z.apply(this, arguments);
+    }.bind(window);
+})();
+
+# String.prototype.charCodeAt-defuser
+stcharat-defuser.js application/javascript
+(() => {
+    let needle = '{{1}}';
+    if (needle === '' || needle === '{{1}}') {
+        needle = '.?';
+    } else if (needle.slice(0, 1) === '/' && needle.slice(-1) === '/') {
+        needle = needle.slice(1, -1);
+    } else {
+        needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    needle = new RegExp(needle);
+    realstcharat = window.String.prototype.charCodeAt;
+    window.String.prototype.charCodeAt = function(a) {
+        if (!needle.test(String(a))) {
+            realstcharat.call(window, a);
+        }
+    }.bind(window);
+})();
+
+# String.prototype.charCodeAt-logger
+stcharat-logger.js application/javascript
+(() => {
+    let z = window.String.prototype.charCodeAt,
+        log = console.log.bind(console);
+    window.String.prototype.charCodeAt = function(a) {
+        log('uBO: String.prototype.charCodeAt("%s")', String(a));
+        return z.apply(this, arguments);
+    }.bind(window);
+})();
+
+# document.write-defuser
+dwrite.js application/javascript
+(() => {
+    let needle = '{{1}}';
+    if (needle === '' || needle === '{{1}}') {
+        needle = '.?';
+    } else if (needle.slice(0, 1) === '/' && needle.slice(-1) === '/') {
+        needle = needle.slice(1, -1);
+    } else {
+        needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    needle = new RegExp(needle);
+    rdwrite = document.write.bind(document);
+    window.document.write = function(a) {
+        if (!needle.test(String(a))) {
+            rdwrite.call(window, a);
+        }
+    }.bind(window);
+})();
+
+# document.write-logger
+dwrite-logger.js application/javascript
+(() => {
+    let z = window.document.write.bind(document),
+        log = console.log.bind(console);
+    window.document.write = function(a) {
+        log('uBO: document.write("%s")', String(a));
+        return z.apply(this, arguments);
+    }.bind(window);
+})();
+
+# document.createElement-logger
+dce-logger.js application/javascript
+(() => {
+	let z = window.document.createElement.bind(document),
+		log = console.log.bind(console);
+	window.document.createElement = function(a) {
+		log('uBO: document.createElement("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+# document.getElementsByName-logger
+dgebn-logger.js application/javascript
+(() => {
+	let z = window.document.getElementsByName.bind(document),
+		log = console.log.bind(console);
+	window.document.getElementsByName = function(a) {
+		log('uBO: document.getElementsByName("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+# document.getElementsByTagName-logger
+dgebtn-logger.js application/javascript
+(() => {
+	let z = window.document.getElementsByTagName.bind(document),
+		log = console.log.bind(console);
+	window.document.getElementsByTagName = function(a) {
+		log('uBO: document.getElementsByTagName("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+# atob-defuser
+noatob.js application/javascript
+(() => {
+    let needle = '{{1}}';
+    if (needle === '' || needle === '{{1}}') {
+        needle = '.?';
+    } else if (needle.slice(0, 1) === '/' && needle.slice(-1) === '/') {
+        needle = needle.slice(1, -1);
+    } else {
+        needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    needle = new RegExp(needle);
+    realNoAtob = window.atob;
+    window.atob = function(a) {
+        if (!needle.test(a.toString())) {
+            realNoAtob.call(window, a);
+        }
+    }.bind(window);
+})();
+
+# atob-logger
+atob-logger.js application/javascript
+(() => {
+    let z = window.atob,
+        log = console.log.bind(console);
+    window.atob = function(a) {
+        log('uBO: atob("%s")', a.toString());
+        return z.apply(this, arguments);
+    }.bind(window);
+})();
+
+# mouseclick-defuser
+mousedef.js application/javascript
+(() => {
+    'use strict';
+    document.body.removeAttribute('oncopy');
+    document.body.removeAttribute('onselectstart');
+    document.body.removeAttribute('ondragstart');
+    document.body.removeAttribute('ondrag');
+    document.oncopy = null;
+    document.onselectstart = null;
+    document.ondragstart = null;
+    document.ondrag = null;
+})();
+
+# mouseclick-defuser-2
+mousedef2.js application/javascript
+! function() {
+    function e(e) {
+        for (var t = 0; t < r.length; t++) {
+            var n = r[t],
+                o = "on" + n;
+            e[o] && (e[o] = null), e.addEventListener(n, function(e) {
+                e.stopPropagation()
+            }, !0)
+        }
+    }
+    var r = ["contextmenu", "copy", "cut", "paste", "mousedown", "mouseup", "beforeunload", "beforeprint", "keyup", "keydown", "select", "selectstart"];
+    e(window);
+    for (var t, n = window.frames, o = 0; o < n.length; o++) try {
+        e(n[o])
+    } catch (e) {}(t = document.createElement("style")).type = "text/css", t.innerHTML = "* { -webkit-touch-callout: default !important; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; } ", document.head.appendChild(t)
+}();
+
+# oncontextmenu-defuser
+contextmenudef.js application/javascript
+function clearEventListeners() {
+    document.oncontextmenu = null;
+    document.body.removeAttribute("oncontextmenu")
+}
+window.addEventListener('load', clearEventListeners, false);
+
+# btoa-defuser
+nobtoa.js application/javascript
+(() => {
+	let needle = '{{1}}';
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1,-1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	realNoBtoa = window.btoa;
+	window.btoa = function(a) {
+		if ( !needle.test(a.toString()) ) {
+			realNoBtoa.call(window, a);
+		}
+	}.bind(window);
+})();
+
+# btoa-logger
+btoa-logger.js application/javascript
+(() => {
+	let z = window.btoa,
+		log = console.log.bind(console);
+	window.btoa = function(a) {
+		log('uBO: btoa("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+# window.alert-defuser
+alt.js application/javascript
+(() => {
+	let needle = '{{1}}';
+	if ( needle === '' || needle === '{{1}}' ) {
+		needle = '.?';
+	} else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+		needle = needle.slice(1,-1);
+	} else {
+		needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+	needle = new RegExp(needle);
+	ralt = window.alert;
+	window.alert = function(a) {
+		if ( !needle.test(a.toString()) ) {
+			ralt.call(window, a);
+		}
+	}.bind(window);
+})();
+
+# window.alert-logger
+alt-logger.js application/javascript
+(() => {
+	let z = window.alert,
+		log = console.log.bind(console);
+	window.alert = function(a) {
+		log('uBO: window.alert("%s")', a.toString());
+		return z.apply(this, arguments);
+	}.bind(window);
+})();
+
+# cookie-setter
+cookie-set.js application/javascript
+(() => {
+	     'use strict';
+	     document.cookie = '{{1}}={{2}}; max-age={{3}}; secure; path=/;';
+})();
+
+# js-rm
+js-rm.js application/javascript
+(() => { 
+	  'use strict';
+	  let needle = '{{1}}';
+	  if ( needle === '' || needle === '{{1}}' ) {
+	      needle = '.?';
+	  } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+	      needle = needle.slice(1,-1);
+	  } else {
+	      needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	  }
+	  needle = new RegExp(needle);
+	  const jsnode = () => {
+				    try {
+					    const jss = document.querySelectorAll('script');
+					    for (const js of jss) {
+						    if (js.outerHTML.match(needle)) {
+							js.textContent = '';
+							js.remove();
+					   	    }			
+					    }
+				    } catch { }
+	  };
+	  const observer = new MutationObserver(jsnode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); return; }
+})();
+
+# css-rm
+css-rm.js application/javascript
+(() => { 
+          'use strict';
+	  let needle = '{{1}}';
+          if ( needle === '' || needle === '{{1}}' ) {
+              needle = '.?';
+          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle);
+          const cssnode = () => {
+                                         try {
+                                          	const css = document.querySelectorAll('style');
+                                          	for (const cs of css) {
+                                              		if (cs.outerHTML.match(needle)) {
+								cs.textContent = '';
+								cs.remove();
+							}			
+                                          	}
+                                   	 } catch { }
+          };
+          const observer = new MutationObserver(cssnode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); return; }
+})();
+
+# frame-rm
+frame-rm.js application/javascript
+(() => { 
+          'use strict';
+	  let needle = '{{1}}';
+          if ( needle === '' || needle === '{{1}}' ) {
+              needle = '.?';
+          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle);
+          const framenode = () => {
+                                           try {
+                                          	 const frames = document.querySelectorAll('iframe');
+                                          	 for (const frame of frames) {
+                                              		if (frame.outerHTML.match(needle)) {
+                                                                	frame.textContent = '';
+									frame.remove();
+                                              		}			
+                                          	 }
+                                   	   } catch { }
+          };
+          const observer = new MutationObserver(framenode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); return; }
+})();
+
+# meta-rm
+meta-rm.js application/javascript
+(() => { 
+          'use strict';
+	  let needle = '{{1}}';
+          if ( needle === '' || needle === '{{1}}' ) {
+              needle = '.?';
+          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle);
+          const metanode = () => {
+                                          try {
+                                          	const metas = document.querySelectorAll('meta');
+                                          	for (const meta of metas) {
+                                              		if (meta.outerHTML.match(needle)) {
+                                                                	meta.textContent = '';
+									meta.remove();
+                                              		}			
+                                          	}
+                                   	  } catch { }
+          };
+          const observer = new MutationObserver(metanode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
+})();
+
+# element-remover
+remove-elem.js application/javascript
+(() => {
+		'use strict';
+		const selector = '{{1}}';
+		if ( selector === '' || selector === '{{1}}' ) { return; }
+		const rm = () => {
+		 			   const elements = document.querySelectorAll(selector);
+					   try {
+						  for (const element of elements) {
+							if (!document.querySelector(selector)) { break; }
+							element.textContent = '';
+							element.remove();
+					       	  }
+					   } catch { }
+		};
+		const observer = new MutationObserver(rm);
+    		observer.observe(document.documentElement, { childList: true, subtree: true });
+		if (document.readyState === 'complete') { observer.disconnect(); return; } 
+})();
