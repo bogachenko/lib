@@ -1,5 +1,5 @@
 {
-  "timeStamp": 1584167195234,
+  "timeStamp": 1584529550403,
   "version": "1.25.2",
   "userSettings": {
     "advancedUserEnabled": true,
@@ -10,7 +10,7 @@
     "colorBlindFriendly": false,
     "contextMenuEnabled": false,
     "dynamicFilteringEnabled": true,
-    "externalLists": "https://adaway.org/hosts.txt\nhttps://easylist-downloads.adblockplus.org/bitblock.txt\nhttps://easylist-downloads.adblockplus.org/cntblock.txt\nhttps://gitlab.com/CHEF-KOCH/cks-filterlist/raw/master/filters/ads-tracker.txt\nhttps://raw.githubusercontent.com/StevenBlack/hosts/master/hosts\nhttps://raw.githubusercontent.com/bogachenko/filterlist/master/filterlist.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/personal/bogachenkoPF.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt\nhttps://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt\nhttps://raw.githubusercontent.com/smed79/blacklist/master/abp.txt",
+    "externalLists": "https://adaway.org/hosts.txt\nhttps://easylist-downloads.adblockplus.org/bitblock.txt\nhttps://easylist-downloads.adblockplus.org/cntblock.txt\nhttps://gitlab.com/CHEF-KOCH/cks-filterlist/raw/master/filters/ads-tracker.txt\nhttps://raw.githubusercontent.com/StevenBlack/hosts/master/hosts\nhttps://raw.githubusercontent.com/anudeepND/blacklist/master/CoinMiner.txt\nhttps://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/master/filterlist.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/personal/bogachenkoPF.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt\nhttps://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt\nhttps://raw.githubusercontent.com/smed79/blacklist/master/abp.txt\nhttps://raw.githubusercontent.com/thisisu/hosts_adultxxx/master/hosts",
     "firewallPaneMinimized": false,
     "hyperlinkAuditingDisabled": true,
     "ignoreGenericCosmeticFilters": false,
@@ -32,6 +32,8 @@
     "ublock-annoyances",
     "RUS-0",
     "https://adaway.org/hosts.txt",
+    "https://raw.githubusercontent.com/anudeepND/blacklist/master/CoinMiner.txt",
+    "https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt",
     "https://raw.githubusercontent.com/bogachenko/filterlist/master/filterlist.txt",
     "https://raw.githubusercontent.com/bogachenko/filterlist/personal/bogachenkoPF.txt",
     "https://gitlab.com/CHEF-KOCH/cks-filterlist/raw/master/filters/ads-tracker.txt",
@@ -40,7 +42,8 @@
     "https://easylist-downloads.adblockplus.org/bitblock.txt",
     "https://easylist-downloads.adblockplus.org/cntblock.txt",
     "https://raw.githubusercontent.com/smed79/blacklist/master/abp.txt",
-    "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+    "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts",
+    "https://raw.githubusercontent.com/thisisu/hosts_adultxxx/master/hosts"
   ],
   "hiddenSettings": {
     "allowGenericProceduralFilters": false,
@@ -78,7 +81,7 @@
     "suspendTabsUntilReady": "unset",
     "uiFlavor": "unset",
     "updateAssetBypassBrowserCache": false,
-    "userResourcesLocation": "https://raw.githubusercontent.com/bogachenko/filterlist/personal/scriptlets.txt https://raw.githubusercontent.com/uBlock-user/uBO-Scriptlets/master/scriptlets.txt https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resources.txt "
+    "userResourcesLocation": "https://raw.githubusercontent.com/bogachenko/lib/master/txt/scriptlets.txt https://raw.githubusercontent.com/uBlock-user/uBO-Scriptlets/master/scriptlets.txt https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resources.txt"
   },
   "whitelist": [
     "about-scheme",
