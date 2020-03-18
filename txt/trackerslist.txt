@@ -25,6 +25,7 @@ http://153.92.6.87:80/announce
 http://157.7.202.64:8080/announce
 http://158.69.146.212:7777/announce
 http://173.254.204.71:1096/announce
+http://175.24.22.206:11450/announce
 http://176.113.68.66:6961/announce
 http://176.113.68.67:6961/announce
 http://176.113.71.19:6961/announce
@@ -681,6 +682,7 @@ http://www.wareztorrent.com/announce
 http://www.wareztorrent.com:6969/announce
 http://www.wareztorrent.com:80/announce
 http://www.xwt-classics.net/announce.php
+http://xbtrutor.com:2710/announce
 http://z.crazyhd.com:2710/announce
 http://z6gw6skubmo2pj43.onion:8080/announce
 http://zephir.monocul.us:6969/announce
@@ -852,6 +854,7 @@ udp://212.47.227.58:6969/announce
 udp://213.163.67.56:1337/announce
 udp://217.76.183.53:80/announce
 udp://218.5.40.213:2710/announce
+udp://218.5.40.38:2710/announce
 udp://218.5.40.50:2710/announce
 udp://218.5.41.120:2710/announce
 udp://218.5.42.126:2710/announce
@@ -1176,9 +1179,6 @@ udp://z.crazyhd.com:2710/announce
 udp://zephir.monocul.us:6969/announce
 udp://zer0day.ch:1337
 udp://zer0day.ch:1337/announce
-http://xbtrutor.com:2710/announce
-http://retracker.local/announce
-udp://opentor.org:2710
 udp://zer0day.to:1337/announce
 udp:/ndrotracker.biz:1337/announce
 udp:/ntost12.xyz:6969/announce
