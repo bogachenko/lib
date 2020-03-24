@@ -52,9 +52,9 @@ user_pref("browser.search.geoip.timeout", 0);
 user_pref("browser.search.geoSpecificDefaults", false);
 user_pref("browser.search.geoSpecificDefaults.url", "");
 
-// Use the application language over the language of your operating system in the regional settings
-// Использовать язык приложения поверх языка вашей операционной системы в региональных настройках
-user_pref("intl.regional_prefs.use_os_locales", false);
+// Allow Internet content to appear in messages
+// Разрешить в сообщениях показ содержимого из Интернета
+user_pref("mailnews.message_display.disable_remote_image", false);
 
 // Automatic update of search engines
 // Автоматическое обновление поисковых систем
@@ -87,5 +87,227 @@ user_pref("toolkit.telemetry.cachedClientID", "");
 user_pref("toolkit.telemetry.enabled", false);
 user_pref("toolkit.telemetry.server", "");
 user_pref("toolkit.telemetry.server_owner", "");
+user_pref("toolkit.telemetry.infoURL", "");
 user_pref("toolkit.telemetry.unified", false);
 user_pref("toolkit.telemetry.debugSlowSql", false);
+
+// SSL Error reporting
+// Отчеты об ошибках SSL
+user_pref("security.ssl.errorReporting.automatic", false);
+user_pref("security.ssl.errorReporting.enabled", false);
+user_pref("security.ssl.errorReporting.url", "");
+
+// Web content in file processes
+// Веб-контент в файловых процессах
+user_pref("browser.tabs.remote.allowLinkedWebInFileUriProcess", false);
+
+// Block pop-ups
+// Блокировать всплывающие окна
+user_pref("dom.disable_open_during_load", true);
+user_pref("dom.block_multiple_popups", true);
+
+// Maximum number of pop-ups
+// Максимальное количество всплывающих окон
+user_pref("dom.popup_maximum", 3);
+
+// Setting default permissions (resource://app/defaults/permissions) in the Permission Manager
+// Установка по умолчанию разрешений (resource://app/defaults/permissions) в Менеджере Разрешений
+user_pref("permissions.manager.defaultsUrl", "");
+
+// Exposure of system colors to CSS or canvas
+// [NOTE] Might affect CSS in themes and extensions.
+// Экспозиция системных цветов CSS или canvas
+// [ЗАМЕТКА] Может повлиять на CSS у тем и расширениях.
+user_pref("ui.use_standins_for_native_colors", true);
+
+// Force punycode for internationalized domain names
+// Принудительное использование Юникода для интернационализированных доменных имен
+user_pref("network.IDN_show_punycode", true);
+
+// File handle API
+// [NOTE] Responsible for accessing lower-level file operations.
+// API для обработки файлов
+// [ЗАМЕТКА] Отвечает за доступ к более низкоуровневым файловым операциям.
+user_pref("dom.fileHandle.enabled", false);
+
+// Device storage API
+// [NOTE] Responsible for access to the file system, this API allows the browser to read and/or write to the users files.
+// API хранилища устройств
+// [ЗАМЕТКА] Отвечает за доступ к файловой системе, данный API позволяет браузеру самостоятельно читать и/или писать в файлах пользователя.
+user_pref("device.storage.enabled", false);
+
+// Showing search results
+//		TRUE = To wrap lines
+//		FALSE = Do not wrap lines
+// Показ результатов поиска
+//		TRUE = Переносить строки
+//		FALSE = Не переносить строки
+user_pref("view_source.wrap_long_lines", true);
+
+// CSS :visited selectors
+// [ЗАМЕТКА] Disables the use of styles with the: visited selector to visited links, which prevents the user from finding out what URLs the user has in the browser history.
+// CSS :visited селекторы
+// [ЗАМЕТКА] Отключает применение к посещенным ссылкам стилей с селектором :visited, что предотвращает возможность выяснить, какие URL есть у пользователя в истории браузера.
+user_pref("layout.css.visited_links_enabled", false);
+
+// Closing Thunderbird when closing the last tab
+// Закрытие Thunderbird при закрытии последней вкладки
+user_pref("mail.tabs.closeWindowWithLastTab", false);
+
+// Preloading documents or resources specified via <link rel = "preload">
+// Предзагрузка документов или ресурсов, указанных через <link rel="preload">
+user_pref("network.preload", false);
+
+// Memory cache
+// [WARNING] Allowing caching to RAM can lead to browser tracking using "digital fingerprints" created using the E-Tag!
+// Кэш памяти
+// [ВНИМАНИЕ] Разрешение кэширования в оперативную память может привести к отслеживанию браузера по "цифровым отпечаткам", создаваемым при помощи E-Tag!
+user_pref("browser.cache.memory.enable", false);
+user_pref("browser.cache.memory.capacity", 0);
+
+// Reporting API
+// [NOTE] Stores reports and endpoints in a reporting cache, which are then queued and sent via the HTTP header "Report-To" to endpoints.
+// API отчетов
+// [ЗАМЕТКА] Сохраняет отчеты и конечные точки в кэше отчетов, которые затем помещаются в очередь и отправляются через заголовок HTTP "Report-To" к конечным точкам.
+user_pref("dom.reporting.enabled", false);
+user_pref("dom.reporting.featurePolicy.enabled", false);
+user_pref("dom.reporting.header.enabled", false);
+user_pref("dom.reporting.testing.enabled", false);
+
+// Limited window.opener protection
+// Ограниченная защита window.opener
+user_pref("dom.targetBlankNoOpener.enabled", true);
+
+// Web compatibility reporter
+// Отправка отчетов о совместимости с интернетом
+user_pref("extensions.webcompat-reporter.enabled", false);
+
+// Logging
+// Ведение журнала
+user_pref("devtools.debugger.logging", false);
+user_pref("devtools.onboarding.telemetry.logged", false);
+user_pref("dom.indexedDB.logging.details", false);
+user_pref("dom.indexedDB.logging.enabled", false);
+user_pref("dom.indexedDB.logging.profiler-marks", false);
+user_pref("dom.performance.enable_user_timing_logging", false);
+user_pref("extensions.logging.enabled", false);
+user_pref("gfx.logging.painted-pixel-count.enabled", false);
+user_pref("gfx.logging.peak-texture-usage.enabled", false);
+user_pref("gfx.logging.texture-usage.enabled", false);
+
+// Black lists
+// Черные списки
+user_pref("extensions.blocklist.enabled", false);
+user_pref("extensions.blocklist.url", "");
+
+// First Party Isolation
+user_pref("privacy.firstparty.isolate", true);
+
+// Mixed content
+// Смешанный контент
+user_pref("security.mixed_content.block_active_content", true);
+user_pref("security.mixed_content.block_display_content", true);
+user_pref("security.mixed_content.block_object_subrequest", true);
+user_pref("security.mixed_content.upgrade_display_content", true);
+
+// WebVR
+user_pref("dom.vr.enabled", false);
+
+// WebGL
+user_pref("webgl.disabled", true);
+user_pref("webgl.enable-webgl2", false);
+user_pref("webgl.disable-wgl", true);
+user_pref("webgl.disable-angle", true);
+user_pref("webgl.disable-DOM-blit-uploads", true);
+user_pref("webgl.min_capability_mode", true);
+user_pref("webgl.disable-extensions", true);
+user_pref("webgl.disable-fail-if-major-performance-caveat", true);
+
+// Gamepad control
+// Управление геймпадом
+user_pref("dom.gamepad.enabled", false);
+
+// Updating system add-ons
+// Обновление системных дополнений
+user_pref("extensions.systemAddon.update.enabled", false);
+
+// Safe browsing
+// Безопасный просмотр
+user_pref("browser.safebrowsing.malware.enabled", false);
+user_pref("browser.safebrowsing.phishing.enabled", false);
+user_pref("browser.safebrowsing.allowOverride", false);
+user_pref("browser.safebrowsing.downloads.enabled", false);
+user_pref("browser.safebrowsing.blockedURIs.enabled", false);
+user_pref("browser.safebrowsing.downloads.remote.enabled", false);
+user_pref("browser.safebrowsing.downloads.remote.block_dangerous", false);
+user_pref("browser.safebrowsing.downloads.remote.block_dangerous_host", false);
+user_pref("browser.safebrowsing.downloads.remote.block_potentially_unwanted", false);
+user_pref("browser.safebrowsing.downloads.remote.block_uncommon", false);
+user_pref("browser.safebrowsing.downloads.remote.url", "");
+user_pref("browser.safebrowsing.provider.google.advisoryURL", "");
+user_pref("browser.safebrowsing.provider.google.gethashURL", "");
+user_pref("browser.safebrowsing.provider.google.lists", "");
+user_pref("browser.safebrowsing.provider.google.reportMalwareMistakeURL", "");
+user_pref("browser.safebrowsing.provider.google.reportPhishMistakeURL", "");
+user_pref("browser.safebrowsing.provider.google.reportURL", "");
+user_pref("browser.safebrowsing.provider.google.updateURL", "");
+user_pref("browser.safebrowsing.provider.google4.advisoryURL", "");
+user_pref("browser.safebrowsing.provider.google4.dataSharingURL", "");
+user_pref("browser.safebrowsing.provider.google4.gethashURL", "");
+user_pref("browser.safebrowsing.provider.google4.lists", "");
+user_pref("browser.safebrowsing.provider.google4.reportMalwareMistakeURL", "");
+user_pref("browser.safebrowsing.provider.google4.reportPhishMistakeURL", "");
+user_pref("browser.safebrowsing.provider.google4.reportURL", "");
+user_pref("browser.safebrowsing.provider.google4.updateURL", "");
+user_pref("browser.safebrowsing.provider.mozilla.gethashURL", "");
+user_pref("browser.safebrowsing.provider.mozilla.lists", "");
+user_pref("browser.safebrowsing.provider.mozilla.lists.base", "");
+user_pref("browser.safebrowsing.provider.mozilla.lists.content", "");
+user_pref("browser.safebrowsing.provider.mozilla.updateURL", "");
+user_pref("browser.safebrowsing.reportPhishURL", "");
+
+// WebRTC (Web Real-Time Communication)
+// Peer-to-peer data transfer and WebRTC that lets you know your real IP. WebRTC provides voice communication, video chats, P2P file sharing between browser applications without the use of third-party add-ons.
+// WebRTC (Веб Связь в Реальном Времени)
+// Пиринговая передача данных и WebRTC, который позволяет узнать ваш реальный IP. WebRTC обеспечивает голосовое общение, видео чаты, обмен файлами по технологии P2P между браузерными приложениями без использования сторонних дополнений.
+user_pref("media.peerconnection.dtmf.enabled", false);
+user_pref("media.peerconnection.enabled", false);
+user_pref("media.peerconnection.ice.tcp", false);
+user_pref("media.peerconnection.identity.enabled", false);
+user_pref("media.peerconnection.simulcast", false);
+user_pref("media.peerconnection.video.vp9_enabled", false);
+user_pref("media.peerconnection.turn.disable", true);
+user_pref("media.peerconnection.use_document_iceservers", false);
+user_pref("media.peerconnection.video.enabled", false);
+user_pref("media.peerconnection.ice.default_address_only", true);
+user_pref("media.peerconnection.ice.no_host", true);
+
+// Time range to clear
+//		0 = Everything
+//		1 = Last hour
+//		2 = Last two hours
+//		3 = Last four hours
+//		4 = Today
+// Диапазон времени для очистки
+//		0 = Все
+//		1 = Последний час
+//		2 = Последние два часа
+//		3 = Последние четыре часа
+//		4 = Сегодня
+user_pref("privacy.sanitize.timeSpan", 0);
+
+// Master cleaner Thunderbird
+// [NOTE] This dialog window is invoked by hotkeys - Ctrl + Shift + Del.
+// Мастер очистки Thunderbird
+// [ЗАМЕТКА] Это диалоговое окно вызывается горячими клавишами - Ctrl + Shift + Del.
+user_pref("privacy.cpd.cache", true);
+user_pref("privacy.cpd.cookies", true);
+user_pref("privacy.cpd.history", true);
+
+// Remember your browsing and download history
+// Помните историю посещений и загрузок
+user_pref("places.history.enabled", false);
+
+// Remember the search history and form data
+// Помнить историю поиска и данные формы
+user_pref("browser.formfill.enable", false);

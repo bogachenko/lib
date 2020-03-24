@@ -895,10 +895,8 @@ user_pref("network.preload", false);
 user_pref("browser.laterrun.enabled", false);
 
 // Memory cache
-// [NOTE] Not recommended due to performance issues.
 // [WARNING] Allowing caching to RAM can lead to browser tracking using "digital fingerprints" created using the E-Tag!
 // Кэш памяти
-// [ЗАМЕТКА] Не рекомендуется из-за проблем с производительностью.
 // [ВНИМАНИЕ] Разрешение кэширования в оперативную память может привести к отслеживанию браузера по "цифровым отпечаткам", создаваемым при помощи E-Tag!
 user_pref("browser.cache.memory.enable", false);
 user_pref("browser.cache.memory.capacity", 0);
