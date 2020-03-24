@@ -8,8 +8,8 @@ user_pref("general.warnOnAboutConfig", false);
 // Предупреждение в "about:networking"
 user_pref("network.warnOnAboutNetworking", false);
 
-// Check if Thunderbird is your default browser
-// Проверять, является ли Thunderbird вашим браузером по умолчанию
+// Check if Thunderbird is your default email client
+// Проверять, является ли Thunderbird вашим почтовым клиентом по умолчанию
 user_pref("mail.shell.checkDefaultClient", false);
 
 // Opening pages "Welcome and what's new?"
@@ -78,10 +78,10 @@ user_pref("lightweightThemes.recommendedThemes", "");
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 
 // Telemetry
-// This feature sends data about usage, browser performance, user interface features, memory and hardware configurations, as well as real IP to Mozilla servers. In addition, information may be collected about the sites visited.
+// This feature sends data about usage, mail client performance, user interface features, memory and hardware configurations, as well as real IP to Mozilla servers. In addition, information may be collected about the sites visited.
 // [WARNING] This is a serious source of leaks and user tracking, do not turn it on.
 // Телеметрия
-// Эта функция отправляет на серверы Mozilla данные об использовании, производительности браузера, особенностях пользовательского интерфейса, памяти и конфигурации оборудования, а также реальный IP. Кроме того, может собираться информация о посещаемых сайтах.
+// Эта функция отправляет данные об использовании, производительности почтового клиента, функциях пользовательского интерфейса, конфигурации памяти и оборудования, а также реальных IP-адресах на серверы Mozilla. Кроме того, может собираться информация о посещаемых сайтах.
 // [ВНИМАНИЕ] Это серьезный источник утечек и слежения за пользователем, не включайте его.
 user_pref("toolkit.telemetry.cachedClientID", "");
 user_pref("toolkit.telemetry.enabled", false);
@@ -131,9 +131,9 @@ user_pref("network.IDN_show_punycode", true);
 user_pref("dom.fileHandle.enabled", false);
 
 // Device storage API
-// [NOTE] Responsible for access to the file system, this API allows the browser to read and/or write to the users files.
+// [NOTE] Responsible for access to the file system, this API allows the mail client to read and/or write to the users files.
 // API хранилища устройств
-// [ЗАМЕТКА] Отвечает за доступ к файловой системе, данный API позволяет браузеру самостоятельно читать и/или писать в файлах пользователя.
+// [ЗАМЕТКА] Отвечает за доступ к файловой системе, данный API позволяет почтовому клиенту самостоятельно читать и/или писать в файлах пользователя.
 user_pref("device.storage.enabled", false);
 
 // Showing search results
@@ -145,9 +145,9 @@ user_pref("device.storage.enabled", false);
 user_pref("view_source.wrap_long_lines", true);
 
 // CSS :visited selectors
-// [ЗАМЕТКА] Disables the use of styles with the: visited selector to visited links, which prevents the user from finding out what URLs the user has in the browser history.
+// [ЗАМЕТКА] Disables the use of styles with the: visited selector to visited links, which prevents the user from finding out what URLs the user has in the mail client history.
 // CSS :visited селекторы
-// [ЗАМЕТКА] Отключает применение к посещенным ссылкам стилей с селектором :visited, что предотвращает возможность выяснить, какие URL есть у пользователя в истории браузера.
+// [ЗАМЕТКА] Отключает применение к посещенным ссылкам стилей с селектором :visited, что предотвращает возможность выяснить, какие URL есть у пользователя в истории почтового клиента.
 user_pref("layout.css.visited_links_enabled", false);
 
 // Closing Thunderbird when closing the last tab
@@ -159,9 +159,9 @@ user_pref("mail.tabs.closeWindowWithLastTab", false);
 user_pref("network.preload", false);
 
 // Memory cache
-// [WARNING] Allowing caching to RAM can lead to browser tracking using "digital fingerprints" created using the E-Tag!
+// [WARNING] Enabling caching into RAM can lead to the tracking of the email client by "digital fingerprints" created using the E-Tag!
 // Кэш памяти
-// [ВНИМАНИЕ] Разрешение кэширования в оперативную память может привести к отслеживанию браузера по "цифровым отпечаткам", создаваемым при помощи E-Tag!
+// [ВНИМАНИЕ] Разрешение кэширования в оперативную память может привести к отслеживанию почтового клиента по "цифровым отпечаткам", создаваемым при помощи E-Tag!
 user_pref("browser.cache.memory.enable", false);
 user_pref("browser.cache.memory.capacity", 0);
 
@@ -311,3 +311,32 @@ user_pref("places.history.enabled", false);
 // Remember the search history and form data
 // Помнить историю поиска и данные формы
 user_pref("browser.formfill.enable", false);
+
+// Crash reports
+// [NOTE] This function sends information about program crashes to the Mozilla server, including technical information (memory status, etc.), time, and visited web links.
+// Отчеты о сбоях
+// [ЗАМЕТКА] Эта функция отсылает на сервер Mozilla сведения о сбоях программы, включая техническую информацию (состояние памяти и т.п.), время и посещаемые веб-ссылки.
+user_pref("breakpad.reportURL", "");
+
+// Add-on installation delay
+// Задержка при установке дополнений
+user_pref("security.dialog_enable_delay", 0);
+
+// Health report details
+// This function collects advanced information about the health of the program and sends it to Mozilla servers, in particular: the number of crashes, information about slow loading. It includes data on equipment, operating system, version of this program, installed add-ons (number and type), intra-browser events, rendering, restoration of sessions, their duration, profile age, number of pages visited.
+// Данные об отчета о здоровье
+// Данная функция собирает расширенную информацию о работоспособности программы и отсылает ее на серверы Mozilla, в частности: количество падений, сведения о медленной загрузке. Она включает в себя данные об оборудовании, операционной системе, версии этой программы, установленных дополнениях (количество и тип), внутрибраузерных событиях, рендеринге, восстановлении сессий, их длительности, возрасте профиля, количестве посещенных страниц.
+user_pref("datareporting.policy.dataSubmissionEnabled", false);
+
+// API for microphone and webcam interaction
+// API для взаимодействия с микрофоном и веб-камерой
+user_pref("media.navigator.enabled", false);
+user_pref("media.navigator.video.enabled", false);
+
+// Automatically play sound in non-active tabs
+//		TRUE = Do not play
+//		FALSE = Play
+// Автоматическое воспроизведение звука в неактивных вкладках
+//		TRUE = Не воспроизводить
+//		FALSE = Воспроизводить
+user_pref("media.block-autoplay-until-in-foreground", true);

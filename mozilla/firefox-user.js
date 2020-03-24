@@ -286,7 +286,7 @@ user_pref("media.block-autoplay-until-in-foreground", true);
 // This feature sends data about usage, browser performance, user interface features, memory and hardware configurations, as well as real IP to Mozilla servers. In addition, information may be collected about the sites visited.
 // [WARNING] This is a serious source of leaks and user tracking, do not turn it on.
 // Телеметрия
-// Эта функция отправляет на серверы Mozilla данные об использовании, производительности браузера, особенностях пользовательского интерфейса, памяти и конфигурации оборудования, а также реальный IP. Кроме того, может собираться информация о посещаемых сайтах.
+// Эта функция отправляет данные об использовании, производительности браузера, функциях пользовательского интерфейса, конфигурации памяти и оборудования, а также реальных IP-адресах на серверы Mozilla. Кроме того, может собираться информация о посещаемых сайтах.
 // [ВНИМАНИЕ] Это серьезный источник утечек и слежения за пользователем, не включайте его.
 user_pref("security.certerrors.recordEventTelemetry", false);
 user_pref("toolkit.coverage.endpoint.base", "");
@@ -316,17 +316,17 @@ user_pref("browser.newtabpage.activity-stream.feeds.systemtick", false);
 user_pref("browser.newtabpage.activity-stream.filterAdult", false);
 
 // Health report details
-// This feature collects advanced information about the health of the browser and sends it to Mozilla servers, in particular: the number of falls, information about slow loading. It includes data on hardware, operating system, browser version, installed add-ons (number and type), intra-browser events, rendering, session recovery, session duration, profile age, number of pages visited.
+// This function collects advanced information about the health of the program and sends it to Mozilla servers, in particular: the number of crashes, information about slow loading. It includes data on equipment, operating system, version of this program, installed add-ons (number and type), intra-browser events, rendering, restoration of sessions, their duration, profile age, number of pages visited.
 // Данные об отчета о здоровье
-// Данная функция собирает расширенную информацию о работоспособности браузера и отсылает ее на серверы Mozilla, в частности: количество падений, сведения о медленной загрузке. Она включает в себя данные об оборудовании, операционной системе, версии браузера, установленных дополнениях (количество и тип), внутрибраузерных событиях, рендеринге, восстановлении сессий, их длительности, возрасте профиля, количестве посещенных страниц.
+// Данная функция собирает расширенную информацию о работоспособности программы и отсылает ее на серверы Mozilla, в частности: количество падений, сведения о медленной загрузке. Она включает в себя данные об оборудовании, операционной системе, версии этой программы, установленных дополнениях (количество и тип), внутрибраузерных событиях, рендеринге, восстановлении сессий, их длительности, возрасте профиля, количестве посещенных страниц.
 user_pref("datareporting.healthreport.infoURL", "");
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
 
 // Crash reports
-// [NOTE] This feature sends to the Mozilla server information about browser crashes, including technical information (memory status, etc.), time and web links visited.
+// [NOTE] This function sends information about program crashes to the Mozilla server, including technical information (memory status, etc.), time, and visited web links.
 // Отчеты о сбоях
-// [ЗАМЕТКА] Эта функция отсылает на сервер Mozilla сведения о сбоях браузера, включая техническую информацию (состояние памяти и т.п.), время и посещаемые веб-ссылки.
+// [ЗАМЕТКА] Эта функция отсылает на сервер Mozilla сведения о сбоях программы, включая техническую информацию (состояние памяти и т.п.), время и посещаемые веб-ссылки.
 user_pref("breakpad.reportURL", "");
 user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 user_pref("browser.crashReports.unsubmittedCheck.enabled", false);
