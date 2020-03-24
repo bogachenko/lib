@@ -488,9 +488,6 @@ user_pref("browser.sessionstore.max_windows_undo", 10);
 // Offline cache
 // Автономный кэш
 user_pref("browser.cache.offline.enable", false);
-
-// Offline cache on insecure sites
-// Автономный кэш на небезопасных сайтах
 user_pref("browser.cache.offline.insecure.enable", false);
 
 // Request to use the offline cache
@@ -547,12 +544,6 @@ user_pref("network.cookie.thirdparty.nonsecureSessionOnly", true);
 //		0 = Сохранять их до истечения срока действия
 //		2 = Сохранять их до закрытия Firefox
 user_pref("network.cookie.lifetimePolicy", 2);
-
-// Indexed database API
-// [NOTE] Disabling this feature will break many sites. You would better use add-ons for full control.
-// API Индексированных баз данных
-// [ЗАМЕТКА] Отключение этой функции поломает много сайтов. Вам лучше использовать дополнения для полного контроля.
-// user_pref("dom.indexedDB.enabled", false);
 
 // Storage API
 // [NOTE] Disables another way for sites to store their data on the users personal computer.
@@ -634,10 +625,12 @@ user_pref("lightweightThemes.update.enabled", false);
 //		0 = Desktop
 //		1 = Downloads
 //		2 = Last used folder
+// [NOTE] On Android, when you select "Save to desktop", downloading will not work at all
 // Путь для сохранения файлов
 //		0 = Рабочий стол
 //		1 = Загрузки
 //		2 = Последняя используемая папка
+// [ЗАМЕТКА] На Android при выборе "Сохранять на рабочий стол" загрузка вообще работать не будет
 user_pref("browser.download.folderList", 1);
 
 // Adding downloads to the list of recent system documents
