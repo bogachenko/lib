@@ -2,7 +2,7 @@
 
 // Warning in "about:config"
 // Предупреждение в "about:config"
-user_pref("general.aboutConfig.enable", false);
+user_pref("browser.aboutConfig.showWarning", false);
 
 // Warning about closing multiple tabs
 // Предупреждение о закрытии нескольких вкладок
@@ -228,6 +228,10 @@ user_pref("browser.newtabpage.activity-stream.improvesearch.noDefaultSearchTile"
 user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
 user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
 user_pref("browser.newtabpage.activity-stream.telemetry.ping.endpoint", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.useRemoteL10n", false);
+user_pref("browser.newtabpage.activity-stream.discoverystream.personalization.modelKeys", "");
+user_pref("browser.newtabpage.activity-stream.feeds.recommendationproviderswitcher", false);
+user_pref("browser.newtabpage.activity-stream.feeds.section.highlights", false);
 
 // Защита от отслеживания
 // Tracking protection
@@ -238,6 +242,7 @@ user_pref("privacy.trackingprotection.cryptomining.enabled", false);
 user_pref("privacy.socialtracking.block_cookies.enabled", false);
 user_pref("privacy.trackingprotection.socialtracking.enabled", false);
 user_pref("privacy.trackingprotection.introURL", "");
+user_pref("privacy.trackingprotection.annotate_channels", false);
 
 // WebRTC (Web Real-Time Communication)
 // Peer-to-peer data transfer and WebRTC that lets you know your real IP. WebRTC provides voice communication, video chats, P2P file sharing between browser applications without the use of third-party add-ons.
@@ -354,6 +359,7 @@ user_pref("geo.enabled", false);
 user_pref("geo.provider.ms-windows-location", false);
 user_pref("geo.provider.use_corelocation", false);
 user_pref("geo.provider.use_gpsd", false);
+user_pref("geo.provider.network.url", "");
 
 // GeoIP-based search results
 // Результаты поиска на основе GeoIP
@@ -1045,3 +1051,7 @@ user_pref("browser.contentblocking.report.proxy_extension.url", "");
 user_pref("browser.contentblocking.report.social.url", "");
 user_pref("browser.contentblocking.report.tracker.url", "");
 user_pref("browser.contentblocking.reportBreakage.url", "");
+
+// Делегирование разрешений
+// Permission delegation
+user_pref("permissions.delegation.enabled", false);
