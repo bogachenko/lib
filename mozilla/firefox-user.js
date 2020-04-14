@@ -1055,3 +1055,11 @@ user_pref("browser.contentblocking.reportBreakage.url", "");
 // Делегирование разрешений
 // Permission delegation
 user_pref("permissions.delegation.enabled", false);
+
+// Mega bar
+// Мега бар
+user_pref("browser.urlbar.openViewOnFocus", false);
+user_pref("browser.urlbar.update1", false);
+user_pref("browser.urlbar.update1.interventions", false);
+user_pref("browser.urlbar.update1.searchTips", false);
+user_pref("browser.urlbar.update1.view.stripHttps", false);
