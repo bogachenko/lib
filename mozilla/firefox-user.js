@@ -399,21 +399,6 @@ user_pref("plugin.state.flash", 0);
 // Сканирование Plugin ID (PLID) в каталогах, определенных в реестре Windows
 user_pref("plugin.scan.plid.all", false);
 
-// OpenH264 codec (Gecko Media Plugins)
-// Кодек OpenH264 (Gecko Медиа Плагины)
-user_pref("media.gmp-provider.enabled", false);
-user_pref("media.gmp-gmpopenh264.enabled", false);
-user_pref("media.gmp-manager.cert.checkAttributes", false);
-user_pref("media.gmp.trial-create.enabled", false);
-user_pref("media.gmp-widevinecdm.enabled", false);
-user_pref("media.gmp-widevinecdm.visible", false);
-user_pref("media.gmp-gmpopenh264.visible", false);
-user_pref("media.gmp-manager.url", false);
-
-// Digital rights management (DRM)
-// Управление цифровыми правами (DRM)
-user_pref("media.eme.enabled", false);
-
 // Preload a page that the browser considers to be a logical next page
 // Предварительная загрузка страницы, которую браузер считает логической следующей страницей
 user_pref("network.prefetch-next", false);
@@ -959,12 +944,6 @@ user_pref("privacy.firstparty.isolate", true);
 
 // GIO
 user_pref("network.gio.supported-protocols", "");
-
-// Mixed content
-// Смешанный контент
-user_pref("security.mixed_content.block_active_content", true);
-user_pref("security.mixed_content.block_display_content", true);
-user_pref("security.mixed_content.block_object_subrequest", true);
 
 // WebVR
 user_pref("dom.vr.enabled", false);
