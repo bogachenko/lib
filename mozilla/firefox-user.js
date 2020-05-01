@@ -1,8 +1,15 @@
 // Config for Firefox by bogachenko
 
 // Warning in "about:config"
+// [NOTE] Page version
+//		xul = chrome://global/content/config.xul
+//		xhtml = chrome://global/content/config.xhtml
 // Предупреждение в "about:config"
+// [ЗАМЕТКА] Версия страницы
+//		xul = chrome://global/content/config.xul
+//		xhtml = chrome://global/content/config.xhtml
 user_pref("browser.aboutConfig.showWarning", false);
+user_pref("general.warnOnAboutConfig", false);
 
 // Warning about closing multiple tabs
 // Предупреждение о закрытии нескольких вкладок
@@ -232,6 +239,9 @@ user_pref("browser.newtabpage.activity-stream.asrouter.useRemoteL10n", false);
 user_pref("browser.newtabpage.activity-stream.discoverystream.personalization.modelKeys", "");
 user_pref("browser.newtabpage.activity-stream.feeds.recommendationproviderswitcher", false);
 user_pref("browser.newtabpage.activity-stream.feeds.section.highlights", false);
+user_pref("browser.newtabpage.activity-stream.discoverystream.region-layout-config", "");
+user_pref("browser.newtabpage.activity-stream.discoverystream.region-spocs-config", "");
+user_pref("browser.newtabpage.activity-stream.discoverystream.region-stories-config", "");
 
 // Защита от отслеживания
 // Tracking protection
@@ -319,6 +329,9 @@ user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion", fa
 user_pref("browser.newtabpage.activity-stream.feeds.sections", false);
 user_pref("browser.newtabpage.activity-stream.feeds.systemtick", false);
 user_pref("browser.newtabpage.activity-stream.filterAdult", false);
+user_pref("security.app_menu.recordEventTelemetry", false);
+user_pref("security.identitypopup.recordEventTelemetry", false);
+user_pref("security.protectionspopup.recordEventTelemetry", false);
 
 // Health report details
 // This function collects advanced information about the health of the program and sends it to Mozilla servers, in particular: the number of crashes, information about slow loading. It includes data on equipment, operating system, version of this program, installed add-ons (number and type), intra-browser events, rendering, restoration of sessions, their duration, profile age, number of pages visited.
@@ -376,6 +389,8 @@ user_pref("browser.search.geoSpecificDefaults.url", "");
 // Рекомендованные темы и расширения
 user_pref("lightweightThemes.recommendedThemes", "");
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
+user_pref("browser.discovery.enabled", false);
+user_pref("browser.discovery.containers.enabled", false);
 
 // Add-on installation delay
 // Задержка при установке дополнений
@@ -601,6 +616,8 @@ user_pref("signon.autofillForms.http", false);
 // Show password notifications for hacked sites
 // Показывать уведомления о паролях для взломанных сайтов
 user_pref("signon.management.page.breach-alerts.enabled", false);
+user_pref("signon.management.page.mobileAndroidURL", "");
+user_pref("signon.management.page.mobileAppleURL", "");
 
 // Smooth scrolling
 // [NOTE] Recommended for brake applications, hardware failures, and problems with the video card.
@@ -915,6 +932,13 @@ user_pref("extensions.pocket.enabled", false);
 user_pref("extensions.screenshots.disabled", true);
 user_pref("extensions.screenshots.upload-disabled", true);
 
+// Extension Form Autofill
+// Расширение Form Autofill
+user_pref("extensions.formautofill.addresses.enabled", false);
+user_pref("extensions.formautofill.available", "off");
+user_pref("extensions.formautofill.creditCards.enabled", false);
+user_pref("extensions.formautofill.heuristics.enabled", false);
+
 // Web compatibility reporter
 // Отправка отчетов о совместимости с интернетом
 user_pref("extensions.webcompat-reporter.enabled", false);
@@ -1030,6 +1054,10 @@ user_pref("browser.contentblocking.report.proxy_extension.url", "");
 user_pref("browser.contentblocking.report.social.url", "");
 user_pref("browser.contentblocking.report.tracker.url", "");
 user_pref("browser.contentblocking.reportBreakage.url", "");
+user_pref("browser.contentblocking.report.lockwise.mobile-android.url", "");
+user_pref("browser.contentblocking.report.lockwise.mobile-ios.url", "");
+user_pref("browser.contentblocking.report.mobile-android.url", "");
+user_pref("browser.contentblocking.report.mobile-ios.url", "");
 
 // Делегирование разрешений
 // Permission delegation
@@ -1042,3 +1070,8 @@ user_pref("browser.urlbar.update1", false);
 user_pref("browser.urlbar.update1.interventions", false);
 user_pref("browser.urlbar.update1.searchTips", false);
 user_pref("browser.urlbar.update1.view.stripHttps", false);
+
+// Исследования
+// Studies
+user_pref("app.shield.optoutstudies.enabled", false);
+
