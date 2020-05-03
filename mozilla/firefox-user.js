@@ -242,6 +242,8 @@ user_pref("browser.newtabpage.activity-stream.feeds.section.highlights", false);
 user_pref("browser.newtabpage.activity-stream.discoverystream.region-layout-config", "");
 user_pref("browser.newtabpage.activity-stream.discoverystream.region-spocs-config", "");
 user_pref("browser.newtabpage.activity-stream.discoverystream.region-stories-config", "");
+user_pref("browser.newtabpage.activity-stream.feeds.sections", false);
+user_pref("browser.newtabpage.activity-stream.feeds.systemtick", false);
 
 // Защита от отслеживания
 // Tracking protection
@@ -326,8 +328,6 @@ user_pref("toolkit.telemetry.ecosystemtelemetry.enabled", false);
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion", false);
-user_pref("browser.newtabpage.activity-stream.feeds.sections", false);
-user_pref("browser.newtabpage.activity-stream.feeds.systemtick", false);
 user_pref("browser.newtabpage.activity-stream.filterAdult", false);
 user_pref("security.app_menu.recordEventTelemetry", false);
 user_pref("security.identitypopup.recordEventTelemetry", false);
@@ -337,7 +337,6 @@ user_pref("security.protectionspopup.recordEventTelemetry", false);
 // This function collects advanced information about the health of the program and sends it to Mozilla servers, in particular: the number of crashes, information about slow loading. It includes data on equipment, operating system, version of this program, installed add-ons (number and type), intra-browser events, rendering, restoration of sessions, their duration, profile age, number of pages visited.
 // Данные об отчета о здоровье
 // Данная функция собирает расширенную информацию о работоспособности программы и отсылает ее на серверы Mozilla, в частности: количество падений, сведения о медленной загрузке. Она включает в себя данные об оборудовании, операционной системе, версии этой программы, установленных дополнениях (количество и тип), внутрибраузерных событиях, рендеринге, восстановлении сессий, их длительности, возрасте профиля, количестве посещенных страниц.
-user_pref("datareporting.healthreport.infoURL", "");
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
 
@@ -352,11 +351,14 @@ user_pref("browser.tabs.crashReporting.email", "");
 user_pref("browser.tabs.crashReporting.emailMe", false);
 user_pref("browser.tabs.crashReporting.includeURL", false);
 user_pref("browser.tabs.crashReporting.sendReport", false);
+user_pref("browser.tabs.crashReporting.requestEmail", false);
 
 // Promo for mobile phones
 // Акция для мобильных телефонов
 user_pref("identity.mobilepromo.android", "");
 user_pref("identity.mobilepromo.ios", "");
+user_pref("signon.management.page.mobileAndroidURL", "");
+user_pref("signon.management.page.mobileAppleURL", "");
 
 // PingCentre telemetry
 // Телеметрия ПингЦентра
@@ -373,17 +375,15 @@ user_pref("geo.provider.ms-windows-location", false);
 user_pref("geo.provider.use_corelocation", false);
 user_pref("geo.provider.use_gpsd", false);
 user_pref("geo.provider.network.url", "");
-
-// GeoIP-based search results
-// Результаты поиска на основе GeoIP
-user_pref("browser.search.region", "US");
-user_pref("browser.search.geoip.url", "");
-user_pref("browser.search.geoip.timeout", 0);
+user_pref("geo.provider-country.network.url", "");
 
 // Browser geolocation (GeoIP) when working with search servers
 // Геопозиционирования браузера (GeoIP) при работе с поисковыми серверами
 user_pref("browser.search.geoSpecificDefaults", false);
 user_pref("browser.search.geoSpecificDefaults.url", "");
+user_pref("browser.search.region", "US");
+user_pref("browser.search.geoip.url", "");
+user_pref("browser.search.geoip.timeout", 0);
 
 // Recommended themes and extensions
 // Рекомендованные темы и расширения
@@ -454,6 +454,7 @@ user_pref("services.sync.engine.tabs", false);
 // API Кэша (Хранилище кэша)
 // [ЗАМЕТКА] Это хранилище на компьютере пользователя, куда скрипты могут складывать информацию. Оно является частью спецификации "Service workers", но может быть использовано и без них.
 user_pref("dom.caches.enabled", false);
+user_pref("dom.caches.testing.enabled", false);
 
 // Web notifications
 // [NOTE] Data is sent to the site(s) not currently open in the browser.
@@ -616,8 +617,6 @@ user_pref("signon.autofillForms.http", false);
 // Show password notifications for hacked sites
 // Показывать уведомления о паролях для взломанных сайтов
 user_pref("signon.management.page.breach-alerts.enabled", false);
-user_pref("signon.management.page.mobileAndroidURL", "");
-user_pref("signon.management.page.mobileAppleURL", "");
 
 // Smooth scrolling
 // [NOTE] Recommended for brake applications, hardware failures, and problems with the video card.
@@ -633,12 +632,10 @@ user_pref("lightweightThemes.update.enabled", false);
 //		0 = Desktop
 //		1 = Downloads
 //		2 = Last used folder
-// [NOTE] On Android, when you select "Save to desktop", downloading will not work at all
 // Путь для сохранения файлов
 //		0 = Рабочий стол
 //		1 = Загрузки
 //		2 = Последняя используемая папка
-// [ЗАМЕТКА] На Android при выборе "Сохранять на рабочий стол" загрузка вообще работать не будет
 user_pref("browser.download.folderList", 1);
 
 // Adding downloads to the list of recent system documents
