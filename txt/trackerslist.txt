@@ -15,6 +15,15 @@ http://104.31.140.11:80/announce
 http://107.150.14.110:6969/announce
 http://109.121.134.121:1337/announce
 http://114.55.113.60:6969/announce
+udp://tracker.publicbt.com:80/announce
+udp://tracker.openbittorrent.com:80/announce
+http://bt.rutracker.org/ann?uk=aFt9SG08hL
+udp://bt.rutor.org:2710
+udp://tracker.leechers-paradise.org:6969
+udp://tracker.coppersurfer.tk:6969
+udp://tracker.publicbt.com:80
+udp://tracker.openbittorrent.com:80
+http://retracker.local/announce
 http://121.14.98.151:9090/announce
 http://122.116.144.108:6969/announce
 http://123.5qzone.net:7777/
@@ -28,6 +37,7 @@ http://1337.abcvg.info/announce
 http://1337.abcvg.info:80/announce
 http://139.99.100.97:8080/announce
 http://149.129.63.70:6969/announce
+https://tracker.imgoingto.icu/announce
 http://149.28.95.5:2710/announce
 http://153.92.6.117:80/announce
 http://153.92.6.87:80/announce
@@ -37,6 +47,8 @@ http://159.89.208.145:8866/announce
 http://169.1.1.242:80/announce
 http://172.64.139.2:80/announce
 http://173.254.204.71:1096/announce
+http://t.lint2.com:9000/announce
+udp://t.lint2.com:9000/announce
 http://175.24.22.206:11450/announce
 http://176.113.68.66:6961/announce
 http://176.113.68.67:6961/announce
