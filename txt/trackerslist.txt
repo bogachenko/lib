@@ -49,6 +49,8 @@ http://172.64.139.2:80/announce
 http://173.254.204.71:1096/announce
 http://t.lint2.com:9000/announce
 udp://t.lint2.com:9000/announce
+http://omg.wtftrackr.xyz/announce
+udp://omg.wtftrackr.xyz/announce
 http://175.24.22.206:11450/announce
 http://176.113.68.66:6961/announce
 http://176.113.68.67:6961/announce
@@ -428,7 +430,6 @@ http://retracker.kld.ru:2710/announce
 http://retracker.krs-ix.ru/announce
 http://retracker.krs-ix.ru:80/announce
 http://retracker.lanta-net.ru:2710/announce
-http://retracker.local/announce
 http://retracker.local:80/announce
 http://retracker.mgts.by/announce
 http://retracker.mgts.by:80/announce
@@ -898,7 +899,6 @@ https://tracker.hama3.net/announce
 https://tracker.hama3.net:443/announce
 https://tracker.hdcmct.org/announce.php
 https://tracker.heaterdown.eu:443/announce
-https://tracker.imgoingto.icu/announce
 https://tracker.lelux.fi/announce
 https://tracker.lelux.fi:443/announce
 https://tracker.nanoha.org/announce
@@ -1251,7 +1251,6 @@ udp://tracker.btzoo.eu:80/announce
 udp://tracker.ccc.de:80
 udp://tracker.ccc.de:80/announce
 udp://tracker.christianbro.pw:6969/announce
-udp://tracker.coppersurfer.tk:6969
 udp://tracker.coppersurfer.tk:6969/announce
 udp://tracker.coppersurfer.tk:80
 udp://tracker.coppersurfer.tk:80/announce
@@ -1294,7 +1293,6 @@ udp://tracker.kamigami.org:2710/announce
 udp://tracker.kicks-ass.net:80/announce
 udp://tracker.kiwifarms.net:8000/announce
 udp://tracker.kuroy.me:5944/announce
-udp://tracker.leechers-paradise.org:6969
 udp://tracker.leechers-paradise.org:6969/announce
 udp://tracker.lelux.fi:6969/announce
 udp://tracker.mg64.net:2710/announce
@@ -1310,9 +1308,7 @@ udp://tracker.ohys.net:80/announce
 udp://tracker.open-internet.nl:6969/announce
 udp://tracker.open-tracker.org:1337/announce
 udp://tracker.openbittorrent.com
-udp://tracker.openbittorrent.com:80
 udp://tracker.openbittorrent.com:80/
-udp://tracker.openbittorrent.com:80/announce
 udp://tracker.opentrackr.org:1337
 udp://tracker.opentrackr.org:1337/announce
 udp://tracker.patatje.eu:6969/announce
@@ -1324,8 +1320,6 @@ udp://tracker.pomf.se/announce
 udp://tracker.port443.xyz:6969/announce
 udp://tracker.prq.to/announce
 udp://tracker.prq.to:80/announce
-udp://tracker.publicbt.com:80
-udp://tracker.publicbt.com:80/announce
 udp://tracker.pubt.net:2710/announce
 udp://tracker.qt.is:6969/announce
 udp://tracker.safe.moe:6969/announce
