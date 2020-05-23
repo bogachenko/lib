@@ -730,17 +730,6 @@
     "httpsFiltering" : true,
     "mobileData" : true,
     "mobileDataScreenOff" : true,
-    "packageName" : "com.android.vending",
-    "showFirewallNotifications" : true,
-    "trafficFiltering" : false,
-    "wifi" : true,
-    "wifiScreenOff" : true,
-    "default" : false
-  }, {
-    "adBlocking" : true,
-    "httpsFiltering" : true,
-    "mobileData" : true,
-    "mobileDataScreenOff" : true,
     "packageName" : "com.pac.console",
     "showFirewallNotifications" : true,
     "trafficFiltering" : false,
@@ -1666,17 +1655,6 @@
     "mobileData" : true,
     "mobileDataScreenOff" : true,
     "packageName" : "com.kms.free",
-    "showFirewallNotifications" : true,
-    "trafficFiltering" : true,
-    "wifi" : true,
-    "wifiScreenOff" : true,
-    "default" : false
-  }, {
-    "adBlocking" : false,
-    "httpsFiltering" : true,
-    "mobileData" : true,
-    "mobileDataScreenOff" : true,
-    "packageName" : "ru.sberbankmobile",
     "showFirewallNotifications" : true,
     "trafficFiltering" : true,
     "wifi" : true,
@@ -4201,6 +4179,116 @@
     "wifi" : true,
     "wifiScreenOff" : true,
     "default" : false
+  }, {
+    "adBlocking" : true,
+    "httpsFiltering" : true,
+    "mobileData" : true,
+    "mobileDataScreenOff" : true,
+    "packageName" : "com.android.vending",
+    "showFirewallNotifications" : true,
+    "trafficFiltering" : true,
+    "wifi" : true,
+    "wifiScreenOff" : true,
+    "default" : false
+  }, {
+    "adBlocking" : true,
+    "httpsFiltering" : true,
+    "mobileData" : true,
+    "mobileDataScreenOff" : true,
+    "packageName" : "ru.sberbankmobile",
+    "showFirewallNotifications" : true,
+    "trafficFiltering" : true,
+    "wifi" : true,
+    "wifiScreenOff" : true,
+    "default" : false
+  }, {
+    "adBlocking" : true,
+    "httpsFiltering" : true,
+    "mobileData" : false,
+    "mobileDataScreenOff" : false,
+    "packageName" : "com.appstar.callrecorder",
+    "showFirewallNotifications" : true,
+    "trafficFiltering" : true,
+    "wifi" : false,
+    "wifiScreenOff" : false,
+    "default" : false
+  }, {
+    "adBlocking" : true,
+    "httpsFiltering" : true,
+    "mobileData" : false,
+    "mobileDataScreenOff" : false,
+    "packageName" : "com.rarlab.rar",
+    "showFirewallNotifications" : true,
+    "trafficFiltering" : true,
+    "wifi" : false,
+    "wifiScreenOff" : false,
+    "default" : false
+  }, {
+    "adBlocking" : true,
+    "httpsFiltering" : true,
+    "mobileData" : false,
+    "mobileDataScreenOff" : false,
+    "packageName" : "com.sonymobile.anondata",
+    "showFirewallNotifications" : true,
+    "trafficFiltering" : true,
+    "wifi" : false,
+    "wifiScreenOff" : false,
+    "default" : false
+  }, {
+    "adBlocking" : true,
+    "httpsFiltering" : true,
+    "mobileData" : false,
+    "mobileDataScreenOff" : false,
+    "packageName" : "com.sonyericsson.idd.agent",
+    "showFirewallNotifications" : true,
+    "trafficFiltering" : true,
+    "wifi" : false,
+    "wifiScreenOff" : false,
+    "default" : false
+  }, {
+    "adBlocking" : true,
+    "httpsFiltering" : true,
+    "mobileData" : false,
+    "mobileDataScreenOff" : false,
+    "packageName" : "com.pixign.smart.puzzles",
+    "showFirewallNotifications" : true,
+    "trafficFiltering" : true,
+    "wifi" : false,
+    "wifiScreenOff" : false,
+    "default" : false
+  }, {
+    "adBlocking" : true,
+    "httpsFiltering" : true,
+    "mobileData" : true,
+    "mobileDataScreenOff" : true,
+    "packageName" : "com.sonyericsson.updatecenter",
+    "showFirewallNotifications" : true,
+    "trafficFiltering" : false,
+    "wifi" : true,
+    "wifiScreenOff" : true,
+    "default" : false
+  }, {
+    "adBlocking" : true,
+    "httpsFiltering" : true,
+    "mobileData" : false,
+    "mobileDataScreenOff" : false,
+    "packageName" : "com.kingroot.kinguser",
+    "showFirewallNotifications" : true,
+    "trafficFiltering" : true,
+    "wifi" : false,
+    "wifiScreenOff" : false,
+    "default" : false
+  }, {
+    "adBlocking" : true,
+    "httpsFiltering" : true,
+    "mobileData" : false,
+    "mobileDataScreenOff" : false,
+    "packageName" : "com.sonyericsson.album",
+    "showFirewallNotifications" : true,
+    "trafficFiltering" : true,
+    "wifi" : false,
+    "wifiScreenOff" : false,
+    "default" : false
   } ],
   "booleanPreferences" : {
     "pref.vpn.ipv4.bypass" : false,
@@ -4258,7 +4346,7 @@
     "key_auto_update_period" : 1,
     "stats_interval" : 2131820625,
     "stealth_mode_third_party_cookie_value" : 180,
-    "key_theme" : 1,
+    "key_theme" : 0,
     "pref.vpn.tun.mtu" : 9000,
     "pref.boot.startup.delay" : 5,
     "key_https_filtering_mode" : 1,
@@ -4301,12 +4389,8 @@
     "disabled_user_rules" : [ ]
   },
   "dnsServer" : {
-    "id" : "google-dns",
-    "name" : "Google DNS",
-    "parallelQueries" : false,
-    "provider" : "Google DNS",
-    "serverType" : "REGULAR",
-    "upstreams" : [ "8.8.8.8", "8.8.4.4" ]
+    "id" : "system",
+    "parallelQueries" : false
   },
   "settingsFiltersConfiguration" : {
     "customFilters" : [ {
