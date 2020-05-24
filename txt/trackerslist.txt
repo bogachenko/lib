@@ -1392,6 +1392,8 @@ udp://u.wwwww.wtf:1/announce
 udp://u4.trakx.nibba.trade:1337/announce
 udp://ulfbrueggemann.no-ip.org:6969/announce
 udp://valakas.rollo.dnsabr.com:2710/announce
+https://tracker.jae.moe:443/announce
+udp://tracker.jae.moe:6969/announce
 udp://wambo.club:1337/announce
 udp://www.eddie4.nl:6969/announce
 udp://www.loushao.net:8080/announce
