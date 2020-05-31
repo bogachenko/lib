@@ -17,7 +17,7 @@ fi
 sleep 5
 su
 pacman -Syyuu
-pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp
+pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono
 systemctl enable bumblebeed
 gpasswd -a $USER bumblebee
 rm -rf /home/bogachenko/.mozilla/
