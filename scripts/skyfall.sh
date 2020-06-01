@@ -4,6 +4,7 @@
 # Author: Bogachenko Vyacheslav
 # Mail: bogachenkove@gmail.com
 
+clear
 echo "Checking network connection."
 echo "Please wait..."
 ping google.com -c 1 >/dev/null 2>&1
@@ -18,7 +19,7 @@ sleep 5
 su
 pacman-mirrors --fasttrack
 pacman -Syyuu
-pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono nvidia-prime
+pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-ubuntu-font-family jre-openjdk jdk-openjdk jre-openjdk-headless
 systemctl enable bumblebeed
 gpasswd -a $USER bumblebee
 rm -rf /home/bogachenko/.mozilla/
@@ -36,4 +37,4 @@ makepkg -si
 cd ..
 rm -dR yaourt/ package-query/
 exit
-yaourt -S ttf-google-fonts-git
+yaourt -S ttf-google-fonts-git ttf-ms-win10 ungoogled-chromium
