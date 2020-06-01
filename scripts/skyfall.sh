@@ -18,13 +18,14 @@ sleep 5
 su
 pacman-mirrors --fasttrack
 pacman -Syyuu
-pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono
+pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono nvidia-prime
 systemctl enable bumblebeed
 gpasswd -a $USER bumblebee
 rm -rf /home/bogachenko/.mozilla/
 rm /etc/hosts
 wget -P /etc/ https://raw.githubusercontent.com/bogachenko/filterlist/personal/hosts
-sudo pacman -S --needed base-devel git wget yajl
+pacman -S --needed base-devel git wget yajl
+cd /tmp/
 git clone https://aur.archlinux.org/package-query.git
 cd package-query/
 makepkg -si
@@ -33,4 +34,6 @@ git clone https://aur.archlinux.org/yaourt.git
 cd yaourt/
 makepkg -si
 cd ..
-sudo rm -dR yaourt/ package-query/
+rm -dR yaourt/ package-query/
+exit
+yaourt -S ttf-google-fonts-git
