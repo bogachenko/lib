@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Skyfall: Automatic configuration of Manjaro.
+# Bomjaro: Automatic configuration of Manjaro.
 # Author: Bogachenko Vyacheslav
 # Mail: bogachenkove@gmail.com
 
