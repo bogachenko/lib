@@ -1,7 +1,6 @@
 # Collection of scriptlets to be used for injection in uBlock Origin.
 
 # eval-logger
-# example.com##+js(eval-logger)
 eval-logger.js application/javascript
 (() => {
 	'use strict';
@@ -508,4 +507,33 @@ remove-elem.js application/javascript
 		const observer = new MutationObserver(rm);
     		observer.observe(document.documentElement, { childList: true, subtree: true });
 		if (document.readyState === 'complete') { observer.disconnect(); return; } 
+})();
+
+# inline-noscript-rm
+inline-noscript-rm.js application/javascript
+(() => { 
+          'use strict';
+	  let needle = '{{1}}';
+          if ( needle === '' || needle === '{{1}}' ) {
+              needle = '.?';
+          } else if ( needle.slice(0,1) === '/' && needle.slice(-1) === '/' ) {
+              needle = needle.slice(1,-1);
+          } else {
+              needle = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          }
+          needle = new RegExp(needle);
+          const nosnode = () => {
+                                         try {
+                                          	const noss = document.querySelectorAll('noscript');
+                                          	for (const nos of noss) {
+                                              		if (nos.outerHTML.match(needle)) {
+                                                                	nos.textContent = '';
+									nos.remove();
+							}			
+                                          	}
+                                   	 } catch { }
+          };
+          const observer = new MutationObserver(nosnode);
+	  observer.observe(document.documentElement, { childList: true, subtree: true });
+	  if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
