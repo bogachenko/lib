@@ -19,7 +19,7 @@ sleep 5
 su
 pacman-mirrors --fasttrack
 pacman -Syyuu
-pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-ubuntu-font-family jre-openjdk jdk-openjdk jre-openjdk-headless chromium
+pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-ubuntu-font-family jre-openjdk jdk-openjdk jre-openjdk-headless chromium capitaine-cursors
 systemctl enable bumblebeed
 gpasswd -a $USER bumblebee
 rm -rf /home/bogachenko/.mozilla/
@@ -36,5 +36,8 @@ cd yaourt/
 makepkg -si
 cd ..
 rm -dR yaourt/ package-query/
+rm -rf /tmp/*
 exit
-yaourt -S ttf-google-fonts-git
+yaourt -S ttf-google-fonts-git ttf-ms-fonts
+ln -s /usr/share/icons/capitaine-cursors-light/cursors ~/.icons/default/cursors
+sudo reboot
