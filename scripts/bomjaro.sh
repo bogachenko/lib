@@ -19,7 +19,10 @@ sleep 5
 su
 pacman-mirrors --fasttrack
 pacman -Syyuu
-pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-ubuntu-font-family jre-openjdk jdk-openjdk jre-openjdk-headless chromium capitaine-cursors
+pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-ubuntu-font-family jre-openjdk jdk-openjdk jre-openjdk-headless chromium capitaine-cursors discord telegram-desktop zsh
+chsh -s /bin/zsh
+cd /home/$USER
+rm -rf .bash_history .bash_logout .bash_profile .bashrc
 systemctl enable bumblebeed
 gpasswd -a $USER bumblebee
 rm -rf /home/$USER/.mozilla/
@@ -40,7 +43,8 @@ cd ..
 rm -dR yaourt/ package-query/
 rm -rf /tmp/*
 exit
-yaourt -S ttf-ms-fonts vscodium-bin
+sudo chsh -s /bin/zsh
+yaourt -S ttf-ms-fonts vscodium-bin github-desktop-bin
 ln -s /usr/share/icons/capitaine-cursors-light/cursors ~/.icons/default/cursors
 sudo paccache -r
 sudo pacman -Scc
