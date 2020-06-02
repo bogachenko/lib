@@ -22,7 +22,9 @@ pacman -Syyuu
 pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-ubuntu-font-family jre-openjdk jdk-openjdk jre-openjdk-headless chromium capitaine-cursors
 systemctl enable bumblebeed
 gpasswd -a $USER bumblebee
-rm -rf /home/bogachenko/.mozilla/
+rm -rf /home/$USER/.mozilla/
+cd /home/$USER/.mozilla/firefox/
+mkdir $USER
 rm /etc/hosts
 wget -P /etc/ https://raw.githubusercontent.com/bogachenko/filterlist/personal/hosts
 pacman -S --needed base-devel git wget yajl
@@ -40,4 +42,6 @@ rm -rf /tmp/*
 exit
 yaourt -S ttf-ms-fonts vscodium-bin
 ln -s /usr/share/icons/capitaine-cursors-light/cursors ~/.icons/default/cursors
+sudo paccache -r
+sudo pacman -Scc
 sudo reboot
