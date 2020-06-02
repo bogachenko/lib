@@ -38,6 +38,6 @@ cd ..
 rm -dR yaourt/ package-query/
 rm -rf /tmp/*
 exit
-yaourt -S ttf-google-fonts-git ttf-ms-fonts
+yaourt -S ttf-ms-fonts vscodium-bin
 ln -s /usr/share/icons/capitaine-cursors-light/cursors ~/.icons/default/cursors
 sudo reboot
