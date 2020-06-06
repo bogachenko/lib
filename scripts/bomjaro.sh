@@ -85,6 +85,15 @@ PACKAGES=(
  ttf-ms-fonts
  vscodium-bin
  github-desktop-bin
+ at-spi2-atk
+ lib32-at-spi2-atk
+ at-spi2-core
+ lib32-at-spi2-core
+ ca-certificates
+ ca-certificates-mozilla
+ ca-certificates-utils
+ cracklib
+ lib32-cracklib
 )
 
 yaourt --noconfirm -S --needed "${PACKAGES[@]}"
@@ -112,7 +121,7 @@ mkdir wine
 WINEARCH=win32 WINEPREFIX=~/wine/win32 winecfg
 WINEPREFIX=~/wine/win64 winecfg
 sudo pacman -Syyuu
-yaourt -Syu
+yaourt -Syua
 sudo paccache -r
 sudo pacman -Scc
 sudo reboot
