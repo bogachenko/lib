@@ -82,6 +82,9 @@ PACKAGES=(
  adobe-source-han-sans-otc-fonts
  noto-fonts-emoji
  ttf-symbola
+ ttf-ms-fonts
+ vscodium-bin
+ github-desktop-bin
 )
 
 yaourt --noconfirm -S --needed "${PACKAGES[@]}"
@@ -103,7 +106,6 @@ wget -P /etc/ https://raw.githubusercontent.com/bogachenko/filterlist/personal/h
 rm -rf /tmp/*
 exit
 sudo chsh -s /bin/zsh
-yaourt -S ttf-ms-fonts vscodium-bin github-desktop-bin
 ln -s /usr/share/icons/capitaine-cursors-light/cursors ~/.icons/default/cursors
 cd /home/$USER
 mkdir wine
