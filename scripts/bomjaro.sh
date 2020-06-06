@@ -19,7 +19,7 @@ sleep 5
 su
 pacman-mirrors --fasttrack
 pacman -Syyuu
-pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-ubuntu-font-family jre-openjdk jdk-openjdk jre-openjdk-headless chromium capitaine-cursors discord telegram-desktop zsh thunderbird-i18n-ru thunderbird gparted wine wine-gecko wine-mono virtualbox qbittorrent
+pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-ubuntu-font-family jre-openjdk jdk-openjdk jre-openjdk-headless chromium capitaine-cursors discord telegram-desktop zsh thunderbird-i18n-ru thunderbird gparted wine wine-gecko wine-mono qbittorrent lib32-libva-vdpau-driver lib32-libvdpau lib32-mesa-vdpau libva-vdpau-driver libvdpau libvdpau-va-gl mesa-vdpau vdpauinfo intel-media-driver
 chsh -s /bin/zsh
 cd /home/$USER
 rm -rf .bash_history .bash_logout .bash_profile .bashrc
