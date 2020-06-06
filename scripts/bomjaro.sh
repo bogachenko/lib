@@ -16,10 +16,79 @@ then
     pause
 fi
 sleep 5
+
+sudo pacman -S --needed base-devel git wget yajl
+cd /tmp/
+git clone https://aur.archlinux.org/package-query.git
+cd package-query/
+makepkg -si
+cd ..
+git clone https://aur.archlinux.org/yaourt.git
+cd yaourt/
+makepkg -si
+cd ..
+sudo rm -dR yaourt/ package-query/
+
+PACKAGES=(
+ firefox-i18n-ru
+ vim
+ vlc
+ steam-native-runtime
+ steam
+ opera
+ opera-ffmpeg-codecs
+ gimp
+ ttf-liberation
+ ttf-dejavu
+ opendesktop-fonts
+ ttf-bitstream-vera
+ ttf-arphic-ukai
+ ttf-arphic-uming
+ ttf-hanazono
+ ttf-ubuntu-font-family
+ jre-openjdk
+ jdk-openjdk
+ jre-openjdk-headless
+ chromium
+ capitaine-cursors
+ discord
+ telegram-desktop
+ zsh
+ thunderbird-i18n-ru
+ thunderbird
+ gparted
+ wine
+ wine-gecko
+ wine-mono
+ qbittorrent
+ lib32-libva-vdpau-driver
+ lib32-libvdpau
+ lib32-mesa-vdpau
+ libva-vdpau-driver
+ libvdpau
+ libvdpau-va-gl
+ mesa-vdpau
+ vdpauinfo
+ intel-media-driver
+ ttf-droid
+ ttf-roboto
+ noto-fonts
+ ttf-liberation
+ ttf-ubuntu-font-family
+ ttf-fira-code
+ adobe-source-code-pro-fonts
+ ttf-freefont
+ noto-fonts-cjk
+ adobe-source-han-sans-otc-fonts
+ noto-fonts-emoji
+ ttf-symbola
+)
+
+yaourt --noconfirm -S --needed "${PACKAGES[@]}"
+
 su
 pacman-mirrors --fasttrack
 pacman -Syyuu
-pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-ubuntu-font-family jre-openjdk jdk-openjdk jre-openjdk-headless chromium capitaine-cursors discord telegram-desktop zsh thunderbird-i18n-ru thunderbird gparted wine wine-gecko wine-mono qbittorrent lib32-libva-vdpau-driver lib32-libvdpau lib32-mesa-vdpau libva-vdpau-driver libvdpau libvdpau-va-gl mesa-vdpau vdpauinfo intel-media-driver
 chsh -s /bin/zsh
 cd /home/$USER
 rm -rf .bash_history .bash_logout .bash_profile .bashrc
@@ -31,17 +100,6 @@ cd /home/$USER/.mozilla/firefox/
 mkdir $USER
 rm /etc/hosts
 wget -P /etc/ https://raw.githubusercontent.com/bogachenko/filterlist/personal/hosts
-pacman -S --needed base-devel git wget yajl
-cd /tmp/
-git clone https://aur.archlinux.org/package-query.git
-cd package-query/
-makepkg -si
-cd ..
-git clone https://aur.archlinux.org/yaourt.git
-cd yaourt/
-makepkg -si
-cd ..
-rm -dR yaourt/ package-query/
 rm -rf /tmp/*
 exit
 sudo chsh -s /bin/zsh
