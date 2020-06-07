@@ -106,10 +106,6 @@ user_pref("browser.urlbar.suggest.openpage", false);
 user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.delay", 0);
 
-// Alternative search engines in the address bar
-// Альтернативные поисковые системы в адресной строке
-user_pref("browser.urlbar.oneOffSearches", false);
-
 // Inline autocomplete
 //		TRUE = Supplement the text typed in the address bar
 //		FALSE = Show below
@@ -787,10 +783,6 @@ user_pref("security.ssl.errorReporting.url", "");
 // Sketches of visited pages
 // Эскизы посещенных страниц
 user_pref("browser.pagethumbnails.capturing_disabled", true);
-
-// Web content in file processes
-// Веб-контент в файловых процессах
-user_pref("browser.tabs.remote.allowLinkedWebInFileUriProcess", false);
 
 // User interface tour (UITour)
 // Тур по интерфейсу пользователя
