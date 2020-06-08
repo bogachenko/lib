@@ -94,6 +94,7 @@ PACKAGES=(
  ca-certificates-utils
  cracklib
  lib32-cracklib
+ palemoon-bin
 )
 
 yaourt --noconfirm -S --needed "${PACKAGES[@]}"
@@ -120,6 +121,7 @@ cd /home/$USER
 mkdir wine
 WINEARCH=win32 WINEPREFIX=~/wine/win32 winecfg
 WINEPREFIX=~/wine/win64 winecfg
+gpg --keyserver=keyserver.ubuntu.com --recv-keys 40481E7B8FCF9CEC
 sudo pacman -Syyuu
 yaourt -Syua
 sudo paccache -r
