@@ -30,11 +30,9 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 PACKAGES=(
- firefox-i18n-ru
+ 
  vim
  vlc
- steam-native-runtime
- steam
  opera
  opera-ffmpeg-codecs
  gimp
@@ -94,7 +92,7 @@ PACKAGES=(
  ca-certificates-utils
  cracklib
  lib32-cracklib
- palemoon-bin
+ 
 )
 
 yaourt --noconfirm -S --needed "${PACKAGES[@]}"
@@ -102,6 +100,7 @@ yaourt --noconfirm -S --needed "${PACKAGES[@]}"
 su
 pacman-mirrors --fasttrack
 pacman -Syyuu
+pacman -S --noconfirm palemoon-bin firefox-i18n-ru steam steam-native-runtime
 chsh -s /bin/zsh
 cd /home/$USER
 rm -rf .bash_history .bash_logout .bash_profile .bashrc
@@ -121,7 +120,6 @@ cd /home/$USER
 mkdir wine
 WINEARCH=win32 WINEPREFIX=~/wine/win32 winecfg
 WINEPREFIX=~/wine/win64 winecfg
-gpg --keyserver=keyserver.ubuntu.com --recv-keys 40481E7B8FCF9CEC
 sudo pacman -Syyuu
 yaourt -Syua
 sudo paccache -r
