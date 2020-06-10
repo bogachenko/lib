@@ -217,7 +217,9 @@ user_pref("browser.newtabpage.activity-stream.feeds.newtabinit", false);
 user_pref("browser.newtabpage.activity-stream.feeds.places", false);
 user_pref("browser.newtabpage.activity-stream.feeds.prefs", false);
 user_pref("browser.newtabpage.activity-stream.feeds.section.topstories.options", false);
+user_pref("browser.newtabpage.activity-stream.discoverystream.region-basic-layout", false);
 user_pref("browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.messaging-experiments", "");
 user_pref("browser.newtabpage.activity-stream.pocketCta", "");
 user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion.endpoint", "");
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
@@ -1055,10 +1057,6 @@ user_pref("permissions.delegation.enabled", false);
 // Mega bar
 // Мега бар
 user_pref("browser.urlbar.openViewOnFocus", false);
-user_pref("browser.urlbar.update1", false);
-user_pref("browser.urlbar.update1.interventions", false);
-user_pref("browser.urlbar.update1.searchTips", false);
-user_pref("browser.urlbar.update1.view.stripHttps", false);
 
 // Исследования
 // Studies
