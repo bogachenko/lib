@@ -28,79 +28,10 @@ cd yaourt/
 makepkg -si
 cd ..
 sudo rm -dR yaourt/ package-query/
-
-PACKAGES=(
- 
- vim
- vlc
- opera
- opera-ffmpeg-codecs
- gimp
- ttf-liberation
- ttf-dejavu
- opendesktop-fonts
- ttf-bitstream-vera
- ttf-arphic-ukai
- ttf-arphic-uming
- ttf-hanazono
- ttf-ubuntu-font-family
- jre-openjdk
- jdk-openjdk
- jre-openjdk-headless
- chromium
- capitaine-cursors
- discord
- telegram-desktop
- zsh
- thunderbird-i18n-ru
- thunderbird
- gparted
- wine
- wine-gecko
- wine-mono
- qbittorrent
- lib32-libva-vdpau-driver
- lib32-libvdpau
- lib32-mesa-vdpau
- libva-vdpau-driver
- libvdpau
- libvdpau-va-gl
- mesa-vdpau
- vdpauinfo
- intel-media-driver
- ttf-droid
- ttf-roboto
- noto-fonts
- ttf-liberation
- ttf-ubuntu-font-family
- ttf-fira-code
- adobe-source-code-pro-fonts
- ttf-freefont
- noto-fonts-cjk
- adobe-source-han-sans-otc-fonts
- noto-fonts-emoji
- ttf-symbola
- ttf-ms-fonts
- vscodium-bin
- github-desktop-bin
- at-spi2-atk
- lib32-at-spi2-atk
- at-spi2-core
- lib32-at-spi2-core
- ca-certificates
- ca-certificates-mozilla
- ca-certificates-utils
- cracklib
- lib32-cracklib
- 
-)
-
-yaourt --noconfirm -S --needed "${PACKAGES[@]}"
-
 su
 pacman-mirrors --fasttrack
 pacman -Syyuu
-pacman -S --noconfirm palemoon-bin firefox-i18n-ru steam steam-native-runtime
+pacman -S firefox-i18n-ru vim vlc steam-native-runtime steam opera opera-ffmpeg-codecs gimp ttf-liberation ttf-dejavu opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-ubuntu-font-family jre-openjdk jdk-openjdk jre-openjdk-headless chromium capitaine-cursors discord telegram-desktop zsh thunderbird-i18n-ru thunderbird gparted wine wine-gecko wine-mono virtualbox qbittorrent
 chsh -s /bin/zsh
 cd /home/$USER
 rm -rf .bash_history .bash_logout .bash_profile .bashrc
