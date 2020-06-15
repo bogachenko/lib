@@ -1,0 +1,13 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorTheme": "Visual Studio Light",
+    "telemetry.enableTelemetry": false,
+    "editor.wordWrap": "on",
+    "editor.accessibilitySupport": "off",
+    "typescript.surveys.enabled": false,
+    "typescript.suggestionActions.enabled": false,
+    "git.confirmSync": false,
+    "files.associations": {
+    
+    }
+}
