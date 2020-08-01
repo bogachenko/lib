@@ -1,6 +1,6 @@
 {
-  "timeStamp": 1595252793899,
-  "version": "1.28.2",
+  "timeStamp": 1596276284475,
+  "version": "1.28.4",
   "userSettings": {
     "advancedUserEnabled": true,
     "alwaysDetachLogger": false,
@@ -10,10 +10,10 @@
     "colorBlindFriendly": false,
     "contextMenuEnabled": false,
     "dynamicFilteringEnabled": false,
-    "externalLists": "https://adaway.org/hosts.txt\nhttps://easylist-downloads.adblockplus.org/bitblock.txt\nhttps://easylist-downloads.adblockplus.org/cntblock.txt\nhttps://gitlab.com/CHEF-KOCH/cks-filterlist/raw/master/filters/ads-tracker.txt\nhttps://raw.githubusercontent.com/StevenBlack/hosts/master/hosts\nhttps://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/master/filterlist.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/personal/bogachenkoPF.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt\nhttps://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt\nhttps://raw.githubusercontent.com/jerryn70/GoodbyeAds/master/Formats/GoodbyeAds-AdBlock-Filter.txt\nhttps://raw.githubusercontent.com/smed79/blacklist/master/abp.txt\nhttps://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt\nhttps://www.github.developerdan.com/hosts/lists/tracking-aggressive-extended.txt",
+    "externalLists": "https://adaway.org/hosts.txt\nhttps://easylist-downloads.adblockplus.org/advblock.txt\nhttps://easylist-downloads.adblockplus.org/bitblock.txt\nhttps://easylist-downloads.adblockplus.org/cntblock.txt\nhttps://easylist-downloads.adblockplus.org/liste_fr.txt\nhttps://gitlab.com/CHEF-KOCH/cks-filterlist/raw/master/filters/ads-tracker.txt\nhttps://raw.githubusercontent.com/StevenBlack/hosts/master/hosts\nhttps://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/master/filterlist.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/personal/bogachenkoPF.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt\nhttps://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt\nhttps://raw.githubusercontent.com/jerryn70/GoodbyeAds/master/Formats/GoodbyeAds-AdBlock-Filter.txt\nhttps://raw.githubusercontent.com/smed79/blacklist/master/abp.txt\nhttps://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt",
     "firewallPaneMinimized": false,
     "hyperlinkAuditingDisabled": true,
-    "ignoreGenericCosmeticFilters": false,
+    "ignoreGenericCosmeticFilters": true,
     "largeMediaSize": 50,
     "parseAllABPHideFilters": true,
     "popupPanelSections": 63,
@@ -34,8 +34,6 @@
     "urlhaus-1",
     "fanboy-social",
     "ublock-annoyances",
-    "FRA-0",
-    "RUS-0",
     "https://adaway.org/hosts.txt",
     "https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt",
     "https://raw.githubusercontent.com/bogachenko/filterlist/master/filterlist.txt",
@@ -44,12 +42,13 @@
     "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
     "https://raw.githubusercontent.com/jerryn70/GoodbyeAds/master/Formats/GoodbyeAds-AdBlock-Filter.txt",
     "https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt",
-    "https://www.github.developerdan.com/hosts/lists/tracking-aggressive-extended.txt",
+    "https://easylist-downloads.adblockplus.org/liste_fr.txt",
     "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
+    "https://easylist-downloads.adblockplus.org/advblock.txt",
     "https://easylist-downloads.adblockplus.org/bitblock.txt",
-    "https://easylist-downloads.adblockplus.org/cntblock.txt",
     "https://raw.githubusercontent.com/smed79/blacklist/master/abp.txt",
-    "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
+    "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts",
+    "https://easylist-downloads.adblockplus.org/cntblock.txt"
   ],
   "hiddenSettings": {
     "allowGenericProceduralFilters": false,
