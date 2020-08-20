@@ -1,5 +1,5 @@
 @ECHO OFF
-TITLE bogachenko's Personal Filter Hosts
+TITLE bogachenko's DNS Filter
 ECHO Hosts file update script
 ECHO by bogachenko
 ECHO Start %TIME% %DATE%
