@@ -11,26 +11,9 @@
 user_pref("browser.aboutConfig.showWarning", false);
 user_pref("general.warnOnAboutConfig", false);
 
-// Warning about closing multiple tabs
-// Предупреждение о закрытии нескольких вкладок
-user_pref("browser.tabs.warnOnClose", true);
-user_pref("browser.tabs.warnOnCloseOtherTabs", true);
-
-// Warning about opening a large number of tabs
-// Предупреждение о открытии большого количества вкладок
-user_pref("browser.tabs.warnOnOpen", true);
-
 // Check if Firefox is your default browser
 // Проверять, является ли Firefox вашим браузером по умолчанию
 user_pref("browser.shell.checkDefaultBrowser", false);
-
-// Opening pages "Welcome and what's new?"
-// Открытие страниц "Добро пожаловать и что нового?"
-user_pref("browser.startup.homepage_override.mstone", "ignore");
-user_pref("startup.homepage_welcome_url", "");
-user_pref("startup.homepage_welcome_url.additional", "");
-user_pref("startup.homepage_override_url", "");
-user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
 
 // Start page
 //		0 = Blank page
@@ -42,23 +25,7 @@ user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
 //		1 = Домашняя страница
 //		2 = Последняя посещенная страница
 //		3 = Возобновить предыдущую сессию
-user_pref("browser.startup.page", 0);
-
-// Homepage
-// Домашняя страница
-user_pref("browser.startup.homepage", "about:blank");
-
-// New tab
-//		TRUE = Top-sites
-//		FALSE = Blank page
-// Новая вкладкa
-//		TRUE = Топ-сайтов
-//		FALSE = Пустая страница
-user_pref("browser.newtabpage.enabled", false);
-
-// Preloading a new tab
-// Предварительная загрузка новой вкладки
-user_pref("browser.newtab.preload", false);
+user_pref("browser.startup.page", 1);
 
 // Opening tabs and external applications in the background
 //		TRUE = Open such tabs in the background
@@ -74,26 +41,6 @@ user_pref("browser.tabs.loadDivertedInBackground", true);
 // Поисковый механизм по умолчанию использует данные, связанные с геолокацией (вашим реальным местонахождением, определяемым по IP-адресу). Эти данные отсылаются на серверы Mozilla и Google. Кроме того, Google собирает и хранит данные о ваших поисковых запросах и предпочтениях.
 user_pref("browser.search.suggest.enabled", false);
 
-// In "about:addons" remove the item "Get add-ons"
-// [WARNING] Uses Google Analytics.
-// В "about:addons" убрать пункт "Получить дополнения"
-// [ВНИМАНИЕ] Использует Google Analytics.
-user_pref("extensions.getAddons.showPane", false);
-user_pref("extensions.webservice.discoverURL", "");
-
-// Guessing the domain in the address bar
-// Угадывание домена в адресной строке
-user_pref("browser.fixup.alternate.enabled", false);
-user_pref("browser.fixup.domainwhitelist.localhost", false);
-
-// Number of steps "To previous page" and "To next page"
-// [NOTE] Reduces memory consumption.
-// [WARNING] If you change the value to "0", you can not use the "To previous page" button.
-// Количество шагов "На предыдущую страницу" и "На следующую страницу"
-// [ЗАМЕТКА] Уменьшает потребление памяти.
-// [ВНИМАНИЕ] Если вы измените значение на "0", вы не сможете использовать кнопку "На предыдущую страницу".
-user_pref("browser.sessionhistory.max_entries", 10);
-
 // Preloading autocomplete URLs (when you enter in the address bar)
 // Предварительная загрузка URL-адресов автозаполнения (при вводе в адресную строку)
 user_pref("browser.urlbar.speculativeConnect.enabled", false);
@@ -105,14 +52,6 @@ user_pref("browser.urlbar.suggest.bookmark", false);
 user_pref("browser.urlbar.suggest.openpage", false);
 user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.delay", 0);
-
-// Inline autocomplete
-//		TRUE = Supplement the text typed in the address bar
-//		FALSE = Show below
-// Встроенное автозаполнение
-//		TRUE = Дополнять текст, набранный в адресной строке
-//		FALSE = Показывать ниже
-// user_pref("browser.urlbar.autoFill", false);
 
 // Remember the search history and form data
 // Помнить историю поиска и данные формы
@@ -136,6 +75,7 @@ user_pref("privacy.clearOnShutdown.history", true);
 user_pref("privacy.clearOnShutdown.offlineApps", true);
 user_pref("privacy.clearOnShutdown.sessions", true);
 user_pref("privacy.clearOnShutdown.siteSettings", true);
+user_pref("privacy.clearOnShutdown.openWindows", true);
 
 // Master cleaner Firefox
 // [NOTE] This dialog window is invoked by hotkeys - Ctrl + Shift + Del.
@@ -150,6 +90,7 @@ user_pref("privacy.cpd.offlineApps", true);
 user_pref("privacy.cpd.passwords", false);
 user_pref("privacy.cpd.sessions", true);
 user_pref("privacy.cpd.siteSettings", true);
+user_pref("privacy.cpd.openWindows", true);
 
 // Time range to clear
 //		0 = Everything
@@ -191,103 +132,9 @@ user_pref("browser.bookmarks.max_backups", 3);
 //		2 = Ничего не делать
 user_pref("browser.backspace_action", 2);
 
-// Activity stream expansion
-// Расширение Activity stream
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
-user_pref("browser.newtabpage.activity-stream.default.sites", "");
-user_pref("browser.library.activity-stream.enabled", false);
-user_pref("browser.newtabpage.activity-stream.showSearch", false);
-user_pref("browser.newtabpage.activity-stream.sectionOrder", "");
-user_pref("browser.newtabpage.activity-stream.asrouter.providers.cfr", "");
-user_pref("browser.newtabpage.activity-stream.asrouter.providers.cfr-fxa", "");
-user_pref("browser.newtabpage.activity-stream.asrouter.providers.message-groups", "");
-user_pref("browser.newtabpage.activity-stream.asrouter.providers.onboarding", "");
-user_pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "");
-user_pref("browser.newtabpage.activity-stream.asrouter.providers.whats-new-panel", "");
-user_pref("browser.newtabpage.activity-stream.discoverystream.config", "");
-user_pref("browser.newtabpage.activity-stream.discoverystream.enabled", false);
-user_pref("browser.newtabpage.activity-stream.discoverystream.endpointSpocsClear", "");
-user_pref("browser.newtabpage.activity-stream.discoverystream.endpoints", "");
-user_pref("browser.newtabpage.activity-stream.feeds.aboutpreferences", false);
-user_pref("browser.newtabpage.activity-stream.feeds.asrouterfeed", false);
-user_pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false);
-user_pref("browser.newtabpage.activity-stream.feeds.favicon", false);
-user_pref("browser.newtabpage.activity-stream.feeds.newtabinit", false);
-user_pref("browser.newtabpage.activity-stream.feeds.places", false);
-user_pref("browser.newtabpage.activity-stream.feeds.prefs", false);
-user_pref("browser.newtabpage.activity-stream.feeds.section.topstories.options", false);
-user_pref("browser.newtabpage.activity-stream.discoverystream.region-basic-layout", false);
-user_pref("browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines", "");
-user_pref("browser.newtabpage.activity-stream.asrouter.providers.messaging-experiments", "");
-user_pref("browser.newtabpage.activity-stream.pocketCta", "");
-user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion.endpoint", "");
-user_pref("browser.newtabpage.activity-stream.showSponsored", false);
-user_pref("browser.newtabpage.activity-stream.section.highlights.includeVisited", false);
-user_pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
-user_pref("browser.newtabpage.activity-stream.section.highlights.includeDownloads", false);
-user_pref("browser.newtabpage.activity-stream.section.highlights.includeBookmarks", false);
-user_pref("browser.newtabpage.activity-stream.prerender", false);
-user_pref("browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts", false);
-user_pref("browser.newtabpage.activity-stream.improvesearch.noDefaultSearchTile", false);
-user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
-user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
-user_pref("browser.newtabpage.activity-stream.telemetry.ping.endpoint", "");
-user_pref("browser.newtabpage.activity-stream.asrouter.useRemoteL10n", false);
-user_pref("browser.newtabpage.activity-stream.discoverystream.personalization.modelKeys", "");
-user_pref("browser.newtabpage.activity-stream.feeds.recommendationproviderswitcher", false);
-user_pref("browser.newtabpage.activity-stream.feeds.section.highlights", false);
-user_pref("browser.newtabpage.activity-stream.discoverystream.region-layout-config", "");
-user_pref("browser.newtabpage.activity-stream.discoverystream.region-spocs-config", "");
-user_pref("browser.newtabpage.activity-stream.discoverystream.region-stories-config", "");
-user_pref("browser.newtabpage.activity-stream.feeds.sections", false);
-user_pref("browser.newtabpage.activity-stream.feeds.systemtick", false);
-
 // Защита от отслеживания
 // Tracking protection
 user_pref("privacy.trackingprotection.enabled", false);
-user_pref("privacy.trackingprotection.pbmode.enabled", false);
-user_pref("privacy.trackingprotection.fingerprinting.enabled", false);
-user_pref("privacy.trackingprotection.cryptomining.enabled", false);
-user_pref("privacy.socialtracking.block_cookies.enabled", false);
-user_pref("privacy.trackingprotection.socialtracking.enabled", false);
-user_pref("privacy.trackingprotection.introURL", "");
-user_pref("privacy.trackingprotection.annotate_channels", false);
-
-// WebRTC (Web Real-Time Communication)
-// Peer-to-peer data transfer and WebRTC that lets you know your real IP. WebRTC provides voice communication, video chats, P2P file sharing between browser applications without the use of third-party add-ons.
-// WebRTC (Веб Связь в Реальном Времени)
-// Пиринговая передача данных и WebRTC, который позволяет узнать ваш реальный IP. WebRTC обеспечивает голосовое общение, видео чаты, обмен файлами по технологии P2P между браузерными приложениями без использования сторонних дополнений.
-user_pref("media.peerconnection.dtmf.enabled", false);
-user_pref("media.peerconnection.enabled", false);
-user_pref("media.peerconnection.ice.tcp", false);
-user_pref("media.peerconnection.identity.enabled", false);
-user_pref("media.peerconnection.simulcast", false);
-user_pref("media.peerconnection.video.vp9_enabled", false);
-user_pref("media.peerconnection.turn.disable", true);
-user_pref("media.peerconnection.use_document_iceservers", false);
-user_pref("media.peerconnection.video.enabled", false);
-user_pref("media.peerconnection.ice.default_address_only", true);
-user_pref("media.peerconnection.ice.no_host", true);
-user_pref("media.peerconnection.ice.proxy_only_if_behind_proxy", true);
-
-// API for microphone and webcam interaction
-// API для взаимодействия с микрофоном и веб-камерой
-user_pref("media.navigator.enabled", false);
-user_pref("media.navigator.video.enabled", false);
-
-// Status of permissions for camera, microphone, location, notifications
-//		0 = Ask
-//		1 = Enable
-//		2 = Block
-// Состояние разрешений для камеры, микрофона, местоположения, уведомлений 
-//		0 = Всегда спрашивать
-//		1 = Разрешить
-//		2 = Блокировать
-user_pref("permissions.default.camera", 2);
-user_pref("permissions.default.desktop-notification", 2);
-user_pref("permissions.default.geo", 2);
-user_pref("permissions.default.microphone", 2);
 
 // Automatically play sound in non-active tabs
 //		TRUE = Do not play
@@ -303,33 +150,22 @@ user_pref("media.block-autoplay-until-in-foreground", true);
 // Телеметрия
 // Эта функция отправляет данные об использовании, производительности браузера, функциях пользовательского интерфейса, конфигурации памяти и оборудования, а также реальных IP-адресах на серверы Mozilla. Кроме того, может собираться информация о посещаемых сайтах.
 // [ВНИМАНИЕ] Это серьезный источник утечек и слежения за пользователем, не включайте его.
-user_pref("security.certerrors.recordEventTelemetry", false);
 user_pref("toolkit.coverage.endpoint.base", "");
 user_pref("toolkit.coverage.opt-out", true);
 user_pref("toolkit.telemetry.archive.enabled", false);
 user_pref("toolkit.telemetry.bhrPing.enabled", false);
-user_pref("toolkit.telemetry.cachedClientID", "");
 user_pref("toolkit.telemetry.coverage.opt-out", true);
 user_pref("toolkit.telemetry.enabled", false);
 user_pref("toolkit.telemetry.firstShutdownPing.enabled", false);
-user_pref("toolkit.telemetry.hybridContent.enabled", false);
 user_pref("toolkit.telemetry.newProfilePing.enabled", false);
-user_pref("toolkit.telemetry.previousBuildID", "");
-user_pref("toolkit.telemetry.server", "");
-user_pref("toolkit.telemetry.server_owner", "");
+user_pref("toolkit.telemetry.server", "data:,");
 user_pref("toolkit.telemetry.shutdownPingSender.enabled", false);
 user_pref("toolkit.telemetry.shutdownPingSender.enabledFirstSession", false);
 user_pref("toolkit.telemetry.unified", false);
 user_pref("toolkit.telemetry.updatePing.enabled", false);
-user_pref("toolkit.telemetry.debugSlowSql", false);
-user_pref("toolkit.telemetry.ecosystemtelemetry.enabled", false);
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry", false);
-user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion", false);
-user_pref("browser.newtabpage.activity-stream.filterAdult", false);
-user_pref("security.app_menu.recordEventTelemetry", false);
-user_pref("security.identitypopup.recordEventTelemetry", false);
-user_pref("security.protectionspopup.recordEventTelemetry", false);
+user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion.endpoint", "data:,");
 
 // Health report details
 // This function collects advanced information about the health of the program and sends it to Mozilla servers, in particular: the number of crashes, information about slow loading. It includes data on equipment, operating system, version of this program, installed add-ons (number and type), intra-browser events, rendering, restoration of sessions, their duration, profile age, number of pages visited.
@@ -345,11 +181,7 @@ user_pref("datareporting.policy.dataSubmissionEnabled", false);
 user_pref("breakpad.reportURL", "");
 user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 user_pref("browser.crashReports.unsubmittedCheck.enabled", false);
-user_pref("browser.tabs.crashReporting.email", "");
-user_pref("browser.tabs.crashReporting.emailMe", false);
-user_pref("browser.tabs.crashReporting.includeURL", false);
 user_pref("browser.tabs.crashReporting.sendReport", false);
-user_pref("browser.tabs.crashReporting.requestEmail", false);
 
 // Promo for mobile phones
 // Акция для мобильных телефонов
@@ -361,56 +193,12 @@ user_pref("signon.management.page.mobileAppleURL", "");
 // PingCentre telemetry
 // Телеметрия ПингЦентра
 user_pref("browser.ping-centre.telemetry", false);
-user_pref("browser.ping-centre.staging.endpoint", "");
-user_pref("browser.ping-centre.production.endpoint", "");
-
-// Geolocation accounting
-// Firefox has built-in tools for transferring geodata (your location). This uses information obtained from the operating systems geolocation facilities, Wi-Fi networks, telephone and Internet operators, as well as a real IP address. In addition, the above data is sent to Google servers.
-// Учет геолокации
-// Firefox располагает встроенными средствами передачи геоданных (вашего местонахождения). При этом используются сведения, получаемые от геолокационных средств операционной системы, сетей Wi-Fi, телефонных и интернет-операторов, а также реальный IP-адрес. Кроме того, вышеперечисленные данные отсылаются на серверы Google.
-user_pref("geo.enabled", false);
-user_pref("geo.provider.ms-windows-location", false);
-user_pref("geo.provider.use_corelocation", false);
-user_pref("geo.provider.use_gpsd", false);
-user_pref("geo.provider.network.url", "");
-user_pref("geo.provider-country.network.url", "");
-
-// Browser geolocation (GeoIP) when working with search servers
-// Геопозиционирования браузера (GeoIP) при работе с поисковыми серверами
-user_pref("browser.search.geoSpecificDefaults", false);
-user_pref("browser.search.geoSpecificDefaults.url", "");
-user_pref("browser.search.region", "US");
-user_pref("browser.search.geoip.url", "");
-user_pref("browser.search.geoip.timeout", 0);
 
 // Recommended themes and extensions
 // Рекомендованные темы и расширения
-user_pref("lightweightThemes.recommendedThemes", "");
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 user_pref("browser.discovery.enabled", false);
 user_pref("browser.discovery.containers.enabled", false);
-
-// Add-on installation delay
-// Задержка при установке дополнений
-user_pref("security.dialog_enable_delay", 0);
-
-// Activate the plugin by clicking
-// Активация плагина по клику
-user_pref("plugins.click_to_play", true);
-
-// Flash plugin
-//		0 = Off
-//		1 = Ask
-//		2 = On
-// Flash плагин
-//		0 = Выключить
-//		1 = Спросить
-//		2 = Включить
-user_pref("plugin.state.flash", 0);
-
-// Scanning Plugin ID (PLID) in directories defined in the Windows registry
-// Сканирование Plugin ID (PLID) в каталогах, определенных в реестре Windows
-user_pref("plugin.scan.plid.all", false);
 
 // Preload a page that the browser considers to be a logical next page
 // Предварительная загрузка страницы, которую браузер считает логической следующей страницей
@@ -423,26 +211,16 @@ user_pref("network.prefetch-next", false);
 user_pref("network.dns.disablePrefetch", true);
 user_pref("network.dns.disablePrefetchFromHTTPS", true);
 
-// Sending ping
-// Sending data about clicking on a link to the addresses specified in the "a" tag ("ping" attribute). HTML5 allows you to use this attribute for an element called ping. This function sends data by the URI defined in the hyperlink (if the user clicks on it). This allows you to track activity, user preferences and collect statistics about them.
-// Отправка пинга
-// Отправка данных о нажатии на ссылку адресам, указанным в тэге "a" (атрибут "ping"). HTML5 позволяет использовать этот атрибут для элемента под названием ping. Эта функция отсылает данные по URI, определенному в гиперссылке (если на нее нажимает пользователь). Это позволяет отслеживать активность, предпочтения пользователей и собирать статистику о них.
-user_pref("browser.send_pings", false);
-user_pref("browser.send_pings.max_per_link", 0);
-user_pref("browser.send_pings.require_same_host", true);
-
 // Captive portal detection
 // Обнаружение портала авторизации
 user_pref("captivedetect.canonicalURL", "");
+user_pref("network.connectivity-service.IPv4.url", "");
+user_pref("network.connectivity-service.IPv6.url", "");
 user_pref("network.captive-portal-service.enabled", false);
 user_pref("network.connectivity-service.enabled", false);
 
 // Synchronization of preferences
 // Синхронизация предпочтений
-user_pref("services.sync.engine.addresses", false);
-user_pref("services.sync.engine.addresses.available", false);
-user_pref("services.sync.engine.creditcards", false);
-user_pref("services.sync.engine.creditcards.available", false);
 user_pref("services.sync.engine.history", false);
 user_pref("services.sync.engine.prefs", false);
 user_pref("services.sync.engine.tabs", false);
@@ -452,7 +230,6 @@ user_pref("services.sync.engine.tabs", false);
 // API Кэша (Хранилище кэша)
 // [ЗАМЕТКА] Это хранилище на компьютере пользователя, куда скрипты могут складывать информацию. Оно является частью спецификации "Service workers", но может быть использовано и без них.
 user_pref("dom.caches.enabled", false);
-user_pref("dom.caches.testing.enabled", false);
 
 // Web notifications
 // [NOTE] Data is sent to the site(s) not currently open in the browser.
@@ -466,38 +243,15 @@ user_pref("dom.push.serverURL", "");
 
 // Disk cache
 // Кэш-диска
-user_pref("browser.cache.disk.capacity", 0);
 user_pref("browser.cache.disk.enable", false);
-user_pref("browser.cache.disk.smart_size.enabled", false);
-user_pref("browser.cache.disk.smart_size.first_run", false);
-user_pref("browser.cache.frecency_experiment", -1);
-user_pref("browser.cache.disk_cache_ssl", false);
-
-// Fastback cache
-//		0 = Disable
-//		-1 = Auto
-// Кэш Fastback
-//		0 = Отключить
-//		-1 = Автоматически
-user_pref("browser.sessionhistory.max_total_viewers", 0);
 
 // Forbids saving permissions manager settings
 // Запрет сохранения настроек диспетчера разрешений
 user_pref("permissions.memory_only", true);
 
-// Session Recovery Service for windows and tabs
-// Служба восстановления сеанса для окон и вкладок
-user_pref("browser.sessionstore.max_tabs_undo", 10);
-user_pref("browser.sessionstore.max_windows_undo", 10);
-
 // Offline cache
 // Автономный кэш
 user_pref("browser.cache.offline.enable", false);
-user_pref("browser.cache.offline.insecure.enable", false);
-
-// Request to use the offline cache
-// Запрос на использование автономного кеша
-user_pref("offline-apps.allow_by_default", false);
 
 // Storing extra session data
 //		0 = Everywhere
@@ -515,7 +269,7 @@ user_pref("browser.sessionstore.resume_from_crash", false);
 
 // Interval between saving sessions
 // Интервал между сохранением сеансов
-user_pref("browser.sessionstore.interval", 60000);
+user_pref("browser.sessionstore.interval", 30000);
 
 // Firefox recovery after OS restart
 // Восстановление Firefox после перезагрузки OS
@@ -537,11 +291,6 @@ user_pref("toolkit.winRegisterApplicationRestart", false);
 //		3 = Блокировать куки с не посещенных сайтов
 user_pref("network.cookie.cookieBehavior", 0);
 
-// Third-party cookies are set for the session only
-// Сторонние файлы куки устанавливаются только для сеанса
-user_pref("network.cookie.thirdparty.sessionOnly", true);
-user_pref("network.cookie.thirdparty.nonsecureSessionOnly", true);
-
 // Сookie lifetime policy
 //		0 = Save them before expiration
 //		2 = Save them until close Firefox
@@ -556,28 +305,11 @@ user_pref("network.cookie.lifetimePolicy", 2);
 // [ЗАМЕТКА] Отключает еще один способ для сайтов хранить свои данные на персональном компьютере пользователя.
 user_pref("dom.storageManager.enabled", false);
 
-// Limit events that can trigger a pop-up
-// Ограничения событий, которые могут вызвать всплывающее окно
-user_pref("dom.popup_allowed_events", "click dblclick");
-
-// Special services (accessibility support services)
-// Специальные услуги (службы поддержки доступности)
-user_pref("accessibility.force_disabled", 1);
-
 // Additional analytics sent to the web server
 // [NOTE] HTTP-data leaking from UserAgent to the server, especially when leaving the page.
 // Дополнительная аналитика, отправленная на веб-сервер
 // [ЗАМЕТКА] HTTP-данные утекающих от UserAgent на сервер, особенно при покидании страницы.
 user_pref("beacon.enabled", false);
-
-// Deleting temporary files opened by an external application
-// Удаление временных файлов, открытые внешним приложением
-user_pref("browser.helperApps.deleteTempFileOnExit", true);
-
-// Web speech
-// Веб-речь
-user_pref("media.webspeech.synth.enabled", false);
-user_pref("media.webspeech.recognition.enable", false);
 
 // Collecting HTML video statistics
 // Сбор HTML-видеостатистики
@@ -593,14 +325,6 @@ user_pref("gecko.handlerService.schemes.mailto.2.name", "");
 user_pref("gecko.handlerService.schemes.mailto.2.uriTemplate", "");
 user_pref("gecko.handlerService.schemes.mailto.3.name", "");
 user_pref("gecko.handlerService.schemes.mailto.3.uriTemplate", "");
-user_pref("gecko.handlerService.schemes.webcal.0.name", "");
-user_pref("gecko.handlerService.schemes.webcal.0.uriTemplate", "");
-user_pref("gecko.handlerService.schemes.webcal.1.name", "");
-user_pref("gecko.handlerService.schemes.webcal.1.uriTemplate", "");
-user_pref("gecko.handlerService.schemes.webcal.2.name", "");
-user_pref("gecko.handlerService.schemes.webcal.2.uriTemplate", "");
-user_pref("gecko.handlerService.schemes.webcal.3.name", "");
-user_pref("gecko.handlerService.schemes.webcal.3.uriTemplate", "");
 
 // Sending telemetry data and website address, about where and how the plugin failed
 // Отправка телеметрических данных и адреса сайта, о том, где и как произошел сбой плагина
@@ -622,10 +346,6 @@ user_pref("signon.management.page.breach-alerts.enabled", false);
 // [ЗАМЕТКА] Рекомендовано при торможениях, аппаратных сбоях и проблемах с видеокартой.
 user_pref("general.smoothScroll", false);
 
-// Automatic update themes
-// Автоматическое обновление тем
-user_pref("lightweightThemes.update.enabled", false);
-
 // Path to save files
 //		0 = Desktop
 //		1 = Downloads
@@ -640,10 +360,6 @@ user_pref("browser.download.folderList", 1);
 // Добавление загрузок в список последних документов системы
 user_pref("browser.download.manager.addToRecentDocs", false);
 
-// Hiding MIME types
-// Скрытие типов MIME
-user_pref("browser.download.hide_plugins_without_extensions", false);
-
 // Show the "Open with" dialog box in the download window
 // Показ диалогового окна "Открыть при помощи" в окне загрузки
 user_pref("browser.download.forbid_open_with", true);
@@ -653,70 +369,14 @@ user_pref("browser.download.forbid_open_with", true);
 // Предсказатель
 // [ЗАМЕТКА] Это функция создает простейшие соединения с сервером. Когда курсор находится над определенной ссылкой, Firefox пытается предугадать действия пользователя на странице с целью увеличения производительность и скорости обработки контента на странице.
 user_pref("network.predictor.enabled", false);
-user_pref("network.predictor.enable-hover-on-ssl", false);
-user_pref("network.predictor.enable-prefetch", false);
-
-// Displays all parts of the URL in the address bar
-// Отображения всех части URL-адреса в строке адреса
-user_pref("browser.urlbar.trimURLs", false);
-
-// Display JavaScript in history URLs
-// Отображение JavaScript в URLs истории
-user_pref("browser.urlbar.filter.javascript", true);
-
-// Maximum number of history results in the address bar
-// Максимальное количество результатов истории в панеле адреса
-user_pref("browser.urlbar.maxHistoricalSearchSuggestions", 0);
 
 // WebExtension restrictions for specific Mozilla domains
 // Ограничения WebExtension для определенных доменов Mozilla
 user_pref("extensions.webextensions.restrictedDomains", "");
 
-// Install add-ons without signatures and display a request to install add-ons in the browser
-// Установка дополнений без подписей и вывод запроса на установку дополнений в браузер
-// user_pref("xpinstall.whitelist.required", true);
+// Install add-ons without signatures
+// Установка дополнений без подписей
 user_pref("xpinstall.signatures.required", false);
-
-// Fullscreen API
-// [WARNING] Allows you to identify the browser by means of browser fingerprints.
-// API Полного экрана
-// [ВНИМАНИЕ] Позволяет идентифицировать браузер с помощью отпечатков пальцев браузера.
-// user_pref("full-screen-api.enabled", false);
-user_pref("full-screen-api.unprefix.enabled", false);
-user_pref("full-screen-api.warning.delay", 0);
-user_pref("full-screen-api.warning.timeout", 0);
-
-// Animated gradient that runs through the tab after the page is fully loaded
-// Анимированный градиент, который пробегает по вкладке после полной загрузки страницы
-user_pref("toolkit.cosmeticAnimations.enabled", false);
-
-// Spellchecking
-//		0 = Do not check
-//		1 = Check in multiline fields
-//		2 = Check in all text fields
-// Проверка орфографии
-//		0 = Не проверять
-//		1 = Проверка в многострочных полях
-//		2 = Проверка во всех текстовых полях
-user_pref("layout.spellcheckDefault", 2);
-
-// Auto scroll
-// Автоматическая прокрутка
-user_pref("general.autoScroll", false);
-
-// Reader view
-// [NOTE] Load reduction.
-// Просмотр для чтения
-// [ЗАМЕТКА] Снижение нагрузки.
-user_pref("reader.parse-on-load.enabled", false);
-
-// Text reader function in Reader view
-// Функция зачитывания текста в Reader view
-user_pref("narrate.enabled", false);
-
-// Displaying an empty window as early as possible with the subsequent filling
-// Отображение пустого окна, как можно раньше с последующим заполнением
-user_pref("browser.startup.blankWindow", false);
 
 // Service Workers
 // "Service workers" essentially act as proxy servers that sit between web apps, and the browser and network, are event driven, and can control the web page/site it is associated with, intercepting and modifying navigation and resource requests, and caching resources.
@@ -725,58 +385,6 @@ user_pref("browser.startup.blankWindow", false);
 // "Service workers" по существу действуют как прокси-серверы, которые находятся между веб-приложениями, браузером и сетью, управляются событиями и могут управлять веб-страницей или сайтом, с которыми они связаны, перехватывать и изменять запросы навигации и ресурсов, а также кэшировать ресурсы.
 // [ЗАМЕТКА] Это сильно нагружает ресурсы системы и занимает большую часть оперативной памяти.
 user_pref("dom.serviceWorkers.enabled", false);
-
-// Cookies for HTTP sites are set with the "secure" directive
-// Файлы куки для сайтов HTTP устанавливаются с "защищенной" директивой
-user_pref("network.cookie.leave-secure-alone", true);
-
-// SameSite сookies
-// Куки SameSite
-user_pref("network.cookie.same-site.enabled", true);
-
-// DOM (Document Object Model) Storage
-// The DOM specifications of web applications define a mechanism that allows web pages to store their data on the client side in a special storage.
-// [WARNING] This will break a lot of sites functionality and extensions. You are better off using an extension for more granular control.
-// Хранилище DOM (Объектная Модель Документа)
-// DOM-спецификации веб-приложений определяют механизм, разрешающий веб-страницам сохранять свои данные на клиентской стороне в специальном хранилище.
-// [ВНИМАНИЕ] Отключение этого предпочтения сломает много функций и расширений сайтов. Вам лучше использовать расширение для более гранулированного контроля.
-// user_pref("dom.storage.enabled", false);
-user_pref("browser.engagement.recent_visited_origins.expiry", 0);
-user_pref("dom.storage.testing", false);
-user_pref("dom.storage_access.enabled", false);
-user_pref("dom.storage_access.auto_grants", false);
-
-// Detection of connection/disconnection of media devices in the system
-// Обнаружение подключения/отключения медиа-устройств в системе
-user_pref("media.ondevicechange.enabled", false);
-
-// Saving zoom for sites
-// [WARNING] Allows you to identify the browser by means of browser fingerprints.
-// Сохранение масштаба для сайтов
-// [ВНИМАНИЕ] Позволяет идентифицировать браузер с помощью отпечатков пальцев браузера.
-user_pref("browser.zoom.siteSpecific", false);
-
-// Sites with autocomplete="off" attribute
-// [NOTE] This function allows you to save the entered passwords in the password manager, even if the site owner has set the autocomplete attribute to "off".
-// Сайты с атрибутом автозаполнение "off"
-// [ЗАМЕТКА] Данная функция позволяет сохранять введенные пароли в менеджере паролей, даже если владелец сайта установил атрибуту автозаполнение значение "off".
-user_pref("signon.storeWhenAutocompleteOff", true);
-
-// Formless login capture for Password Manager
-// Захват формы для входа в систему
-user_pref("signon.formlessCapture.enabled", false);
-
-// SSL session tracking
-// [NOTE] Disables sending Session Tickets (TLS) and Session Identifiers (SSL) - unique identifiers used to speed up the re-establishment of an encrypted connection, which can also be used to track a user.
-// Отслеживание сеансов SSL
-// [ЗАМЕТКА] Отключает посылку Session Tickets (TLS) и Session Identifiers (SSL) - уникальных идентификаторов, применяемых для ускорения повторной установки шифрованного соединения, которые могут быть также использованы и для отслеживания пользователя.
-user_pref("security.ssl.disable_session_identifiers", true);
-
-// SSL Error reporting
-// Отчеты об ошибках SSL
-user_pref("security.ssl.errorReporting.automatic", false);
-user_pref("security.ssl.errorReporting.enabled", false);
-user_pref("security.ssl.errorReporting.url", "");
 
 // Sketches of visited pages
 // Эскизы посещенных страниц
@@ -803,12 +411,6 @@ user_pref("dom.popup_maximum", 3);
 // Setting default permissions (resource://app/defaults/permissions) in the Permission Manager
 // Установка по умолчанию разрешений (resource://app/defaults/permissions) в Менеджере Разрешений
 user_pref("permissions.manager.defaultsUrl", "");
-
-// Exposure of system colors to CSS or canvas
-// [NOTE] Might affect CSS in themes and extensions.
-// Экспозиция системных цветов CSS или canvas
-// [ЗАМЕТКА] Может повлиять на CSS у тем и расширениях.
-user_pref("ui.use_standins_for_native_colors", true);
 
 // Force punycode for internationalized domain names
 // Принудительное использование Юникода для интернационализированных доменных имен
@@ -842,10 +444,6 @@ user_pref("browser.bookmarks.autoExportHTML", false);
 //		FALSE = Открывать результат поиска на новой странице
 user_pref("browser.search.openintab", true);
 
-// Automatic selection of the entire line in the address bar
-// Автоматическое выделение всей строки в поле адресной строки
-user_pref("browser.urlbar.clickSelectsAll", true);
-
 // Showing search results
 //		TRUE = To wrap lines
 //		FALSE = Do not wrap lines
@@ -868,10 +466,6 @@ user_pref("browser.tabs.closeWindowWithLastTab", false);
 // Режим приватного просмотра
 user_pref("browser.privatebrowsing.autostart", true);
 
-// The time of inactivity of the user through which the browser will begin to save the session
-// Время отсутствия активности пользователя, через который браузер начнет сохранять сессию
-user_pref("browser.sessionstore.idleDelay", 720000);
-
 // Preloading documents or resources specified via <link rel = "preload">
 // Предзагрузка документов или ресурсов, указанных через <link rel="preload">
 user_pref("network.preload", false);
@@ -882,30 +476,6 @@ user_pref("network.preload", false);
 // [ЗАМЕТКА] Показ новых пользователей различной справочной информация при "N" запуске браузера.
 user_pref("browser.laterrun.enabled", false);
 
-// Memory cache
-// [WARNING] Allowing caching to RAM can lead to browser tracking using "digital fingerprints" created using the E-Tag!
-// Кэш памяти
-// [ВНИМАНИЕ] Разрешение кэширования в оперативную память может привести к отслеживанию браузера по "цифровым отпечаткам", создаваемым при помощи E-Tag!
-user_pref("browser.cache.memory.enable", false);
-user_pref("browser.cache.memory.capacity", 0);
-
-// Reporting API
-// [NOTE] Stores reports and endpoints in a reporting cache, which are then queued and sent via the HTTP header "Report-To" to endpoints.
-// API отчетов
-// [ЗАМЕТКА] Сохраняет отчеты и конечные точки в кэше отчетов, которые затем помещаются в очередь и отправляются через заголовок HTTP "Report-To" к конечным точкам.
-user_pref("dom.reporting.enabled", false);
-user_pref("dom.reporting.featurePolicy.enabled", false);
-user_pref("dom.reporting.header.enabled", false);
-user_pref("dom.reporting.testing.enabled", false);
-
-// Adding sites from Alexa Top 500 to the address bar Autocomplete list
-// Добавление сайтов из Alexa Top 500 в список автозаполнения адресной строки
-user_pref("browser.urlbar.usepreloadedtopurls.enabled", false);
-
-// Limited window.opener protection
-// Ограниченная защита window.opener
-user_pref("dom.targetBlankNoOpener.enabled", true);
-
 // Pocket extension
 // Proprietary application Pocket (formerly known as Read It Later) allows you to save links to texts in the cloud storage for further reading, storing data about user activity and synchronizing them between all devices subscribed to the service. This can de-anonymize users and reveal their preferences.
 // [NOTE] Pocket is a third-party (now owned by Mozilla) cloud service, which operates on the principle of "Save for later use".
@@ -914,47 +484,24 @@ user_pref("dom.targetBlankNoOpener.enabled", true);
 // [ЗАМЕТКА] Pocket является сторонним (теперь принадлежит Mozilla) облачным сервисом, который работает по принципу "Сохранить для последующего использования".
 user_pref("extensions.pocket.enabled", false);
 
-// Extension Screenshots
-// Расширение Скриншоты
-user_pref("extensions.screenshots.disabled", true);
-user_pref("extensions.screenshots.upload-disabled", true);
-
 // Extension Form Autofill
 // Расширение Form Autofill
 user_pref("extensions.formautofill.addresses.enabled", false);
 user_pref("extensions.formautofill.available", "off");
 user_pref("extensions.formautofill.creditCards.enabled", false);
 user_pref("extensions.formautofill.heuristics.enabled", false);
+user_pref("extensions.formautofill.section.enabled", false);
 
 // Web compatibility reporter
 // Отправка отчетов о совместимости с интернетом
 user_pref("extensions.webcompat-reporter.enabled", false);
 
-// Logging
-// Ведение журнала
-user_pref("devtools.debugger.logging", false);
-user_pref("devtools.onboarding.telemetry.logged", false);
-user_pref("dom.indexedDB.logging.details", false);
-user_pref("dom.indexedDB.logging.enabled", false);
-user_pref("dom.indexedDB.logging.profiler-marks", false);
-user_pref("dom.performance.enable_user_timing_logging", false);
-user_pref("extensions.logging.enabled", false);
-user_pref("gfx.logging.painted-pixel-count.enabled", false);
-user_pref("gfx.logging.peak-texture-usage.enabled", false);
-user_pref("gfx.logging.texture-usage.enabled", false);
-user_pref("security.sandbox.logging.enabled", false);
-user_pref("browser.ping-centre.log", false);
-
 // Black lists
 // Черные списки
 user_pref("extensions.blocklist.enabled", false);
-user_pref("extensions.blocklist.url", "");
 
 // First Party Isolation
 user_pref("privacy.firstparty.isolate", true);
-
-// GIO
-user_pref("network.gio.supported-protocols", "");
 
 // WebVR
 user_pref("dom.vr.enabled", false);
@@ -968,11 +515,6 @@ user_pref("dom.gamepad.enabled", false);
 user_pref("app.normandy.enabled", false);
 user_pref("app.normandy.api_url", "");
 user_pref("app.normandy.first_run", false);
-
-// Updating system add-ons
-// Обновление системных дополнений
-user_pref("extensions.systemAddon.update.enabled", false);
-user_pref("extensions.systemAddon.update.url", "");
 
 // Safe browsing
 // Безопасный просмотр
@@ -1013,7 +555,6 @@ user_pref("browser.safebrowsing.reportPhishURL", "");
 // Блокировка контента
 user_pref("browser.contentblocking.category", "custom");
 user_pref("browser.contentblocking.cfr-milestone.enabled", false);
-user_pref("browser.contentblocking.control-center.ui.showBlockedLabels", false);
 user_pref("browser.contentblocking.cryptomining.preferences.ui.enabled", false);
 user_pref("browser.contentblocking.database.enabled", false);
 user_pref("browser.contentblocking.fingerprinting.preferences.ui.enabled", false);
@@ -1036,11 +577,6 @@ user_pref("browser.contentblocking.report.lockwise.mobile-ios.url", "");
 user_pref("browser.contentblocking.report.mobile-android.url", "");
 user_pref("browser.contentblocking.report.mobile-ios.url", "");
 
-// Делегирование разрешений
-// Permission delegation
-user_pref("permissions.delegation.enabled", false);
-
 // Исследования
 // Studies
 user_pref("app.shield.optoutstudies.enabled", false);
-
