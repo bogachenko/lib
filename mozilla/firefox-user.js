@@ -718,10 +718,6 @@ user_pref("narrate.enabled", false);
 // Отображение пустого окна, как можно раньше с последующим заполнением
 user_pref("browser.startup.blankWindow", false);
 
-// WebGL debug info being available to websites
-// Информация об отладке WebGL доступна для веб-сайтов
-user_pref("webgl.enable-debug-renderer-info", false);
-
 // Service Workers
 // "Service workers" essentially act as proxy servers that sit between web apps, and the browser and network, are event driven, and can control the web page/site it is associated with, intercepting and modifying navigation and resource requests, and caching resources.
 // [NOTE] This heavily loads the system resources and takes up most of the RAM.
@@ -963,16 +959,6 @@ user_pref("network.gio.supported-protocols", "");
 // WebVR
 user_pref("dom.vr.enabled", false);
 
-// WebGL
-user_pref("webgl.disabled", true);
-user_pref("webgl.enable-webgl2", false);
-user_pref("webgl.disable-wgl", true);
-user_pref("webgl.disable-angle", true);
-user_pref("webgl.disable-DOM-blit-uploads", true);
-user_pref("webgl.min_capability_mode", true);
-user_pref("webgl.disable-extensions", true);
-user_pref("webgl.disable-fail-if-major-performance-caveat", true);
-
 // Gamepad control
 // Управление геймпадом
 user_pref("dom.gamepad.enabled", false);
@@ -1053,10 +1039,6 @@ user_pref("browser.contentblocking.report.mobile-ios.url", "");
 // Делегирование разрешений
 // Permission delegation
 user_pref("permissions.delegation.enabled", false);
-
-// Mega bar
-// Мега бар
-user_pref("browser.urlbar.openViewOnFocus", false);
 
 // Исследования
 // Studies
