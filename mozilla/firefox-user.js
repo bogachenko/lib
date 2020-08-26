@@ -68,7 +68,7 @@ user_pref("privacy.sanitize.sanitizeOnShutdown", true);
 // What elements of the story should be automatically deleted when you close Firefox
 // Какие элементы истории должны быть автоматически удалены при закрытии Firefox
 user_pref("privacy.clearOnShutdown.cache", true);
-user_pref("privacy.clearOnShutdown.cookies", true);
+user_pref("privacy.clearOnShutdown.cookies", false);
 user_pref("privacy.clearOnShutdown.downloads", true);
 user_pref("privacy.clearOnShutdown.formdata", true);
 user_pref("privacy.clearOnShutdown.history", true);
@@ -82,7 +82,7 @@ user_pref("privacy.clearOnShutdown.openWindows", true);
 // Мастер очистки Firefox
 // [ЗАМЕТКА] Это диалоговое окно вызывается горячими клавишами - Ctrl + Shift + Del.
 user_pref("privacy.cpd.cache", true);
-user_pref("privacy.cpd.cookies", true);
+user_pref("privacy.cpd.cookies", false);
 user_pref("privacy.cpd.downloads", true);
 user_pref("privacy.cpd.formdata", true);
 user_pref("privacy.cpd.history", true);
@@ -297,7 +297,7 @@ user_pref("network.cookie.cookieBehavior", 0);
 // Политика жизни куки
 //		0 = Сохранять их до истечения срока действия
 //		2 = Сохранять их до закрытия Firefox
-user_pref("network.cookie.lifetimePolicy", 2);
+user_pref("network.cookie.lifetimePolicy", 0);
 
 // Storage API
 // [NOTE] Disables another way for sites to store their data on the users personal computer.
