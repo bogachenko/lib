@@ -732,6 +732,7 @@ http://tracker.moeking.me:6969/announce
 http://tracker.mononoke-bt.org:2401/baabb89ff287bbbaddf51c482f467324/announce
 http://tracker.moxing.party:6969/announce
 http://tracker.mytorrenttracker.com:6099/announce
+http://tracker.name/announce.php
 http://tracker.noobsubs.net/announce
 http://tracker.noobsubs.net:80/announce
 http://tracker.novalayer.org:6969/announce
