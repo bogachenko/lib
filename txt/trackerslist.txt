@@ -1111,9 +1111,11 @@ udp://149.129.65.231:2710/announce
 udp://15.188.67.15:6969/announce
 udp://151.236.218.182:6969/announce
 udp://151.80.120.112:2710/announce
+udp://151.80.120.112:2730/announce
 udp://151.80.120.113:2710/announce
 udp://151.80.120.114:2710/announce
 udp://151.80.120.115:2710/announce
+udp://151.80.120.115:2820/announce
 udp://151.80.44.145:6969/announce
 udp://159.100.245.181:6969/announce
 udp://159.69.208.124:6969/announce
@@ -1883,6 +1885,7 @@ wss://tracker.fastcast.nz:443/announce
 wss://tracker.files.fm:7073/announce
 wss://tracker.lab.vvc.niif.hu/announce
 wss://tracker.lab.vvc.niif.hu:443/announce
+wss://tracker.magnetoo.io/announce
 wss://tracker.novage.com.ua:443/announce
 wss://tracker.openwebtorrent.com
 wss://tracker.openwebtorrent.com/announce
