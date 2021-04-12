@@ -10,7 +10,7 @@ sudo apt install -y ssh
 sudo systemctl enable ssh.service && sudo systemctl start ssh.service
 
 # Updating repository data and installing updates.
-sudo apt update && sudo apt upgrade
+sudo apt update -y && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 # Adding the Kali repository.
 sudo sh -c '# deb http://http.kali.org/kali kali-rolling main non-free contrib' >> /etc/apt/sources.list"
@@ -24,12 +24,12 @@ clear
 
 # Installing main packages.
 sudo apt --no-install-suggests --no-install-recommends install chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra git vim mc htop vlc neofetch hostapd dnsmasq resolvconf
-sudo apt install -y xrdp fonts-noto ttf-mscorefonts-installer tor privoxy
+sudo apt install -y xrdp fonts-noto ttf-mscorefonts-installer tor privoxy qbittorrent
 
 # Convert SOCKS to HTTP proxy via Privoxy.
-sudo sh -c 'forward-socks5 / localhost:9050 .' >> /etc/privoxy/config"
-sudo sh -c 'forward-socks4 / localhost:9050 .' >> /etc/privoxy/config"
-sudo sh -c 'forward-socks4a / localhost:9050 .' >> /etc/privoxy/config"
+echo "forward-socks5 / localhost:9050 ." | sudo tee /etc/privoxy/config
+echo "forward-socks4 / localhost:9050 ." | sudo tee /etc/privoxy/config
+echo "forward-socks4a / localhost:9050 ." | sudo tee /etc/privoxy/config
 
 # Enabling daemons and starting them for my main packages.
 sudo systemctl enable resolvconf.service && sudo systemctl start resolvconf.service
@@ -48,5 +48,8 @@ sudo resolvconf -u
 cat /etc/resolv.conf
 
 sleep .5
+
 clear
-sudo apt autoremove
+
+# Running package clean-up using apt autoclean and autoremove.
+sudo apt autoremove -y && apt autoclean -y
