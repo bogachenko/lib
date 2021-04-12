@@ -1,12 +1,38 @@
 ## Raspberry Pi
 
-sudo systemctl enable ssh && sudo systemctl start ssh
+TELLUSER='echo $USER'
+echo 'Hello, $USER'
+
+# Installing the SSH package and starting its service.
+sudo apt install -y ssh
+sudo systemctl enable ssh.service && sudo systemctl start ssh.service
+
+# Updating repository data and installing updates.
 sudo apt update && sudo apt upgrade
+
+# Running the standard config file for the Raspberry Pi.
 sudo raspi-config
-clear
-sudo apt --no-install-suggests --no-install-recommends install chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra git tor vim ssh mc htop vlc neofetch hostapd dnsmasq
+
+# Downloading and installing Adguard Home.
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
+clear
+
+# Installing core packages
+sudo apt --no-install-suggests --no-install-recommends install chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra git tor vim mc htop vlc neofetch hostapd dnsmasq resolvconf
 sudo apt install -y xrdp fonts-noto ttf-mscorefonts-installer
-sudo vim /etc/resolv.conf
+
+sudo systemctl enable resolvconf.service
+sudo systemctl start resolvconf.service
+
+cat > /etc/resolvconf/resolv.conf.d/head <<EOF 
+nameserver 192.168.0.104
+nameserver 192.168.0.102
+EOF
+
+sudo resolvconf --enable-updates
+sudo resolvconf -u
+cat /etc/resolv.conf
+
+sleep .5
 clear
 sudo apt autoremove
