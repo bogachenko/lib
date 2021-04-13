@@ -39,7 +39,7 @@ sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 # Setting up static DNS (which I gave for the Raspberry Pi in my router settings) for Adguard Home.
 sudo cat > /etc/resolvconf/resolv.conf.d/head <<EOF 
 nameserver 192.168.0.104
-nameserver 192.168.0.102
+nameserver 192.168.0.105
 EOF
 
 # Updating configuration files for DNS and setting it to default on reboot.
