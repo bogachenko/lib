@@ -49,6 +49,26 @@ cat /etc/resolv.conf
 
 sleep .5
 
+# Setting up the configuration for my VIM
+cat > ~/.vimrc <<EOF 
+set number " Show absolute line numbers on the left.
+filetype plugin on " Auto-detect un-labeled filetypes
+syntax on " Turn syntax highlighting on
+set ai " Sets auto-indentation
+set si " Sets smart-indentation
+set noswapfile " Prevent vim from creating .swp files
+set tabstop=2 " Tab equal 2 spaces (default 4)
+set wrap " Wrap overflowing lines
+set hlsearch " When searching (/), highlights matches as you go
+set incsearch " When searching (/), display results as you type (instead of only upon ENTER)
+set ignorecase " When searching (/), ignore case entirely
+set smartcase " When searching (/), automatically switch to a case-sensitive search if you use any capital letters
+set cmdheight=2 " Set height of the command bar to 2
+set ttyfast " Boost speed by altering character redraw rates to your terminal
+set encoding=utf8 " Set text encoding as utf8
+set clipboard=unnamed " Use the OS clipboard by default
+EOF
+
 clear
 
 # Running package clean-up using apt autoclean and autoremove.
