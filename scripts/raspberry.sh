@@ -64,7 +64,7 @@ clear
 # Running package clean-up using apt autoclean and autoremove.
 sudo apt autoremove -y && apt autoclean -y
 
-# Change hostname
+# Change hostname.
 sudo hostnamectl set-hostname localhost
 sudo cat > /etc/hosts <<EOF
 0.0.0.0 0.0.0.0
@@ -83,7 +83,7 @@ ff02::2 ip6-allrouters
 ff02::3 ip6-allhosts
 
 192.168.0.104	localhost
-192.168.0.102	localhost
+192.168.0.105	localhost
 EOF
 
 sleep .5
