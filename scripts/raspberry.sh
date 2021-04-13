@@ -51,25 +51,39 @@ sleep .5
 
 # Setting up the configuration for my VIM
 cat > ~/.vimrc <<EOF 
-set number " Show absolute line numbers on the left.
-filetype plugin on " Auto-detect un-labeled filetypes
-syntax on " Turn syntax highlighting on
-set ai " Sets auto-indentation
-set si " Sets smart-indentation
-set noswapfile " Prevent vim from creating .swp files
-set tabstop=2 " Tab equal 2 spaces (default 4)
-set wrap " Wrap overflowing lines
-set hlsearch " When searching (/), highlights matches as you go
-set incsearch " When searching (/), display results as you type (instead of only upon ENTER)
-set ignorecase " When searching (/), ignore case entirely
-set smartcase " When searching (/), automatically switch to a case-sensitive search if you use any capital letters
-set cmdheight=2 " Set height of the command bar to 2
-set ttyfast " Boost speed by altering character redraw rates to your terminal
-set encoding=utf8 " Set text encoding as utf8
-set clipboard=unnamed " Use the OS clipboard by default
+set number
+syntax on
+set noswapfile
+set wrap
+set ttyfast
+set encoding=utf8
 EOF
 
 clear
 
 # Running package clean-up using apt autoclean and autoremove.
 sudo apt autoremove -y && apt autoclean -y
+
+# Change hostname
+sudo hostnamectl set-hostname localhost
+sudo cat > /etc/hosts <<EOF
+0.0.0.0 0.0.0.0
+127.0.0.1 local
+127.0.0.1 localhost
+127.0.0.1 localhost.localdomain
+255.255.255.255 broadcasthost
+::1 ip6-localhost
+::1 ip6-loopback
+::1 localhost
+fe80::1%lo0 localhost
+ff00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+
+192.168.0.104	localhost
+192.168.0.102	localhost
+EOF
+
+sleep .5
