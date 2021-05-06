@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Raspberry Pi
+# Ubuntu x64
 
 TELLUSER='echo $USER'
 echo 'Hello, $USER'
@@ -15,15 +16,12 @@ sudo apt update -y && sudo apt upgrade -y && sudo apt full-upgrade -y
 # Adding the Kali repository.
 sudo sh -c '# deb http://http.kali.org/kali kali-rolling main non-free contrib' >> /etc/apt/sources.list"
 
-# Running the standard config file for the Raspberry Pi.
-sudo raspi-config
-
 # Downloading and installing Adguard Home.
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
 clear
 
 # Installing main packages.
-sudo apt --no-install-suggests --no-install-recommends install chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra git vim mc htop vlc neofetch hostapd dnsmasq resolvconf
+sudo apt --no-install-suggests --no-install-recommends install chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools
 sudo apt install -y xrdp fonts-noto ttf-mscorefonts-installer tor privoxy qbittorrent
 
 # Convert SOCKS to HTTP proxy via Privoxy.
