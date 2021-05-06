@@ -9,16 +9,12 @@ echo 'Hello, $USER'
 # Updating repository data and installing updates.
 sudo pacman -Syu
 
-# Installing the SSH package and starting its service.
-sudo pacman -S openssh
-sudo systemctl enable sshd.service && sudo systemctl start sshd.service
-
 # Downloading and installing Adguard Home.
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
 clear
 
 # Installing main packages.
-sudo pacman -S chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp noto-fonts noto-fonts-emoji tor privoxy qbittorrent i3
+sudo pacman -S chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp noto-fonts noto-fonts-emoji tor privoxy qbittorrent i3 openssh sddm dmenu xterm cmake freetype2 fontconfig pkg-config make libxcb
 
 # Convert SOCKS to HTTP proxy via Privoxy.
 echo "forward-socks5 / localhost:9050 ." | sudo tee /etc/privoxy/config
@@ -29,6 +25,8 @@ echo "forward-socks4a / localhost:9050 ." | sudo tee /etc/privoxy/config
 sudo systemctl enable resolvconf.service && sudo systemctl start resolvconf.service
 sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
+sudo systemctl enable sshd.service && sudo systemctl start sshd.service
+sudo systemctl enable sddm.service && sudo systemctl sddm sshd.service
 
 # Setting up static DNS (which I gave for the Raspberry Pi in my router settings) for Adguard Home.
 sudo cat > /etc/resolvconf/resolv.conf.d/head <<EOF 
