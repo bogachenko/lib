@@ -1,28 +1,24 @@
 #!/bin/bash
 
 # Raspberry Pi
-# Ubuntu x64
+# OS: Manjaro arm64
 
 TELLUSER='echo $USER'
 echo 'Hello, $USER'
 
-# Installing the SSH package and starting its service.
-sudo apt install -y ssh
-sudo systemctl enable ssh.service && sudo systemctl start ssh.service
-
 # Updating repository data and installing updates.
-sudo apt update -y && sudo apt upgrade -y && sudo apt full-upgrade -y
+sudo pacman -Syu
 
-# Adding the Kali repository.
-sudo sh -c '# deb http://http.kali.org/kali kali-rolling main non-free contrib' >> /etc/apt/sources.list"
+# Installing the SSH package and starting its service.
+sudo pacman -S openssh
+sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 
 # Downloading and installing Adguard Home.
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
 clear
 
 # Installing main packages.
-sudo apt --no-install-suggests --no-install-recommends install chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools
-sudo apt install -y xrdp fonts-noto ttf-mscorefonts-installer tor privoxy qbittorrent
+sudo pacman -S chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp noto-fonts noto-fonts-emoji tor privoxy qbittorrent i3
 
 # Convert SOCKS to HTTP proxy via Privoxy.
 echo "forward-socks5 / localhost:9050 ." | sudo tee /etc/privoxy/config
@@ -58,9 +54,6 @@ set encoding=utf8
 EOF
 
 clear
-
-# Running package clean-up using apt autoclean and autoremove.
-sudo apt autoremove -y && apt autoclean -y
 
 # Change hostname.
 sudo hostnamectl set-hostname localhost
