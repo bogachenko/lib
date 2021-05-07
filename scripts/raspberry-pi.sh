@@ -14,7 +14,22 @@ curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scrip
 clear
 
 # Installing main packages.
-sudo pacman -S --needed chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp noto-fonts noto-fonts-emoji tor privoxy qbittorrent i3 openssh sddm dmenu xterm cmake freetype2 fontconfig pkg-config make libxcb iw gpm base-devel wget yajl code
+sudo pacman -S --needed chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp noto-fonts noto-fonts-emoji tor privoxy qbittorrent i3 openssh sddm dmenu xterm cmake freetype2 fontconfig pkg-config make libxcb iw gpm base-devel wget yajl code ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-liberation opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono noto-fonts-extra ttf-fira-sans ttf-fira-mono ttf-opensans
+
+# Installing yaourt.
+cd /tmp
+git clone https://aur.archlinux.org/package-query.git
+cd package-query/
+makepkg -si
+cd ..
+git clone https://aur.archlinux.org/yaourt.git
+cd yaourt/
+makepkg -si
+cd ..
+sudo rm -dR yaourt/ package-query/
+
+# Installing main packages from yaourt repository 
+yaourt -S ttf-ms-fonts
 
 # Convert SOCKS to HTTP proxy via Privoxy.
 echo "forward-socks5 / localhost:9050 ." | sudo tee /etc/privoxy/config
@@ -55,7 +70,7 @@ cat /etc/resolv.conf
 sleep .5
 
 # Setting up the configuration for my VIM
-cat > ~/.vimrc <<EOF 
+cat > ~/.vimrc <<EOF
 set number
 syntax on
 set noswapfile
