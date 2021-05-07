@@ -14,7 +14,7 @@ curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scrip
 clear
 
 # Installing main packages.
-sudo pacman -S --needed chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp noto-fonts noto-fonts-emoji tor privoxy qbittorrent i3 openssh sddm dmenu xterm cmake freetype2 fontconfig pkg-config make libxcb iw gpm base-devel wget yajl code ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-liberation opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono noto-fonts-extra ttf-fira-sans ttf-fira-mono ttf-opensans
+sudo pacman -S --needed chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp noto-fonts noto-fonts-emoji tor privoxy qbittorrent i3 openssh sddm dmenu xterm cmake freetype2 fontconfig pkg-config make libxcb iw gpm base-devel wget yajl code ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-liberation opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono noto-fonts-extra ttf-fira-sans ttf-fira-mono ttf-opensans netctl gparted ppp dialog wpa_supplicant xorg-xinit p7zip unrar alsa-lib alsa-utils
 
 # Installing yaourt.
 cd /tmp
@@ -54,7 +54,21 @@ ru_RU.UTF-8 UTF-8
 en_US.UTF-8 UTF-8
 EOF
 sudo locale-gen
-sudo localectl set-locale LANG=ru_RU.UTF-8
+sudo setfont cyr-sun16
+sudo localectl set-locale LANG="ru_RU.UTF-8"
+
+# Setting the time zone.
+sudo timedatectl set-timezone Asia/Sakhalin
+
+# Fill in the information for GECOS.
+sudo chfn bogachenko
+
+# Automatic login.
+sudo cat > /etc/sddm.conf <<EOF
+[Autologin]
+User=bogachenko
+Session=i3.desktop
+EOF
 
 # Setting up static DNS (which I gave for the Raspberry Pi in my router settings) for Adguard Home.
 sudo cat > /etc/resolvconf/resolv.conf.d/head <<EOF
