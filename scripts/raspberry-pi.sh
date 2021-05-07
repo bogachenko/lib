@@ -14,7 +14,7 @@ curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scrip
 clear
 
 # Installing main packages.
-sudo pacman -S chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp noto-fonts noto-fonts-emoji tor privoxy qbittorrent i3 openssh sddm dmenu xterm cmake freetype2 fontconfig pkg-config make libxcb
+sudo pacman -S --needed chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp noto-fonts noto-fonts-emoji tor privoxy qbittorrent i3 openssh sddm dmenu xterm cmake freetype2 fontconfig pkg-config make libxcb iw gpm base-devel wget yajl code
 
 # Convert SOCKS to HTTP proxy via Privoxy.
 echo "forward-socks5 / localhost:9050 ." | sudo tee /etc/privoxy/config
@@ -27,9 +27,22 @@ sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable sddm.service && sudo systemctl sddm sshd.service
+sudo systemctl enable gpm.service && sudo systemctl start gpm.service
+
+# Installing Russian localization for the system.
+sudo cat > /etc/vconsole.conf <<EOF
+FONT=cyr-sun16
+KEYMAP=ru
+EOF
+sudo cat > /etc/locale.gen <<EOF
+ru_RU.UTF-8 UTF-8
+en_US.UTF-8 UTF-8
+EOF
+sudo locale-gen
+sudo localectl set-locale LANG=ru_RU.UTF-8
 
 # Setting up static DNS (which I gave for the Raspberry Pi in my router settings) for Adguard Home.
-sudo cat > /etc/resolvconf/resolv.conf.d/head <<EOF 
+sudo cat > /etc/resolvconf/resolv.conf.d/head <<EOF
 nameserver 192.168.0.104
 nameserver 192.168.0.105
 EOF
