@@ -6,6 +6,19 @@
 TELLUSER='echo $USER'
 echo 'Hello, $USER'
 
+# Installing Russian localization for the system.
+sudo cat > /etc/vconsole.conf <<EOF
+FONT=cyr-sun16
+KEYMAP=ru
+EOF
+sudo cat > /etc/locale.gen <<EOF
+ru_RU.UTF-8 UTF-8
+en_US.UTF-8 UTF-8
+EOF
+sudo locale-gen
+sudo setfont cyr-sun16
+sudo localectl set-locale LANG="ru_RU.UTF-8"
+
 # Updating repository data and installing updates.
 sudo pacman -Syu
 
@@ -14,7 +27,7 @@ curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scrip
 clear
 
 # Installing main packages.
-sudo pacman -S --needed chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp noto-fonts noto-fonts-emoji tor privoxy qbittorrent i3 openssh sddm dmenu xterm cmake freetype2 fontconfig pkg-config make libxcb iw gpm base-devel wget yajl code ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-liberation opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono noto-fonts-extra ttf-fira-sans ttf-fira-mono ttf-opensans netctl gparted ppp dialog wpa_supplicant xorg-xinit p7zip unrar alsa-lib alsa-utils
+sudo pacman -S --needed chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp tor privoxy i3 openssh sddm dmenu xterm cmake freetype2 fontconfig pkg-config make libxcb iw gpm base-devel wget yajl code ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-liberation opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-opensans netctl gparted ppp dialog wpa_supplicant xorg-xinit p7zip unrar alsa-lib alsa-utils
 
 # Installing yaourt.
 cd /tmp
@@ -43,22 +56,6 @@ sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable sddm.service && sudo systemctl sddm sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
-
-# Installing Russian localization for the system.
-sudo cat > /etc/vconsole.conf <<EOF
-FONT=cyr-sun16
-KEYMAP=ru
-EOF
-sudo cat > /etc/locale.gen <<EOF
-ru_RU.UTF-8 UTF-8
-en_US.UTF-8 UTF-8
-EOF
-sudo locale-gen
-sudo setfont cyr-sun16
-sudo localectl set-locale LANG="ru_RU.UTF-8"
-
-# Setting the time zone.
-sudo timedatectl set-timezone Asia/Sakhalin
 
 # Fill in the information for GECOS.
 sudo chfn bogachenko
