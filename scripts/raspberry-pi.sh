@@ -6,28 +6,29 @@
 TELLUSER='echo $USER'
 echo 'Hello, $USER'
 
+# Getting root permission.
+su
+
 # Installing Russian localization for the system.
-sudo cat > /etc/vconsole.conf <<EOF
+cat > /etc/vconsole.conf <<EOF
 FONT=cyr-sun16
 KEYMAP=ru
 EOF
-sudo cat > /etc/locale.gen <<EOF
+cat > /etc/locale.gen <<EOF
 ru_RU.UTF-8 UTF-8
 en_US.UTF-8 UTF-8
 EOF
-sudo locale-gen
-sudo setfont cyr-sun16
-sudo localectl set-locale LANG="ru_RU.UTF-8"
+locale-gen
+setfont cyr-sun16
+localectl set-locale LANG="ru_RU.UTF-8"
 
 # Updating repository data and installing updates.
-sudo pacman -Syu
-
-# Downloading and installing Adguard Home.
-curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
-clear
+pacman -Syu
 
 # Installing main packages.
-sudo pacman -S --needed chromium git vim mc htop vlc neofetch hostapd dnsmasq resolvconf curl net-tools xrdp tor privoxy i3 openssh sddm dmenu xterm cmake freetype2 fontconfig pkg-config make libxcb iw gpm base-devel wget yajl code ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-liberation opendesktop-fonts ttf-bitstream-vera ttf-arphic-ukai ttf-arphic-uming ttf-hanazono ttf-opensans netctl gparted ppp dialog wpa_supplicant xorg-xinit p7zip unrar alsa-lib alsa-utils
+pacman -S --needed chromium git vim mc htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar
+
+exit
 
 # Installing yaourt.
 cd /tmp
@@ -43,6 +44,10 @@ sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
 yaourt -S ttf-ms-fonts
+
+# Downloading and installing Adguard Home.
+curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
+clear
 
 # Convert SOCKS to HTTP proxy via Privoxy.
 echo "forward-socks5 / localhost:9050 ." | sudo tee /etc/privoxy/config
@@ -68,10 +73,10 @@ Session=i3.desktop
 EOF
 
 # Setting up static DNS (which I gave for the Raspberry Pi in my router settings) for Adguard Home.
-sudo cat > /etc/resolvconf/resolv.conf.d/head <<EOF
-nameserver 192.168.0.104
-nameserver 192.168.0.105
-EOF
+#sudo cat > /etc/resolvconf/resolv.conf.d/head <<EOF
+#nameserver 192.168.0.104
+#nameserver 192.168.0.105
+#EOF
 
 # Updating configuration files for DNS and setting it to default on reboot.
 sudo resolvconf --enable-updates
