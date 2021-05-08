@@ -58,7 +58,7 @@ sudo systemctl enable sddm.service && sudo systemctl sddm sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
 
 # Fill in the information for GECOS.
-sudo chfn bogachenko
+sudo chfn ${TELLUSER}
 
 # Automatic login.
 sudo cat > /etc/sddm.conf <<EOF
