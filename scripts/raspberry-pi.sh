@@ -26,8 +26,9 @@ localectl set-locale LANG="ru_RU.UTF-8"
 pacman -Syu
 
 # Installing main packages.
-pacman -S --needed chromium git vim mc htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar
+pacman -S --needed chromium git vim mc htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar xorg-drivers terminator
 
+# Exiting superuser mode.
 exit
 
 # Installing yaourt.
@@ -50,9 +51,11 @@ curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scrip
 clear
 
 # Convert SOCKS to HTTP proxy via Privoxy.
-echo "forward-socks5 / localhost:9050 ." | sudo tee /etc/privoxy/config
-echo "forward-socks4 / localhost:9050 ." | sudo tee /etc/privoxy/config
-echo "forward-socks4a / localhost:9050 ." | sudo tee /etc/privoxy/config
+sudo cat > /etc/privoxy/config <<EOF
+forward-socks5 / localhost:9050 .
+forward-socks4 / localhost:9050 .
+forward-socks4a / localhost:9050 .
+EOF
 
 # Enabling daemons and starting them for my main packages.
 sudo systemctl enable resolvconf.service && sudo systemctl start resolvconf.service
@@ -79,9 +82,9 @@ EOF
 #EOF
 
 # Updating configuration files for DNS and setting it to default on reboot.
-sudo resolvconf --enable-updates
-sudo resolvconf -u
-cat /etc/resolv.conf
+#sudo resolvconf --enable-updates
+#sudo resolvconf -u
+#cat /etc/resolv.conf
 
 sleep .5
 
