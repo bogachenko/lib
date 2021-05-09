@@ -26,7 +26,7 @@ localectl set-locale LANG="ru_RU.UTF-8"
 pacman -Syu
 
 # Installing main packages.
-pacman -S --needed chromium git vim mc htop zip unzip unarj geany neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar xorg-drivers terminator
+pacman -S --needed chromium git vim mc htop zip unzip thunar gvfs unarj geany neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar xorg-drivers terminator
 
 # Exiting superuser mode.
 exit
@@ -85,8 +85,6 @@ EOF
 #sudo resolvconf --enable-updates
 #sudo resolvconf -u
 #cat /etc/resolv.conf
-
-sleep .5
 
 # Setting up the configuration for my VIM
 cat > ~/.vimrc <<EOF
