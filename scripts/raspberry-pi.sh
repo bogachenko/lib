@@ -2,6 +2,7 @@
 
 # Raspberry Pi
 # OS: Manjaro arm64
+# URL: https://raw.githubusercontent.com/bogachenko/lib/master/scripts/raspberry-pi.sh
 
 TELLUSER='echo $USER'
 echo 'Hello, $USER'
@@ -23,10 +24,10 @@ setfont cyr-sun16
 localectl set-locale LANG="ru_RU.UTF-8"
 
 # Updating repository data and installing updates.
-pacman -Syu
+pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed firefox git vim htop zip unzip unarj geany neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar xorg-drivers ranger code
+pacman -S --needed firefox git vim htop zip unzip unarj geany neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar xorg-drivers ranger code firefox-i18n-ru
 
 # Exiting superuser mode.
 exit
@@ -98,6 +99,7 @@ set ttyfast
 set encoding=utf8
 EOF
 
+# Clear the console.
 clear
 
 # Change hostname.
