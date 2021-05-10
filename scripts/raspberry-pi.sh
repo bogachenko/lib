@@ -26,7 +26,7 @@ localectl set-locale LANG="ru_RU.UTF-8"
 pacman -Syu
 
 # Installing main packages.
-pacman -S --needed chromium git vim mc htop zip unzip thunar gvfs unarj geany neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar xorg-drivers terminator
+pacman -S --needed chromium git vim htop zip unzip unarj geany neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar xorg-drivers ranger code
 
 # Exiting superuser mode.
 exit
@@ -64,6 +64,8 @@ sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable sddm.service && sudo systemctl start sddm.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
+sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
+sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
 
 # Fill in the information for GECOS.
 sudo chfn ${TELLUSER}
