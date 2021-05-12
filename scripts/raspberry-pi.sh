@@ -35,7 +35,7 @@ EOF
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji gnome
+pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji gnome modemmanager usb_modeswitch
 
 # Exiting superuser mode.
 exit
@@ -73,6 +73,9 @@ sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
 sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
 sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
+sudo systemctl enable NetworkManager.service && sudo systemctl start NetworkManager.service
+sudo systemctl enable gdm.service && sudo systemctl start gdm.service
+sudo systemctl enable ModemManager.service && sudo systemctl start ModemManager.service
 
 # Fill in the information for GECOS.
 sudo chfn ${TELLUSER}
