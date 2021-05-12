@@ -24,7 +24,7 @@ setfont cyr-sun16
 localectl set-locale LANG="ru_RU.UTF-8"
 
 # Choosing fast mirrors for Pacman.
-sudo cat > /etc/pacman.d/mirrorlist <<EOF
+cat > /etc/pacman.d/mirrorlist <<EOF
 Server = http://mirrors.colocall.net/manjaro/arm-stable/$repo/$arch
 Server = https://mirror.yandex.ru/mirrors/manjaro/arm-stable/$repo/$arch
 Server = https://mirror.truenetwork.ru/manjaro/arm-stable/$repo/$arch
@@ -35,7 +35,7 @@ EOF
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed firefox git vim htop zip unzip unarj geany neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar xorg-drivers ranger code firefox-i18n-ru qterminal pcmanfm-qt gvfs gtk2 gtk3 gtk4 scrot xorg-xsetroot
+pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji gnome
 
 # Exiting superuser mode.
 exit
@@ -67,11 +67,9 @@ forward-socks4a / localhost:9050 .
 EOF
 
 # Enabling daemons and starting them for my main packages.
-#sudo systemctl enable resolvconf.service && sudo systemctl start resolvconf.service
 sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable sshd.service && sudo systemctl start sshd.service
-sudo systemctl enable sddm.service && sudo systemctl start sddm.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
 sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
 sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
@@ -80,22 +78,12 @@ sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
 sudo chfn ${TELLUSER}
 
 # Automatic login.
-sudo cat > /etc/sddm.conf <<EOF
-[Autologin]
-User=bogachenko
-Session=i3.desktop
+sudo cat > /etc/gdm/custom.conf <<EOF
+# Enable automatic login for user
+[daemon]
+AutomaticLogin=${TELLUSER}
+AutomaticLoginEnable=True
 EOF
-
-# Setting up static DNS (which I gave for the Raspberry Pi in my router settings) for Adguard Home.
-#sudo cat > /etc/resolvconf/resolv.conf.d/head <<EOF
-#nameserver 192.168.0.104
-#nameserver 192.168.0.105
-#EOF
-
-# Updating configuration files for DNS and setting it to default on reboot.
-#sudo resolvconf --enable-updates
-#sudo resolvconf -u
-#cat /etc/resolv.conf
 
 # Setting up the configuration for my VIM
 cat > ~/.vimrc <<EOF
@@ -131,9 +119,5 @@ ff02::3 ip6-allhosts
 192.168.0.104	localhost
 192.168.0.105	localhost
 EOF
-
-mkdir -p ~/.config/i3status
-cp /etc/i3status.conf ~/.config/i3status/config
-#exec --no-startup-id xsetroot -solid "
 
 sleep .5
