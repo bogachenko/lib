@@ -23,11 +23,17 @@ locale-gen
 setfont cyr-sun16
 localectl set-locale LANG="ru_RU.UTF-8"
 
+sudo cat > /etc/pacman.d/mirrorlist <<EOF
+Server = http://mirrors.colocall.net/manjaro/arm-stable/$repo/$arch
+Server = https://mirror.yandex.ru/mirrors/manjaro/arm-stable/$repo/$arch
+Server = https://mirror.truenetwork.ru/manjaro/arm-stable/$repo/$arch
+EOF
+
 # Updating repository data and installing updates.
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed firefox git vim htop zip unzip unarj geany neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar xorg-drivers ranger code firefox-i18n-ru
+pacman -S --needed firefox git vim htop zip unzip unarj geany neofetch hostapd dnsmasq net-tools tor privoxy i3-wm i3status sddm dmenu cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar xorg-drivers ranger code firefox-i18n-ru qterminal pcmanfm-qt gvfs gtk2 gtk3 gtk4 scrot xorg-xsetroot
 
 # Exiting superuser mode.
 exit
@@ -123,5 +129,9 @@ ff02::3 ip6-allhosts
 192.168.0.104	localhost
 192.168.0.105	localhost
 EOF
+
+mkdir -p ~/.config/i3status
+cp /etc/i3status.conf ~/.config/i3status/config
+#exec --no-startup-id xsetroot -solid "
 
 sleep .5
