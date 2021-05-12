@@ -23,10 +23,12 @@ locale-gen
 setfont cyr-sun16
 localectl set-locale LANG="ru_RU.UTF-8"
 
+# Choosing fast mirrors for Pacman.
 sudo cat > /etc/pacman.d/mirrorlist <<EOF
 Server = http://mirrors.colocall.net/manjaro/arm-stable/$repo/$arch
 Server = https://mirror.yandex.ru/mirrors/manjaro/arm-stable/$repo/$arch
 Server = https://mirror.truenetwork.ru/manjaro/arm-stable/$repo/$arch
+Server = https://fastmirror.pp.ua/manjaro/arm-stable/$repo/$arch
 EOF
 
 # Updating repository data and installing updates.
