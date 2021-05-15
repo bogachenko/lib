@@ -35,7 +35,7 @@ EOF
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot qterminal pcmanfm-qt i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio
+pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot qterminal pcmanfm-qt i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx
 
 # Automatic login.
 sudo cat > /etc/sddm.conf <<EOF
@@ -60,7 +60,7 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
-yaourt -S ttf-ms-fonts
+yaourt -S ttf-ms-fonts windows8-cursor tor-browser
 
 # Downloading and installing Adguard Home.
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
@@ -97,29 +97,16 @@ set ttyfast
 set encoding=utf8
 EOF
 
-# Clear the console.
-clear
-
-# Change hostname.
-sudo hostnamectl set-hostname localhost
-sudo cat > /etc/hosts <<EOF
-0.0.0.0 0.0.0.0
-127.0.0.1 local
-127.0.0.1 localhost
-127.0.0.1 localhost.localdomain
-255.255.255.255 broadcasthost
-::1 ip6-localhost
-::1 ip6-loopback
-::1 localhost
-fe80::1%lo0 localhost
-ff00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
-ff02::3 ip6-allhosts
-
-192.168.0.104	localhost
-192.168.0.105	localhost
+# Setting the Windows 8 cursor by default.
+mkdir -p -v ~/.icons/default
+cat > ~/.icons/default/index.theme <<EOF
+[icon theme] 
+Inherits=Windows8-cursor
+EOF
+sudo cat > /usr/share/icons/default/index.theme <<EOF
+[icon theme] 
+Inherits=Windows8-cursor
 EOF
 
-sleep .5
+# Clear the console.
+clear
