@@ -28,7 +28,6 @@ cat > /etc/pacman.d/mirrorlist <<EOF
 Server = http://mirrors.colocall.net/manjaro/arm-stable/$repo/$arch
 Server = https://mirror.yandex.ru/mirrors/manjaro/arm-stable/$repo/$arch
 Server = https://mirror.truenetwork.ru/manjaro/arm-stable/$repo/$arch
-Server = https://fastmirror.pp.ua/manjaro/arm-stable/$repo/$arch
 EOF
 
 # Updating repository data and installing updates.
@@ -60,7 +59,7 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
-yaourt -S ttf-ms-fonts windows8-cursor tor-browser
+yaourt -S ttf-ms-fonts windows8-cursor
 
 # Downloading and installing Adguard Home.
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
