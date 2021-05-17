@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Raspberry Pi
-# OS: Manjaro arm64
-# URL: https://raw.githubusercontent.com/bogachenko/lib/master/scripts/raspberry-pi.sh
+# Manjaro ARM Linux aarch64
 
 TELLUSER='echo $USER'
 echo 'Hello, $USER'
@@ -34,10 +33,10 @@ EOF
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot qterminal pcmanfm-qt i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx gpicview xarchiver vlc transmission-qt
+pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot qterminal pcmanfm-qt i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx gpicview xarchiver vlc transmission-qt noto-fonts-cjk xorg-xrdb speedtest-cli uget
 
 # Automatic login.
-sudo cat > /etc/sddm.conf <<EOF
+cat > /etc/sddm.conf <<EOF
 [Autologin]
 User=${TELLUSER}
 Session=i3.desktop
@@ -45,6 +44,18 @@ EOF
 
 # Exiting superuser mode.
 exit
+
+# Configuring the Xresources file.
+cat > ~/.Xresources <<EOF
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+EOF
+xrdb -merge ~/.Xresources
 
 # Installing yaourt.
 cd /tmp
@@ -59,7 +70,7 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
-yaourt -S ttf-ms-fonts windows8-cursor
+yaourt -S ttf-ms-win10 windows8-cursor gksu
 
 # Downloading and installing Adguard Home.
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
