@@ -33,7 +33,7 @@ EOF
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot qterminal pcmanfm-qt i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx gpicview xarchiver vlc transmission-qt noto-fonts-cjk xorg-xrdb speedtest-cli uget xdg-user-dirs
+pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot qterminal pcmanfm-qt i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx gpicview xarchiver vlc qbittorrent noto-fonts-cjk xorg-xrdb speedtest-cli uget xdg-user-dirs atril gtk2 gtk3 gtk4
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -73,7 +73,7 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
-yaourt -S ttf-ms-win10 windows8-cursor gksu paper-icon-theme-git
+yaourt -S ttf-ms-win10 windows8-cursor gksu
 
 # Downloading and installing Adguard Home.
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
