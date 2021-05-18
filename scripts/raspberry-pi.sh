@@ -74,6 +74,11 @@ method=shared
 [proxy]
 EOF
 
+# Convert SOCKS to HTTP proxy via Privoxy.
+echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
+echo "forward-socks4 / localhost:9050 ." >> /etc/privoxy/config
+echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
+
 # Exiting superuser mode.
 exit
 
@@ -105,16 +110,11 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
-yay -S ttf-ms-win10 xcursor-hackneyed-light gksu
+yaourt -S ttf-ms-win10 xcursor-hackneyed-light gksu
 
 # Downloading and installing Adguard Home.
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
 clear
-
-# Convert SOCKS to HTTP proxy via Privoxy.
-sudo echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
-sudo echo "forward-socks4 / localhost:9050 ." >> /etc/privoxy/config
-sudo echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
 
 # Enabling daemons and starting them for my main packages.
 sudo systemctl enable tor.service && sudo systemctl start tor.service
