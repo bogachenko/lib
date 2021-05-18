@@ -9,6 +9,9 @@ echo 'Hello, $USER'
 # Getting root permission.
 su
 
+# Refresh mirrors for Pacman.
+pacman-mirrors
+
 # Installing Russian localization for the system.
 cat > /etc/vconsole.conf <<EOF
 FONT=cyr-sun16
@@ -21,13 +24,6 @@ EOF
 locale-gen
 setfont cyr-sun16
 localectl set-locale LANG="ru_RU.UTF-8"
-
-# Choosing fast mirrors for Pacman.
-cat > /etc/pacman.d/mirrorlist <<EOF
-Server = http://mirrors.colocall.net/manjaro/arm-stable/$repo/$arch
-Server = https://mirror.yandex.ru/mirrors/manjaro/arm-stable/$repo/$arch
-Server = https://mirror.truenetwork.ru/manjaro/arm-stable/$repo/$arch
-EOF
 
 # Updating repository data and installing updates.
 pacman -Syyuu
@@ -42,7 +38,7 @@ User=${TELLUSER}
 Session=i3.desktop
 EOF
 
-#
+# Create the WIFI-hotspot.
 cat > /etc/NetworkManager/system-connections/linux-wifi-hotspot.nmconnection <<EOF
 [connection]
 id=linux-wifi-hotspot
@@ -98,29 +94,23 @@ xrdb -merge ~/.Xresources
 
 # Installing yaourt.
 cd /tmp
-git clone https://aur.archlinux.org/package-query.git
-cd package-query/
+git clone https://aur.archlinux.org/yay.git
+cd yay/
 makepkg -si
 cd ..
-git clone https://aur.archlinux.org/yaourt.git
-cd yaourt/
-makepkg -si
-cd ..
-sudo rm -dR yaourt/ package-query/
+sudo rm -dR yay/
 
 # Installing main packages from yaourt repository 
-yaourt -S ttf-ms-win10 windows8-cursor gksu
+yay -S ttf-ms-win10 xcursor-hackneyed-light gksu
 
 # Downloading and installing Adguard Home.
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
 clear
 
 # Convert SOCKS to HTTP proxy via Privoxy.
-sudo cat > /etc/privoxy/config <<EOF
-forward-socks5 / localhost:9050 .
-forward-socks4 / localhost:9050 .
-forward-socks4a / localhost:9050 .
-EOF
+sudo echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
+sudo echo "forward-socks4 / localhost:9050 ." >> /etc/privoxy/config
+sudo echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
 
 # Enabling daemons and starting them for my main packages.
 sudo systemctl enable tor.service && sudo systemctl start tor.service
@@ -146,15 +136,15 @@ set ttyfast
 set encoding=utf8
 EOF
 
-# Setting the Windows 8 cursor by default.
+# Setting the Hackneyed cursor by default.
 mkdir -p -v ~/.icons/default
 cat > ~/.icons/default/index.theme <<EOF
 [icon theme] 
-Inherits=Windows8-cursor
+Inherits=Hackneyed
 EOF
 sudo cat > /usr/share/icons/default/index.theme <<EOF
 [icon theme] 
-Inherits=Windows8-cursor
+Inherits=Hackneyed
 EOF
 
 # Clear the console.
