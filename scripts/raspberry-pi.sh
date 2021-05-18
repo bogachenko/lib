@@ -29,7 +29,7 @@ localectl set-locale LANG="ru_RU.UTF-8"
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot qterminal pcmanfm-qt i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx gpicview xarchiver vlc qbittorrent noto-fonts-cjk xorg-xrdb speedtest-cli uget xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager
+pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot qterminal pcmanfm-qt i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx gpicview xarchiver vlc qbittorrent noto-fonts-cjk xorg-xrdb speedtest-cli uget xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -110,7 +110,7 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
-yaourt -S ttf-ms-win10 xcursor-hackneyed-light gksu
+yaourt -S xcursor-hackneyed-light kdesu ttf-ms-fonts
 
 # Downloading and installing Adguard Home.
 curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
@@ -126,6 +126,7 @@ sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
 sudo systemctl enable NetworkManager.service && sudo systemctl start NetworkManager.service
 sudo systemctl enable ModemManager.service && sudo systemctl start ModemManager.service
 sudo systemctl enable sddm.service && sudo systemctl start sddm.service
+sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
 
 # Fill in the information for GECOS.
 sudo chfn ${TELLUSER}
@@ -143,11 +144,11 @@ EOF
 # Setting the Hackneyed cursor by default.
 mkdir -p -v ~/.icons/default
 cat > ~/.icons/default/index.theme <<EOF
-[icon theme] 
+[Icon Theme] 
 Inherits=Hackneyed
 EOF
 sudo cat > /usr/share/icons/default/index.theme <<EOF
-[icon theme] 
+[Icon Theme] 
 Inherits=Hackneyed
 EOF
 
