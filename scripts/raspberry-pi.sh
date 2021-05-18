@@ -9,9 +9,6 @@ echo 'Hello, $USER'
 # Getting root permission.
 su
 
-# Refresh mirrors for Pacman.
-pacman-mirrors
-
 # Installing Russian localization for the system.
 cat > /etc/vconsole.conf <<EOF
 FONT=cyr-sun16
@@ -25,11 +22,14 @@ locale-gen
 setfont cyr-sun16
 localectl set-locale LANG="ru_RU.UTF-8"
 
+# Refresh mirrors for Pacman.
+pacman-mirrors
+
 # Updating repository data and installing updates.
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed git vim htop zip unzip unarj neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx gpicview xarchiver vlc qbittorrent noto-fonts-cjk xorg-xrdb speedtest-cli uget xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xfce4
+pacman -S --needed zsh git vim htop zip unzip unarj neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx gpicview xarchiver vlc qbittorrent noto-fonts-cjk xorg-xrdb speedtest-cli uget xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xfce4
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -42,6 +42,10 @@ EOF
 echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
 echo "forward-socks4 / localhost:9050 ." >> /etc/privoxy/config
 echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
+
+# Change the shell.
+chsh -s /bin/zsh ${TELLUSER}
+chsh -s /bin/zsh root
 
 # Exiting superuser mode.
 exit
