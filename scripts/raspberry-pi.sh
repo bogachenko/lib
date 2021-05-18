@@ -42,6 +42,42 @@ User=${TELLUSER}
 Session=i3.desktop
 EOF
 
+#
+cat > /etc/NetworkManager/system-connections/linux-wifi-hotspot.nmconnection <<EOF
+[connection]
+id=linux-wifi-hotspot
+uuid=313620c4-59ae-494d-9aa2-16541d1f0be4
+type=wifi
+interface-name=wlan0
+permissions=
+timestamp=1621310313
+ 
+[wifi]
+band=a
+cloned-mac-address=stable
+mac-address=E4:5F:01:00:E9:35
+mac-address-blacklist=
+mode=ap
+seen-bssids=FA:A3:DB:BB:0C:44;
+ssid=One-Two
+ 
+[wifi-security]
+key-mgmt=wpa-psk
+psk=Af35k767del37n!
+ 
+[ipv4]
+dns-search=
+method=shared
+ 
+[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+ip6-privacy=0
+method=shared
+ 
+[proxy]
+EOF
+
 # Exiting superuser mode.
 exit
 
