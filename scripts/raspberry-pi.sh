@@ -29,49 +29,13 @@ localectl set-locale LANG="ru_RU.UTF-8"
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed git vim htop zip unzip unarj neofetch hostapd dnsmasq net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot qterminal pcmanfm-qt i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx gpicview xarchiver vlc qbittorrent noto-fonts-cjk xorg-xrdb speedtest-cli uget xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd
+pacman -S --needed git vim htop zip unzip unarj neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx gpicview xarchiver vlc qbittorrent noto-fonts-cjk xorg-xrdb speedtest-cli uget xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xfce4
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
 [Autologin]
 User=${TELLUSER}
 Session=i3.desktop
-EOF
-
-# Create the WIFI-hotspot.
-cat > /etc/NetworkManager/system-connections/linux-wifi-hotspot.nmconnection <<EOF
-[connection]
-id=linux-wifi-hotspot
-uuid=313620c4-59ae-494d-9aa2-16541d1f0be4
-type=wifi
-interface-name=wlan0
-permissions=
-timestamp=1621310313
- 
-[wifi]
-band=a
-cloned-mac-address=stable
-mac-address=E4:5F:01:00:E9:35
-mac-address-blacklist=
-mode=ap
-seen-bssids=FA:A3:DB:BB:0C:44;
-ssid=One-Two
- 
-[wifi-security]
-key-mgmt=wpa-psk
-psk=Af35k767del37n!
- 
-[ipv4]
-dns-search=
-method=shared
- 
-[ipv6]
-addr-gen-mode=stable-privacy
-dns-search=
-ip6-privacy=0
-method=shared
- 
-[proxy]
 EOF
 
 # Convert SOCKS to HTTP proxy via Privoxy.
@@ -110,19 +74,16 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
-yaourt -S xcursor-hackneyed-light kdesu ttf-ms-fonts
+yaourt -S windows8-cursor gksu ttf-ms-fonts
 
 # Downloading and installing Adguard Home.
-curl -sSL https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh
-clear
+curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 
 # Enabling daemons and starting them for my main packages.
 sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
-sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
-sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
 sudo systemctl enable NetworkManager.service && sudo systemctl start NetworkManager.service
 sudo systemctl enable ModemManager.service && sudo systemctl start ModemManager.service
 sudo systemctl enable sddm.service && sudo systemctl start sddm.service
@@ -145,11 +106,11 @@ EOF
 mkdir -p -v ~/.icons/default
 cat > ~/.icons/default/index.theme <<EOF
 [Icon Theme] 
-Inherits=Hackneyed
+Inherits=Windows8-cursor
 EOF
 sudo cat > /usr/share/icons/default/index.theme <<EOF
 [Icon Theme] 
-Inherits=Hackneyed
+Inherits=Windows8-cursor
 EOF
 
 # Clear the console.
