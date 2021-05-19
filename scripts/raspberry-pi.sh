@@ -29,7 +29,7 @@ pacman-mirrors
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed zsh git vim htop zip unzip unarj neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers xorg-server xorg-apps ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli uget xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xfce4
+pacman -S --needed zsh git vim htop zip unzip unarj neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers xorg-server xorg-apps ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli uget xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xfce4 network-manager-applet xdg-utils xautolock xfce4-pulseaudio-plugin xfce4-xkb-plugin pavucontrol
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -78,7 +78,7 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
-yaourt -S windows8-cursor gksu ttf-ms-fonts
+yaourt -S windows8-cursor ttf-ms-fonts xfce-theme-greybird
 
 # Downloading and installing Adguard Home.
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
