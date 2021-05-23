@@ -98,8 +98,8 @@ yaourt -S windows8-cursor
 
 # Installing my user.js file in Firefox.
 cd /tmp
-curl -s -S -L https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
-mv /tmp/firefox-user.js ~/.mozilla/firefox/${TELLUSER}/user.js
+curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
+mv /tmp/user.js ~/.mozilla/firefox/${TELLUSER}/user.js
 
 # Downloading and installing Adguard Home.
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
