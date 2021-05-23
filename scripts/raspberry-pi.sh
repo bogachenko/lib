@@ -22,9 +22,6 @@ locale-gen
 setfont cyr-sun16
 localectl set-locale LANG="ru_RU.UTF-8"
 
-# 
-# /etc/X11/xorg.conf.d/00-keyboard.conf
-
 # Refresh mirrors for Pacman.
 pacman-mirrors
 
@@ -32,7 +29,7 @@ pacman-mirrors
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils
+pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono urxvt-perls
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -63,8 +60,28 @@ Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
 Xft.autohint: false
-Xft.hintstyle: hintslight
+Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.clipboard.autocopy: true
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.scrollBar: false
+URxvt.background: #000000
+URxvt.foreground: #ffffff
+URxvt.font: xft:Fira Mono:regular:size=10
+URxvt.boldFont: xft:Fira Mono:bold:size=10
+URxvt.italicFont: xft:Fira Mono:italic:size=10
+URxvt.boldItalicFont: xft:Fira Mono:bold:italic:size=10
+URxvt.geometry: 150x30
+URxvt.scrollTtyOutput: false
+URxvt.cursorBlink: true
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select,matcher
+URxvt.url-select.launcher: firefox
+URxvt.url-select.underline: true
+URxvt.matcher.button: 1
 EOF
 xrdb -merge ~/.Xresources
 
