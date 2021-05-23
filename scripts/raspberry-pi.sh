@@ -22,6 +22,9 @@ locale-gen
 setfont cyr-sun16
 localectl set-locale LANG="ru_RU.UTF-8"
 
+# 
+# /etc/X11/xorg.conf.d/00-keyboard.conf
+
 # Refresh mirrors for Pacman.
 pacman-mirrors
 
@@ -29,7 +32,7 @@ pacman-mirrors
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed zsh git vim htop zip unzip unarj neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-croscore ttf-dejavu ttf-bitstream-vera netctl gparted p7zip unrar openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli uget xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xfce4 network-manager-applet xdg-utils xautolock xfce4-pulseaudio-plugin xfce4-xkb-plugin pavucontrol hostapd xorg-apps dnsmasq
+pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
