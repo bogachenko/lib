@@ -51,6 +51,9 @@ user_pref("browser.urlbar.suggest.history", false);
 user_pref("browser.urlbar.suggest.bookmark", false);
 user_pref("browser.urlbar.suggest.openpage", false);
 user_pref("browser.urlbar.suggest.searches", false);
+user_pref("browser.urlbar.suggest.engines", false);
+user_pref("browser.urlbar.suggest.topsites", false);
+user_pref("browser.urlbar.suggest.quicksuggest", false);
 user_pref("browser.urlbar.delay", 0);
 
 // Remember the search history and form data
@@ -461,10 +464,6 @@ user_pref("layout.css.visited_links_enabled", false);
 // Closing Firefox when closing the last tab
 // Закрытие Firefox при закрытии последней вкладки
 user_pref("browser.tabs.closeWindowWithLastTab", false);
-
-// Private browsing mode
-// Режим приватного просмотра
-user_pref("browser.privatebrowsing.autostart", true);
 
 // Preloading documents or resources specified via <link rel = "preload">
 // Предзагрузка документов или ресурсов, указанных через <link rel="preload">
