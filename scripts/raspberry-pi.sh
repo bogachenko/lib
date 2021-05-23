@@ -29,7 +29,7 @@ pacman-mirrors
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono urxvt-perls
+pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -78,10 +78,6 @@ URxvt.boldItalicFont: xft:Fira Mono:bold:italic:size=10
 URxvt.geometry: 150x30
 URxvt.scrollTtyOutput: false
 URxvt.cursorBlink: true
-URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select,matcher
-URxvt.url-select.launcher: firefox
-URxvt.url-select.underline: true
-URxvt.matcher.button: 1
 EOF
 xrdb -merge ~/.Xresources
 
@@ -98,7 +94,12 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
-yaourt -S windows8-cursor ttf-ms-fonts
+yaourt -S windows8-cursor
+
+# Installing my user.js file in Firefox.
+cd /tmp
+curl -s -S -L https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
+mv /tmp/firefox-user.js ~/.mozilla/firefox/${TELLUSER}/user.js
 
 # Downloading and installing Adguard Home.
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
