@@ -21,6 +21,16 @@ EOF
 locale-gen
 setfont cyr-sun16
 localectl set-locale LANG="ru_RU.UTF-8"
+sudo cat > /etc/X11/xorg.conf.d/00-keyboard.conf <<EOF
+Section "InputClass"
+        Identifier "system-keyboard"
+        MatchIsKeyboard "on"
+        Option "XkbLayout" "us,ru"
+        Option "XkbModel" "pc105"
+        Option "XkbVariant" "dvorak,"
+        Option "XkbOptions" "grp:alt_shift_toggle"
+EndSection
+EOF
 
 # Refresh mirrors for Pacman.
 pacman-mirrors
@@ -29,7 +39,7 @@ pacman-mirrors
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl thunderbird qmmp pcmanfm-qt
+pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl thunderbird qmmp pcmanfm-qt python2 python3
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -94,7 +104,7 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
-yaourt -S windows8-cursor
+yaourt -S xcursor-simp1e
 
 # Installing my user.js file in Firefox.
 cd /tmp
@@ -129,25 +139,33 @@ set wrap
 set ttyfast
 set encoding=utf8
 EOF
+sudo cat > /root/.vimrc <<EOF
+set number
+syntax on
+set noswapfile
+set wrap
+set ttyfast
+set encoding=utf8
+EOF
 
 # Setting the Hackneyed cursor by default.
 mkdir -p -v ~/.icons/default
 cat > ~/.icons/default/index.theme <<EOF
 [Icon Theme] 
-Inherits=Windows8-cursor
+Inherits=Simp1e
 EOF
 sudo cat > /usr/share/icons/default/index.theme <<EOF
 [Icon Theme] 
-Inherits=Windows8-cursor
+Inherits=Simp1e
 EOF
 
 # ZSH Generator.
 cat > ~/.zshrc <<EOF
-PROMPT="%n%F{10}$%f "
+PROMPT="%F{10}%n$%f "
 RPROMPT="%d"
 EOF
 sudo cat > /root/.zshrc <<EOF
-PROMPT="%n%F{9}$%f "
+PROMPT="%F{9}%n$%f "
 RPROMPT="%d"
 EOF
 
