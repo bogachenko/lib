@@ -29,7 +29,7 @@ pacman-mirrors
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax
+pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl thunderbird qmmp
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -113,7 +113,9 @@ sudo systemctl enable NetworkManager.service && sudo systemctl start NetworkMana
 sudo systemctl enable ModemManager.service && sudo systemctl start ModemManager.service
 sudo systemctl enable sddm.service && sudo systemctl start sddm.service
 sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
-sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
+#sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
+#sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
+sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
 
 # Fill in the information for GECOS.
 sudo chfn ${TELLUSER}
