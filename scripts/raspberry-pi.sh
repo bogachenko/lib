@@ -39,7 +39,7 @@ pacman-mirrors
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl thunderbird qmmp pcmanfm-qt python2 python create_ap
+pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl thunderbird qmmp pcmanfm-qt python2 python create_ap ttf-carlito ttf-caladea ttf-croscore
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -104,7 +104,7 @@ cd ..
 sudo rm -dR yaourt/ package-query/
 
 # Installing main packages from yaourt repository 
-yaourt -S xcursor-simp1e
+yaourt -S mocu-xcursor
 
 # Installing my user.js file in Firefox.
 cd /tmp
@@ -150,11 +150,11 @@ EOF
 mkdir -p -v ~/.icons/default
 cat > ~/.icons/default/index.theme <<EOF
 [Icon Theme] 
-Inherits=Simp1e
+Inherits=Mocu-White-Right
 EOF
 sudo cat > /usr/share/icons/default/index.theme <<EOF
 [Icon Theme] 
-Inherits=Simp1e
+Inherits=Mocu-White-Right
 EOF
 
 # ZSH Generator.
@@ -163,12 +163,16 @@ PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
 export BROWSER="firefox"
 export EDITOR="vim"
 alias ls='ls -ls'
-alias
+alias reboot='sudo reboot'
+alias updxres='xrdb -merge ~/.Xresources'
 EOF
 sudo cat > /root/.zshrc <<EOF
-PROMPT="%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f$ "
+PROMPT="%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# "
 export BROWSER="firefox"
 export EDITOR="vim"
+alias ls='ls -ls'
+alias reboot='sudo reboot'
+alias updxres='xrdb -merge ~/.Xresources'
 EOF
 
 # Removing debris.
