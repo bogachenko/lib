@@ -39,7 +39,7 @@ pacman-mirrors
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji modemmanager usb_modeswitch crda sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient nm-connection-editor alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 networkmanager dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl thunderbird qmmp pcmanfm-qt python2 python
+pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl thunderbird qmmp pcmanfm-qt python2 python create_ap
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -66,11 +66,11 @@ xdg-user-dirs-update
 # Configuring the Xresources file.
 cat > ~/.Xresources <<EOF
 Xft.dpi: 96
-Xft.antialias: true
-Xft.hinting: true
+Xft.antialias: 1
+Xft.hinting: 1
 Xft.rgba: rgb
-Xft.autohint: false
-Xft.hintstyle: hintfull
+Xft.autohint: 0
+Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
 URxvt.iso14755: false
@@ -119,12 +119,10 @@ sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
-sudo systemctl enable NetworkManager.service && sudo systemctl start NetworkManager.service
-sudo systemctl enable ModemManager.service && sudo systemctl start ModemManager.service
 sudo systemctl enable sddm.service && sudo systemctl start sddm.service
 sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
-#sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
-#sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
+sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
+sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
 
 # Fill in the information for GECOS.
@@ -161,14 +159,14 @@ EOF
 
 # ZSH Generator.
 cat > ~/.zshrc <<EOF
-PROMPT="%F{10}%n$%f "
-RPROMPT="%d"
+PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
 export BROWSER="firefox"
 export EDITOR="vim"
+alias ls='ls -ls'
+alias
 EOF
 sudo cat > /root/.zshrc <<EOF
-PROMPT="%F{9}%n$%f "
-RPROMPT="%d"
+PROMPT="%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f$ "
 export BROWSER="firefox"
 export EDITOR="vim"
 EOF
