@@ -3,7 +3,7 @@
 # Raspberry Pi
 # Manjaro ARM Linux aarch64
 
-TELLUSER='bogachenko'
+TELLUSER=$(echo $USER)
 
 # Getting root permission.
 su
