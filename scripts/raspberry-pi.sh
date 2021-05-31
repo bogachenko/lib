@@ -91,7 +91,7 @@ URxvt.cursorBlink: true
 EOF
 xrdb -merge ~/.Xresources
 
-# Installing yaourt.
+# Installing the AUR repository.
 cd /tmp
 git clone https://aur.archlinux.org/package-query.git
 cd package-query/
@@ -102,6 +102,12 @@ cd yaourt/
 makepkg -si
 cd ..
 sudo rm -dR yaourt/ package-query/
+
+# Installing the BlackArch repository.
+curl -O https://blackarch.org/strap.sh
+chmod +x strap.sh
+sudo ./strap.sh
+sudo pacman -Syu
 
 # Installing main packages from yaourt repository 
 yaourt -S mocu-xcursor
