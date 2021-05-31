@@ -3,8 +3,7 @@
 # Raspberry Pi
 # Manjaro ARM Linux aarch64
 
-TELLUSER='echo $USER'
-echo 'Hello, $USER'
+TELLUSER='bogachenko'
 
 # Getting root permission.
 su
@@ -44,7 +43,7 @@ pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
 [Autologin]
-User=${TELLUSER}
+User=$TELLUSER
 Session=i3.desktop
 EOF
 
@@ -54,7 +53,7 @@ echo "forward-socks4 / localhost:9050 ." >> /etc/privoxy/config
 echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
 
 # Change the shell.
-chsh -s /bin/zsh ${TELLUSER}
+chsh -s /bin/zsh $TELLUSER
 chsh -s /bin/zsh root
 
 # Exiting superuser mode.
@@ -118,7 +117,7 @@ sudo pacman -S 42zip
 # Installing my user.js file in Firefox.
 cd /tmp
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
-mv /tmp/user.js ~/.mozilla/firefox/${TELLUSER}/user.js
+mv /tmp/user.js ~/.mozilla/firefox/$TELLUSER/user.js
 
 # Downloading and installing Adguard Home.
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
@@ -135,7 +134,7 @@ sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
 
 # Fill in the information for GECOS.
-sudo chfn ${TELLUSER}
+sudo chfn $TELLUSER
 
 # Setting up the configuration for my VIM
 cat > ~/.vimrc <<EOF
