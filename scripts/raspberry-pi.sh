@@ -168,7 +168,7 @@ cat > ~/.zshrc <<EOF
 PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
 export BROWSER="firefox"
 export EDITOR="vim"
-alias ls='ls -ls'
+alias ls='ls -la'
 alias reboot='sudo reboot'
 alias updxres='xrdb -merge ~/.Xresources'
 EOF
@@ -176,7 +176,7 @@ sudo cat > /root/.zshrc <<EOF
 PROMPT="%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# "
 export BROWSER="firefox"
 export EDITOR="vim"
-alias ls='ls -ls'
+alias ls='ls -la'
 alias reboot='sudo reboot'
 alias updxres='xrdb -merge ~/.Xresources'
 EOF
