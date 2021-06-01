@@ -10,7 +10,7 @@ su
 
 # Installing Russian localization for the system.
 cat > /etc/vconsole.conf <<EOF
-FONT=cyr-sun16
+FONT=ter-k16n
 KEYMAP=ru
 EOF
 cat > /etc/locale.gen <<EOF
@@ -18,7 +18,7 @@ ru_RU.UTF-8 UTF-8
 en_US.UTF-8 UTF-8
 EOF
 locale-gen
-setfont cyr-sun16
+setfont ter-k16n
 localectl set-locale LANG="ru_RU.UTF-8"
 sudo cat > /etc/X11/xorg.conf.d/00-keyboard.conf <<EOF
 Section "InputClass"
@@ -38,7 +38,7 @@ pacman-mirrors
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl thunderbird qmmp pcmanfm-qt python2 python create_ap ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs
+pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl thunderbird qmmp pcmanfm-qt python2 python create_ap ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -173,13 +173,14 @@ export EDITOR="vim"
 alias ls='ls -la'
 alias reboot='sudo reboot'
 alias updxres='xrdb -merge ~/.Xresources'
+alias pac='pacman'
 EOF
 sudo cat > /root/.zshrc <<EOF
 PROMPT="%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# "
 export BROWSER="firefox"
 export EDITOR="vim"
 alias ls='ls -la'
-alias updxres='xrdb -merge ~/.Xresources'
+alias pac='pacman'
 EOF
 
 # Removing debris.
