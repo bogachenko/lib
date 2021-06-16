@@ -50,18 +50,24 @@ cat > /usr/share/gtk-2.0/gtkrc <<EOF
 gtk-icon-theme-name = "Papirus"
 gtk-theme-name = "Adwaita"
 gtk-font-name = "Noto Sans 9"
+gtk-menu-images=0
+gtk-button-images=0
 EOF
 cat > /usr/share/gtk-3.0/settings.ini <<EOF
 [Settings]
 gtk-icon-theme-name = Papirus
 gtk-theme-name = Adwaita
 gtk-font-name = Noto Sans 9
+gtk-menu-images=0
+gtk-button-images=0
 EOF
 cat > /usr/share/gtk-4.0/settings.ini <<EOF
 [Settings]
 gtk-icon-theme-name = Papirus
 gtk-theme-name = Adwaita
 gtk-font-name = Noto Sans 9
+gtk-menu-images=0
+gtk-button-images=0
 EOF
 
 # Automatic login.
@@ -203,7 +209,12 @@ alias ls='ls -la'
 alias reboot='sudo reboot'
 alias updxres='xrdb -merge ~/.Xresources'
 alias pac='pacman'
-alias updatesystem='sudo pacman -Syu && yaourt -Syua'
+alias updatesystem='sudo pacman -Syu'
+alias vi='vim'
+alias tarzip='unzip'
+alias tarx='tar -xvf'
+alias targz='tar -zxvf'
+alias tarbz2='tar -jxvf'
 EOF
 sudo cat > /root/.zshrc <<EOF
 PROMPT="%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# "
@@ -214,6 +225,11 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 alias ls='ls -la'
 alias pac='pacman'
 alias updatesystem='pacman -Syu'
+alias vi='vim'
+alias tarzip='unzip'
+alias tarx='tar -xvf'
+alias targz='tar -zxvf'
+alias tarbz2='tar -jxvf'
 EOF
 
 # Removing debris.
