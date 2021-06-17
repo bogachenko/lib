@@ -5,6 +5,9 @@
 
 TELLUSER=$(echo $USER)
 
+# Clear the console.
+clear
+
 # Getting root permission.
 su
 
@@ -33,16 +36,7 @@ EOF
 
 # Refresh mirrors for Pacman.
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-cat > /etc/pacman.d/mirrorlist <<EOF
-Server = http://mirror.truenetwork.ru/mirrors/manjaro/arm-stable/$repo/$arch
-Server = https://mirror.truenetwork.ru/mirrors/manjaro/arm-stable/$repo/$arch
-Server = http://mirror.yandex.ru/mirrors/manjaro/arm-stable/$repo/$arch
-Server = https://mirror.yandex.ru/mirrors/manjaro/arm-stable/$repo/$arch
-Server = http://mirror.surf/manjaro/arm-stable/$repo/$arch
-Server = https://mirror.surf/manjaro/arm-stable/$repo/$arch
-Server = http://mirror.nw-sys.ru/manjaro/arm-stable/$repo/$arch
-Server = https://mirror.nw-sys.ru/manjaro/arm-stable/$repo/$arch
-EOF
+pacman-mirrors --country Russia
 pacman-mirrors
 
 # Updating repository data and installing updates.
@@ -240,3 +234,6 @@ sudo paccache -r
 
 # Clear the console.
 clear
+
+# Reboot
+sudo reboot
