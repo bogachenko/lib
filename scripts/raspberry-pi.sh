@@ -34,8 +34,14 @@ EOF
 # Refresh mirrors for Pacman.
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 cat > /etc/pacman.d/mirrorlist <<EOF
-Server = https://mirror.yandex.ru/mirrors/manjaro/arm-stable/$repo/$arch
+Server = http://mirror.truenetwork.ru/mirrors/manjaro/arm-stable/$repo/$arch
 Server = https://mirror.truenetwork.ru/mirrors/manjaro/arm-stable/$repo/$arch
+Server = http://mirror.yandex.ru/mirrors/manjaro/arm-stable/$repo/$arch
+Server = https://mirror.yandex.ru/mirrors/manjaro/arm-stable/$repo/$arch
+Server = http://mirror.surf/manjaro/arm-stable/$repo/$arch
+Server = https://mirror.surf/manjaro/arm-stable/$repo/$arch
+Server = http://mirror.nw-sys.ru/manjaro/arm-stable/$repo/$arch
+Server = https://mirror.nw-sys.ru/manjaro/arm-stable/$repo/$arch
 EOF
 pacman-mirrors
 
@@ -43,7 +49,7 @@ pacman-mirrors
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs atril gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl thunderbird qmmp pcmanfm-qt python2 python create_ap ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos papirus-icon-theme qt5ct pwgen imagemagick dunst
+pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl pcmanfm-qt python2 python create_ap ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen imagemagick dunst libjpeg-turbo capitaine-cursors breeze-icons
 
 # Installing the theme.
 cat > /usr/share/gtk-2.0/gtkrc <<EOF
@@ -142,7 +148,7 @@ yaourt -Syua
 sudo pacman -Syu
 
 # Installing main packages from the AUR repository.
-yaourt -S mocu-xcursor peerflix
+yaourt -S peerflix
 
 # Installing main packages from the BlackArch repository.
 sudo pacman -S 42zip
@@ -191,11 +197,11 @@ EOF
 mkdir -p -v ~/.icons/default
 cat > ~/.icons/default/index.theme <<EOF
 [Icon Theme] 
-Inherits=Mocu-White-Right
+Inherits=capitaine-cursors-light
 EOF
 sudo cat > /usr/share/icons/default/index.theme <<EOF
 [Icon Theme] 
-Inherits=Mocu-White-Right
+Inherits=capitaine-cursors-light
 EOF
 
 # ZSH Generator.
@@ -233,7 +239,7 @@ alias tarbz2='tar -jxvf'
 EOF
 
 # Removing debris.
-sudo rm -rf /root/.bash_history /root/.bashrc /root/.bash_logout ~/.bashrc ~/.bash_history ~/.bash_logout ~/.cache/thumbnails
+sudo rm -rf /root/.bash_history /root/.bashrc /root/.bash_logout /root/.bash_profile ~/.bashrc ~/.bash_history ~/.bash_logout ~/.cache/thumbnails ~/.bash_profile
 sudo pacman -Scc
 sudo paccache -r
 
