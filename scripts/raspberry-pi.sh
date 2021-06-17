@@ -26,7 +26,7 @@ Section "InputClass"
         MatchIsKeyboard "on"
         Option "XkbLayout" "us,ru"
         Option "XkbModel" "pc105"
-        Option "XkbVariant" "dvorak,"
+        Option "XkbVariant" ""
         Option "XkbOptions" "grp:alt_shift_toggle"
 EndSection
 EOF
@@ -81,6 +81,12 @@ cat > /etc/sddm.conf <<EOF
 [Autologin]
 User=$TELLUSER
 Session=i3.desktop
+EOF
+
+# Setting the Hackneyed cursor by default.
+cat > /usr/share/icons/default/index.theme <<EOF
+[Icon Theme] 
+Inherits=capitaine-cursors-light
 EOF
 
 # Convert SOCKS to HTTP proxy via Privoxy.
@@ -191,17 +197,6 @@ set noswapfile
 set wrap
 set ttyfast
 set encoding=utf8
-EOF
-
-# Setting the Hackneyed cursor by default.
-mkdir -p -v ~/.icons/default
-cat > ~/.icons/default/index.theme <<EOF
-[Icon Theme] 
-Inherits=capitaine-cursors-light
-EOF
-sudo cat > /usr/share/icons/default/index.theme <<EOF
-[Icon Theme] 
-Inherits=capitaine-cursors-light
 EOF
 
 # ZSH Generator.
