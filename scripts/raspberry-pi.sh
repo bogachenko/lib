@@ -74,6 +74,9 @@ gtk-font-name = Noto Sans 9
 gtk-menu-images=0
 gtk-button-images=0
 EOF
+cp /usr/share/gtk-2.0/gtkrc ~/.gtkrc-2.0
+cp /usr/share/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
+cp /usr/share/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini
 
 # Automatic login.
 cat > /etc/sddm.conf <<EOF
@@ -189,14 +192,7 @@ set wrap
 set ttyfast
 set encoding=utf8
 EOF
-sudo cat > /root/.vimrc <<EOF
-set number
-syntax on
-set noswapfile
-set wrap
-set ttyfast
-set encoding=utf8
-EOF
+sudo cp ~/.vimrc /root/.vimrc
 
 # ZSH Generator.
 cat > ~/.zshrc <<EOF
