@@ -47,7 +47,7 @@ pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf
 
 # Installing the theme.
 cat > /usr/share/gtk-2.0/gtkrc <<EOF
-gtk-icon-theme-name = "Papirus"
+gtk-icon-theme-name = "Breeze"
 gtk-theme-name = "Adwaita"
 gtk-font-name = "Noto Sans 9"
 gtk-menu-images=0
@@ -55,7 +55,7 @@ gtk-button-images=0
 EOF
 cat > /usr/share/gtk-3.0/settings.ini <<EOF
 [Settings]
-gtk-icon-theme-name = Papirus
+gtk-icon-theme-name = Breeze
 gtk-theme-name = Adwaita
 gtk-font-name = Noto Sans 9
 gtk-menu-images=0
@@ -63,7 +63,7 @@ gtk-button-images=0
 EOF
 cat > /usr/share/gtk-4.0/settings.ini <<EOF
 [Settings]
-gtk-icon-theme-name = Papirus
+gtk-icon-theme-name = Breeze
 gtk-theme-name = Adwaita
 gtk-font-name = Noto Sans 9
 gtk-menu-images=0
