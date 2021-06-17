@@ -37,7 +37,6 @@ EOF
 # Refresh mirrors for Pacman.
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 pacman-mirrors --country Russia
-pacman-mirrors
 
 # Updating repository data and installing updates.
 pacman -Syyuu
@@ -74,6 +73,8 @@ gtk-font-name = Noto Sans 9
 gtk-menu-images=0
 gtk-button-images=0
 EOF
+mkdir -p ~/.config/gtk-{4.0,5.0}/
+chown $TELLUSER:$TELLUSER ~/.config/gtk-{4.0,5.0}/
 cp /usr/share/gtk-2.0/gtkrc ~/.gtkrc-2.0
 cp /usr/share/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
 cp /usr/share/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini
