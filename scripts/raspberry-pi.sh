@@ -42,7 +42,7 @@ pacman-mirrors --country Russia
 pacman -Syyuu
 
 # Installing main packages.
-pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl pcmanfm-qt python2 python create_ap ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen imagemagick dunst libjpeg-turbo capitaine-cursors breeze-icons chromium yajl
+pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock pavucontrol hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-untils ttf-fira-code ttf-fira-mono mathjax youtube-dl pcmanfm-qt python2 python create_ap ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen imagemagick dunst libjpeg-turbo capitaine-cursors breeze-icons chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa
 
 # Setting a parameter for QT.
 cat > /etc/environment <<EOF
@@ -375,9 +375,11 @@ sudo cp ~/.vimrc /root/.vimrc
 # ZSH Generator.
 cat > ~/.zshrc <<EOF
 PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
+
 export BROWSER="firefox"
 export EDITOR="vim"
 export XDG_CONFIG_HOME="$HOME/.config"
+
 alias ls='ls -la'
 alias reboot='sudo reboot'
 alias updxres='xrdb -merge ~/.Xresources'
@@ -385,29 +387,27 @@ alias pac='pacman'
 alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
 alias updsys='sudo pacman -Syu'
 alias vi='vim'
-alias tarzip='unzip'
-alias tarx='tar -xvf'
-alias targz='tar -zxvf'
-alias tarbz2='tar -jxvf'
+alias c="clear"
+
 EOF
 sudo cat > /root/.zshrc <<EOF
 PROMPT="%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# "
+
 export BROWSER="firefox"
 export EDITOR="vim"
 export XDG_CONFIG_HOME="$HOME/.config"
+
 alias ls='ls -la'
 alias pac='pacman'
 alias unlockpac='rm -f /var/lib/pacman/db.lck'
 alias updsys='pacman -Syu'
 alias vi='vim'
-alias tarzip='unzip'
-alias tarx='tar -xvf'
-alias targz='tar -zxvf'
-alias tarbz2='tar -jxvf'
+alias c="clear"
+
 EOF
 
 # Removing debris.
-sudo rm -rf /root/.bash_history /root/.bashrc /root/.bash_logout /root/.bash_profile ~/.bashrc ~/.bash_history ~/.bash_logout ~/.cache/thumbnails ~/.bash_profile
+sudo rm -rf /root/.bash_history /root/.bashrc /root/.bash_logout /root/.bash_profile /root/.bash_functions /root/.bash_aliases ~/.bashrc ~/.bash_history ~/.bash_logout ~/.cache/thumbnails ~/.bash_profile ~/.bash_functions ~/.bash_aliases
 sudo pacman -Scc
 sudo paccache -r
 
