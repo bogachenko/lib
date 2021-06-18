@@ -383,7 +383,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 alias ls='ls -la'
 alias reboot='sudo reboot'
-alias updxres='xrdb -merge ~/.Xresources'
+alias updXres='xrdb -merge ~/.Xresources'
 alias pac='pacman'
 alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
 alias updsys='sudo pacman -Syu'
@@ -408,10 +408,9 @@ alias c="clear"
 EOF
 
 # Removing debris.
-sudo rm -rf /root/.bash_history /root/.bashrc /root/.bash_logout /root/.bash_profile /root/.bash_functions /root/.bash_aliases ~/.bashrc ~/.bash_history ~/.bash_logout ~/.cache/thumbnails ~/.bash_profile ~/.bash_functions ~/.bash_aliases
+sudo rm -rf /root/.bash_history /root/.bashrc /root/.bash_logout /root/.bash_profile /root/.bash_functions /root/.bash_aliases ~/.bashrc ~/.bash_history ~/.bash_logout ~/.cache/thumbnails ~/.bash_profile ~/.bash_functions ~/.bash_aliases /tmp/*
 sudo pacman -Scc
 sudo paccache -r
-sudo rm -rf /tmp/*
 
 # Clear the console.
 clear
