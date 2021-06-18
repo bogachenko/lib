@@ -209,7 +209,11 @@ sudo chfn $TELLUSER
 mkdir -p ~/.config/i3status
 cat > ~/.config/i3status/config <<EOF
 general {
+        output_format = "i3bar"
         colors = true
+        color_good = "#00FF00"
+        color_degraded = "#FFFF00"
+        color_bad = "#FF0000"
         interval = 1
 }
 
@@ -336,6 +340,17 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 bar {
         status_command i3status
+colors {
+    background #000000
+    statusline #FFFFFF
+    separator  #666666
+
+    focused_workspace  #4C7899 #285577 #FFFFFF
+    active_workspace   #333333 #222222 #FFFFFF
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace   #2F343A #900000 #FFFFFF
+    binding_mode       #2F343A #900000 #FFFFFF
+        }
 }
 exec_always --no-startup-id xsetroot -solid "#003760"
 EOF
