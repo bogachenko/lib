@@ -61,8 +61,8 @@ gtk-enable-event-sounds=0
 gtk-enable-input-feedback-sounds=0
 gtk-xft-antialias=1
 gtk-xft-hinting=1
-gtk-xft-hintstyle=hintslight
-gtk-xft-rgba=rgb
+gtk-xft-hintstyle="hintslight"
+gtk-xft-rgba="rgb"
 EOF
 cat > /usr/share/gtk-3.0/settings.ini <<EOF
 [Settings]
@@ -76,8 +76,8 @@ gtk-enable-event-sounds=0
 gtk-enable-input-feedback-sounds=0
 gtk-xft-antialias=1
 gtk-xft-hinting=1
-gtk-xft-hintstyle="hintslight"
-gtk-xft-rgba="rgb"
+gtk-xft-hintstyle=hintslight
+gtk-xft-rgba=rgb
 EOF
 cat > /usr/share/gtk-4.0/settings.ini <<EOF
 [Settings]
