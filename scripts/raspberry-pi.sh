@@ -175,7 +175,6 @@ sudo ./strap.sh
 
 # Updating system data.
 yaourt -Syua
-sudo pacman -Syu
 
 # Installing main packages from the AUR repository.
 yaourt -S peerflix
@@ -384,8 +383,8 @@ alias pac='pacman'
 alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
 alias updsys='sudo pacman -Syu'
 alias vi='vim'
-alias c="clear"
-alias wifi-router="sudo create_ap --daemon --country RU --driver nl80211 wlan0 eth0 bogachenko N7GZiMD!2ZTaZWYj0mLV"
+alias c='clear'
+alias wifi-router='sudo create_ap wlan0 eth0 bogachenko N7GZiMD!2ZTaZWYj0mLV'
 
 EOF
 sudo cat > /root/.zshrc <<EOF
@@ -400,7 +399,8 @@ alias pac='pacman'
 alias unlockpac='rm -f /var/lib/pacman/db.lck'
 alias updsys='pacman -Syu'
 alias vi='vim'
-alias c="clear"
+alias c='clear'
+alias wifi-router='create_ap wlan0 eth0 bogachenko N7GZiMD!2ZTaZWYj0mLV'
 
 EOF
 
