@@ -180,9 +180,6 @@ sudo pacman -Syu
 # Installing main packages from the AUR repository.
 yaourt -S peerflix
 
-# Installing main packages from the BlackArch repository.
-sudo pacman -S 42zip
-
 # Installing my user.js file in Firefox.
 cd /tmp
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
@@ -388,6 +385,7 @@ alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
 alias updsys='sudo pacman -Syu'
 alias vi='vim'
 alias c="clear"
+alias wifi-router="sudo create_ap --daemon --country RU --driver nl80211 wlan0 eth0 bogachenko N7GZiMD!2ZTaZWYj0mLV"
 
 EOF
 sudo cat > /root/.zshrc <<EOF
