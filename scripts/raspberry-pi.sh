@@ -379,13 +379,12 @@ export XDG_CONFIG_HOME="$HOME/.config"
 alias ls='ls -la'
 alias reboot='sudo reboot'
 alias updXres='xrdb -merge ~/.Xresources'
-alias pac='sudo pacman'
 alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
-alias updsys='sudo pacman -Syu'
 alias vi='vim'
 alias c='clear'
-alias wifi-router='sudo create_ap wlan0 eth0 localhost N7GZiMD!2ZTaZWYj0mLV'
-alias code="code --user-data-dir /home/$TELLUSER/.config/Code/"
+alias wifi-router='sudo create_ap --daemon wlan0 eth0 localhost N7GZiMD!2ZTaZWYj0mLV'
+alias code='code --user-data-dir /home/$TELLUSER/.config/Code/'
+alias sysctl='systemctl'
 
 EOF
 sudo cat > /root/.zshrc <<EOF
@@ -396,13 +395,12 @@ export EDITOR="vim"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 alias ls='ls -la'
-alias pac='pacman'
 alias unlockpac='rm -f /var/lib/pacman/db.lck'
-alias updsys='pacman -Syu'
 alias vi='vim'
 alias c='clear'
-alias wifi-router='create_ap wlan0 eth0 localhost N7GZiMD!2ZTaZWYj0mLV'
-alias code="code --user-data-dir /home/$TELLUSER/.config/Code/"
+alias wifi-router='create_ap --daemon wlan0 eth0 localhost N7GZiMD!2ZTaZWYj0mLV'
+alias code='code --user-data-dir /home/$TELLUSER/.config/Code/'
+alias sysctl='systemctl'
 
 EOF
 
