@@ -5,6 +5,7 @@
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
 TELLUSER=$(echo $USER)
+PASSWD='N7GZiMD!2ZTaZWYj0mLV'
 
 # Clear the console.
 clear
@@ -158,7 +159,7 @@ auth_algs=1
 wpa=2
 wpa_key_mgmt=WPA-PSK  
 rsn_pairwise=CCMP
-wpa_passphrase=N7GZiMD!2ZTaZWYj0mLV
+wpa_passphrase=$PASSWD
 EOF
 
 # Exiting superuser mode.
@@ -232,8 +233,8 @@ sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
 sudo systemctl enable sddm.service && sudo systemctl start sddm.service
 sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
-sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
-sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
+sudo systemctl enable hostapd.service && sudo systemctl stop hostapd.service
+sudo systemctl enable dnsmasq.service && sudo systemctl stop dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
 
 # Fill in the information for GECOS.
@@ -435,7 +436,7 @@ alias ls='ls -la'
 alias unlockpac='rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
 alias c='clear'
-alias wifi-router='create_ap --daemon wlan0 eth0 home.localhost N7GZiMD!2ZTaZWYj0mLV'
+alias wifi-router='create_ap --daemon wlan0 eth0 home.localhost $PASSWD'
 alias systctl='systemctl'
 
 EOF
