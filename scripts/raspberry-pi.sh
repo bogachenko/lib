@@ -126,7 +126,10 @@ chsh -s /bin/zsh root
 # Setting the location of the Wi-Fi point.
 ip link set dev wlan0 up
 ip addr add 10.0.0.1/24 dev wlan0
+mv /etc/dnsmasq.conf /etc/dnsmasq.conf.backup
+mv /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.backup
 cat > /etc/dnsmasq.conf <<EOF
+port=5353
 interface=wlan0
 bind-interfaces
 dhcp-option=3,10.0.0.1
@@ -135,12 +138,12 @@ dhcp-range=10.0.0.2,10.0.0.10,12h
 no-hosts
 no-resolv
 log-queries
-log-facility=/var/log/dnsmasq.log
+log-facility=/tmp/dnsmasq.log
 server=8.8.8.8
 server=8.8.4.4
 EOF
 cat > /etc/hostapd/hostapd.conf <<EOF
-ctrl_interface=/var/run/hostapd
+ctrl_interface=/run/hostapd
 interface=wlan0
 ssid=localhost
 driver=nl80211
@@ -149,7 +152,7 @@ hw_mode=a
 ieee80211d=1
 country_code=RU
 macaddr_acl=0
-deny_mac_file=/etc/hostapd.deny
+deny_mac_file=/etc/hostapd/hostapd.deny
 wmm_enabled=0
 auth_algs=1
 wpa=2
