@@ -6,6 +6,7 @@
 
 TELLUSER=$(echo $USER)
 PASSWD='N7GZiMD!2ZTaZWYj0mLV'
+UA='Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
 
 # Clear the console.
 clear
@@ -153,7 +154,7 @@ interface=wlan0
 ssid=localhost
 driver=nl80211
 channel=11
-hw_mode=a
+hw_mode=g
 ieee80211d=1
 country_code=RU
 macaddr_acl=0
@@ -410,6 +411,21 @@ set ttyfast
 set encoding=utf8
 EOF
 sudo cp ~/.vimrc /root/.vimrc
+
+# Setting up a configuration file for the Wget program.
+cat > ~/.wgetrc <<EOF
+tries = 3
+retry_connrefused = on
+user_agent = $UA
+robots = off
+EOF
+sudo cp ~/.wgetrc /root/.wgetrc
+
+# Setting up a configuration file for the cURL program.
+cat > ~/.curlrc <<EOF
+user_agent = $UA
+EOF
+sudo cp ~/.curlrc /root/.curlrc
 
 # ZSH Generator.
 cat > ~/.zshrc <<EOF
