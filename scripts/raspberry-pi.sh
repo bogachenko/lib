@@ -143,6 +143,10 @@ log-facility=/tmp/dnsmasq.log
 server=8.8.8.8
 server=8.8.4.4
 EOF
+echo '1' > /proc/sys/net/ipv4/ip_forward
+iptables -A FORWARD -i eth0 -o wlan0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 cat > /etc/hostapd/hostapd.conf <<EOF
 ctrl_interface=/run/hostapd
 interface=wlan0
