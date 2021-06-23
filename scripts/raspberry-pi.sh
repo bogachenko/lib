@@ -383,8 +383,7 @@ alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
 alias c='clear'
 alias wifi-router='sudo create_ap --daemon wlan0 eth0 localhost N7GZiMD!2ZTaZWYj0mLV'
-alias code='code --user-data-dir /home/$TELLUSER/.config/Code/'
-alias sysctl='systemctl'
+alias systctl='systemctl'
 
 EOF
 sudo cat > /root/.zshrc <<EOF
@@ -399,8 +398,7 @@ alias unlockpac='rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
 alias c='clear'
 alias wifi-router='create_ap --daemon wlan0 eth0 localhost N7GZiMD!2ZTaZWYj0mLV'
-alias code='code --user-data-dir /home/$TELLUSER/.config/Code/'
-alias sysctl='systemctl'
+alias systctl='systemctl'
 
 EOF
 
