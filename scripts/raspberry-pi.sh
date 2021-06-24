@@ -7,6 +7,9 @@
 TELLUSER=$(echo $USER)
 PASSWD='N7GZiMD!2ZTaZWYj0mLV'
 UA='Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
+FONT='Noto Sans'
+FONTM='Noto Sans Mono'
+FONTMM='Noto Sans Medium'
 
 # Clear the console.
 clear
@@ -57,7 +60,7 @@ cat > /usr/share/gtk-2.0/gtkrc <<EOF
 gtk-icon-theme-name="Breeze"
 gtk-theme-name="Adwaita"
 gtk-cursor-theme-name="capitaine-cursors-light"
-gtk-font-name="Noto Sans 9"
+gtk-font-name="$FONT 9"
 gtk-menu-images=0
 gtk-button-images=0
 gtk-enable-event-sounds=0
@@ -72,7 +75,7 @@ cat > /usr/share/gtk-3.0/settings.ini <<EOF
 gtk-icon-theme-name=Breeze
 gtk-theme-name=Adwaita
 gtk-cursor-theme-name=capitaine-cursors-light
-gtk-font-name=Noto Sans 9
+gtk-font-name=$FONT 9
 gtk-menu-images=0
 gtk-button-images=0
 gtk-enable-event-sounds=0
@@ -87,7 +90,7 @@ cat > /usr/share/gtk-4.0/settings.ini <<EOF
 gtk-icon-theme-name=Breeze
 gtk-theme-name=Adwaita
 gtk-cursor-theme-name=capitaine-cursors-light
-gtk-font-name=Noto Sans 9
+gtk-font-name=$FONT 9
 gtk-menu-images=0
 gtk-button-images=0
 gtk-enable-event-sounds=0
@@ -191,10 +194,10 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.scrollBar: false
 URxvt.background: #000000
 URxvt.foreground: #ffffff
-URxvt.font: xft:Fira Mono:regular:size=10
-URxvt.boldFont: xft:Fira Mono:bold:size=10
-URxvt.italicFont: xft:Fira Mono:italic:size=10
-URxvt.boldItalicFont: xft:Fira Mono:bold:italic:size=10
+URxvt.font: xft:$FONTM:regular:size=10
+URxvt.boldFont: xft:$FONTM:bold:size=10
+URxvt.italicFont: xft:$FONTM:italic:size=10
+URxvt.boldItalicFont: xft:$FONTM:bold:italic:size=10
 URxvt.geometry: 150x30
 URxvt.scrollTtyOutput: false
 URxvt.cursorBlink: true
@@ -295,7 +298,7 @@ tztime local {
 EOF
 cat > ~/.config/i3/config <<EOF
 set $mod Mod4
-font pango:Noto Sans Medium 9
+font pango:$FONTMM 9
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -305,7 +308,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 bindsym $mod+Return exec urxvt
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec "dmenu_run -nf '#BEBEBE' -nb '#000000' -sb '#1000C0' -sf '#FFFFFF' -fn 'Noto Sans Medium-9'
+bindsym $mod+d exec "dmenu_run -nf '#BEBEBE' -nb '#000000' -sb '#1000C0' -sf '#FFFFFF' -fn '$FONTMM-9'
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
@@ -441,7 +444,7 @@ alias updXres='xrdb -merge ~/.Xresources'
 alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
 alias c='clear'
-alias wifi-router='sudo create_ap --daemon wlan0 eth0 home.localhost N7GZiMD!2ZTaZWYj0mLV'
+alias wifi-router='sudo create_ap --daemon wlan0 eth0 home.localhost $PASSWD'
 alias systctl='systemctl'
 
 EOF
