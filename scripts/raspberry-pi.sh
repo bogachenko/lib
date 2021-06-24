@@ -194,10 +194,10 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.scrollBar: false
 URxvt.background: #000000
 URxvt.foreground: #ffffff
-URxvt.font: xft:$FONTM:regular:size=10
-URxvt.boldFont: xft:$FONTM:bold:size=10
-URxvt.italicFont: xft:$FONTM:italic:size=10
-URxvt.boldItalicFont: xft:$FONTM:bold:italic:size=10
+URxvt.font: xft:$FONTM:regular:size=9
+URxvt.boldFont: xft:$FONTM:bold:size=9
+URxvt.italicFont: xft:$FONTM:italic:size=9
+URxvt.boldItalicFont: xft:$FONTM:bold:italic:size=9
 URxvt.geometry: 150x30
 URxvt.scrollTtyOutput: false
 URxvt.cursorBlink: true
