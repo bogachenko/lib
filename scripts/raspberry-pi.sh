@@ -4,7 +4,7 @@
 # Manjaro ARM Linux aarch64
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
-TELLUSER=$(echo $USER)
+TELLUSER=$(whoami)
 PASSWD='N7GZiMD!2ZTaZWYj0mLV'
 UA='Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
 FONT='Noto Sans'
@@ -139,7 +139,7 @@ interface=wlan0
 bind-interfaces
 dhcp-option=3,10.0.0.1
 dhcp-option=6,10.0.0.1
-dhcp-range=10.0.0.2,10.0.0.10,12h
+dhcp-range=10.0.0.2,10.0.0.10,255.255.255.0,12h
 no-hosts
 no-resolv
 log-queries
@@ -155,10 +155,12 @@ cat > /etc/hostapd/hostapd.conf <<EOF
 ctrl_interface=/run/hostapd
 interface=wlan0
 ssid=localhost
+ignore_broadcast_ssid=0
 driver=nl80211
 channel=11
 hw_mode=g
 ieee80211d=1
+ieee80211n=1
 country_code=RU
 macaddr_acl=0
 deny_mac_file=/etc/hostapd/hostapd.deny
@@ -169,6 +171,7 @@ wpa_key_mgmt=WPA-PSK
 rsn_pairwise=CCMP
 wpa_passphrase=$PASSWD
 EOF
+echo "nohook wpa_supplicant" >> /etc/dhcpcd.conf
 
 # Exiting superuser mode.
 exit
