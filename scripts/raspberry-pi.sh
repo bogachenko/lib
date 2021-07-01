@@ -181,6 +181,17 @@ rsn_pairwise=CCMP
 wpa_passphrase=$PASSWD
 EOF
 echo "nohook wpa_supplicant" >> /etc/dhcpcd.conf
+cat > /etc/systemd/system/autohotspot.service <<EOF
+[Unit]
+Description=Automatically generates a Hotspot when a valid SSID is in range
+After=multi-user.target
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/autohotspot
+[Install]
+WantedBy=multi-user.target
+EOF
 
 # Exiting superuser mode.
 exit
@@ -256,6 +267,7 @@ sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
 sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
 sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
+sudo systemctl enable autohotspot.service
 
 # Fill in the information for GECOS.
 sudo chfn $TELLUSER
