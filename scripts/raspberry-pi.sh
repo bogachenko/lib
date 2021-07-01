@@ -150,7 +150,7 @@ EOF
 cat > /etc/hostapd/hostapd.conf <<EOF
 ctrl_interface=/run/hostapd
 interface=wlan0
-ssid=localhost
+ssid=$TELLUSER
 ignore_broadcast_ssid=0
 driver=nl80211
 channel=11
@@ -482,9 +482,7 @@ alias reboot='sudo reboot'
 alias updXres='xrdb -merge ~/.Xresources'
 alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
-alias c='clear'
-alias wifi-router='sudo create_ap --daemon wlan0 eth0 home.localhost $PASSWD'
-alias systctl='systemctl'
+alias cl='clear'
 
 EOF
 sudo cat > /root/.zshrc <<EOF
@@ -497,9 +495,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 alias ls='ls -la'
 alias unlockpac='rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
-alias c='clear'
-alias wifi-router='create_ap --daemon wlan0 eth0 home.localhost $PASSWD'
-alias systctl='systemctl'
+alias cl='clear'
 
 EOF
 
