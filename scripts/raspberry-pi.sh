@@ -168,7 +168,6 @@ rsn_pairwise=CCMP
 wpa_passphrase=$PASSWD
 EOF
 cat > /usr/bin/autohotspot <<EOF
-
 wifiap()
 {
 ip link set dev wlan0 down
@@ -211,6 +210,18 @@ EOF
 
 # Exiting superuser mode.
 exit
+
+# Enabling daemons and starting them for my main packages.
+sudo systemctl enable tor.service && sudo systemctl start tor.service
+sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
+sudo systemctl enable sshd.service && sudo systemctl start sshd.service
+sudo systemctl enable gpm.service && sudo systemctl start gpm.service
+sudo systemctl enable sddm.service && sudo systemctl start sddm.service
+sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
+sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
+sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
+sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
+sudo systemctl enable autohotspot.service
 
 # Create user directories.
 xdg-user-dirs-update
@@ -272,18 +283,6 @@ mv /tmp/user.js ~/.mozilla/firefox/$TELLUSER/user.js
 
 # Downloading and installing Adguard Home.
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-
-# Enabling daemons and starting them for my main packages.
-sudo systemctl enable tor.service && sudo systemctl start tor.service
-sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
-sudo systemctl enable sshd.service && sudo systemctl start sshd.service
-sudo systemctl enable gpm.service && sudo systemctl start gpm.service
-sudo systemctl enable sddm.service && sudo systemctl start sddm.service
-sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
-sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
-sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
-sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
-sudo systemctl enable autohotspot.service
 
 # Fill in the information for GECOS.
 sudo chfn $TELLUSER
