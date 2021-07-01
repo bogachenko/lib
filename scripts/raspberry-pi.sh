@@ -129,10 +129,10 @@ chsh -s /bin/zsh $TELLUSER
 chsh -s /bin/zsh root
 
 # Setting the location of the Wi-Fi point.
-ip link set dev wlan0 up
-ip addr add 10.0.0.1/24 dev wlan0
 mv /etc/dnsmasq.conf /etc/dnsmasq.conf.backup
 mv /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.backup
+systemctl stop hostapd.service
+systemctl stop dnsmasq.service
 cat > /etc/dnsmasq.conf <<EOF
 port=5353
 interface=wlan0
@@ -147,10 +147,19 @@ log-facility=/tmp/dnsmasq.log
 server=8.8.8.8
 server=8.8.4.4
 EOF
-echo '1' > /proc/sys/net/ipv4/ip_forward
+sysctl net.ipv4.ip_forward=1
+cat > /usr/bin/autohotspot <<EOF
+ip link set dev wlan0 down
+ip addr add 10.0.0.1/24 dev wlan0
+ip link set dev wlan0 up
+dhcpcd -k wlan0 >/dev/null 2>&1
 iptables -A FORWARD -i eth0 -o wlan0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+systemctl start dnsmasq
+systemctl start hostapd
+EOF
+chmod +x /usr/bin/autohotspot
 cat > /etc/hostapd/hostapd.conf <<EOF
 ctrl_interface=/run/hostapd
 interface=wlan0
@@ -244,8 +253,8 @@ sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
 sudo systemctl enable sddm.service && sudo systemctl start sddm.service
 sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
-sudo systemctl enable hostapd.service && sudo systemctl stop hostapd.service
-sudo systemctl enable dnsmasq.service && sudo systemctl stop dnsmasq.service
+sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
+sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
 
 # Fill in the information for GECOS.
