@@ -147,19 +147,6 @@ log-facility=/tmp/dnsmasq.log
 server=8.8.8.8
 server=8.8.4.4
 EOF
-sysctl net.ipv4.ip_forward=1
-cat > /usr/bin/autohotspot <<EOF
-ip link set dev wlan0 down
-ip addr add 10.0.0.1/24 dev wlan0
-ip link set dev wlan0 up
-dhcpcd -k wlan0 >/dev/null 2>&1
-iptables -A FORWARD -i eth0 -o wlan0 -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-systemctl start dnsmasq
-systemctl start hostapd
-EOF
-chmod +x /usr/bin/autohotspot
 cat > /etc/hostapd/hostapd.conf <<EOF
 ctrl_interface=/run/hostapd
 interface=wlan0
@@ -180,6 +167,19 @@ wpa_key_mgmt=WPA-PSK
 rsn_pairwise=CCMP
 wpa_passphrase=$PASSWD
 EOF
+sysctl net.ipv4.ip_forward=1
+cat > /usr/bin/autohotspot <<EOF
+ip link set dev wlan0 down
+ip addr add 10.0.0.1/24 dev wlan0
+ip link set dev wlan0 up
+dhcpcd -k wlan0 >/dev/null 2>&1
+iptables -A FORWARD -i eth0 -o wlan0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+systemctl start dnsmasq
+systemctl start hostapd
+EOF
+chmod +x /usr/bin/autohotspot
 echo "nohook wpa_supplicant" >> /etc/dhcpcd.conf
 cat > /etc/systemd/system/autohotspot.service <<EOF
 [Unit]
