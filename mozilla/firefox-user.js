@@ -196,6 +196,8 @@ user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 user_pref("browser.discovery.enabled", false);
 user_pref("browser.discovery.containers.enabled", false);
 user_pref("extensions.getAddons.showPane", false);
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
 
 // Preload a page that the browser considers to be a logical next page
 // Предварительная загрузка страницы, которую браузер считает логической следующей страницей
