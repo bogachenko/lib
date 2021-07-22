@@ -1,16 +1,9 @@
-// Config for Thunderbird by bogachenko
+// Configuration file for the Thunderbird.
+// Author: Bogachenko Vyacheslav
 
 // Warning in "about:config"
 // Предупреждение в "about:config"
 user_pref("general.warnOnAboutConfig", false);
-
-// Warning in "about:networking"
-// Предупреждение в "about:networking"
-user_pref("network.warnOnAboutNetworking", false);
-
-// Check if Thunderbird is your default email client
-// Проверять, является ли Thunderbird вашим почтовым клиентом по умолчанию
-user_pref("mail.shell.checkDefaultClient", false);
 
 // Opening pages "Welcome and what's new?"
 // Открытие страниц "Добро пожаловать и что нового?"
