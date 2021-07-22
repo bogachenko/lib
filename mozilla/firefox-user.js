@@ -32,6 +32,7 @@ user_pref("browser.startup.homepage", "about:blank");
 // New tabs
 user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.newtab.preload", false);
+user_pref("browser.newtabpage.activity-stream.default.sites", "");
 
 // Opening tabs and external applications in the background
 //		TRUE = Open such tabs in the background
@@ -293,14 +294,14 @@ user_pref("browser.sessionstore.interval", 30000);
 user_pref("toolkit.winRegisterApplicationRestart", false);
 
 // Cookies
-// A Cookie is a piece of data (a small text file) sent by the server and stored in the browser. When the user reloads the same page, the browser sends the cookie back to the server and notifies it of the previous activity. Cookies store information such as passwords, logins, session data, credit card data, email addresses, and record various user activity and other statistics.
+// [NOTE] A Cookie is a piece of data (a small text file) sent by the server and stored in the browser. When the user reloads the same page, the browser sends the cookie back to the server and notifies it of the previous activity. Cookies store information such as passwords, logins, session data, credit card data, email addresses, and record various user activity and other statistics.
 // [WARNING] Cookies are actively used by many web resources in the process of monitoring and tracking user activity. Theft and analysis of cookies is a potentially dangerous and serious attack, leading to global leaks of user data and use.
 //		0 = Accept cookies and site data
 //		1 = Block third-party cookies
 //		2 = Block all cookies
 //		3 = Block cookies from sites not visited
 // Куки
-// Cookie - фрагмент данных (небольшой текстовый файл), отправляемый сервером и сохраняющийся в браузере. Когда пользователь вновь загружает ту же самую страницу, браузер отсылает cookie назад на сервер и уведомляет его о предыдущей активности. Cookie хранят такую информацию, как пароли, логины, сеансовые данные, данные кредитных карт, электронные почтовые адреса и записывают различную пользовательскую активность и прочую статистику.
+// [ЗАМЕТКА] Cookie - фрагмент данных (небольшой текстовый файл), отправляемый сервером и сохраняющийся в браузере. Когда пользователь вновь загружает ту же самую страницу, браузер отсылает cookie назад на сервер и уведомляет его о предыдущей активности. Cookie хранят такую информацию, как пароли, логины, сеансовые данные, данные кредитных карт, электронные почтовые адреса и записывают различную пользовательскую активность и прочую статистику.
 // [ВНИМАНИЕ] Cookie активно используются многими веб-ресурсами в процессе контроля и слежки за пользовательской активностью. Похищение и анализ cookie является потенциально опасной и серьезной атакой, приводящей к глобальным утечкам пользовательских данных и их использованию.
 //		0 = Принимать куки и данные сайтов
 //		1 = Блокировать стороннии куки
@@ -396,11 +397,9 @@ user_pref("extensions.webextensions.restrictedDomains", "");
 user_pref("xpinstall.signatures.required", false);
 
 // Service Workers
-// "Service workers" essentially act as proxy servers that sit between web apps, and the browser and network, are event driven, and can control the web page/site it is associated with, intercepting and modifying navigation and resource requests, and caching resources.
-// [NOTE] This heavily loads the system resources and takes up most of the RAM.
+// [NOTE] "Service workers" essentially act as proxy servers that sit between web apps, and the browser and network, are event driven, and can control the web page/site it is associated with, intercepting and modifying navigation and resource requests, and caching resources. This heavily loads the system resources and takes up most of the RAM.
 // Service Workers
-// "Service workers" по существу действуют как прокси-серверы, которые находятся между веб-приложениями, браузером и сетью, управляются событиями и могут управлять веб-страницей или сайтом, с которыми они связаны, перехватывать и изменять запросы навигации и ресурсов, а также кэшировать ресурсы.
-// [ЗАМЕТКА] Это сильно нагружает ресурсы системы и занимает большую часть оперативной памяти.
+// [ЗАМЕТКА] "Service workers" по существу действуют как прокси-серверы, которые находятся между веб-приложениями, браузером и сетью, управляются событиями и могут управлять веб-страницей или сайтом, с которыми они связаны, перехватывать и изменять запросы навигации и ресурсов, а также кэшировать ресурсы. Это сильно нагружает ресурсы системы и занимает большую часть оперативной памяти.
 user_pref("dom.serviceWorkers.enabled", false);
 
 // Sketches of visited pages
@@ -490,11 +489,9 @@ user_pref("network.preload", false);
 user_pref("browser.laterrun.enabled", false);
 
 // Pocket extension
-// Proprietary application Pocket (formerly known as Read It Later) allows you to save links to texts in the cloud storage for further reading, storing data about user activity and synchronizing them between all devices subscribed to the service. This can de-anonymize users and reveal their preferences.
-// [NOTE] Pocket is a third-party (now owned by Mozilla) cloud service, which operates on the principle of "Save for later use".
+// [NOTE] Proprietary application Pocket (formerly known as Read It Later) allows you to save links to texts in the cloud storage for further reading, storing data about user activity and synchronizing them between all devices subscribed to the service. This can de-anonymize users and reveal their preferences.
 // Расширение Pocket
-// Проприетарное приложение Pocket (ранее известное как Read It Later) позволяет сохранять ссылки на тексты в облачном хранилище для их дальнейшего прочтения, храня таким образом данные о пользовательской активности и синхронизируя их между всеми устройствами, подписанным на услуги сервиса. Это может деанонимизировать пользователей и раскрыть их предпочтения.
-// [ЗАМЕТКА] Pocket является сторонним (теперь принадлежит Mozilla) облачным сервисом, который работает по принципу "Сохранить для последующего использования".
+// [ЗАМЕТКА] Проприетарное приложение Pocket (ранее известное как Read It Later) позволяет сохранять ссылки на тексты в облачном хранилище для их дальнейшего прочтения, храня таким образом данные о пользовательской активности и синхронизируя их между всеми устройствами, подписанным на услуги сервиса. Это может деанонимизировать пользователей и раскрыть их предпочтения.
 user_pref("extensions.pocket.enabled", false);
 
 // Extension Form Autofill
@@ -538,28 +535,6 @@ user_pref("browser.safebrowsing.downloads.remote.block_dangerous", false);
 user_pref("browser.safebrowsing.downloads.remote.block_dangerous_host", false);
 user_pref("browser.safebrowsing.downloads.remote.block_potentially_unwanted", false);
 user_pref("browser.safebrowsing.downloads.remote.block_uncommon", false);
-user_pref("browser.safebrowsing.downloads.remote.url", "");
-user_pref("browser.safebrowsing.provider.google.advisoryURL", "");
-user_pref("browser.safebrowsing.provider.google.gethashURL", "");
-user_pref("browser.safebrowsing.provider.google.lists", "");
-user_pref("browser.safebrowsing.provider.google.reportMalwareMistakeURL", "");
-user_pref("browser.safebrowsing.provider.google.reportPhishMistakeURL", "");
-user_pref("browser.safebrowsing.provider.google.reportURL", "");
-user_pref("browser.safebrowsing.provider.google.updateURL", "");
-user_pref("browser.safebrowsing.provider.google4.advisoryURL", "");
-user_pref("browser.safebrowsing.provider.google4.dataSharingURL", "");
-user_pref("browser.safebrowsing.provider.google4.gethashURL", "");
-user_pref("browser.safebrowsing.provider.google4.lists", "");
-user_pref("browser.safebrowsing.provider.google4.reportMalwareMistakeURL", "");
-user_pref("browser.safebrowsing.provider.google4.reportPhishMistakeURL", "");
-user_pref("browser.safebrowsing.provider.google4.reportURL", "");
-user_pref("browser.safebrowsing.provider.google4.updateURL", "");
-user_pref("browser.safebrowsing.provider.mozilla.gethashURL", "");
-user_pref("browser.safebrowsing.provider.mozilla.lists", "");
-user_pref("browser.safebrowsing.provider.mozilla.lists.base", "");
-user_pref("browser.safebrowsing.provider.mozilla.lists.content", "");
-user_pref("browser.safebrowsing.provider.mozilla.updateURL", "");
-user_pref("browser.safebrowsing.reportPhishURL", "");
 
 // Content blocking
 // Блокировка контента
@@ -570,22 +545,6 @@ user_pref("browser.contentblocking.database.enabled", false);
 user_pref("browser.contentblocking.fingerprinting.preferences.ui.enabled", false);
 user_pref("browser.contentblocking.report.lockwise.enabled", false);
 user_pref("browser.contentblocking.report.monitor.enabled", false);
-user_pref("browser.contentblocking.report.cookie.url", "");
-user_pref("browser.contentblocking.report.cryptominer.url", "");
-user_pref("browser.contentblocking.report.fingerprinter.url", "");
-user_pref("browser.contentblocking.report.lockwise.how_it_works.url", "");
-user_pref("browser.contentblocking.report.lockwise.url", "");
-user_pref("browser.contentblocking.report.monitor.how_it_works.url", "");
-user_pref("browser.contentblocking.report.monitor.sign_in_url", "");
-user_pref("browser.contentblocking.report.monitor.url", "");
-user_pref("browser.contentblocking.report.proxy_extension.url", "");
-user_pref("browser.contentblocking.report.social.url", "");
-user_pref("browser.contentblocking.report.tracker.url", "");
-user_pref("browser.contentblocking.reportBreakage.url", "");
-user_pref("browser.contentblocking.report.lockwise.mobile-android.url", "");
-user_pref("browser.contentblocking.report.lockwise.mobile-ios.url", "");
-user_pref("browser.contentblocking.report.mobile-android.url", "");
-user_pref("browser.contentblocking.report.mobile-ios.url", "");
 
 // Исследования
 // Studies
