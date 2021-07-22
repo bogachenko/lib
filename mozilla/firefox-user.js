@@ -216,16 +216,12 @@ user_pref("extensions.getAddons.showPane", false);
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
 user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
 
-// Preload a page that the browser considers to be a logical next page
-// Предварительная загрузка страницы, которую браузер считает логической следующей страницей
+// Page preloading
+// Предварительная загрузка страниц
 user_pref("network.prefetch-next", false);
-
-// Pre-query DNS for all links on the active page
-// [NOTE] For HTTP and HTTPS-protected pages. This feature allows the browser in the background to determine DNS for various web content in order to speed up subsequent downloads (for links, graphics, CSS, JavaScript, etc.).
-// Предварительный запрос DNS для всех ссылок на активной странице
-// [ЗАМЕТКА] Для HTTP и HTTPS-защищенных страниц. Эта функция позволяет браузеру в фоновом режиме определять DNS для различного веб-контента с целью ускорения последующей загрузки (для ссылок, графики, CSS, JavaScript и т.п.).
 user_pref("network.dns.disablePrefetch", true);
 user_pref("network.dns.disablePrefetchFromHTTPS", true);
+user_pref("network.http.speculative-parallel-limit", 0);
 
 // Captive portal detection
 // Обнаружение портала авторизации
@@ -257,7 +253,6 @@ user_pref("dom.webnotifications.serviceworker.enabled", false);
 user_pref("dom.webnotifications.requireuserinteraction", false);
 user_pref("dom.push.enabled", false);
 user_pref("dom.push.connection.enabled", false);
-user_pref("dom.push.serverURL", "");
 
 // Disk cache
 // Кэш-диска
