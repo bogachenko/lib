@@ -11,6 +11,7 @@ user_pref("browser.startup.homepage_override.mstone", "ignore");
 user_pref("startup.homepage_welcome_url", "");
 user_pref("startup.homepage_welcome_url.additional", "");
 user_pref("startup.homepage_override_url", "");
+user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
 
 // Start page
 //		0 = Blank page
@@ -27,6 +28,7 @@ user_pref("browser.startup.page", 0);
 // Home page and new windows
 // Домашняя страница и новые окна
 user_pref("browser.startup.homepage", "about:blank");
+user_pref("browser.startup.blankWindow", false);
 
 // Новые вкладки
 // New tabs
@@ -512,6 +514,10 @@ user_pref("dom.vr.enabled", false);
 // Управление геймпадом
 user_pref("dom.gamepad.enabled", false);
 
+// Shaking the screen
+// Встряхивание экрана
+user_pref("dom.vibrator.enabled", false);
+
 // Shield
 // Щит
 user_pref("app.normandy.enabled", false);
@@ -544,3 +550,11 @@ user_pref("browser.contentblocking.report.monitor.enabled", false);
 // Исследования
 // Studies
 user_pref("app.shield.optoutstudies.enabled", false);
+
+// Predicting the domains of the url in the address bar
+// Предугадывание доменов URL-адреса в адресной строке
+user_pref("browser.fixup.alternate.enabled", false);
+
+// Display all parts of a URL in the address bar
+// Отображение все частей URL-адреса в адресной строке
+user_pref("browser.urlbar.trimURLs", false);
