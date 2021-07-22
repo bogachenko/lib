@@ -1,19 +1,9 @@
-// Config for Firefox by bogachenko
+// Configuration file for the Firefox browser.
+// Author: Bogachenko Vyacheslav
 
 // Warning in "about:config"
-// [NOTE] Page version
-//		xul = chrome://global/content/config.xul
-//		xhtml = chrome://global/content/config.xhtml
 // Предупреждение в "about:config"
-// [ЗАМЕТКА] Версия страницы
-//		xul = chrome://global/content/config.xul
-//		xhtml = chrome://global/content/config.xhtml
 user_pref("browser.aboutConfig.showWarning", false);
-user_pref("general.warnOnAboutConfig", false);
-
-// Check if Firefox is your default browser
-// Проверять, является ли Firefox вашим браузером по умолчанию
-user_pref("browser.shell.checkDefaultBrowser", false);
 
 // Start page
 //		0 = Blank page
@@ -25,7 +15,7 @@ user_pref("browser.shell.checkDefaultBrowser", false);
 //		1 = Домашняя страница
 //		2 = Последняя посещенная страница
 //		3 = Возобновить предыдущую сессию
-user_pref("browser.startup.page", 1);
+user_pref("browser.startup.page", 0);
 
 // Opening tabs and external applications in the background
 //		TRUE = Open such tabs in the background
@@ -36,9 +26,9 @@ user_pref("browser.startup.page", 1);
 user_pref("browser.tabs.loadDivertedInBackground", true);
 
 // Search suggestions
-// The default search engine uses geolocation-related data (your real location, determined by IP address). This data is sent to the Mozilla and Google servers. In addition, Google collects and stores data about your search queries and preferences.
+// [NOTE] The default search engine uses geolocation-related data (your real location, determined by IP address).
 // Поисковые предложения
-// Поисковый механизм по умолчанию использует данные, связанные с геолокацией (вашим реальным местонахождением, определяемым по IP-адресу). Эти данные отсылаются на серверы Mozilla и Google. Кроме того, Google собирает и хранит данные о ваших поисковых запросах и предпочтениях.
+// [ЗАМЕТКА] Поисковый механизм по умолчанию использует данные, связанные с геолокацией (вашим реальным местонахождением, определяемым по IP-адресу).
 user_pref("browser.search.suggest.enabled", false);
 
 // Preloading autocomplete URLs (when you enter in the address bar)
@@ -80,9 +70,9 @@ user_pref("privacy.clearOnShutdown.sessions", true);
 user_pref("privacy.clearOnShutdown.siteSettings", true);
 user_pref("privacy.clearOnShutdown.openWindows", true);
 
-// Master cleaner Firefox
+// Browser cleanup wizard 
 // [NOTE] This dialog window is invoked by hotkeys - Ctrl + Shift + Del.
-// Мастер очистки Firefox
+// Мастер очистки браузера
 // [ЗАМЕТКА] Это диалоговое окно вызывается горячими клавишами - Ctrl + Shift + Del.
 user_pref("privacy.cpd.cache", true);
 user_pref("privacy.cpd.cookies", false);
@@ -138,6 +128,11 @@ user_pref("browser.backspace_action", 2);
 // Защита от отслеживания
 // Tracking protection
 user_pref("privacy.trackingprotection.enabled", false);
+user_pref("privacy.trackingprotection.annotate_channels", false);
+user_pref("privacy.trackingprotection.cryptomining.enabled", false);
+user_pref("privacy.trackingprotection.fingerprinting.enabled", false);
+user_pref("privacy.trackingprotection.pbmode.enabled", false);
+user_pref("privacy.trackingprotection.enabled", false);
 
 // Automatically play sound in non-active tabs
 //		TRUE = Do not play
@@ -171,9 +166,9 @@ user_pref("browser.newtabpage.activity-stream.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion.endpoint", "data:,");
 
 // Health report details
-// This function collects advanced information about the health of the program and sends it to Mozilla servers, in particular: the number of crashes, information about slow loading. It includes data on equipment, operating system, version of this program, installed add-ons (number and type), intra-browser events, rendering, restoration of sessions, their duration, profile age, number of pages visited.
+// [NOTE] This function collects advanced information about the health of the program and sends it to Mozilla servers, in particular: the number of crashes, information about slow loading. It includes data on equipment, operating system, version of this program, installed add-ons (number and type), intra-browser events, rendering, restoration of sessions, their duration, profile age, number of pages visited.
 // Данные об отчета о здоровье
-// Данная функция собирает расширенную информацию о работоспособности программы и отсылает ее на серверы Mozilla, в частности: количество падений, сведения о медленной загрузке. Она включает в себя данные об оборудовании, операционной системе, версии этой программы, установленных дополнениях (количество и тип), внутрибраузерных событиях, рендеринге, восстановлении сессий, их длительности, возрасте профиля, количестве посещенных страниц.
+// [NOTE] Данная функция собирает расширенную информацию о работоспособности программы и отсылает ее на серверы Mozilla, в частности: количество падений, сведения о медленной загрузке. Она включает в себя данные об оборудовании, операционной системе, версии этой программы, установленных дополнениях (количество и тип), внутрибраузерных событиях, рендеринге, восстановлении сессий, их длительности, возрасте профиля, количестве посещенных страниц.
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
 
@@ -190,8 +185,6 @@ user_pref("browser.tabs.crashReporting.sendReport", false);
 // Акция для мобильных телефонов
 user_pref("identity.mobilepromo.android", "");
 user_pref("identity.mobilepromo.ios", "");
-user_pref("signon.management.page.mobileAndroidURL", "");
-user_pref("signon.management.page.mobileAppleURL", "");
 
 // PingCentre telemetry
 // Телеметрия ПингЦентра
@@ -202,6 +195,7 @@ user_pref("browser.ping-centre.telemetry", false);
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 user_pref("browser.discovery.enabled", false);
 user_pref("browser.discovery.containers.enabled", false);
+user_pref("extensions.getAddons.showPane", false);
 
 // Preload a page that the browser considers to be a logical next page
 // Предварительная загрузка страницы, которую браузер считает логической следующей страницей
@@ -217,6 +211,7 @@ user_pref("network.dns.disablePrefetchFromHTTPS", true);
 // Captive portal detection
 // Обнаружение портала авторизации
 user_pref("captivedetect.canonicalURL", "");
+user_pref("captivedetect.canonicalContent", "");
 user_pref("network.connectivity-service.IPv4.url", "");
 user_pref("network.connectivity-service.IPv6.url", "");
 user_pref("network.captive-portal-service.enabled", false);
@@ -240,6 +235,7 @@ user_pref("dom.caches.enabled", false);
 // [ЗАМЕТКА] Данные отсылаются на сайт(ы) не открытые в данный момент в браузере.
 user_pref("dom.webnotifications.enabled", false);
 user_pref("dom.webnotifications.serviceworker.enabled", false);
+user_pref("dom.webnotifications.requireuserinteraction", false);
 user_pref("dom.push.enabled", false);
 user_pref("dom.push.connection.enabled", false);
 user_pref("dom.push.serverURL", "");
@@ -248,7 +244,7 @@ user_pref("dom.push.serverURL", "");
 // Кэш-диска
 user_pref("browser.cache.disk.enable", false);
 
-// Forbids saving permissions manager settings
+// Forbidding saving the settings of the permission manager
 // Запрет сохранения настроек диспетчера разрешений
 user_pref("permissions.memory_only", true);
 
@@ -274,8 +270,8 @@ user_pref("browser.sessionstore.resume_from_crash", false);
 // Интервал между сохранением сеансов
 user_pref("browser.sessionstore.interval", 30000);
 
-// Firefox recovery after OS restart
-// Восстановление Firefox после перезагрузки OS
+// Restoring the browser after restarting the operating system
+// Восстановление браузера после перезагрузки операционной системы
 user_pref("toolkit.winRegisterApplicationRestart", false);
 
 // Cookies
@@ -295,11 +291,11 @@ user_pref("toolkit.winRegisterApplicationRestart", false);
 user_pref("network.cookie.cookieBehavior", 0);
 
 // Сookie lifetime policy
-//		0 = Save them before expiration
-//		2 = Save them until close Firefox
+//		0 = Keep them until they expire
+//		2 = Keep them until you close the browser
 // Политика жизни куки
 //		0 = Сохранять их до истечения срока действия
-//		2 = Сохранять их до закрытия Firefox
+//		2 = Сохранять их до закрытия браузера
 user_pref("network.cookie.lifetimePolicy", 0);
 
 // Storage API
@@ -498,9 +494,6 @@ user_pref("extensions.webcompat-reporter.enabled", false);
 // Black lists
 // Черные списки
 user_pref("extensions.blocklist.enabled", false);
-
-// First Party Isolation
-user_pref("privacy.firstparty.isolate", true);
 
 // WebVR
 user_pref("dom.vr.enabled", false);
