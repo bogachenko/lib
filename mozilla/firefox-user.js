@@ -5,6 +5,13 @@
 // Предупреждение в "about:config"
 user_pref("browser.aboutConfig.showWarning", false);
 
+// Открытие вкладок "Добро пожаловать" и "Новые заметки"
+// Opening the "Welcome" and "New Notes" tabs
+user_pref("browser.startup.homepage_override.mstone", "ignore");
+user_pref("startup.homepage_welcome_url", "");
+user_pref("startup.homepage_welcome_url.additional", "");
+user_pref("startup.homepage_override_url", "");
+
 // Start page
 //		0 = Blank page
 //		1 = Home page
@@ -16,6 +23,15 @@ user_pref("browser.aboutConfig.showWarning", false);
 //		2 = Последняя посещенная страница
 //		3 = Возобновить предыдущую сессию
 user_pref("browser.startup.page", 0);
+
+// Home page and new windows
+// Домашняя страница и новые окна
+user_pref("browser.startup.homepage", "about:blank");
+
+// Новые вкладки
+// New tabs
+user_pref("browser.newtabpage.enabled", false);
+user_pref("browser.newtab.preload", false);
 
 // Opening tabs and external applications in the background
 //		TRUE = Open such tabs in the background
