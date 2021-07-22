@@ -58,8 +58,8 @@ user_pref("places.history.enabled", false);
 // Автоматическое удаление истории при закрытии браузера
 user_pref("privacy.sanitize.sanitizeOnShutdown", true);
 
-// What elements of the story should be automatically deleted when you close Firefox
-// Какие элементы истории должны быть автоматически удалены при закрытии Firefox
+// Which data items should be automatically deleted when the browser is closed
+// Какие элементы данных должны быть автоматически удалены при закрытии браузера
 user_pref("privacy.clearOnShutdown.cache", true);
 user_pref("privacy.clearOnShutdown.cookies", false);
 user_pref("privacy.clearOnShutdown.downloads", true);
@@ -364,9 +364,9 @@ user_pref("browser.download.manager.addToRecentDocs", false);
 user_pref("browser.download.forbid_open_with", true);
 
 // Predictor
-// [NOTE] This function creates the simplest connections to the server. When the cursor is over a particular link, Firefox tries to anticipate the users actions on the page in order to increase the performance and speed of content processing on the page.
+// [NOTE] This function creates the simplest connections to the server. When the cursor is over a certain link, the browser tries to predict the user's actions on the page in order to increase the performance and speed of content processing.
 // Предсказатель
-// [ЗАМЕТКА] Это функция создает простейшие соединения с сервером. Когда курсор находится над определенной ссылкой, Firefox пытается предугадать действия пользователя на странице с целью увеличения производительность и скорости обработки контента на странице.
+// [ЗАМЕТКА] Эта функция создает простейшие подключения к серверу. Когда курсор находится над определенной ссылкой, браузер пытается предсказать действия пользователя на странице, чтобы повысить производительность и скорость обработки контента.
 user_pref("network.predictor.enabled", false);
 
 // WebExtension restrictions for specific Mozilla domains
@@ -457,8 +457,8 @@ user_pref("view_source.wrap_long_lines", true);
 // [ЗАМЕТКА] Отключает применение к посещенным ссылкам стилей с селектором :visited, что предотвращает возможность выяснить, какие URL есть у пользователя в истории браузера.
 user_pref("layout.css.visited_links_enabled", false);
 
-// Closing Firefox when closing the last tab
-// Закрытие Firefox при закрытии последней вкладки
+// Closing the browser when closing the last tab
+// Закрытие браузера при закрытии последней вкладки
 user_pref("browser.tabs.closeWindowWithLastTab", false);
 
 // Preloading documents or resources specified via <link rel = "preload">
