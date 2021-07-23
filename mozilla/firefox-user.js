@@ -80,7 +80,7 @@ user_pref("privacy.sanitize.sanitizeOnShutdown", true);
 // Which data items should be automatically deleted when the browser is closed
 // Какие элементы данных должны быть автоматически удалены при закрытии браузера
 user_pref("privacy.clearOnShutdown.cache", true);
-user_pref("privacy.clearOnShutdown.cookies", false);
+user_pref("privacy.clearOnShutdown.cookies", true);
 user_pref("privacy.clearOnShutdown.downloads", true);
 user_pref("privacy.clearOnShutdown.formdata", true);
 user_pref("privacy.clearOnShutdown.history", true);
@@ -94,7 +94,7 @@ user_pref("privacy.clearOnShutdown.openWindows", true);
 // Мастер очистки браузера
 // [ЗАМЕТКА] Это диалоговое окно вызывается горячими клавишами - Ctrl + Shift + Del.
 user_pref("privacy.cpd.cache", true);
-user_pref("privacy.cpd.cookies", false);
+user_pref("privacy.cpd.cookies", true);
 user_pref("privacy.cpd.downloads", true);
 user_pref("privacy.cpd.formdata", true);
 user_pref("privacy.cpd.history", true);
@@ -260,8 +260,12 @@ user_pref("dom.push.connection.enabled", false);
 // Кэш-диска
 user_pref("browser.cache.disk.enable", false);
 
-// Forbidding saving the settings of the permission manager
-// Запрет сохранения настроек диспетчера разрешений
+// Saving settings to disk for the permission manager
+//		TRUE = Keep them until the browser is closed
+//		FALSE = Keep them
+// Сохранения настроек на диск для диспетчера разрешений
+//		TRUE = Хранить их до тех пор, пока браузер не закроется
+//		FALSE = Хранить их
 user_pref("permissions.memory_only", true);
 
 // Offline cache
@@ -312,7 +316,7 @@ user_pref("network.cookie.cookieBehavior", 0);
 // Политика жизни куки
 //		0 = Сохранять их до истечения срока действия
 //		2 = Сохранять их до закрытия браузера
-user_pref("network.cookie.lifetimePolicy", 0);
+user_pref("network.cookie.lifetimePolicy", 2);
 
 // Storage API
 // [NOTE] Disables another way for sites to store their data on the users personal computer.
@@ -564,3 +568,23 @@ user_pref("browser.urlbar.trimURLs", false);
 user_pref("network.trr.mode", 2);
 user_pref("network.trr.uri", "https://dns.google/dns-query");
 user_pref("network.trr.custom_uri", "https://dns.google/dns-query");
+
+// Reader View
+user_pref("reader.parse-on-load.enabled", false);
+
+// Geolocation
+// Геолокация
+user_pref("geo.enabled", false);
+
+// Permission settings for sites
+//		0 = Always ask
+//		0 = Allow
+//		0 = Block
+// Настройки разрешения для сайтов
+//		0 = Всегда спрашивать
+//		0 = Разрешать
+//		0 = Блокировать
+user_pref("permissions.default.geo", 2);
+user_pref("permissions.default.camera", 2);
+user_pref("permissions.default.desktop-notification", 2);
+user_pref("permissions.default.microphone", 2);
