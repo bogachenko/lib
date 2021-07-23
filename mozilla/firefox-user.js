@@ -1,4 +1,4 @@
-// Configuration file for the Firefox browser.
+// Mozilla User Preferences
 // Author: Bogachenko Vyacheslav
 
 // Warning in "about:config"
@@ -71,7 +71,7 @@ user_pref("browser.formfill.enable", false);
 
 // Remember your browsing and download history
 // Помните историю посещений и загрузок
-user_pref("places.history.enabled", false);
+// user_pref("places.history.enabled", false);
 
 // Automatic deletion of history when closing the browser
 // Автоматическое удаление истории при закрытии браузера
@@ -558,3 +558,9 @@ user_pref("browser.fixup.alternate.enabled", false);
 // Display all parts of a URL in the address bar
 // Отображение все частей URL-адреса в адресной строке
 user_pref("browser.urlbar.trimURLs", false);
+
+// DNS over HTTPS
+// DNS поверх HTTPS
+user_pref("network.trr.mode", 2);
+user_pref("network.trr.uri", "https://dns.google/dns-query");
+user_pref("network.trr.custom_uri", "https://dns.google/dns-query");
