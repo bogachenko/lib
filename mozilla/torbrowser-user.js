@@ -112,3 +112,126 @@ user_pref("browser.tabs.loadBookmarksInTabs", true);
 // Opening bookmarks in background tabs
 // Открытие закладок в фоновых вкладках
 user_pref("browser.tabs.loadBookmarksInBackground", true);
+
+// Maximum number of backup bookmarks
+// Максимальное количество резервных закладок
+user_pref("browser.bookmarks.max_backups", 3);
+
+// "Backspace" button value
+//		0 = Previous page
+//		1 = Scroll page up
+//		2 = Do nothing
+// Значение кнопки "Backspace"
+//		0 = Предыдущая страница
+//		1 = Прокрутить страницу вверх
+//		2 = Ничего не делать
+user_pref("browser.backspace_action", 2);
+
+// Telemetry
+// This feature sends data about usage, browser performance, user interface features, memory and hardware configurations, as well as real IP to Mozilla servers. In addition, information may be collected about the sites visited.
+// [WARNING] This is a serious source of leaks and user tracking, do not turn it on.
+// Телеметрия
+// Эта функция отправляет данные об использовании, производительности браузера, функциях пользовательского интерфейса, конфигурации памяти и оборудования, а также реальных IP-адресах на серверы Mozilla. Кроме того, может собираться информация о посещаемых сайтах.
+// [ВНИМАНИЕ] Это серьезный источник утечек и слежения за пользователем, не включайте его.
+user_pref("toolkit.coverage.endpoint.base", "");
+user_pref("toolkit.coverage.opt-out", true);
+user_pref("toolkit.telemetry.archive.enabled", false);
+user_pref("toolkit.telemetry.bhrPing.enabled", false);
+user_pref("toolkit.telemetry.coverage.opt-out", true);
+user_pref("toolkit.telemetry.enabled", false);
+user_pref("toolkit.telemetry.firstShutdownPing.enabled", false);
+user_pref("toolkit.telemetry.newProfilePing.enabled", false);
+user_pref("toolkit.telemetry.server", "data:,");
+user_pref("toolkit.telemetry.shutdownPingSender.enabled", false);
+user_pref("toolkit.telemetry.shutdownPingSender.enabledFirstSession", false);
+user_pref("toolkit.telemetry.unified", false);
+user_pref("toolkit.telemetry.updatePing.enabled", false);
+
+// Promo for mobile phones
+// Акция для мобильных телефонов
+user_pref("identity.mobilepromo.android", "");
+user_pref("identity.mobilepromo.ios", "");
+
+// PingCentre telemetry
+// Телеметрия ПингЦентра
+user_pref("browser.ping-centre.telemetry", false);
+
+// Recommended themes and extensions
+// Рекомендованные темы и расширения
+user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
+user_pref("browser.discovery.enabled", false);
+user_pref("browser.discovery.containers.enabled", false);
+user_pref("extensions.getAddons.showPane", false);
+
+// Page preloading
+// Предварительная загрузка страниц
+user_pref("network.prefetch-next", false);
+user_pref("network.dns.disablePrefetch", true);
+user_pref("network.dns.disablePrefetchFromHTTPS", true);
+user_pref("network.http.speculative-parallel-limit", 0);
+
+// Cache API (Cache storage)
+// [NOTE] It is a repository on the users computer where scripts can store information. It is part of the "Service workers" specification, but can be used without them.
+// API Кэша (Хранилище кэша)
+// [ЗАМЕТКА] Это хранилище на компьютере пользователя, куда скрипты могут складывать информацию. Оно является частью спецификации "Service workers", но может быть использовано и без них.
+user_pref("dom.caches.enabled", false);
+
+// Web notifications
+// [NOTE] Data is sent to the site(s) not currently open in the browser.
+// Веб-уведомления
+// [ЗАМЕТКА] Данные отсылаются на сайт(ы) не открытые в данный момент в браузере.
+user_pref("dom.webnotifications.enabled", false);
+user_pref("dom.webnotifications.serviceworker.enabled", false);
+user_pref("dom.webnotifications.requireuserinteraction", false);
+user_pref("dom.push.enabled", false);
+user_pref("dom.push.connection.enabled", false);
+
+// Restore active session in case of browser crash
+// Восстановления активной сессии в случае падения браузера
+user_pref("browser.sessionstore.resume_from_crash", false);
+
+// Interval between saving sessions
+// Интервал между сохранением сеансов
+user_pref("browser.sessionstore.interval", 30000);
+
+// Restoring the browser after restarting the operating system
+// Восстановление браузера после перезагрузки операционной системы
+user_pref("toolkit.winRegisterApplicationRestart", false);
+
+// Storage API
+// [NOTE] Disables another way for sites to store their data on the users personal computer.
+// API Хранилища
+// [ЗАМЕТКА] Отключает еще один способ для сайтов хранить свои данные на персональном компьютере пользователя.
+user_pref("dom.storageManager.enabled", false);
+
+// Additional analytics sent to the web server
+// [NOTE] HTTP-data leaking from UserAgent to the server, especially when leaving the page.
+// Дополнительная аналитика, отправленная на веб-сервер
+// [ЗАМЕТКА] HTTP-данные утекающих от UserAgent на сервер, особенно при покидании страницы.
+user_pref("beacon.enabled", false);
+
+// Collecting HTML video statistics
+// Сбор HTML-видеостатистики
+user_pref("media.video_stats.enabled", false);
+
+// Types of content
+// Типы содержимого
+user_pref("gecko.handlerService.schemes.mailto.0.name", "");
+user_pref("gecko.handlerService.schemes.mailto.0.uriTemplate", "");
+user_pref("gecko.handlerService.schemes.mailto.1.name", "");
+user_pref("gecko.handlerService.schemes.mailto.1.uriTemplate", "");
+user_pref("gecko.handlerService.schemes.mailto.2.name", "");
+user_pref("gecko.handlerService.schemes.mailto.2.uriTemplate", "");
+user_pref("gecko.handlerService.schemes.mailto.3.name", "");
+user_pref("gecko.handlerService.schemes.mailto.3.uriTemplate", "");
+
+// Sending telemetry data and website address, about where and how the plugin failed
+// Отправка телеметрических данных и адреса сайта, о том, где и как произошел сбой плагина
+user_pref("dom.ipc.plugins.reportCrashURL", false);
+user_pref("dom.ipc.plugins.flash.subprocess.crashreporter.enabled", false);
+
+// Smooth scrolling
+// [NOTE] Recommended for brake applications, hardware failures, and problems with the video card.
+// Плавная прокрутка
+// [ЗАМЕТКА] Рекомендовано при торможениях, аппаратных сбоях и проблемах с видеокартой.
+user_pref("general.smoothScroll", false);
