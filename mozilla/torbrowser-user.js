@@ -1,14 +1,17 @@
-// Config for Tor Browser by bogachenko
+// Mozilla User Preferences
+// Author: Bogachenko Vyacheslav
 
 // Warning in "about:config"
-// [NOTE] Page version
-//		xul = chrome://global/content/config.xul
-//		xhtml = chrome://global/content/config.xhtml
 // Предупреждение в "about:config"
-// [ЗАМЕТКА] Версия страницы
-//		xul = chrome://global/content/config.xul
-//		xhtml = chrome://global/content/config.xhtml
 user_pref("browser.aboutConfig.showWarning", false);
+
+// Opening the "Welcome" and "New Notes" tabs
+// Открытие вкладок "Добро пожаловать" и "Новые заметки"
+user_pref("browser.startup.homepage_override.mstone", "ignore");
+user_pref("startup.homepage_welcome_url", "");
+user_pref("startup.homepage_welcome_url.additional", "");
+user_pref("startup.homepage_override_url", "");
+user_pref("browser.messaging-system.whatsNewPanel.enabled", false);
 
 // Start page
 //		0 = Blank page
@@ -21,6 +24,16 @@ user_pref("browser.aboutConfig.showWarning", false);
 //		2 = Последняя посещенная страница
 //		3 = Возобновить предыдущую сессию
 user_pref("browser.startup.page", 0);
+
+// Home page and new windows
+// Домашняя страница и новые окна
+user_pref("browser.startup.homepage", "about:blank");
+user_pref("browser.startup.blankWindow", false);
+
+// Новые вкладки
+// New tabs
+user_pref("browser.newtabpage.enabled", false);
+user_pref("browser.newtab.preload", false);
 
 // Opening tabs and external applications in the background
 //		TRUE = Open such tabs in the background
@@ -47,10 +60,10 @@ user_pref("browser.urlbar.delay", 0);
 // Автоматическое удаление истории при закрытии браузера
 user_pref("privacy.sanitize.sanitizeOnShutdown", true);
 
-// What elements of the story should be automatically deleted when you close Tor Browser
-// Какие элементы истории должны быть автоматически удалены при закрытии браузера Tor
+// Which data items should be automatically deleted when the browser is closed
+// Какие элементы данных должны быть автоматически удалены при закрытии браузера
 user_pref("privacy.clearOnShutdown.cache", true);
-user_pref("privacy.clearOnShutdown.cookies", false);
+user_pref("privacy.clearOnShutdown.cookies", true);
 user_pref("privacy.clearOnShutdown.downloads", true);
 user_pref("privacy.clearOnShutdown.formdata", true);
 user_pref("privacy.clearOnShutdown.history", true);
@@ -59,12 +72,12 @@ user_pref("privacy.clearOnShutdown.sessions", true);
 user_pref("privacy.clearOnShutdown.siteSettings", true);
 user_pref("privacy.clearOnShutdown.openWindows", true);
 
-// Master cleaner Firefox
+// Browser cleanup wizard 
 // [NOTE] This dialog window is invoked by hotkeys - Ctrl + Shift + Del.
-// Мастер очистки Firefox
+// Мастер очистки браузера
 // [ЗАМЕТКА] Это диалоговое окно вызывается горячими клавишами - Ctrl + Shift + Del.
 user_pref("privacy.cpd.cache", true);
-user_pref("privacy.cpd.cookies", false);
+user_pref("privacy.cpd.cookies", true);
 user_pref("privacy.cpd.downloads", true);
 user_pref("privacy.cpd.formdata", true);
 user_pref("privacy.cpd.history", true);
@@ -99,17 +112,3 @@ user_pref("browser.tabs.loadBookmarksInTabs", true);
 // Opening bookmarks in background tabs
 // Открытие закладок в фоновых вкладках
 user_pref("browser.tabs.loadBookmarksInBackground", true);
-
-// Maximum number of backup bookmarks
-// Максимальное количество резервных закладок
-user_pref("browser.bookmarks.max_backups", 3);
-
-// "Backspace" button value
-//		0 = Previous page
-//		1 = Scroll page up
-//		2 = Do nothing
-// Значение кнопки "Backspace"
-//		0 = Предыдущая страница
-//		1 = Прокрутить страницу вверх
-//		2 = Ничего не делать
-user_pref("browser.backspace_action", 2);
