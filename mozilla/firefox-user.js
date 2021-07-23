@@ -5,8 +5,8 @@
 // Предупреждение в "about:config"
 user_pref("browser.aboutConfig.showWarning", false);
 
-// Открытие вкладок "Добро пожаловать" и "Новые заметки"
 // Opening the "Welcome" and "New Notes" tabs
+// Открытие вкладок "Добро пожаловать" и "Новые заметки"
 user_pref("browser.startup.homepage_override.mstone", "ignore");
 user_pref("startup.homepage_welcome_url", "");
 user_pref("startup.homepage_welcome_url.additional", "");
