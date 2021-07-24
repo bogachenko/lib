@@ -69,10 +69,6 @@ user_pref("browser.urlbar.delay", 0);
 // Помнить историю поиска и данные формы
 user_pref("browser.formfill.enable", false);
 
-// Remember your browsing and download history
-// Помните историю посещений и загрузок
-// user_pref("places.history.enabled", false);
-
 // Automatic deletion of history when closing the browser
 // Автоматическое удаление истории при закрытии браузера
 user_pref("privacy.sanitize.sanitizeOnShutdown", true);
@@ -510,7 +506,8 @@ user_pref("extensions.webcompat-reporter.enabled", false);
 // Черные списки
 user_pref("extensions.blocklist.enabled", false);
 
-// WebVR
+// Virtual reality
+// Виртуальная реальность
 user_pref("dom.vr.enabled", false);
 
 // Gamepad control
@@ -524,7 +521,6 @@ user_pref("dom.vibrator.enabled", false);
 // Shield
 // Щит
 user_pref("app.normandy.enabled", false);
-user_pref("app.normandy.api_url", "");
 user_pref("app.normandy.first_run", false);
 
 // Safe browsing
