@@ -561,3 +561,21 @@ user_pref("permissions.default.geo", 2);
 user_pref("permissions.default.camera", 2);
 user_pref("permissions.default.desktop-notification", 2);
 user_pref("permissions.default.microphone", 2);
+
+// Quickstart
+// [NOTE] Quickstart allows Tor Browser to connect automatically.
+// Быстрый старт
+// [ЗАМЕТКА] Быстрый запуск позволяет Tor Browser подключаться автоматически.
+user_pref("extensions.torlauncher.quickstart", false);
+
+// Security level
+// [ЗАМЕТКА] Disable web features that can be used to attack your security and anonymity.
+//		1 = Highest
+//		2 = High
+//		4 = Normal
+// Уровень безопасности
+// [ЗАМЕТКА] Отключите веб-функции, которые могут использоваться для атаки на вашу безопасность и анонимность.
+//		1 = Высший
+//		2 = Высокий
+//		4 = Обычный
+user_pref("extensions.torbutton.security_slider", 2);
