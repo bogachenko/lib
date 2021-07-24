@@ -453,11 +453,11 @@ user_pref("device.storage.enabled", false);
 user_pref("browser.bookmarks.autoExportHTML", false);
 
 // Showing search results
-//		TRUE = Open search result in current page
-//		FALSE = Open search result in new page
+//		TRUE = Open search result in new page
+//		FALSE = Open search result in current page
 // Показ результатов поиска
-//		TRUE = Открывать результат поиска в текущей странице
-//		FALSE = Открывать результат поиска на новой странице
+//		TRUE = Открывать результат поиска на новой странице
+//		FALSE = Открывать результат поиска в текущей странице
 user_pref("browser.search.openintab", true);
 
 // Showing search results
