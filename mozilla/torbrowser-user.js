@@ -273,3 +273,100 @@ user_pref("network.IDN_show_punycode", true);
 // API для обработки файлов
 // [ЗАМЕТКА] Отвечает за доступ к более низкоуровневым файловым операциям.
 user_pref("dom.fileHandle.enabled", false);
+
+// Showing search results
+//		TRUE = Open search result in new page
+//		FALSE = Open search result in current page
+// Показ результатов поиска
+//		TRUE = Открывать результат поиска на новой странице
+//		FALSE = Открывать результат поиска в текущей странице
+user_pref("browser.search.openintab", true);
+
+// Showing search results
+//		TRUE = To wrap lines
+//		FALSE = Do not wrap lines
+// Показ результатов поиска
+//		TRUE = Переносить строки
+//		FALSE = Не переносить строки
+user_pref("view_source.wrap_long_lines", true);
+
+// CSS :visited selectors
+// [ЗАМЕТКА] Disables the use of styles with the: visited selector to visited links, which prevents the user from finding out what URLs the user has in the browser history.
+// CSS :visited селекторы
+// [ЗАМЕТКА] Отключает применение к посещенным ссылкам стилей с селектором :visited, что предотвращает возможность выяснить, какие URL есть у пользователя в истории браузера.
+user_pref("layout.css.visited_links_enabled", false);
+
+// Closing the browser when closing the last tab
+// Закрытие браузера при закрытии последней вкладки
+user_pref("browser.tabs.closeWindowWithLastTab", false);
+
+// Module LaterRun
+// [NOTE] Displaying new users with various help information when "N" starts up the browser.
+// Модуль LaterRun
+// [ЗАМЕТКА] Показ новых пользователей различной справочной информация при "N" запуске браузера.
+user_pref("browser.laterrun.enabled", false);
+
+// Extension Form Autofill
+// Расширение Form Autofill
+user_pref("extensions.formautofill.addresses.enabled", false);
+user_pref("extensions.formautofill.available", "off");
+user_pref("extensions.formautofill.creditCards.enabled", false);
+user_pref("extensions.formautofill.heuristics.enabled", false);
+user_pref("extensions.formautofill.section.enabled", false);
+
+// Black lists
+// Черные списки
+user_pref("extensions.blocklist.enabled", false);
+
+// Gamepad control
+// Управление геймпадом
+user_pref("dom.gamepad.enabled", false);
+
+// Shield
+// Щит
+user_pref("app.normandy.enabled", false);
+user_pref("app.normandy.first_run", false);
+
+// Safe browsing
+// Безопасный просмотр
+user_pref("browser.safebrowsing.malware.enabled", false);
+user_pref("browser.safebrowsing.phishing.enabled", false);
+user_pref("browser.safebrowsing.allowOverride", false);
+user_pref("browser.safebrowsing.downloads.enabled", false);
+user_pref("browser.safebrowsing.blockedURIs.enabled", false);
+user_pref("browser.safebrowsing.downloads.remote.enabled", false);
+user_pref("browser.safebrowsing.downloads.remote.block_dangerous", false);
+user_pref("browser.safebrowsing.downloads.remote.block_dangerous_host", false);
+user_pref("browser.safebrowsing.downloads.remote.block_potentially_unwanted", false);
+user_pref("browser.safebrowsing.downloads.remote.block_uncommon", false);
+
+// Content blocking
+// Блокировка контента
+user_pref("browser.contentblocking.category", "custom");
+user_pref("browser.contentblocking.cfr-milestone.enabled", false);
+user_pref("browser.contentblocking.cryptomining.preferences.ui.enabled", false);
+user_pref("browser.contentblocking.database.enabled", false);
+user_pref("browser.contentblocking.fingerprinting.preferences.ui.enabled", false);
+user_pref("browser.contentblocking.report.lockwise.enabled", false);
+user_pref("browser.contentblocking.report.monitor.enabled", false);
+
+// Display all parts of a URL in the address bar
+// Отображение все частей URL-адреса в адресной строке
+user_pref("browser.urlbar.trimURLs", false);
+
+// Reader View
+user_pref("reader.parse-on-load.enabled", false);
+
+
+// Permission settings for sites
+//		0 = Always ask
+//		0 = Allow
+//		0 = Block
+// Настройки разрешения для сайтов
+//		0 = Всегда спрашивать
+//		0 = Разрешать
+//		0 = Блокировать
+user_pref("permissions.default.geo", 2);
+user_pref("permissions.default.camera", 2);
+user_pref("permissions.default.desktop-notification", 2);
+user_pref("permissions.default.microphone", 2);
