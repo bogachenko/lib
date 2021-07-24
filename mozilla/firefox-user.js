@@ -571,6 +571,15 @@ user_pref("reader.parse-on-load.enabled", false);
 // Геолокация
 user_pref("geo.enabled", false);
 
+// Search region
+// Регион поиска
+user_pref("browser.search.region", "US");
+user_pref("geo.provider.network.url", "");
+user_pref("geo.provider.ms-windows-location", false);
+user_pref("geo.provider.use_gpsd", false);
+user_pref("browser.region.network.url", "");
+user_pref("browser.region.update.enabled", false);
+
 // Permission settings for sites
 //		0 = Always ask
 //		0 = Allow
