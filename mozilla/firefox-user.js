@@ -410,7 +410,6 @@ user_pref("browser.pagethumbnails.capturing_disabled", true);
 // User interface tour (UITour)
 // Тур по интерфейсу пользователя
 user_pref("browser.uitour.enabled", false);
-user_pref("browser.uitour.url", "");
 
 // Web channel whitelist
 // Белый список веб-каналов
