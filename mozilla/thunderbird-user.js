@@ -1,4 +1,4 @@
-// Configuration file for the Thunderbird.
+// Mozilla User Preferences
 // Author: Bogachenko Vyacheslav
 
 // Warning in "about:config"
@@ -24,14 +24,8 @@ user_pref("mailnews.start_page.enabled", false);
 // Домашняя страница
 user_pref("mailnews.start_page.url", "about:blank");
 
-// Automatic check for updates for extensions
-// Автоматическая проверка обновлений для расширений
-user_pref("extensions.update.enabled", false);
-
-// Geolocation accounting
-// Thunderbird has built-in tools for transferring geodata (your location). This uses information obtained from the operating systems geolocation facilities, Wi-Fi networks, telephone and Internet operators, as well as a real IP address. In addition, the above data is sent to Google servers.
-// Учет геолокации
-// Thunderbird располагает встроенными средствами передачи геоданных (вашего местонахождения). При этом используются сведения, получаемые от геолокационных средств операционной системы, сетей Wi-Fi, телефонных и интернет-операторов, а также реальный IP-адрес. Кроме того, вышеперечисленные данные отсылаются на серверы Google.
+// Geolocation
+// Геолокация
 user_pref("geo.enabled", false);
 
 // GeoIP-based search results
