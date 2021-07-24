@@ -235,3 +235,41 @@ user_pref("dom.ipc.plugins.flash.subprocess.crashreporter.enabled", false);
 // Плавная прокрутка
 // [ЗАМЕТКА] Рекомендовано при торможениях, аппаратных сбоях и проблемах с видеокартой.
 user_pref("general.smoothScroll", false);
+
+// Show the "Open with" dialog box in the download window
+// Показ диалогового окна "Открыть при помощи" в окне загрузки
+user_pref("browser.download.forbid_open_with", true);
+
+// Install add-ons without signatures
+// Установка дополнений без подписей
+user_pref("xpinstall.signatures.required", false);
+
+// Sketches of visited pages
+// Эскизы посещенных страниц
+user_pref("browser.pagethumbnails.capturing_disabled", true);
+
+// User interface tour (UITour)
+// Тур по интерфейсу пользователя
+user_pref("browser.uitour.enabled", false);
+
+// Web channel whitelist
+// Белый список веб-каналов
+user_pref("webchannel.allowObject.urlWhitelist", "");
+
+// Maximum number of pop-ups
+// Максимальное количество всплывающих окон
+user_pref("dom.popup_maximum", 3);
+
+// Setting default permissions (resource://app/defaults/permissions) in the Permission Manager
+// Установка по умолчанию разрешений (resource://app/defaults/permissions) в Менеджере Разрешений
+user_pref("permissions.manager.defaultsUrl", "");
+
+// Force punycode for internationalized domain names
+// Принудительное использование Юникода для интернационализированных доменных имен
+user_pref("network.IDN_show_punycode", true);
+
+// File handle API
+// [NOTE] Responsible for accessing lower-level file operations.
+// API для обработки файлов
+// [ЗАМЕТКА] Отвечает за доступ к более низкоуровневым файловым операциям.
+user_pref("dom.fileHandle.enabled", false);
