@@ -389,3 +389,13 @@ user_pref("browser.search.geoSpecificDefaults.url", "");
 // Allow Internet content to appear in messages
 // Разрешить в сообщениях показ содержимого из Интернета
 user_pref("mailnews.message_display.disable_remote_image", false);
+
+// Chat styles
+//      mail/bubbles/dark/papersheets = Themes
+// Стили чата
+//      mail/bubbles/dark/papersheets = Темы
+user_pref("messenger.options.messagesStyle.theme", "simple");
+
+// Notification of a new message on the taskbar
+// Уведомление о новом сообщение на панели задач
+user_pref("messenger.options.getAttentionOnNewMessages", true); 
