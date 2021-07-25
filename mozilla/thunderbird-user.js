@@ -161,3 +161,40 @@ user_pref("browser.formfill.enable", false);
 // Disk cache
 // Кэш-диска
 user_pref("browser.cache.disk.enable", false);
+
+// Block pop-ups
+// Блокировать всплывающие окна
+user_pref("dom.disable_open_during_load", true);
+user_pref("dom.block_multiple_popups", true);
+
+// Maximum number of pop-ups
+// Максимальное количество всплывающих окон
+user_pref("dom.popup_maximum", 3);
+
+// Setting default permissions (resource://app/defaults/permissions) in the Permission Manager
+// Установка по умолчанию разрешений (resource://app/defaults/permissions) в Менеджере Разрешений
+user_pref("permissions.manager.defaultsUrl", "");
+
+// Force punycode for internationalized domain names
+// Принудительное использование Юникода для интернационализированных доменных имен
+user_pref("network.IDN_show_punycode", true);
+
+// File handle API
+// [NOTE] Responsible for accessing lower-level file operations.
+// API для обработки файлов
+// [ЗАМЕТКА] Отвечает за доступ к более низкоуровневым файловым операциям.
+user_pref("dom.fileHandle.enabled", false);
+
+// Device storage API
+// [NOTE] Responsible for access to the file system, this API allows the browser to read and/or write to the users files.
+// API хранилища устройств
+// [ЗАМЕТКА] Отвечает за доступ к файловой системе, данный API позволяет браузеру самостоятельно читать и/или писать в файлах пользователя.
+user_pref("device.storage.enabled", false);
+
+// Showing search results
+//		TRUE = To wrap lines
+//		FALSE = Do not wrap lines
+// Показ результатов поиска
+//		TRUE = Переносить строки
+//		FALSE = Не переносить строки
+user_pref("view_source.wrap_long_lines", true);
