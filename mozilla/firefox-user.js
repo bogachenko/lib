@@ -384,6 +384,7 @@ user_pref("browser.download.forbid_open_with", true);
 // Предсказатель
 // [ЗАМЕТКА] Эта функция создает простейшие подключения к серверу. Когда курсор находится над определенной ссылкой, браузер пытается предсказать действия пользователя на странице, чтобы повысить производительность и скорость обработки контента.
 user_pref("network.predictor.enabled", false);
+user_pref("network.predictor.enable-prefetch", false);
 
 // WebExtension restrictions for specific Mozilla domains
 // Ограничения WebExtension для определенных доменов Mozilla
