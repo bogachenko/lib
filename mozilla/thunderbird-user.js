@@ -391,9 +391,9 @@ user_pref("browser.search.geoSpecificDefaults.url", "");
 user_pref("mailnews.message_display.disable_remote_image", false);
 
 // Chat styles
-//      mail/bubbles/dark/papersheets = Themes
+//      mail/bubbles/dark/papersheets/simple = Themes
 // Стили чата
-//      mail/bubbles/dark/papersheets = Темы
+//      mail/bubbles/dark/papersheets/simple = Темы
 user_pref("messenger.options.messagesStyle.theme", "simple");
 
 // Notification of a new message on the taskbar
