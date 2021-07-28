@@ -339,6 +339,10 @@ user_pref("dom.gamepad.enabled", false);
 // Встряхивание экрана
 user_pref("dom.vibrator.enabled", false);
 
+// Battery status tracking
+// Отслеживание состояния батареи
+user_pref("dom.battery.enabled", false);
+
 // Safe browsing
 // Безопасный просмотр
 user_pref("browser.safebrowsing.malware.enabled", false);

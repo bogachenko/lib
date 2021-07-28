@@ -32,9 +32,20 @@ user_pref("browser.startup.blankWindow", false);
 
 // Новые вкладки
 // New tabs
+user_pref("browser.newtabpage.pinned", "");
 user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.newtab.preload", false);
 user_pref("browser.newtabpage.activity-stream.default.sites", "");
+
+// Restriction on opening new windows 
+//		0 = Open all links in tabs 
+//		1 = Open links in windows
+//		2 = Open links in tabs, except when custom window options are specified
+// Ограничение на открытие новых окон
+//		0 = Открывать все ссылки во вкладках
+//		1 = Открывать ссылки в окнах
+//		2 = Открывать ссылки во вкладках за исключением случаев, когда заданы нестандартные параметры окна
+user_pref("browser.backspace_action", 0);
 
 // Opening tabs and external applications in the background
 //		TRUE = Open such tabs in the background
@@ -402,8 +413,12 @@ user_pref("xpinstall.signatures.required", false);
 // [ЗАМЕТКА] "Service workers" по существу действуют как прокси-серверы, которые находятся между веб-приложениями, браузером и сетью, управляются событиями и могут управлять веб-страницей или сайтом, с которыми они связаны, перехватывать и изменять запросы навигации и ресурсов, а также кэшировать ресурсы. Это сильно нагружает ресурсы системы и занимает большую часть оперативной памяти.
 user_pref("dom.serviceWorkers.enabled", false);
 
-// Sketches of visited pages
+// Thumbnails of visited pages
+//		TRUE = Page thumbnails will not be created
+//		FALSE = Page thumbnails will be created 
 // Эскизы посещенных страниц
+//		TRUE = Эскизы страниц создаваться не будут
+//		FALSE = Эскизы страниц создаваться будут
 user_pref("browser.pagethumbnails.capturing_disabled", true);
 
 // User interface tour (UITour)
@@ -520,6 +535,10 @@ user_pref("dom.gamepad.enabled", false);
 // Shaking the screen
 // Встряхивание экрана
 user_pref("dom.vibrator.enabled", false);
+
+// Battery status tracking
+// Отслеживание состояния батареи
+user_pref("dom.battery.enabled", false);
 
 // Shield
 // Щит
