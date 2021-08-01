@@ -74,6 +74,7 @@ user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.suggest.engines", false);
 user_pref("browser.urlbar.suggest.topsites", false);
 user_pref("browser.urlbar.suggest.quicksuggest", false);
+user_pref("browser.urlbar.showSearchSuggestionsFirst", false);
 user_pref("browser.urlbar.delay", 0);
 
 // Remember the search history and form data
@@ -614,3 +615,4 @@ user_pref("permissions.default.geo", 2);
 user_pref("permissions.default.camera", 2);
 user_pref("permissions.default.desktop-notification", 2);
 user_pref("permissions.default.microphone", 2);
+user_pref("permissions.default.xr", 2);
