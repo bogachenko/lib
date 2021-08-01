@@ -36,6 +36,13 @@ user_pref("browser.newtabpage.pinned", "");
 user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.newtab.preload", false);
 user_pref("browser.newtabpage.activity-stream.default.sites", "");
+user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
+user_pref("browser.newtabpage.activity-stream.section.highlights.includeBookmarks", false);
+user_pref("browser.newtabpage.activity-stream.section.highlights.includeDownloads", false);
+user_pref("browser.newtabpage.activity-stream.section.highlights.includeVisited", false);
+user_pref("browser.newtabpage.activity-stream.showSearch", false);
+user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
+user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
 
 // Restriction on opening new windows 
 //		0 = Open all links in tabs 
