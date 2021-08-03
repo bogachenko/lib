@@ -40,8 +40,8 @@ Section "InputClass"
 EndSection
 EOF
 
-# Refresh mirrors for Pacman.
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+# Refresh mirrors for the pacman.
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 pacman-mirrors --country Russia
 
 # Updating repository data and installing updates.
