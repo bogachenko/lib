@@ -10,6 +10,22 @@ FONT='Noto Sans'
 FONTM='Noto Sans Mono'
 FONTMM='Noto Sans Medium'
 
+# Installing the AUR repository.
+cd /tmp
+git clone https://aur.archlinux.org/package-query.git
+cd package-query/
+makepkg -si
+cd ..
+git clone https://aur.archlinux.org/yaourt.git
+cd yaourt/
+makepkg -si
+cd /tmp/
+
+# Installing the BlackArch repository.
+curl -O https://blackarch.org/strap.sh
+chmod +x strap.sh
+sudo ./strap.sh
+
 # Updating repository data and installing updates.
 sudo pacman -Syyuu
 
@@ -44,22 +60,6 @@ Section "InputClass"
         Option "XkbOptions" "grp:alt_shift_toggle"
 EndSection
 EOF
-
-# Installing the AUR repository.
-cd /tmp
-git clone https://aur.archlinux.org/package-query.git
-cd package-query/
-makepkg -si
-cd ..
-git clone https://aur.archlinux.org/yaourt.git
-cd yaourt/
-makepkg -si
-cd /tmp/
-
-# Installing the BlackArch repository.
-curl -O https://blackarch.org/strap.sh
-chmod +x strap.sh
-sudo ./strap.sh
 
 # Nvidia.
 cat > /etc/modprobe.d/killnouveau.conf <<EOF
