@@ -65,10 +65,13 @@ pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf
 cat > /etc/modprobe.d/killnouveau.conf <<EOF
 blacklist nouveau
 EOF
-sed -i -e "s/#Driver=/Driver=nvidia/g" /etc/bumblebee/bumblebee.conf
-sed -i -e "s/#Bridge=/Bridge=virtualgl/g" /etc/bumblebee/bumblebee.conf
-sed -i -e "s/#Bridge=/Bridge=virtualgl/g" /etc/mkinitcpio.conf
+sed -i -e "s/Driver=/Driver=nvidia/g" /etc/bumblebee/bumblebee.conf
+sed -i -e "s/Bridge=auto/Bridge=virtualgl/g" /etc/bumblebee/bumblebee.conf
+sed -i -e "s/MODULES=()/MODULES=(i915 bbswitch)/g" /etc/mkinitcpio.conf
 mkinitcpio -p linux
+sed -i -e "s/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet rcutree.rcu_idle_gp_delay=1"/g" /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
+echo 'BusID "PCI:01:00:0"' > /etc/bumblebee/xorg.conf.nvidia
 
 # Exiting superuser mode.
 exit
