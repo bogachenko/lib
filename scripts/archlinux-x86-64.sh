@@ -10,6 +10,15 @@ FONT='Noto Sans'
 FONTM='Noto Sans Mono'
 FONTMM='Noto Sans Medium'
 
+# Updating repository data and installing updates.
+sudo pacman -Syyuu
+
+# Installing main packages from the AUR repository.
+yaourt -S peerflix nvidia-390xx-dkms opencl-nvidia-390xx lib32-opencl-nvidia-390xx lib32-nvidia-390xx-utils nvidia-390xx-utils nvidia-390xx
+
+# Installing main packages.
+sudo pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq rxvt-unicode unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen imagemagick libjpeg-turbo breeze-icons chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa onboard pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc opera xf86-input-synaptics gnome bumblebee xf86-video-intel lib32-virtualgl virtualgl bbswitch primus
+
 # Getting root permission.
 su
 
@@ -52,16 +61,7 @@ curl -O https://blackarch.org/strap.sh
 chmod +x strap.sh
 sudo ./strap.sh
 
-# Updating repository data and installing updates.
-pacman -Syyuu
-
-# Updating system data.
-yaourt -Syua
-
-# Installing main packages.
-pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq rxvt-unicode unzip ppp bluez bluez-untils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen imagemagick libjpeg-turbo breeze-icons chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa onboard pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc opera xf86-input-synaptics bumblebee xf86-video-intel lib32-virtualgl virtualgl bbswitch primus gnome
-
-# 
+# Nvidia.
 cat > /etc/modprobe.d/killnouveau.conf <<EOF
 blacklist nouveau
 EOF
@@ -75,9 +75,6 @@ echo 'BusID "PCI:01:00:0"' > /etc/bumblebee/xorg.conf.nvidia
 
 # Exiting superuser mode.
 exit
-
-# Installing main packages from the AUR repository.
-yaourt -S peerflix nvidia-390xx-dkms opencl-nvidia-390xx lib32-opencl-nvidia-390xx lib32-nvidia-390xx-utils nvidia-390xx-utils nvidia-390xx
 
 # Enabling daemons and starting them for my main packages.
 sudo systemctl enable tor.service && sudo systemctl start tor.service
