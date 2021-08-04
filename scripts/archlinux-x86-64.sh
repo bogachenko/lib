@@ -10,7 +10,10 @@ FONT='Noto Sans'
 FONTM='Noto Sans Mono'
 FONTMM='Noto Sans Medium'
 
-# Installing the AUR repository.
+# Clear the console.
+clear
+
+# Installing the Arch User Repository.
 cd /tmp
 git clone https://aur.archlinux.org/package-query.git
 cd package-query/
@@ -26,17 +29,22 @@ curl -O https://blackarch.org/strap.sh
 chmod +x strap.sh
 sudo ./strap.sh
 
-# Updating repository data and installing updates.
+# Installing updates and updating the data repositories.
+yaourt -Syua
 sudo pacman -Syyuu
 
-# Installing main packages from the AUR repository.
+# Installing main packages from the Arch User Repository.
 yaourt -S peerflix nvidia-390xx-dkms lib32-nvidia-390xx-utils opencl-nvidia-390xx lib32-opencl-nvidia-390xx
 
 # Installing main packages.
-sudo pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq rxvt-unicode unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen imagemagick libjpeg-turbo breeze-icons chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa onboard pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc opera xf86-input-synaptics gnome networkmanager usb_modeswitch modemmanager rp-pppoe bumblebee xf86-video-intel lib32-virtualgl virtualgl bbswitch primus
+sudo pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq xfce4 unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc opera xf86-input-synaptics rp-pppoe bumblebee xf86-video-intel lib32-virtualgl virtualgl bbswitch primus lib32-primus lib32-alsa-lib lib32-alsa-plugins steam steam-native-runtime retroarch libretro
 
 # Getting root permission.
 su
+
+# Change the shell.
+chsh -s /bin/zsh $TELLUSER
+chsh -s /bin/zsh root
 
 # Installing Russian localization for the system.
 cat > /etc/vconsole.conf <<EOF
@@ -76,6 +84,9 @@ echo 'BusID "PCI:01:00:0"' > /etc/bumblebee/xorg.conf.nvidia
 # Exiting superuser mode.
 exit
 
+# Fill in the information for GECOS.
+sudo chfn $TELLUSER
+
 # Enabling daemons and starting them for my main packages.
 sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
@@ -85,8 +96,6 @@ sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
 sudo systemctl disable hostapd.service && sudo systemctl stop hostapd.service
 sudo systemctl disable dnsmasq.service && sudo systemctl stop dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
-sudo systemctl enable NetworkManager.service && sudo systemctl start NetworkManager.service
-sudo systemctl enable ModemManager.service && sudo systemctl start ModemManager.service
 sudo systemctl enable bumblebeed.service
 pulseaudio -k && pulseaudio --start
 
