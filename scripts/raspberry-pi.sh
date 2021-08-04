@@ -30,26 +30,28 @@ curl -O https://blackarch.org/strap.sh
 chmod +x strap.sh
 sudo ./strap.sh
 
-# Updating system data.
+# Installing updates and updating the data repositories.
 yaourt -Syua
+sudo pacman -Syyuu
 
-# Installing main packages from the AUR repository.
+# Installing main packages from the Arch User Repository.
 yaourt -S peerflix
 
-# Refresh mirrors for the pacman.
+# Sorting mirrors for the pacman package manager.
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 sudo pacman-mirrors --country Russia
 
-# Updating repository data and installing updates.
-sudo pacman -Syyuu
-
-# Installing main packages.
+# Installing core packages.
 sudo pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli xdg-user-dirs gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-utils mathjax youtube-dl pcmanfm-qt python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen imagemagick dunst libjpeg-turbo capitaine-cursors breeze-icons chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa lxqt-archiver onboard pulseaudio-bluetooth pulseaudio-equalizer
 
-# Getting root permission.
+# Getting root permissions.
 su
 
-# Installing Russian localization for the system.
+# Change the shell.
+chsh -s /bin/zsh $TELLUSER
+chsh -s /bin/zsh root
+
+# Russification of the system.
 cat > /etc/vconsole.conf <<EOF
 FONT=ter-k16n
 KEYMAP=ru
@@ -77,7 +79,7 @@ cat > /etc/environment <<EOF
 QT_QPA_PLATFORMTHEME="qt5ct"
 EOF
 
-# Installing the theme.
+# Configuring configuration files for GTK themes.
 cat > /usr/share/gtk-2.0/gtkrc <<EOF
 gtk-icon-theme-name="Breeze"
 gtk-theme-name="Adwaita"
@@ -128,14 +130,14 @@ cp /usr/share/gtk-2.0/gtkrc ~/.gtkrc-2.0
 cp /usr/share/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
 cp /usr/share/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini
 
-# Automatic login.
+# Automatic login to the system.
 cat > /etc/sddm.conf <<EOF
 [Autologin]
 User=$TELLUSER
 Session=i3.desktop
 EOF
 
-# Setting the Hackneyed cursor by default.
+# Setting the Capitaine cursor by default.
 cat > /usr/share/icons/default/index.theme <<EOF
 [Icon Theme] 
 Inherits=capitaine-cursors-light
@@ -146,11 +148,7 @@ echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
 echo "forward-socks4 / localhost:9050 ." >> /etc/privoxy/config
 echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
 
-# Change the shell.
-chsh -s /bin/zsh $TELLUSER
-chsh -s /bin/zsh root
-
-# Setting the location of the Wi-Fi point.
+# Wi-Fi hotspot.
 mv /etc/dnsmasq.conf /etc/dnsmasq.conf.backup
 mv /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.backup
 systemctl stop hostapd.service
@@ -235,7 +233,7 @@ EOF
 # Exiting superuser mode.
 exit
 
-# Enabling daemons and starting them for my main packages.
+# Enabling daemons.
 sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable sshd.service && sudo systemctl start sshd.service
@@ -279,7 +277,7 @@ URxvt.cursorBlink: true
 EOF
 xrdb -merge ~/.Xresources
 
-# Installing my user.js file in Firefox.
+# Installing the configuration file user.js for Firefox
 cd /tmp
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
 mv /tmp/user.js ~/.mozilla/firefox/$TELLUSER/user.js
@@ -446,7 +444,7 @@ colors {
 exec_always --no-startup-id xsetroot -solid "#003760"
 EOF
 
-# Setting up a configuration file for the Vim program.
+# Configuration for the Vim program.
 cat > ~/.vimrc <<EOF
 set number
 syntax on
@@ -457,7 +455,7 @@ set encoding=utf8
 EOF
 sudo cp ~/.vimrc /root/.vimrc
 
-# Setting up a configuration file for the Wget program.
+# Configuration for the Wget program.
 cat > ~/.wgetrc <<EOF
 tries = 3
 retry_connrefused = on
@@ -466,13 +464,13 @@ robots = off
 EOF
 sudo cp ~/.wgetrc /root/.wgetrc
 
-# Setting up a configuration file for the cURL program.
+# Configuration for the cURL program.
 cat > ~/.curlrc <<EOF
 user_agent = $UA
 EOF
 sudo cp ~/.curlrc /root/.curlrc
 
-# Setting up a configuration file for the Zsh program.
+# Configuration for the Zsh shell.
 cat > ~/.zshrc <<EOF
 PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
 

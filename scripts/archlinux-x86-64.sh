@@ -39,14 +39,14 @@ yaourt -S peerflix nvidia-390xx-dkms lib32-nvidia-390xx-utils opencl-nvidia-390x
 # Installing main packages.
 sudo pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq xfce4 unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc opera xf86-input-synaptics rp-pppoe bumblebee xf86-video-intel lib32-virtualgl virtualgl bbswitch primus lib32-primus lib32-alsa-lib lib32-alsa-plugins steam steam-native-runtime retroarch libretro
 
-# Getting root permission.
+# Getting root permissions.
 su
 
 # Change the shell.
 chsh -s /bin/zsh $TELLUSER
 chsh -s /bin/zsh root
 
-# Installing Russian localization for the system.
+# Russification of the system.
 cat > /etc/vconsole.conf <<EOF
 FONT=ter-k16n
 KEYMAP=ru
@@ -87,7 +87,7 @@ exit
 # Fill in the information for GECOS.
 sudo chfn $TELLUSER
 
-# Enabling daemons and starting them for my main packages.
+# Enabling daemons.
 sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable sshd.service && sudo systemctl start sshd.service
@@ -102,7 +102,7 @@ pulseaudio -k && pulseaudio --start
 # Adding to groups.
 sudo gpasswd -a $TELLUSER bumblebee
 
-# Installing my user.js file in Firefox.
+# Installing the configuration file user.js for Firefox
 cd /tmp
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
 mv /tmp/user.js ~/.mozilla/firefox/$TELLUSER/user.js
@@ -110,7 +110,7 @@ mv /tmp/user.js ~/.mozilla/firefox/$TELLUSER/user.js
 # Create user directories.
 xdg-user-dirs-update
 
-# Configuring the Xresources file.
+# Configuration for the Xresources file.
 cat > ~/.Xresources <<EOF
 Xft.dpi: 96
 Xft.antialias: 1
@@ -138,7 +138,7 @@ URxvt.cursorBlink: true
 EOF
 xrdb -merge ~/.Xresources
 
-# Setting up a configuration file for the Zsh program.
+# Configuration for the Zsh shell.
 cat > ~/.zshrc <<EOF
 PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
 
