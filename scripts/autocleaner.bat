@@ -1,8 +1,11 @@
 @ECHO	off
 :: Edge
-del C:\Users\bogachenko\AppData\Local\Microsoft\Edge\"User Data"\Default\Cache\*
-del C:\Users\bogachenko\AppData\Local\Microsoft\Edge\"User Data"\Default\GPUCache\*
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache\*"
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\GPUCache\*"
 :: IE
-del C:\Users\bogachenko\AppData\Local\Microsoft\Windows\INetCache\*
+del "%LOCALAPPDATA%\Microsoft\Windows\INetCache\*"
 :: Firefox
-del C:\Users\bogachenko\AppData\Roaming\Mozilla\Firefox\Profiles\bogachenko\formhistory.sqlite
+del "%APPDATA%\Mozilla\Firefox\Profiles\*\formhistory.sqlite"
+del "%APPDATA%\Mozilla\Firefox\Profiles\bogachenko\sessionCheckpoints.json"
+del "%APPDATA%\Mozilla\Firefox\Profiles\bogachenko\sessionstore-backups\recovery.baklz4"
+del "%APPDATA%\Mozilla\Firefox\Profiles\bogachenko\sessionstore-backups\recovery.jsonlz4"
