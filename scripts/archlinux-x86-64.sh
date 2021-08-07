@@ -102,7 +102,7 @@ pulseaudio -k && pulseaudio --start
 # Adding to groups.
 sudo gpasswd -a $TELLUSER bumblebee
 
-# Installing the configuration file user.js for Firefox
+# Installing the configuration file user.js for Firefox.
 cd /tmp
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
 mv /tmp/user.js ~/.mozilla/firefox/$TELLUSER/user.js
@@ -176,5 +176,5 @@ sudo paccache -r
 # Clear the console.
 clear
 
-# Reboot
+# Reboot.
 sudo reboot
