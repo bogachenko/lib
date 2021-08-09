@@ -3,23 +3,26 @@
 RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache" /S /Q
 RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\GPUCache" /S /Q
 :: IE
-RD "%LOCALAPPDATA%\Microsoft\Windows\INetCache\" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Windows\INetCache" /S /Q
 :: Firefox
 DEL "%APPDATA%\Mozilla\Firefox\Profiles\%username%\formhistory.sqlite" /S /Q
 DEL "%APPDATA%\Mozilla\Firefox\Profiles\%username%\sessionCheckpoints.json" /S /Q
-DEL "%APPDATA%\Mozilla\Firefox\Profiles\%username%\sessionstore-backups\recovery.baklz4" /S /Q
-DEL "%APPDATA%\Mozilla\Firefox\Profiles\%username%\sessionstore-backups\recovery.jsonlz4" /S /Q
+DEL "%APPDATA%\Mozilla\Firefox\Profiles\%username%\favicons.sqlite" /S /Q
+DEL "%APPDATA%\Mozilla\Firefox\Profiles\%username%\favicons.sqlite-shm" /S /Q
+DEL "%APPDATA%\Mozilla\Firefox\Profiles\%username%\favicons.sqlite-wal" /S /Q
+DEL "%APPDATA%\Mozilla\Firefox\Profiles\%username%\permissions.sqlite" /S /Q
 RD "%ProgramData%\Mozilla\" /S /Q
 RD "%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%username%\" /S /Q
 RD "%APPDATA%\Mozilla\Extensions" /S /Q
 RD "%APPDATA%\Mozilla\SystemExtensionsDev" /S /Q
 RD "%APPDATA%\Mozilla\Firefox\Crash Reports" /S /Q
 RD "%APPDATA%\Mozilla\Firefox\Pending Pings" /S /Q
-RD "%APPDATA%\Mozilla\Firefox\Profiles\%username%\crashes"
-RD "%APPDATA%\Mozilla\Firefox\Profiles\%username%\minidumps"
-RD "%APPDATA%\Mozilla\Firefox\Profiles\%username%\datareporting"
-RD "%APPDATA%\Mozilla\Firefox\Profiles\%username%\sessionstore-backups"
-RD "%APPDATA%\Mozilla\Firefox\Profiles\%username%\shader-cache"
+RD "%APPDATA%\Mozilla\Firefox\Profiles\%username%\crashes" /S /Q
+RD "%APPDATA%\Mozilla\Firefox\Profiles\%username%\minidumps" /S /Q
+RD "%APPDATA%\Mozilla\Firefox\Profiles\%username%\datareporting" /S /Q
+RD "%APPDATA%\Mozilla\Firefox\Profiles\%username%\sessionstore-backups" /S /Q
+RD "%APPDATA%\Mozilla\Firefox\Profiles\%username%\shader-cache" /S /Q
+DEL "%APPDATA%\Mozilla\Firefox\Profiles\%username%\shield-preference-experiments.json" /S /Q
 :: Opera
 RD "%LOCALAPPDATA%\Opera Software\Opera Stable\cache" /S /Q
 RD "%LOCALAPPDATA%\Opera Software\Opera Stable\System Cache" /S /Q
