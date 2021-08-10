@@ -64,9 +64,21 @@ Call :LGPO_FILE reg add "HKLM\SOFTWARE\Policies\Microsoft\SQMClient\Windows" /v 
 
 :: Диагностические данные.
 Call :LGPO_FILE reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
+Call :LGPO_FILE reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
+Call :LGPO_FILE reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener" /v "Start" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\SQMLogger" /v "Start" /t REG_DWORD /d 0 /f
 
 :: Дистанционного отслеживания приложений.
 Call :LGPO_FILE reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v "AITEnable" /t REG_DWORD /d 0 /f
 
-:: Инвентаризация программ и файлов в системе.
+:: Cборщик перечней программ.
 Call :LGPO_FILE reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v "DisableInventory" /t REG_DWORD /d 1 /f
+del /f /q %ProgramData%\Microsoft\Diagnosis\ETLLogs\AutoLogger\AutoLogger-Diagtrack-Listener.etl
+
+:: Уведомления об отзывах.
+Call :LGPO_FILE reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d 1 /f
+
+:: Телеметрия длля проверки активации Windows.
+Call :TrustedInstaller "reg add ""HKLM\SOFTWARE\Classes\AppID\slui.exe"" /v ""NoGenTicket"" /t REG_DWORD /d 1 /f"
