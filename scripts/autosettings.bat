@@ -57,6 +57,18 @@ SC delete SensorService
 SC config "SensorDataService" start=disabled
 SC stop SensorDataService
 SC delete SensorDataService
+SC config "WSearch" start=disabled
+SC stop WSearch
+SC delete WSearch
+
+REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v SearchboxTaskbarMode /t REG_DWORD /d 0 /f
+Dism /online /Disable-Feature /FeatureName:"SearchEngine-Client-Package" /Remove /norestart
+REG delete "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "CortanaEnabled" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "CortanaEnabled" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 0 /f
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /V "DisableUAR" /T REG_DWORD /D 1 /F
 reg delete "HKLM\SOFTWARE\Policies\Microsoft\SQMClient\Windows" /V "StudyId" /F
 REG ADD "HKLM\SOFTWARE\Policies\Microsoft\SQMClient\Windows" /V "CEIPEnable" /T REG_DWORD /D 0 /F
