@@ -12,5 +12,6 @@
     "editor.cursorSmoothCaretAnimation": true,
     "editor.minimap.enabled": false,
     "workbench.welcomePage.walkthroughs.openOnInstall": false,
-    "workbench.tips.enabled": false
+    "workbench.tips.enabled": false,
+    "workbench.startupEditor": "none"
 }

@@ -347,6 +347,7 @@ user_pref("dom.battery.enabled", false);
 // Безопасный просмотр
 user_pref("browser.safebrowsing.malware.enabled", false);
 user_pref("browser.safebrowsing.phishing.enabled", false);
+user_pref("mail.phishing.detection.enabled", false);
 user_pref("browser.safebrowsing.allowOverride", false);
 user_pref("browser.safebrowsing.downloads.enabled", false);
 user_pref("browser.safebrowsing.blockedURIs.enabled", false);
