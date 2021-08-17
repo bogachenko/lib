@@ -612,14 +612,24 @@ user_pref("browser.region.update.enabled", false);
 
 // Permission settings for sites
 //		0 = Always ask
-//		0 = Allow
-//		0 = Block
+//		1 = Allow
+//		2 = Block
 // Настройки разрешения для сайтов
 //		0 = Всегда спрашивать
-//		0 = Разрешать
-//		0 = Блокировать
+//		1 = Разрешать
+//		2 = Блокировать
 user_pref("permissions.default.geo", 2);
 user_pref("permissions.default.camera", 2);
 user_pref("permissions.default.desktop-notification", 2);
 user_pref("permissions.default.microphone", 2);
 user_pref("permissions.default.xr", 2);
+
+// Icon mode
+//		0 = Normal
+//		1 = Compact
+//		2 = Large
+// Режим иконок
+//		0 = Обычный
+//		1 = Компактный
+//		2 = Большой
+user_pref("browser.uidensity", 2);

@@ -580,12 +580,12 @@ user_pref("browser.region.update.enabled", false);
 
 // Permission settings for sites
 //		0 = Always ask
-//		0 = Allow
-//		0 = Block
+//		1 = Allow
+//		2 = Block
 // Настройки разрешения для сайтов
 //		0 = Всегда спрашивать
-//		0 = Разрешать
-//		0 = Блокировать
+//		1 = Разрешать
+//		2 = Блокировать
 user_pref("permissions.default.geo", 2);
 user_pref("permissions.default.camera", 2);
 user_pref("permissions.default.desktop-notification", 2);
