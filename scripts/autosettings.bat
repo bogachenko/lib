@@ -61,3 +61,17 @@ SC config "WSearch" start=disabled
 SC stop WSearch
 SC delete WSearch
 
+powershell.exe -command "Get-AppxPackage *officehub* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *skypeapp* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *solitairecollection* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *onenote* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *people* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *bingweather* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *xboxapp* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *zunevideo* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *zunemusic* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *feedbackhub* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *mixedreality* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *stickynotes* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *getstarted* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage *gethelp* | Remove-AppxPackage"
