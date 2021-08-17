@@ -1,65 +1,65 @@
 @echo off
 
-SC config "DiagTrack" start=disabled
-SC stop DiagTrack
-SC delete DiagTrack
-SC config "dmwappushservice" start=disabled
-SC stop dmwappushservice
-SC delete dmwappushservice
-SC config "diagnosticshub.standardcollector.service" start=disabled
-SC stop diagnosticshub.standardcollector.service
-SC delete diagnosticshub.standardcollector.service
-SC config "DcpSvc" start=disabled
-SC stop DcpSvc
-SC delete DcpSvc
-SC config "NcbService" start=disabled
-SC stop NcbService
-SC delete NcbService
-SC config "XblGameSave" start=disabled
-SC stop XblGameSave
-SC delete XblGameSave
-SC config "XblAuthManager" start=disabled
-SC stop XblAuthManager
-SC delete XblAuthManager
-SC config "XboxNetApiSvc" start=disabled
-SC stop XboxNetApiSvc
-SC delete XboxNetApiSvc
-SC config "CDPSvc" start=disabled
-SC stop CDPSvc
-SC delete CDPSvc
-SC config "MapsBroker" start=disabled
-SC stop MapsBroker
-SC delete MapsBroker
-SC config "WalletService" start=disabled
-SC stop WalletService
-SC delete WalletService
-SC config "NvTelemetryContainer" start=disabled
-SC stop NvTelemetryContainer
-SC delete NvTelemetryContainer
-SC config "WMPNetworkSvc" start=disabled
-SC stop WMPNetworkSvc
-SC delete WMPNetworkSvc
-SC config "wcncsvc" start=disabled
-SC stop wcncsvc
-SC delete wcncsvc
-SC config "SensrSvc" start=disabled
-SC stop SensrSvc
-SC delete SensrSvc
-SC config "WbioSrvc" start=disabled
-SC stop WbioSrvc
-SC delete WbioSrvc
-SC config "RetailDemo" start=disabled
-SC stop RetailDemo
-SC delete RetailDemo
-SC config "SensorService" start=disabled
-SC stop SensorService
-SC delete SensorService
-SC config "SensorDataService" start=disabled
-SC stop SensorDataService
-SC delete SensorDataService
-SC config "WSearch" start=disabled
-SC stop WSearch
-SC delete WSearch
+sc config "DiagTrack" start=disabled
+sc stop DiagTrack
+sc delete DiagTrack
+sc config "dmwappushservice" start=disabled
+sc stop dmwappushservice
+sc delete dmwappushservice
+sc config "diagnosticshub.standardcollector.service" start=disabled
+sc stop diagnosticshub.standardcollector.service
+sc delete diagnosticshub.standardcollector.service
+sc config "DcpSvc" start=disabled
+sc stop DcpSvc
+sc delete DcpSvc
+sc config "NcbService" start=disabled
+sc stop NcbService
+sc delete NcbService
+sc config "XblGameSave" start=disabled
+sc stop XblGameSave
+sc delete XblGameSave
+sc config "XblAuthManager" start=disabled
+sc stop XblAuthManager
+sc delete XblAuthManager
+sc config "XboxNetApiSvc" start=disabled
+sc stop XboxNetApiSvc
+sc delete XboxNetApiSvc
+sc config "CDPSvc" start=disabled
+sc stop CDPSvc
+sc delete CDPSvc
+sc config "MapsBroker" start=disabled
+sc stop MapsBroker
+sc delete MapsBroker
+sc config "WalletService" start=disabled
+sc stop WalletService
+sc delete WalletService
+sc config "NvTelemetryContainer" start=disabled
+sc stop NvTelemetryContainer
+sc delete NvTelemetryContainer
+sc config "WMPNetworkSvc" start=disabled
+sc stop WMPNetworkSvc
+sc delete WMPNetworkSvc
+sc config "wcncsvc" start=disabled
+sc stop wcncsvc
+sc delete wcncsvc
+sc config "SensrSvc" start=disabled
+sc stop SensrSvc
+sc delete SensrSvc
+sc config "WbioSrvc" start=disabled
+sc stop WbioSrvc
+sc delete WbioSrvc
+sc config "RetailDemo" start=disabled
+sc stop RetailDemo
+sc delete RetailDemo
+sc config "SensorService" start=disabled
+sc stop SensorService
+sc delete SensorService
+sc config "SensorDataService" start=disabled
+sc stop SensorDataService
+sc delete SensorDataService
+sc config "WSearch" start=disabled
+sc stop WSearch
+sc delete WSearch
 
 powershell.exe -command "Get-AppxPackage -allusers *officehub* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *skypeapp* | Remove-AppxPackage"
@@ -81,3 +81,21 @@ powershell.exe -command "Get-AppxPackage -allusers *xboxgamingoverlay* | Remove-
 powershell.exe -command "Get-AppxPackage -allusers *xboxgameoverlay* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *yourphone* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *windowsmaps* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *Windows.Wallet* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *WindowsCamera* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *Microsoft3DViewer* | Remove-AppxPackage"
+
+taskkill /f /im OneDrive.exe > NUL 2>&1
+%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
+rd "%USERPROFILE%\OneDrive" /Q /S > NUL 2>&1
+rd "C:\OneDriveTemp" /Q /S > NUL 2>&1
+rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S > NUL 2>&1
+rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S > NUL 2>&1
+reg load HKLM\DEF %2
+reg delete HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "OneDriveSetup" /f
+reg delete HKEY_LOCAL_MACHINE\DEF\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "OneDriveSetup" /f
+reg delete HKEY_USERS\S-1-5-19\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "OneDriveSetup" /f
+reg delete HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "OneDriveSetup" /f
+reg unload HKLM\DEF
