@@ -69,6 +69,26 @@ sc config "WerSvc" start=disabled
 sc stop WerSvc
 sc delete WerSvc
 sc config "DusmSvc" start=disabled
+sc stop DusmSvc
+sc delete DusmSvc
+sc config "XboxGipSvc" start=disabled
+sc stop XboxGipSvc
+sc delete XboxGipSvc
+sc config "XblAuthManager" start=disabled
+sc stop XblAuthManager
+sc delete XblAuthManager
+sc config "XblGameSave" start=disabled
+sc stop XblGameSave
+sc delete XblGameSave
+sc config "XboxNetApiSvc" start=disabled
+sc stop XboxNetApiSvc
+sc delete XboxNetApiSvc
+sc config "LicenseManager" start=disabled
+sc stop LicenseManager
+sc delete LicenseManager
+sc config "WdiServiceHost" start=disabled
+sc stop WdiServiceHost
+sc delete WdiServiceHost
 :: sc config "WinDefend" start=disabled
 :: sc stop WinDefend
 :: sc delete WinDefend
@@ -146,6 +166,7 @@ schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable
 schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)" /disable
 schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable
 schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
+schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTask" /disable
 
 taskkill /f /im compattelrunner.exe
 taskkill /f /im smartscreen.exe
@@ -236,3 +257,4 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManage
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarViewMode" /t REG_DWORD /d "2" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d "0" /f
