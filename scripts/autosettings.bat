@@ -1,4 +1,6 @@
 @echo off
+set "params=%*"
+cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
 sc config "DiagTrack" start=disabled
 sc stop DiagTrack
@@ -86,6 +88,9 @@ powershell.exe -command "Get-AppxPackage -allusers *Windows.Wallet* | Remove-App
 powershell.exe -command "Get-AppxPackage -allusers *WindowsCamera* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *Microsoft3DViewer* | Remove-AppxPackage"
+takeown /F "C:\Program Files\WindowsApps" /A /R /D Y
+:: cd C:\Program Files\WindowsApps
+:: rd 
 powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:userprofile\Desktop\Apps_List.txt""
 
 taskkill /f /im OneDrive.exe > NUL 2>&1
@@ -101,44 +106,7 @@ reg delete HKEY_USERS\S-1-5-19\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v 
 reg delete HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "OneDriveSetup" /f
 reg unload HKLM\DEF
 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f
-taskkill /f /im MpCmdRun.exe >nul 2>&1
-taskkill /f /im MSASCuiL.exe >nul 2>&1
-taskkill /f /im MSASCui.exe >nul 2>&1
-reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "WindowsDefender" /f 2>nul
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\AutorunsDisabled" /v "WindowsDefender" /t REG_EXPAND_SZ /d "\"%%ProgramFiles%%\Windows Defender\MSASCuiL.exe\"" /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{09A47860-11B0-4DA5-AFA5-26D86198A780}" /t REG_SZ /f
-tasklist /FO TABLE /NH /FI "ImageName EQ MsMpEng.exe" 2>nul | find /i "MsMpEng.exe" >nul && set "Defender=YES"
-if "!Defender!"=="YES" (
- Call :TrustedInstaller "net stop windefend"
- TIMEOUT /T 5 /NOBREAK >nul
- tasklist /FO TABLE /NH /FI "ImageName EQ MsMpEng.exe" 2>nul | find /i "MsMpEng.exe" >nul && TIMEOUT /T 5 /NOBREAK >nul
- tasklist /FO TABLE /NH /FI "ImageName EQ MsMpEng.exe" 2>nul | find /i "MsMpEng.exe" >nul && TIMEOUT /T 10 /NOBREAK >nul
-)
-set "Defender="
-tasklist /FO TABLE /NH /FI "ImageName EQ MsMpEng.exe" 2>nul | find /i "MsMpEng.exe" >nul && set "Defender=YES"
-if "!Defender!"=="YES" (
- Call :TrustedInstaller "net stop windefend"
- TIMEOUT /T 5 /NOBREAK >nul
- tasklist /FO TABLE /NH /FI "ImageName EQ MsMpEng.exe" 2>nul | find /i "MsMpEng.exe" >nul && TIMEOUT /T 5 /NOBREAK >nul
- tasklist /FO TABLE /NH /FI "ImageName EQ MsMpEng.exe" 2>nul | find /i "MsMpEng.exe" >nul && TIMEOUT /T 10 /NOBREAK >nul
-)
-set "Defender="
-tasklist /FO TABLE /NH /FI "ImageName EQ MsMpEng.exe" 2>nul | find /i "MsMpEng.exe" >nul && set "Defender=YES"
-if "!Defender!"=="" (
- Call :TrustedInstaller "reg add "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d 4 /f"
- Call :TrustedInstaller "reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d 4 /f"
- Call :TrustedInstaller "reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d 4 /f"
- Call :TrustedInstaller "reg add "HKLM\SYSTEM\CurrentControlSet\Services\Sense" /v "Start" /t REG_DWORD /d 4 /f"
- Call :TrustedInstaller "reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdBoot" /v "Start" /t REG_DWORD /d 4 /f"
- Call :TrustedInstaller "reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdFilter" /v "Start" /t REG_DWORD /d 4 /f"
- schtasks /Change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /Disable >nul 2>&1
- schtasks /Change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /Disable >nul 2>&1
- schtasks /Change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /Disable >nul 2>&1
- schtasks /Change /TN "\Microsoft\Windows\Windows Defender\Windows Defender Verification" /Disable >nul 2>&1
-) else (
- echo Restart your computer and try again.
-)
+
 sc config "WinDefend" start=disabled
 sc stop WinDefend
 sc delete WinDefend
