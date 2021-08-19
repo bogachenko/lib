@@ -124,7 +124,7 @@ powershell.exe -command "Get-AppxPackage -allusers *Microsoft3DViewer* | Remove-
 takeown /F "C:\Program Files\WindowsApps" /A /R /D Y
 :: cd C:\Program Files\WindowsApps
 :: rd 
-powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:userprofile\Desktop\Apps_List.txt""
+:: powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:userprofile\Desktop\Apps_List.txt""
 
 taskkill /f /im OneDrive.exe > NUL 2>&1
 %SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
@@ -167,9 +167,6 @@ schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance m
 schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable
 schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
 schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTask" /disable
-
-taskkill /f /im compattelrunner.exe > NUL 2>&1
-taskkill /f /im smartscreen.exe > NUL 2>&1
 
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\AeDebug" /v "Auto" /t REG_SZ /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DODownloadMode" /t REG_DWORD /d "0" /f
@@ -307,3 +304,12 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableActivityFeed
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{645FF040-5081-101B-9F08-00AA002F954E}" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /t REG_DWORD /d "1" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BackgroundAppGlobalToggle" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V TaskbarSmallIcons /T REG_DWORD /D "1" /F
+
+taskkill /f /im compattelrunner.exe > NUL 2>&1
+taskkill /f /im smartscreen.exe > NUL 2>&1
+taskkill /f /im explorer.exe
+start explorer.exe
+exit
