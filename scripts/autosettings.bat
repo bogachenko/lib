@@ -122,9 +122,12 @@ powershell.exe -command "Get-AppxPackage -allusers *WindowsCamera* | Remove-Appx
 powershell.exe -command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *Microsoft3DViewer* | Remove-AppxPackage"
 takeown /F "C:\Program Files\WindowsApps" /A /R /D Y
-:: cd C:\Program Files\WindowsApps
-:: rd 
-:: powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:userprofile\Desktop\Apps_List.txt""
+powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.549981C3F5F10_*"
+powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.BingWeather_*"
+powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.GetHelp_*"
+powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.Getstarted_*"
+powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.MicrosoftSolitaireCollection_*"
+powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:userprofile\Desktop\Apps_List.txt""
 
 taskkill /f /im OneDrive.exe > NUL 2>&1
 %SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
@@ -133,10 +136,10 @@ rd "C:\OneDriveTemp" /Q /S > NUL 2>&1
 rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S > NUL 2>&1
 rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S > NUL 2>&1
 reg load HKLM\DEF %2
-reg delete HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "OneDriveSetup" /f
-reg delete HKEY_LOCAL_MACHINE\DEF\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "OneDriveSetup" /f
-reg delete HKEY_USERS\S-1-5-19\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "OneDriveSetup" /f
-reg delete HKEY_USERS\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "OneDriveSetup" /f
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f
+reg delete "HKLM\DEF\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f
+reg delete "HKU\S-1-5-19\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f
+reg delete "HKU\S-1-5-20\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f
 reg unload HKLM\DEF
 
 schtasks /change /tn "CCleaner Update" /disable
