@@ -121,34 +121,37 @@ powershell.exe -command "Get-AppxPackage -allusers *Windows.Wallet* | Remove-App
 powershell.exe -command "Get-AppxPackage -allusers *WindowsCamera* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *Microsoft3DViewer* | Remove-AppxPackage"
+cd "C:\Program Files\WindowsApps"
 takeown /F "C:\Program Files\WindowsApps" /A /R /D Y
-powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.549981C3F5F10_*"
-powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.BingWeather_*"
-powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.GetHelp_*"
-powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.Getstarted_*"
-powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.MicrosoftSolitaireCollection_*"
-powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.Microsoft3DViewer_*"
-powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.MicrosoftOfficeHub_*"
-powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.MicrosoftStickyNotes_*"
-powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.MixedReality.Portal_*"
-powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.Office.OneNote_*"
-powershell.exe -command "rm C:\Program Files\WindowsApps\Microsoft.People_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.ScreenSketch_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.SkypeApp_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.Wallet_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.WindowsCamera_*"
-powershell.exe -command "rm C:\Program Files\microsoft.windowscommunicationsapps_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.WindowsFeedbackHub_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.WindowsMaps_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.WindowsSoundRecorder_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.Xbox.TCUI_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.XboxApp_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.XboxGameOverlay_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.XboxIdentityProvider_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.XboxSpeechToTextOverlay_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.YourPhone_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.ZuneMusic_*"
-powershell.exe -command "rm C:\Program Files\Microsoft.ZuneVideo_*"
+takeown /F "C:\Program Files\WindowsApps\%~1_x86__8wekyb3d8bbwe" /A /R /D Y 
+takeown /F "C:\Program Files\WindowsApps\%~1_x64__8wekyb3d8bbwe" /A /R /D Y 
+powershell.exe -command "rm Microsoft.549981C3F5F10_*"
+powershell.exe -command "rm Microsoft.BingWeather_*"
+powershell.exe -command "rm Microsoft.GetHelp_*"
+powershell.exe -command "rm Microsoft.Getstarted_*"
+powershell.exe -command "rm Microsoft.MicrosoftSolitaireCollection_*"
+powershell.exe -command "rm Microsoft.Microsoft3DViewer_*"
+powershell.exe -command "rm Microsoft.MicrosoftOfficeHub_*"
+powershell.exe -command "rm Microsoft.MicrosoftStickyNotes_*"
+powershell.exe -command "rm Microsoft.MixedReality.Portal_*"
+powershell.exe -command "rm Microsoft.Office.OneNote_*"
+powershell.exe -command "rm Microsoft.People_*"
+powershell.exe -command "rm Microsoft.ScreenSketch_*"
+powershell.exe -command "rm Microsoft.SkypeApp_*"
+powershell.exe -command "rm Microsoft.Wallet_*"
+powershell.exe -command "rm Microsoft.WindowsCamera_*"
+powershell.exe -command "rm microsoft.windowscommunicationsapps_*"
+powershell.exe -command "rm Microsoft.WindowsFeedbackHub_*"
+powershell.exe -command "rm Microsoft.WindowsMaps_*"
+powershell.exe -command "rm Microsoft.WindowsSoundRecorder_*"
+powershell.exe -command "rm Microsoft.Xbox.TCUI_*"
+powershell.exe -command "rm Microsoft.XboxApp_*"
+powershell.exe -command "rm Microsoft.XboxGameOverlay_*"
+powershell.exe -command "rm Microsoft.XboxIdentityProvider_*"
+powershell.exe -command "rm Microsoft.XboxSpeechToTextOverlay_*"
+powershell.exe -command "rm Microsoft.YourPhone_*"
+powershell.exe -command "rm Microsoft.ZuneMusic_*"
+powershell.exe -command "rm Microsoft.ZuneVideo_*"
 powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:userprofile\Desktop\Apps_List.txt""
 
 taskkill /f /im OneDrive.exe > NUL 2>&1
@@ -339,9 +342,17 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcon
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BackgroundAppGlobalToggle" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSmallIcons" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\dmwappushservice" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\DPS" /v "Start" /t REG_DWORD /d "4" /f
 
 taskkill /f /im compattelrunner.exe > NUL 2>&1
 taskkill /f /im smartscreen.exe > NUL 2>&1
 taskkill /f /im explorer.exe
 start explorer.exe
+
+powercfg.exe -x -monitor-timeout-ac 10
+powercfg.exe -x -monitor-timeout-dc 5
+powercfg.exe -x -standby-timeout-ac 0
+powercfg.exe -x -standby-timeout-dc 0
+
 exit
