@@ -29,15 +29,18 @@ curl -O https://blackarch.org/strap.sh
 chmod +x strap.sh
 sudo ./strap.sh
 
+# Update mirrorlist.
+curl -sSL 'https://archlinux.org/mirrorlist/?country=RU&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on' | sed 's/^#Server/Server/g' > /etc/pacman.d/mirrorlist
+
 # Installing updates and updating the data repositories.
 yaourt -Syua
 sudo pacman -Syyuu
 
 # Installing main packages from the Arch User Repository.
-yaourt -S peerflix
+yaourt -S peerflix spotify 
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc xf86-input-synaptics rp-pppoe lib32-virtualgl virtualgl lib32-alsa-lib lib32-alsa-plugins steam steam-native-runtime retroarch libretro sddm xfce4 os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base networkmanager nm-connection-editor usb_modeswitch modemmanager network-manager-applet gvfs xdg-user-dirs
+sudo pacman -S --needed --noconfirm zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc xf86-input-synaptics rp-pppoe lib32-virtualgl virtualgl lib32-alsa-lib lib32-alsa-plugins steam steam-native-runtime retroarch libretro sddm xfce4 os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base networkmanager nm-connection-editor usb_modeswitch modemmanager network-manager-applet gvfs xdg-user-dirs php
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -85,7 +88,7 @@ chsh -s /bin/zsh root
 
 # Russification of the system.
 cat > /etc/vconsole.conf <<EOF
-FONT=ter-k16n
+FONT=cyr-sun16
 KEYMAP=ru
 EOF
 cat > /etc/locale.gen <<EOF
@@ -93,7 +96,7 @@ ru_RU.UTF-8 UTF-8
 en_US.UTF-8 UTF-8
 EOF
 locale-gen
-setfont ter-k16n
+setfont cyr-sun16
 localectl set-locale LANG="ru_RU.UTF-8"
 cat > /etc/X11/xorg.conf.d/00-keyboard.conf <<EOF
 Section "InputClass"
@@ -208,4 +211,10 @@ sudo paccache -r
 clear
 
 # Reboot.
-sudo reboot
+if [[ "$?" == "0" ]]; then
+  echo "Completed successfully."
+  read -r -p "Reboot now? [Y/n]" confirm
+  if [[ ! "$confirm" =~ ^(n|N) ]]; then
+    reboot
+  fi
+fi
