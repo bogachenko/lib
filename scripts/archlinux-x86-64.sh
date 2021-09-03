@@ -44,17 +44,28 @@ nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
 intel=$(lspci | grep -e VGA -e 3D | grep 'Intel' 2> /dev/null || echo '')
 vmware=$(lspci | grep -e VGA -e 3D | grep 'VMware' 2> /dev/null || echo '')
 if [[ -n "$vmware" ]]; then
-  sudo pacman -S --needed xf86-video-vesa
+sudo pacman -S --needed xf86-video-vesa
 fi
 if [[ -n "$nvidia" ]]; then
-  yaourt -S nvidia-390xx-dkms opencl-nvidia-390xx
-  yaourt -S lib32-nvidia-390xx-utils lib32-opencl-nvidia-390xx
+yaourt -S nvidia-390xx-dkms opencl-nvidia-390xx
+yaourt -S lib32-nvidia-390xx-utils lib32-opencl-nvidia-390xx
 fi
 if [[ -n "$intel" ]]; then
-  sudo pacman -S --needed xf86-video-intel intel-ucode
+sudo pacman -S --needed xf86-video-intel intel-ucode
 fi
 if [[ -n "$nvidia" && -n "$intel" ]]; then
-  sudo pacman -S --needed bumblebee bbswitch primus lib32-primus
+sudo pacman -S --needed bumblebee bbswitch primus lib32-primus
+cat > /etc/modprobe.d/killnouveau.conf <<EOF
+blacklist nouveau
+EOF
+sed -i -e "s/Driver=/Driver=nvidia/g" /etc/bumblebee/bumblebee.conf
+sed -i -e "s/Bridge=auto/Bridge=virtualgl/g" /etc/bumblebee/bumblebee.conf
+sed -i -e "s/MODULES=()/MODULES=(i915 bbswitch)/g" /etc/mkinitcpio.conf
+mkinitcpio -p linux
+sed -i -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\"/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet rcutree.rcu_idle_gp_delay=1\"/g" /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
+sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumblebee/xorg.conf.nvidia
+  
 fi
 
 # Getting root permissions.
@@ -89,18 +100,6 @@ Section "InputClass"
         Option "XkbOptions" "grp:alt_shift_toggle"
 EndSection
 EOF
-
-# Nvidia.
-cat > /etc/modprobe.d/killnouveau.conf <<EOF
-blacklist nouveau
-EOF
-sed -i -e "s/Driver=/Driver=nvidia/g" /etc/bumblebee/bumblebee.conf
-sed -i -e "s/Bridge=auto/Bridge=virtualgl/g" /etc/bumblebee/bumblebee.conf
-sed -i -e "s/MODULES=()/MODULES=(i915 bbswitch)/g" /etc/mkinitcpio.conf
-mkinitcpio -p linux
-sed -i -e "s/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="quiet rcutree.rcu_idle_gp_delay=1"/g" /etc/default/grub
-grub-mkconfig -o /boot/grub/grub.cfg
-sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumblebee/xorg.conf.nvidia
 
 # Convert SOCKS to HTTP proxy via Privoxy.
 echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
