@@ -352,7 +352,6 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "DisableLogonBackgr
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "SpynetReporting" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "SubmitSamplesConsent" /t REG_DWORD /d "1" /f
 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d "1" /f
 
 taskkill /f /im compattelrunner.exe > NUL 2>&1
 taskkill /f /im smartscreen.exe > NUL 2>&1
