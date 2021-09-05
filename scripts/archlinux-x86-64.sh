@@ -37,10 +37,10 @@ yaourt -Syua
 sudo pacman -Syyuu
 
 # Installing main packages from the Arch User Repository.
-yaourt -S peerflix spotify 
+yaourt -S peerflix spotify
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc xf86-input-synaptics rp-pppoe lib32-virtualgl virtualgl lib32-alsa-lib lib32-alsa-plugins steam steam-native-runtime retroarch libretro sddm xfce4 os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base networkmanager nm-connection-editor usb_modeswitch modemmanager network-manager-applet gvfs xdg-user-dirs php
+sudo pacman -S --needed --noconfirm zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc xf86-input-synaptics rp-pppoe lib32-virtualgl virtualgl lib32-alsa-lib lib32-alsa-plugins steam steam-native-runtime retroarch libretro sddm xfce4 os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base networkmanager nm-connection-editor usb_modeswitch modemmanager network-manager-applet gvfs xdg-user-dirs php ffmpeg
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -48,14 +48,25 @@ intel=$(lspci | grep -e VGA -e 3D | grep 'Intel' 2> /dev/null || echo '')
 amd=$(lspci | grep -e VGA -e 3D | grep 'AMD' 2> /dev/null || echo '')
 vmware=$(lspci | grep -e VGA -e 3D | grep 'VMware' 2> /dev/null || echo '')
 if [[ -n "$vmware" ]]; then
-sudo pacman -S --needed --noconfirm xf86-video-vesa
+sudo pacman -S --needed --noconfirm xf86-video-vesa xf86-video-vmware
 fi
 if [[ -n "$nvidia" ]]; then
-yaourt -S nvidia-390xx-dkms opencl-nvidia-390xx
+echo 'Please select the correct driver according to your graphics card:'
+select norleg in "Normal" "Legacy"; do
+case $norleg in
+Normal )
+sudo pacman -S --needed nvidia nvidia-utils opencl-nvidia
+sudo pacman -S --needed lib32-nvidia-utils lib32-opencl-nvidia
+;;
+Legacy )
+yaourt -S nvidia-390xx opencl-nvidia-390xx nvidia-390xx-utils
 yaourt -S lib32-nvidia-390xx-utils lib32-opencl-nvidia-390xx
+;;
+esac
+done
 fi
 if [[ -n "$intel" ]]; then
-sudo pacman -S --needed --noconfirm xf86-video-intel
+sudo pacman -S --needed --noconfirm xf86-video-intel vulkan-intel lib32-vulkan-intel
 sudo pacman -S --noconfirm intel-ucode --overwrite=/boot/intel-ucode.img
 fi
 if [[ -n "$nvidia" && -n "$intel" ]]; then
@@ -71,7 +82,7 @@ sudo sed -i -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\"/GRUB_CMDLINE_L
 sudo sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumblebee/xorg.conf.nvidia
 fi
 if [[ -n "$amd" ]]; then
-sudo pacman -S --needed --noconfirm xf86-video-amdgpu
+sudo pacman -S --needed --noconfirm xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon
 sudo pacman -S --noconfirm amd-ucode --overwrite=/boot/amd-ucode.img
 fi
 sudo grub-mkconfig -o /boot/grub/grub.cfg
