@@ -3,7 +3,7 @@
 # Arch Linux x86_64
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
-TELLUSER=$(whoami)
+USERNAME=$(whoami)
 PASSWD='N7GZiMD!2ZTaZWYj0mLV'
 UA='Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
 FONT='Noto Sans'
@@ -40,23 +40,23 @@ sudo pacman -Syyuu
 yaourt -S peerflix spotify
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc xf86-input-synaptics rp-pppoe lib32-virtualgl virtualgl lib32-alsa-lib lib32-alsa-plugins steam steam-native-runtime retroarch libretro sddm xfce4 os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base networkmanager nm-connection-editor usb_modeswitch modemmanager network-manager-applet gvfs xdg-user-dirs php ffmpeg
+sudo pacman -S --needed --noconfirm zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc xf86-input-synaptics rp-pppoe lib32-virtualgl virtualgl lib32-alsa-lib lib32-alsa-plugins steam steam-native-runtime retroarch libretro sddm xfce4 os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base networkmanager nm-connection-editor usb_modeswitch modemmanager network-manager-applet gvfs xdg-user-dirs php ffmpeg ttf-opensans xorg-xkill xorg-xinput libinput xf86-input-libinput qt5-wayland qt6-wayland xorg-xwayland mesa-libgl qbittorrent
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
 intel=$(lspci | grep -e VGA -e 3D | grep 'Intel' 2> /dev/null || echo '')
-amd=$(lspci | grep -e VGA -e 3D | grep 'AMD' 2> /dev/null || echo '')
 vmware=$(lspci | grep -e VGA -e 3D | grep 'VMware' 2> /dev/null || echo '')
 if [[ -n "$vmware" ]]; then
-sudo pacman -S --needed --noconfirm xf86-video-vesa xf86-video-vmware
+sudo pacman -S --needed --noconfirm xf86-video-vesa xf86-video-vmware open-vm-tools
+sudo systemctl enable vmtoolsd
 fi
 if [[ -n "$nvidia" ]]; then
 echo 'Please select the correct driver according to your graphics card:'
 select norleg in "Normal" "Legacy"; do
 case $norleg in
 Normal )
-sudo pacman -S --needed nvidia nvidia-utils opencl-nvidia
-sudo pacman -S --needed lib32-nvidia-utils lib32-opencl-nvidia
+sudo pacman -S --needed nvidia nvidia-utils opencl-nvidia libglvnd
+sudo pacman -S --needed lib32-nvidia-utils lib32-opencl-nvidia lib32-libglvnd
 ;;
 Legacy )
 yaourt -S nvidia-390xx opencl-nvidia-390xx nvidia-390xx-utils
@@ -66,7 +66,7 @@ esac
 done
 fi
 if [[ -n "$intel" ]]; then
-sudo pacman -S --needed --noconfirm xf86-video-intel vulkan-intel lib32-vulkan-intel
+sudo pacman -S --needed --noconfirm xf86-video-intel vulkan-intel lib32-vulkan-intel libvdpau-va-gl
 sudo pacman -S --noconfirm intel-ucode --overwrite=/boot/intel-ucode.img
 fi
 if [[ -n "$nvidia" && -n "$intel" ]]; then
@@ -81,10 +81,6 @@ sudo mkinitcpio -p linux
 sudo sed -i -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\"/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet rcutree.rcu_idle_gp_delay=1\"/g" /etc/default/grub
 sudo sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumblebee/xorg.conf.nvidia
 fi
-if [[ -n "$amd" ]]; then
-sudo pacman -S --needed --noconfirm xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon
-sudo pacman -S --noconfirm amd-ucode --overwrite=/boot/amd-ucode.img
-fi
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # Getting root permissions.
@@ -94,7 +90,7 @@ su
 ln -sf /usr/share/zoneinfo/Asia/Sakhalin /etc/localtime
 
 # Change the shell.
-chsh -s /bin/zsh $TELLUSER
+chsh -s /bin/zsh $USERNAME
 chsh -s /bin/zsh root
 
 # Russification of the system.
@@ -129,7 +125,7 @@ echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
 exit
 
 # Fill in the information for GECOS.
-sudo chfn $TELLUSER
+sudo chfn $USERNAME
 
 # Enabling daemons.
 sudo systemctl enable tor.service && sudo systemctl start tor.service
@@ -145,12 +141,12 @@ sudo systemctl enable bumblebeed.service
 pulseaudio -k && pulseaudio --start
 
 # Adding to groups.
-sudo gpasswd -a $TELLUSER bumblebee
+sudo gpasswd -a $USERNAME bumblebee
 
 # Installing the configuration file user.js for Firefox.
 cd /tmp
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
-mv /tmp/user.js ~/.mozilla/firefox/$TELLUSER/user.js
+mv /tmp/user.js ~/.mozilla/firefox/$USERNAME/user.js
 
 # Create user directories.
 xdg-user-dirs-update
