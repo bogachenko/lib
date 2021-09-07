@@ -632,4 +632,4 @@ user_pref("permissions.default.xr", 2);
 //		0 = Обычный
 //		1 = Компактный
 //		2 = Большой
-user_pref("browser.uidensity", 2);
+user_pref("browser.uidensity", 1);
