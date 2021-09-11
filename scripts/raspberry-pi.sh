@@ -4,7 +4,7 @@
 # Manjaro ARM Linux aarch64
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
-TELLUSER=$(whoami)
+USERNAME=$(whoami)
 PASSWD='N7GZiMD!2ZTaZWYj0mLV'
 UA='Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
 FONT='Noto Sans'
@@ -48,7 +48,7 @@ sudo pacman -S --needed zsh git vim htop neofetch net-tools tor privoxy cmake pk
 su
 
 # Change the shell.
-chsh -s /bin/zsh $TELLUSER
+chsh -s /bin/zsh $USERNAME
 chsh -s /bin/zsh root
 
 # Russification of the system.
@@ -125,7 +125,7 @@ gtk-xft-hintstyle=hintslight
 gtk-xft-rgba=rgb
 EOF
 mkdir -p ~/.config/gtk-{3.0,4.0}/
-chown $TELLUSER:$TELLUSER ~/.config/gtk-{3.0,4.0}/
+chown $USERNAME:$USERNAME ~/.config/gtk-{3.0,4.0}/
 cp /usr/share/gtk-2.0/gtkrc ~/.gtkrc-2.0
 cp /usr/share/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
 cp /usr/share/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini
@@ -133,7 +133,7 @@ cp /usr/share/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini
 # Automatic login to the system.
 cat > /etc/sddm.conf <<EOF
 [Autologin]
-User=$TELLUSER
+User=$USERNAME
 Session=i3.desktop
 EOF
 
@@ -170,7 +170,7 @@ EOF
 cat > /etc/hostapd/hostapd.conf <<EOF
 ctrl_interface=/run/hostapd
 interface=wlan0
-ssid=$TELLUSER
+ssid=$USERNAME
 ignore_broadcast_ssid=0
 driver=nl80211
 channel=11
@@ -280,13 +280,13 @@ xrdb -merge ~/.Xresources
 # Installing the configuration file user.js for Firefox.
 cd /tmp
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
-mv /tmp/user.js ~/.mozilla/firefox/$TELLUSER/user.js
+mv /tmp/user.js ~/.mozilla/firefox/$USERNAME/user.js
 
 # Downloading and installing Adguard Home.
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 
 # Fill in the information for GECOS.
-sudo chfn $TELLUSER
+sudo chfn $USERNAME
 
 # Configuring i3wm and i3status.
 mkdir -p ~/.config/i3status
