@@ -40,7 +40,7 @@ sudo pacman -Syyuu
 yaourt -S peerflix spotify
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc xf86-input-synaptics rp-pppoe lib32-virtualgl virtualgl lib32-alsa-lib lib32-alsa-plugins steam steam-native-runtime retroarch libretro sddm xfce4 os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base networkmanager nm-connection-editor usb_modeswitch modemmanager network-manager-applet gvfs xdg-user-dirs php ffmpeg ttf-opensans xorg-xkill xorg-xinput libinput xf86-input-libinput qt5-wayland qt6-wayland xorg-xwayland mesa-libgl qbittorrent
+sudo pacman -S --needed --noconfirm zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server ranger code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc xf86-input-synaptics rp-pppoe lib32-virtualgl virtualgl lib32-alsa-lib lib32-alsa-plugins steam steam-native-runtime retroarch libretro os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base networkmanager nm-connection-editor usb_modeswitch modemmanager network-manager-applet xdg-user-dirs php ffmpeg ttf-opensans xorg-xkill xorg-xinput libinput xf86-input-libinput qt5-wayland qt6-wayland xorg-xwayland mesa-libgl qbittorrent plasma
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -83,7 +83,7 @@ sudo sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumble
 fi
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-# Getting root permissions.
+# Entering superuser mode.
 su
 
 # Configuration the time zone.
@@ -136,7 +136,7 @@ sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
 sudo systemctl disable hostapd.service && sudo systemctl stop hostapd.service
 sudo systemctl disable dnsmasq.service && sudo systemctl stop dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
-sudo systemctl enable sddm.service
+#sudo systemctl enable sddm.service
 sudo systemctl enable bumblebeed.service
 pulseaudio -k && pulseaudio --start
 
