@@ -38,7 +38,7 @@ sudo pacman -Syyuu
 yaourt -S peerflix spotify
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base xdg-user-dirs php ffmpeg ttf-opensans xorg-xkill xorg-xinput libinput xf86-input-libinput xorg-xwayland mesa-libgl qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang networkmanager networkmanager-qt usb_modeswitch modemmanager modemmanager-qt plasma-nm weston wayland qt5-wayland qt6-wayland
+sudo pacman -S --needed --noconfirm xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk scrot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli gtk2 gtk3 gtk4 dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore perl npm nodejs terminus-font mesa mesa-demos qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base php ffmpeg ttf-opensans libinput xf86-input-libinput qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -53,12 +53,12 @@ echo 'Please select the correct driver according to your graphics card:'
 select norleg in "Normal" "Legacy"; do
 case $norleg in
 Normal )
-sudo pacman -S --needed nvidia libglvnd
+sudo pacman -S --needed nvidia-dkms libglvnd
 sudo pacman -S --needed lib32-nvidia-utils lib32-opencl-nvidia lib32-libglvnd
 sudo pacman -S virtualgl lib32-virtualgl
 ;;
 Legacy )
-yaourt -S nvidia-390xx libglvnd
+yaourt -S nvidia-390xx-dkms libglvnd
 yaourt -S lib32-nvidia-390xx-utils lib32-opencl-nvidia-390xx lib32-libglvnd
 sudo pacman -S virtualgl lib32-virtualgl
 ;;
@@ -149,9 +149,6 @@ sudo gpasswd -a $USERNAME bumblebee
 cd /tmp
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
 mv /tmp/user.js ~/.mozilla/firefox/$USERNAME/user.js
-
-# Create user directories.
-xdg-user-dirs-update
 
 # Configuration for the Xresources file.
 cat > ~/.Xresources <<EOF
