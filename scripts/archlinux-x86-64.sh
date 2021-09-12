@@ -35,10 +35,10 @@ yaourt -Syua
 sudo pacman -Syyuu
 
 # Installing main packages from the Arch User Repository.
-yaourt -S peerflix spotify aic94xx-firmware wd719x-firmware upd72020x-fw
+yaourt -S peerflix spotify tor-browser aic94xx-firmware wd719x-firmware upd72020x-fw
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk scrot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli gtk2 gtk3 gtk4 dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore perl npm nodejs terminus-font mesa mesa-demos qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base php ffmpeg ttf-opensans libinput xf86-input-libinput qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids linux-firmware
+sudo pacman -S --needed --noconfirm xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk scrot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli gtk2 gtk3 gtk4 dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore perl npm nodejs terminus-font mesa mesa-demos qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base php ffmpeg ttf-opensans libinput xf86-input-libinput qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids linux-firmware hwinfo xorg-xwayland libxcb egl-wayland
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -66,7 +66,7 @@ esac
 done
 fi
 if [[ -n "$intel" ]]; then
-sudo pacman -S --needed --noconfirm xf86-video-intel
+sudo pacman -S --needed --noconfirm xf86-video-intel intel-ucode
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 if [[ -n "$nvidia" && -n "$intel" ]]; then
@@ -78,7 +78,7 @@ sudo sed -i -e "s/Driver=/Driver=nvidia/g" /etc/bumblebee/bumblebee.conf
 sudo sed -i -e "s/Bridge=auto/Bridge=virtualgl/g" /etc/bumblebee/bumblebee.conf
 sudo sed -i -e "s/MODULES=()/MODULES=(i915 bbswitch)/g" /etc/mkinitcpio.conf
 sudo mkinitcpio -p linux
-sudo sed -i -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\"/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet rcutree.rcu_idle_gp_delay=1\"/g" /etc/default/grub
+sudo sed -i -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\"/GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet rcutree.rcu_idle_gp_delay=1\"/g" /etc/default/grub
 sudo sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumblebee/xorg.conf.nvidia
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
@@ -132,7 +132,7 @@ sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
-sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
+sudo systemctl disable dhcpcd.service && sudo systemctl stop dhcpcd.service
 sudo systemctl disable hostapd.service && sudo systemctl stop hostapd.service
 sudo systemctl disable dnsmasq.service && sudo systemctl stop dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
