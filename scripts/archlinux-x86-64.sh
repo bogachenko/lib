@@ -37,8 +37,12 @@ sudo pacman -Syyuu
 # Installing main packages from the Arch User Repository.
 yaourt -S peerflix spotify tor-browser aic94xx-firmware wd719x-firmware upd72020x-fw
 
+# Import keys.
+gpg --recv-keys EB774491D9FF06E2
+gpg --recv-keys D1742AD60D811D58
+
 # Installing main packages.
-sudo pacman -S --needed --noconfirm xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk scrot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli gtk2 gtk3 gtk4 dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore perl npm nodejs terminus-font mesa mesa-demos qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base php ffmpeg ttf-opensans libinput xf86-input-libinput qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids linux-firmware hwinfo xorg-xwayland libxcb egl-wayland
+sudo pacman -S --needed --noconfirm xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk scrot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli gtk2 gtk3 gtk4 dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore perl npm nodejs terminus-font mesa mesa-demos qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base php ffmpeg ttf-opensans libinput xf86-input-libinput qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids linux-firmware hwinfo xorg-xwayland libxcb egl-wayland thunderbird thunderbird-i18n-ru
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -145,10 +149,14 @@ pulseaudio -k && pulseaudio --start
 # Adding to groups.
 sudo gpasswd -a $USERNAME bumblebee
 
-# Installing the configuration file user.js for Firefox.
+# Installing the configuration files user.js.
 cd /tmp
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
 mv /tmp/user.js ~/.mozilla/firefox/$USERNAME/user.js
+curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/thunderbird-user.js
+mv /tmp/user.js ~/.thunderbird/$USERNAME/user.js
+curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/torbrowser-user.js
+mv /tmp/user.js ~/.local/opt/tor-browser/app/Browser/TorBrowser/Data/Browser/profile.default/user.js
 
 # Configuration for the Xresources file.
 cat > ~/.Xresources <<EOF
