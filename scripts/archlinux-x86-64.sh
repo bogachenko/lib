@@ -14,10 +14,10 @@ clear
 # Installing the Arch User Repository.
 cd /tmp
 git clone https://aur.archlinux.org/package-query.git
+git clone https://aur.archlinux.org/yaourt.git
 cd package-query/
 makepkg -si
 cd ..
-git clone https://aur.archlinux.org/yaourt.git
 cd yaourt/
 makepkg -si
 cd /tmp
@@ -28,7 +28,8 @@ chmod +x strap.sh
 sudo ./strap.sh
 
 # Update mirrorlist.
-curl -sSL 'https://archlinux.org/mirrorlist/?country=RU&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on' | sed 's/^#Server/Server/g' > /etc/pacman.d/mirrorlist
+sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+curl -sSL 'https://archlinux.org/mirrorlist/?country=RU&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on' | sudo sed 's/^#Server/Server/g' > /etc/pacman.d/mirrorlist
 
 # Installing updates and updating the data repositories.
 yaourt -Syua
@@ -42,7 +43,7 @@ gpg --recv-keys EB774491D9FF06E2
 gpg --recv-keys D1742AD60D811D58
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk scrot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli gtk2 gtk3 gtk4 dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore perl npm nodejs terminus-font mesa mesa-demos qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base php ffmpeg ttf-opensans libinput xf86-input-libinput qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids linux-firmware hwinfo xorg-xwayland libxcb egl-wayland thunderbird thunderbird-i18n-ru
+sudo pacman -S --needed --noconfirm xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk scrot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli gtk2 gtk3 gtk4 dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore perl npm nodejs terminus-font mesa mesa-demos qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base php ffmpeg ttf-opensans libinput xf86-input-libinput qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids linux-firmware hwinfo xorg-xwayland libxcb egl-wayland thunderbird thunderbird-i18n-ru obs-studio jre-openjdk-headless jre-openjdk jdk-openjdk
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
