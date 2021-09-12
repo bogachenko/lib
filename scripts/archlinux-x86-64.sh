@@ -4,8 +4,6 @@
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
 USERNAME=$(whoami)
-PASSWD='N7GZiMD!2ZTaZWYj0mLV'
-UA='Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
 FONT='Noto Sans'
 FONTM='Noto Sans Mono'
 FONTMM='Noto Sans Medium'
@@ -40,7 +38,7 @@ sudo pacman -Syyuu
 yaourt -S peerflix spotify
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base xdg-user-dirs php ffmpeg ttf-opensans xorg-xkill xorg-xinput libinput xf86-input-libinput xorg-xwayland mesa-libgl qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell
+sudo pacman -S --needed --noconfirm zsh git vim htop neofetch net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers xorg-server code firefox-i18n-ru firefox xorg-xinit jack2 noto-fonts noto-fonts-emoji scrot xorg-xsetroot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc noto-fonts-cjk xorg-xrdb speedtest-cli gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd xorg-apps dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct imagemagick libjpeg-turbo yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base xdg-user-dirs php ffmpeg ttf-opensans xorg-xkill xorg-xinput libinput xf86-input-libinput xorg-xwayland mesa-libgl qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang networkmanager networkmanager-qt usb_modeswitch modemmanager modemmanager-qt plasma-nm weston wayland qt5-wayland qt6-wayland
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -68,8 +66,8 @@ esac
 done
 fi
 if [[ -n "$intel" ]]; then
-sudo pacman -S --needed --noconfirm xf86-video-intel vulkan-intel lib32-vulkan-intel libvdpau-va-gl
-sudo pacman -S --noconfirm intel-ucode --overwrite=/boot/intel-ucode.img
+sudo pacman -S --needed --noconfirm xf86-video-intel
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 if [[ -n "$nvidia" && -n "$intel" ]]; then
 sudo pacman -S --needed --noconfirm bumblebee bbswitch primus lib32-primus
@@ -82,8 +80,8 @@ sudo sed -i -e "s/MODULES=()/MODULES=(i915 bbswitch)/g" /etc/mkinitcpio.conf
 sudo mkinitcpio -p linux
 sudo sed -i -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\"/GRUB_CMDLINE_LINUX_DEFAULT=\"quiet rcutree.rcu_idle_gp_delay=1\"/g" /etc/default/grub
 sudo sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumblebee/xorg.conf.nvidia
-fi
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+fi
 
 # Leisure.
 sudo pacman -S steam steam-native-runtime retroarch libretro 
@@ -138,6 +136,8 @@ sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
 sudo systemctl disable hostapd.service && sudo systemctl stop hostapd.service
 sudo systemctl disable dnsmasq.service && sudo systemctl stop dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
+sudo systemctl enable ModemManager.service && sudo systemctl start ModemManager.service
+sudo systemctl enable NetworkManager.service && sudo systemctl start NetworkManager.service
 sudo systemctl enable sddm.service
 sudo systemctl enable bumblebeed.service
 pulseaudio -k && pulseaudio --start
