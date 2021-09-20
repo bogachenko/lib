@@ -35,14 +35,14 @@ yaourt -Syua
 sudo pacman -Syyuu
 
 # Installing main packages from the Arch User Repository.
-yaourt -S peerflix
+yaourt -S peerflix xcursor-we10xos
 
 # Sorting mirrors for the pacman package manager.
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 sudo pacman-mirrors --fasttrack && sudo pacman -Syyu
 
 # Installing core packages.
-sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau xorg-drivers xorg-xrdb xorg-xclock xorg-xsetroot xorg-xmodmap zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc xorg-xrdb speedtest-cli xdg-user-dirs gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-utils mathjax youtube-dl pcmanfm-qt python2 python ttf-carlito ttf-caladea ttf-croscore ttf-opensans libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen dunst capitaine-cursors breeze-icons chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa lxqt-archiver pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-alsa qt6-base qt5-base php ffmpeg glu freeglut glew glslang libxcb jre-openjdk-headless jre-openjdk jdk-openjdk qt6ct
+sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau xorg-drivers xorg-xrdb xorg-xclock xorg-xsetroot xorg-xmodmap zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli xdg-user-dirs gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-utils mathjax youtube-dl pcmanfm-qt python2 python ttf-carlito ttf-caladea ttf-croscore ttf-opensans libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen dunst breeze-icons chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa lxqt-archiver pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-alsa qt6-base qt5-base php ffmpeg glu freeglut glew glslang libxcb jre-openjdk-headless jre-openjdk jdk-openjdk qt6ct
 
 # Getting root permissions.
 su
@@ -83,7 +83,7 @@ EOF
 cat > /usr/share/gtk-2.0/gtkrc <<EOF
 gtk-icon-theme-name="Breeze"
 gtk-theme-name="Adwaita"
-gtk-cursor-theme-name="capitaine-cursors-light"
+gtk-cursor-theme-name="We10XOS-cursors"
 gtk-font-name="$FONT 9"
 gtk-menu-images=0
 gtk-button-images=0
@@ -98,7 +98,7 @@ cat > /usr/share/gtk-3.0/settings.ini <<EOF
 [Settings]
 gtk-icon-theme-name=Breeze
 gtk-theme-name=Adwaita
-gtk-cursor-theme-name=capitaine-cursors-light
+gtk-cursor-theme-name=We10XOS-cursors
 gtk-font-name=$FONT 9
 gtk-menu-images=0
 gtk-button-images=0
@@ -113,7 +113,7 @@ cat > /usr/share/gtk-4.0/settings.ini <<EOF
 [Settings]
 gtk-icon-theme-name=Breeze
 gtk-theme-name=Adwaita
-gtk-cursor-theme-name=capitaine-cursors-light
+gtk-cursor-theme-name=We10XOS-cursors
 gtk-font-name=$FONT 9
 gtk-menu-images=0
 gtk-button-images=0
@@ -140,7 +140,7 @@ EOF
 # Setting the Capitaine cursor by default.
 cat > /usr/share/icons/default/index.theme <<EOF
 [Icon Theme] 
-Inherits=capitaine-cursors-light
+Inherits=We10XOS-cursors
 EOF
 
 # Convert SOCKS to HTTP proxy via Privoxy.
