@@ -43,7 +43,7 @@ gpg --recv-keys EB774491D9FF06E2
 gpg --recv-keys D1742AD60D811D58
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau xorg-drivers xorg-xrdb xorg-xclock xorg-xsetroot xorg-xmodmap zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk scrot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli gtk2 gtk3 gtk4 dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore perl npm nodejs terminus-font mesa mesa-demos qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base php ffmpeg ttf-opensans libinput xf86-input-libinput qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids linux-firmware hwinfo xorg-xwayland libxcb egl-wayland thunderbird thunderbird-i18n-ru obs-studio jre-openjdk-headless jre-openjdk jdk-openjdk lib32-libxcb qt6ct desktop-file-utils
+sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau xorg-drivers xorg-xrdb xorg-xclock xorg-xsetroot xorg-xmodmap zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk scrot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli gtk2 gtk3 gtk4 dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore perl npm nodejs terminus-font mesa mesa-demos qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base php ffmpeg ttf-opensans libinput xf86-input-libinput qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids linux-firmware hwinfo xorg-xwayland libxcb egl-wayland thunderbird thunderbird-i18n-ru obs-studio jre-openjdk-headless jre-openjdk jdk-openjdk lib32-libxcb qt6ct desktop-file-utils ufw giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-lib libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt gst-plugins-base-libs lib32-gst-plugins-base-libs vkd3d lib32-vkd3d sdl2 lib32-sdl2 libgphoto2 sane gsm samba dosbox
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -58,14 +58,14 @@ echo 'Please select the correct driver according to your graphics card:'
 select norleg in "Normal" "Legacy"; do
 case $norleg in
 Normal )
-sudo pacman -S --needed nvidia-dkms libglvnd
-sudo pacman -S --needed lib32-nvidia-utils lib32-opencl-nvidia lib32-libglvnd
-sudo pacman -S virtualgl lib32-virtualgl
+sudo pacman -S --needed --noconfirm nvidia-dkms libglvnd
+sudo pacman -S --needed --noconfirm lib32-nvidia-utils lib32-opencl-nvidia lib32-libglvnd
+sudo pacman -S --needed --noconfirm virtualgl lib32-virtualgl
 ;;
 Legacy )
 yaourt -S nvidia-390xx-dkms libglvnd
 yaourt -S lib32-nvidia-390xx-utils lib32-opencl-nvidia-390xx lib32-libglvnd
-sudo pacman -S virtualgl lib32-virtualgl
+sudo pacman -S --needed --noconfirm virtualgl lib32-virtualgl
 ;;
 esac
 done
@@ -74,6 +74,13 @@ if [[ -n "$intel" ]]; then
 sudo pacman -S --needed --noconfirm xf86-video-intel intel-ucode libva libva-utils libva-intel-driver vulkan-intel
 sudo pacman -S --needed --noconfirm lib32-libva lib32-libva-intel-driver lib32-vulkan-intel
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo cat > /etc/X11/xorg.conf.d/20-intel.conf <<EOF
+Section "Device"
+   Identifier  "Intel Graphics"
+   Driver      "intel"
+   Option      "TearFree"    "true"
+EndSection
+EOF
 fi
 if [[ -n "$nvidia" && -n "$intel" ]]; then
 sudo pacman -S --needed --noconfirm bumblebee bbswitch primus lib32-primus
@@ -90,7 +97,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
 # Leisure.
-sudo pacman -S steam steam-native-runtime retroarch libretro 
+sudo pacman -S --needed --noconfirm steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko
 
 # Entering superuser mode.
 su
@@ -150,6 +157,7 @@ sudo systemctl disable dnsmasq.service && sudo systemctl stop dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
 sudo systemctl enable ModemManager.service && sudo systemctl start ModemManager.service
 sudo systemctl enable NetworkManager.service && sudo systemctl start NetworkManager.service
+sudo systemctl enable ufw.service && sudo systemctl start ufw.service && sudo ufw enable
 sudo systemctl enable sddm.service
 sudo systemctl enable bumblebeed.service
 pulseaudio -k && pulseaudio --start
