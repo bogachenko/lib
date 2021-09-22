@@ -71,7 +71,8 @@ esac
 done
 fi
 if [[ -n "$intel" ]]; then
-sudo pacman -S --needed --noconfirm xf86-video-intel intel-ucode
+sudo pacman -S --needed --noconfirm xf86-video-intel intel-ucode libva libva-utils libva-intel-driver vulkan-intel
+sudo pacman -S --needed --noconfirm lib32-libva lib32-libva-intel-driver lib32-vulkan-intel
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 if [[ -n "$nvidia" && -n "$intel" ]]; then

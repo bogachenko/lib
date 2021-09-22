@@ -351,7 +351,7 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "DisableAcrylicBack
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "DisableLogonBackgroundImage" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "SpynetReporting" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "SubmitSamplesConsent" /t REG_DWORD /d "1" /f
-
+reg add "HKLM\Software\Microsoft\WindowsMitigation" /v "UserPreference" /t REG_DWORD /d "1" /f
 
 taskkill /f /im compattelrunner.exe > NUL 2>&1
 taskkill /f /im smartscreen.exe > NUL 2>&1
