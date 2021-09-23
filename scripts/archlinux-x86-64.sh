@@ -204,7 +204,7 @@ pulseaudio -k && pulseaudio --start
 # Adding to groups.
 sudo gpasswd -a $USERNAME bumblebee
 
-## Starting the NTP service.
+# Starting the NTP service.
 sudo timedatectl set-ntp true
 
 # Installing the configuration files user.js.
@@ -234,10 +234,10 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.scrollBar: false
 URxvt.background: #000000
 URxvt.foreground: #ffffff
-URxvt.font: xft:$FONTM:regular:size=9
-URxvt.boldFont: xft:$FONTM:bold:size=9
-URxvt.italicFont: xft:$FONTM:italic:size=9
-URxvt.boldItalicFont: xft:$FONTM:bold:italic:size=9
+URxvt.font: xft:$FONTM:regular:size=8
+URxvt.boldFont: xft:$FONTM:bold:size=8
+URxvt.italicFont: xft:$FONTM:italic:size=8
+URxvt.boldItalicFont: xft:$FONTM:bold:italic:size=8
 URxvt.geometry: 150x30
 URxvt.scrollTtyOutput: false
 URxvt.cursorBlink: true

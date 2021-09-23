@@ -246,7 +246,7 @@ sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.servic
 sudo systemctl enable autohotspot.service
 pulseaudio -k && pulseaudio --start
 
-## Starting the NTP service.
+# Starting the NTP service.
 sudo timedatectl set-ntp true
 
 # Create user directories.
