@@ -5,6 +5,7 @@
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
 USERNAME=$(whoami)
+LLHT='localhost'
 PASSWD='N7GZiMD!2ZTaZWYj0mLV'
 UA='Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
 FONT='Noto Sans'
@@ -336,7 +337,7 @@ memory {
 }
 
 tztime local {
-        format = "%a %d %B %Y, %H:%M:%S"
+        format = "%a %d %B %Y, %H:%M"
 }
 EOF
 cat > ~/.config/i3/config <<EOF
@@ -487,6 +488,8 @@ alias updXres='xrdb -merge ~/.Xresources'
 alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
 alias cl='clear'
+alias sysctl='systemctl'
+alias wifi-router='create_ap --daemon wlan0 eth0 $LLHT $PASSWD'
 
 EOF
 sudo cat > /root/.zshrc <<EOF
@@ -500,6 +503,8 @@ alias ls='ls -la'
 alias unlockpac='rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
 alias cl='clear'
+alias sysctl='systemctl'
+alias wifi-router='create_ap --daemon wlan0 eth0 $LLHT $PASSWD'
 
 EOF
 
