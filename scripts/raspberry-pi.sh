@@ -137,7 +137,7 @@ User=$USERNAME
 Session=i3.desktop
 EOF
 
-# Setting the Capitaine cursor by default.
+# Setting the Windows 10 cursor by default.
 cat > /usr/share/icons/default/index.theme <<EOF
 [Icon Theme] 
 Inherits=We10XOS-cursors
