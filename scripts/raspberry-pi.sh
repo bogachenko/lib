@@ -310,54 +310,12 @@ set encoding=utf8
 EOF
 sudo cp ~/.vimrc /root/.vimrc
 
-# Configuration for the Wget program.
-cat > ~/.wgetrc <<EOF
-tries = 3
-retry_connrefused = on
-user_agent = $UA
-robots = off
-EOF
-sudo cp ~/.wgetrc /root/.wgetrc
-
-# Configuration for the cURL program.
-cat > ~/.curlrc <<EOF
-user_agent = $UA
-EOF
-sudo cp ~/.curlrc /root/.curlrc
-
-# Configuration for the Zsh shell.
-cat > ~/.zshrc <<EOF
-PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
-
-export BROWSER="firefox"
-export EDITOR="vim"
-export XDG_CONFIG_HOME="$HOME/.config"
-
-alias ls='ls -la'
-alias reboot='sudo reboot'
-alias updXres='xrdb -merge ~/.Xresources'
-alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
-alias vi='vim'
-alias cl='clear'
-alias sysctl='systemctl'
-alias wifi-router='create_ap --daemon wlan0 eth0 $LLHT $PASSWD'
-
-EOF
-sudo cat > /root/.zshrc <<EOF
-PROMPT="%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# "
-
-export BROWSER="firefox"
-export EDITOR="vim"
-export XDG_CONFIG_HOME="$HOME/.config"
-
-alias ls='ls -la'
-alias unlockpac='rm -f /var/lib/pacman/db.lck'
-alias vi='vim'
-alias cl='clear'
-alias sysctl='systemctl'
-alias wifi-router='create_ap --daemon wlan0 eth0 $LLHT $PASSWD'
-
-EOF
+# Configuration for the Z shell.
+cd /tmp
+curl -o zshrc https://gist.githubusercontent.com/bogachenko/05f67ffa8ac6aeeb8f2ba14956d3ad9c/raw/d7e1473de17e0ccdb2cc3889bb5f3e414dcf9fd7/zshrc
+mv /tmp/zshrc ~/.zshrc
+curl -o zshrc https://gist.githubusercontent.com/bogachenko/05f67ffa8ac6aeeb8f2ba14956d3ad9c/raw/d7e1473de17e0ccdb2cc3889bb5f3e414dcf9fd7/zshrc-root
+sudo mv /tmp/zshrc /root/.zshrc
 
 # Removing debris.
 sudo rm -rf /root/.bash_history /root/.bashrc /root/.bash_logout /root/.bash_profile /root/.bash_functions /root/.bash_aliases ~/.bashrc ~/.bash_history ~/.bash_logout ~/.cache/thumbnails ~/.bash_profile ~/.bash_functions ~/.bash_aliases /tmp/* ~/.local/share/Trash/*
