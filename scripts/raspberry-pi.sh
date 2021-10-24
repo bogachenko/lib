@@ -5,8 +5,6 @@
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
 USERNAME=$(whoami)
-LLHT='localhost'
-PASSWD='oBy8neNmnZ'
 UA='Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
 FONT='Noto Sans'
 FONTM='Noto Sans Mono'
@@ -228,9 +226,9 @@ sudo cp ~/.vimrc /root/.vimrc
 
 # Configuration for the Z shell.
 cd /tmp
-curl -o zshrc https://gist.githubusercontent.com/bogachenko/05f67ffa8ac6aeeb8f2ba14956d3ad9c/raw/989d69f4f31ecd6aa3a4dff3e31e3461ea5d7c7d/zshrc
+curl -o zshrc https://gist.githubusercontent.com/bogachenko/05f67ffa8ac6aeeb8f2ba14956d3ad9c/raw/e02aa32cd10989bb05cd26c6b45d5c55e5cf2b0c/zshrc
 mv /tmp/zshrc ~/.zshrc
-curl -o zshrc https://gist.githubusercontent.com/bogachenko/05f67ffa8ac6aeeb8f2ba14956d3ad9c/raw/d7e1473de17e0ccdb2cc3889bb5f3e414dcf9fd7/zshrc-root
+curl -o zshrc https://gist.githubusercontent.com/bogachenko/05f67ffa8ac6aeeb8f2ba14956d3ad9c/raw/e02aa32cd10989bb05cd26c6b45d5c55e5cf2b0c/zshrc-root
 sudo mv /tmp/zshrc /root/.zshrc
 
 # Removing debris.
