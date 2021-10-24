@@ -6,11 +6,10 @@
 
 USERNAME=$(whoami)
 LLHT='localhost'
-PASSWD='N7GZiMD!2ZTaZWYj0mLV'
+PASSWD='oBy8neNmnZ'
 UA='Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)'
 FONT='Noto Sans'
 FONTM='Noto Sans Mono'
-FONTMM='Noto Sans Medium'
 
 # Clear the console.
 clear
@@ -43,7 +42,7 @@ sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 sudo pacman-mirrors --fasttrack && sudo pacman -Syyu
 
 # Installing core packages.
-sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau xorg-drivers xorg-xrdb xorg-xclock xorg-xsetroot xorg-xmodmap zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli xdg-user-dirs gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-utils mathjax youtube-dl pcmanfm-qt python2 python ttf-carlito ttf-caladea ttf-croscore ttf-opensans libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen dunst breeze-icons chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa lxqt-archiver pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-alsa qt6-base qt5-base php ffmpeg glu freeglut glew glslang libxcb jre-openjdk-headless jre-openjdk jdk-openjdk qt6ct desktop-file-utils
+sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau xorg-drivers xorg-xrdb xorg-xclock xorg-xsetroot xorg-xmodmap zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv xorg-drivers code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli xdg-user-dirs gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-utils mathjax youtube-dl pcmanfm-qt python2 python ttf-carlito ttf-caladea ttf-croscore ttf-opensans libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen dunst breeze-icons chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa lxqt-archiver pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-alsa qt6-base qt5-base php ffmpeg glu freeglut glew glslang libxcb jre-openjdk-headless jre-openjdk jdk-openjdk qt6ct desktop-file-utils create_ap
 
 # Getting root permissions.
 su
@@ -149,88 +148,6 @@ echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
 echo "forward-socks4 / localhost:9050 ." >> /etc/privoxy/config
 echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
 
-# Wi-Fi hotspot.
-mv /etc/dnsmasq.conf /etc/dnsmasq.conf.backup
-mv /etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf.backup
-systemctl stop hostapd.service
-systemctl stop dnsmasq.service
-cat > /etc/dnsmasq.conf <<EOF
-port=5353
-interface=wlan0
-bind-interfaces
-dhcp-option=3,10.0.0.1
-dhcp-option=6,10.0.0.1
-dhcp-range=10.0.0.2,10.0.0.10,255.255.255.0,12h
-no-hosts
-no-resolv
-log-queries
-log-facility=/tmp/dnsmasq.log
-server=1.1.1.1
-server=1.0.0.1
-EOF
-cat > /etc/hostapd/hostapd.conf <<EOF
-ctrl_interface=/run/hostapd
-interface=wlan0
-ssid=$USERNAME
-ignore_broadcast_ssid=0
-driver=nl80211
-channel=11
-hw_mode=g
-ieee80211d=1
-ieee80211n=1
-country_code=RU
-macaddr_acl=0
-deny_mac_file=/etc/hostapd/hostapd.deny
-wmm_enabled=0
-auth_algs=1
-wpa=2
-wpa_key_mgmt=WPA-PSK  
-rsn_pairwise=CCMP
-wpa_passphrase=$PASSWD
-EOF
-cat > /usr/bin/autohotspot <<EOF
-#!/bin/bash
-
-wifiap()
-{
-ip link set dev wlan0 down
-ip addr add 10.0.0.1/24 dev wlan0
-ip link set dev wlan0 up
-dhcpcd -k wlan0 >/dev/null 2>&1
-iptables -A FORWARD -i eth0 -o wlan0 -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-systemctl start dnsmasq
-systemctl start hostapd
-echo 1 > /proc/sys/net/ipv4/ip_forward
-}
-killwifiap()
-{
-ip link set dev wlan0 down
-systemctl stop hostapd
-systemctl stop dnsmasq
-iptables -D FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -D FORWARD -i wlan0 -o eth0 -j ACCEPT
-echo 0 > /proc/sys/net/ipv4/ip_forward
-ip addr flush dev wlan0
-ip link set dev wlan0 up
-dhcpcd  -n wlan0 >/dev/null 2>&1
-}
-EOF
-chmod +x /usr/bin/autohotspot
-echo "nohook wpa_supplicant" >> /etc/dhcpcd.conf
-cat > /etc/systemd/system/autohotspot.service <<EOF
-[Unit]
-Description=Automatically generates a Hotspot when a valid SSID is in range
-After=multi-user.target
-[Service]
-Type=oneshot
-RemainAfterExit=yes
-ExecStart=/usr/bin/autohotspot
-[Install]
-WantedBy=multi-user.target
-EOF
-
 # Exiting superuser mode.
 exit
 
@@ -241,8 +158,8 @@ sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
 sudo systemctl enable sddm.service && sudo systemctl start sddm.service
 sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
-sudo systemctl enable hostapd.service && sudo systemctl start hostapd.service
-sudo systemctl enable dnsmasq.service && sudo systemctl start dnsmasq.service
+sudo systemctl disable hostapd.service && sudo systemctl stop hostapd.service
+sudo systemctl disable dnsmasq.service && sudo systemctl stop dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
 sudo systemctl enable autohotspot.service
 pulseaudio -k && pulseaudio --start
