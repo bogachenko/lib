@@ -295,9 +295,9 @@ sudo chfn $USERNAME
 # Configuring i3wm and i3status.
 mkdir -p ~/.config/i3status
 cd ~/.config/i3status
-curl -o config https://gist.githubusercontent.com/bogachenko/37f13919ac73486ba3eefd47137949eb/raw/72aa00451bac714d04e39708767faf65810f6f47/i3status
+curl -o config https://gist.githubusercontent.com/bogachenko/599361c72df40d9ef4fa6cb8f3b6b82f/raw/b7964a856bf2dba10474e8423a8142104c6b3eb5/i3status
 cd ~/.config/i3
-curl -o config https://gist.githubusercontent.com/bogachenko/5f422836e7acac68467a4ce07fc1048d/raw/70311f34979d931527999f938f40725cc55c1039/i3config
+curl -o config https://gist.githubusercontent.com/bogachenko/599361c72df40d9ef4fa6cb8f3b6b82f/raw/b7964a856bf2dba10474e8423a8142104c6b3eb5/i3config
 
 # Configuration for the Vim program.
 cat > ~/.vimrc <<EOF
