@@ -161,7 +161,6 @@ sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
 sudo systemctl disable hostapd.service && sudo systemctl stop hostapd.service
 sudo systemctl disable dnsmasq.service && sudo systemctl stop dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
-sudo systemctl enable autohotspot.service
 pulseaudio -k && pulseaudio --start
 
 # Starting the NTP service.
@@ -229,7 +228,7 @@ sudo cp ~/.vimrc /root/.vimrc
 
 # Configuration for the Z shell.
 cd /tmp
-curl -o zshrc https://gist.githubusercontent.com/bogachenko/05f67ffa8ac6aeeb8f2ba14956d3ad9c/raw/d7e1473de17e0ccdb2cc3889bb5f3e414dcf9fd7/zshrc
+curl -o zshrc https://gist.githubusercontent.com/bogachenko/05f67ffa8ac6aeeb8f2ba14956d3ad9c/raw/989d69f4f31ecd6aa3a4dff3e31e3461ea5d7c7d/zshrc
 mv /tmp/zshrc ~/.zshrc
 curl -o zshrc https://gist.githubusercontent.com/bogachenko/05f67ffa8ac6aeeb8f2ba14956d3ad9c/raw/d7e1473de17e0ccdb2cc3889bb5f3e414dcf9fd7/zshrc-root
 sudo mv /tmp/zshrc /root/.zshrc
