@@ -9,11 +9,19 @@ FONT='Ubuntu Mono'
 # Clear the console.
 clear
 
+# Screen resolution.
+xrandr --size 16:9
+
+# Russification of the system.
+sudo dpkg-reconfigure locales
+sudo localedef --delete-from-archive ru_UA.utf8
+
 # Installing updates and updating the data repositories.
 sudo apt update && sudo apt upgrade
 
 # Installing core packages.
-sudo apt-get --no-install-recommends --no-install-suggests install i3 xinit sddm firefox chromium-browser x11-xserver-utils fonts-noto fonts-ubuntu fonts-ubuntu-console
+sudo apt-get --no-install-recommends --no-install-suggests install i3 xinit sddm firefox chromium-browser chromium-browser-l10n x11-xserver-utils fonts-noto fonts-ubuntu fonts-ubuntu-console hwinfo dmz-cursor-theme firefox-locale-ru unzip
+sudo snap install acestreamplayer
 
 # Enabling daemons.
 sudo systemctl enable sddm.service && sudo systemctl start sddm.service
