@@ -4,6 +4,7 @@
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
 USERNAME=$(whoami)
+FONT='Ubuntu Mono'
 
 # Clear the console.
 clear
@@ -12,7 +13,7 @@ clear
 sudo apt update && sudo apt upgrade
 
 # Installing core packages.
-sudo apt-get --no-install-recommends --no-install-suggests install i3 xinit sddm firefox chromium-browser
+sudo apt-get --no-install-recommends --no-install-suggests install i3 xinit sddm firefox chromium-browser x11-xserver-utils fonts-noto fonts-ubuntu fonts-ubuntu-console
 
 # Enabling daemons.
 sudo systemctl enable sddm.service && sudo systemctl start sddm.service
@@ -40,10 +41,7 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.scrollBar: false
 URxvt.background: #000000
 URxvt.foreground: #ffffff
-URxvt.font: xft:$FONTM:regular:size=9
-URxvt.boldFont: xft:$FONTM:bold:size=9
-URxvt.italicFont: xft:$FONTM:italic:size=9
-URxvt.boldItalicFont: xft:$FONTM:bold:italic:size=9
+URxvt.font: xft:$FONT:bold:size=9
 URxvt.geometry: 150x30
 URxvt.scrollTtyOutput: false
 URxvt.cursorBlink: true
