@@ -1,6 +1,6 @@
 @echo off
 
-:: Windows 11 Build 22000.318 x86_64
+:: Windows 11 build 22000.318 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
 :: Diagnostic Policy Service
@@ -86,3 +86,63 @@ sc delete SensorDataService
 sc config "WSearch" start=disabled
 sc stop WSearch
 sc delete WSearch
+
+:: Contact Data Service
+sc config "PimIndexMaintenanceSvc" start=disabled
+sc stop PimIndexMaintenanceSvc
+sc delete PimIndexMaintenanceSvc
+
+:: Windows Error Reporting Service
+sc config "WerSvc" start=disabled
+sc stop WerSvc
+sc delete WerSvc
+
+:: Data Usage Service
+sc config "DusmSvc" start=disabled
+sc stop DusmSvc
+sc delete DusmSvc
+
+:: Windows License Manager Service
+sc config "LicenseManager" start=disabled
+sc stop LicenseManager
+sc delete LicenseManager
+
+:: Diagnostic Host Service
+sc config "WdiServiceHost" start=disabled
+sc stop WdiServiceHost
+sc delete WdiServiceHost
+
+:: SSDP Discovery Service
+sc config "SSDPSRV" start=disabled
+sc stop SSDPSRV
+sc delete SSDPSRV
+
+:: Geolocation Service
+sc config "lfsvc" start=disabled
+sc stop lfsvc
+sc delete lfsvc
+
+:: ActiveX Installer
+sc config "AxInstSV" start=disabled
+sc stop AxInstSV
+sc delete AxInstSV
+
+:: AllJoyn Router Service
+sc config "AJRouter" start=disabled
+sc stop AJRouter
+sc delete AJRouter
+
+:: App Readiness
+sc config "AppReadiness" start=disabled
+sc stop AppReadiness
+sc delete AppReadiness
+
+:: Internet Connection Sharing
+sc config "SharedAccess" start=disabled
+sc stop SharedAccess
+sc delete SharedAccess
+
+:: SMS Router Service 
+sc config "SmsRouter" start=disabled
+sc stop SmsRouter
+sc delete SmsRouter
