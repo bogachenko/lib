@@ -1,7 +1,15 @@
 @echo off
+set "params=%*"
+cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
 :: Windows 11 build 22000.318 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
+
+:: Microsoft Compatibility Telemetry Process
+taskkill /f /im compattelrunner.exe > NUL 2>&1
+
+:: Windows Defender SmartScreen Process
+taskkill /f /im smartscreen.exe > NUL 2>&1
 
 :: Diagnostic Policy Service
 sc config "DiagTrack" start=disabled
@@ -168,38 +176,37 @@ sc stop SCardSvr
 sc delete SCardSvr
 
 :: Windows Office App
-powershell.exe -command "Get-AppxPackage -allusers *MicrosoftOfficeHub_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *officehub* | Remove-AppxPackage"
 
 :: Microsoft Solitaire Collection Game
-powershell.exe -command "Get-AppxPackage -allusers *MicrosoftSolitaireCollection_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *solitairecollection* | Remove-AppxPackage"
 
 :: People App
-powershell.exe -command "Get-AppxPackage -allusers *Microsoft.People_* | Remove-AppxPackage"
-powershell.exe -command "Get-AppxPackage -allusers *MicrosoftPeople* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *people* | Remove-AppxPackage"
 
 :: Cortana App
-powershell.exe -command "Get-AppxPackage -allusers *Microsoft.549981C3F5F10_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage"
 
 :: Microsoft Teams App
-powershell.exe -command "Get-AppxPackage -allusers *MicrosoftTeams_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *microsoftteams* | Remove-AppxPackage"
 
 :: Bing News App
-powershell.exe -command "Get-AppxPackage -allusers *BingNews_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *bingnews* | Remove-AppxPackage"
 
 :: Xbox App
-powershell.exe -command "Get-AppxPackage -allusers *XboxGameOverlay_* | Remove-AppxPackage"
-powershell.exe -command "Get-AppxPackage -allusers *XboxIdentityProvider_* | Remove-AppxPackage"
-powershell.exe -command "Get-AppxPackage -allusers *XboxSpeechToTextOverlay_* | Remove-AppxPackage"
-powershell.exe -command "Get-AppxPackage -allusers *Xbox.TCUI_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *xboxgamingoverlay* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *xboxidentityprovider* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *xboxspeechtotextoverlay* | Remove-AppxPackage" 
+powershell.exe -command "Get-AppxPackage -allusers *xbox.tcui* | Remove-AppxPackage"
 
 :: YourPhone App
-powershell.exe -command "Get-AppxPackage -allusers *YourPhone_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *yourphone* | Remove-AppxPackage"
 
 :: Windows Communications Apps
-powershell.exe -command "Get-AppxPackage -allusers *windowscommunicationsapps_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
 
 :: Get-Help App
-powershell.exe -command "Get-AppxPackage -allusers *GetHelp_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *gethelp* | Remove-AppxPackage"
 
 :: Get Started App
-powershell.exe -command "Get-AppxPackage -allusers *Getstarted_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *getstarted* | Remove-AppxPackage"
