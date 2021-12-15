@@ -11,6 +11,16 @@ taskkill /f /im compattelrunner.exe > NUL 2>&1
 :: Windows Defender SmartScreen Process
 taskkill /f /im smartscreen.exe > NUL 2>&1
 
+:: OneDrive Process
+taskkill /f /im OneDrive.exe > NUL 2>&1
+%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
+rd "%USERPROFILE%\OneDrive" /Q /S > NUL 2>&1
+rd "C:\OneDriveTemp" /Q /S > NUL 2>&1
+rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S > NUL 2>&1
+rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S > NUL 2>&1
+taskkill /f /im explorer.exe
+start explorer.exe
+
 :: Diagnostic Policy Service
 sc config "DiagTrack" start=disabled
 sc stop DiagTrack
@@ -193,14 +203,23 @@ powershell.exe -command "Get-AppxPackage -allusers *microsoftteams* | Remove-App
 :: Bing News App
 powershell.exe -command "Get-AppxPackage -allusers *bingnews* | Remove-AppxPackage"
 
+:: Bing Weather App
+powershell.exe -command "Get-AppxPackage -allusers *bingweather* | Remove-AppxPackage"
+
 :: Xbox App
 powershell.exe -command "Get-AppxPackage -allusers *xboxgamingoverlay* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *xboxidentityprovider* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *xboxspeechtotextoverlay* | Remove-AppxPackage" 
 powershell.exe -command "Get-AppxPackage -allusers *xbox.tcui* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *xboxapp* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *gamingapp* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *gamingservices* | Remove-AppxPackage"
 
 :: YourPhone App
 powershell.exe -command "Get-AppxPackage -allusers *yourphone* | Remove-AppxPackage"
+
+:: Power Automate App
+powershell.exe -command "Get-AppxPackage -allusers *powerautomate* | Remove-AppxPackage"
 
 :: Windows Communications Apps
 powershell.exe -command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
@@ -210,3 +229,12 @@ powershell.exe -command "Get-AppxPackage -allusers *gethelp* | Remove-AppxPackag
 
 :: Get Started App
 powershell.exe -command "Get-AppxPackage -allusers *getstarted* | Remove-AppxPackage"
+
+:: Microsoft To Do App
+powershell.exe -command "Get-AppxPackage -allusers *todos* | Remove-AppxPackage"
+
+:: Microsoft Feedback Hub App
+powershell.exe -command "Get-AppxPackage -allusers *windowsfeedbackhub* | Remove-AppxPackage"
+
+:: Hold on
+pause
