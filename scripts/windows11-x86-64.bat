@@ -1,4 +1,6 @@
 @echo off
+
+:: Getting root
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
@@ -7,19 +9,36 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 
 :: Microsoft Compatibility Telemetry Process
 taskkill /f /im compattelrunner.exe > NUL 2>&1
+schtasks /change /tn "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
 
-:: Windows Defender SmartScreen Process
+:: Windows Defender Process
 taskkill /f /im smartscreen.exe > NUL 2>&1
+schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /disable
+schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /disable
+schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable
+schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable
+
+:: Windows Security Health Service Process
+taskkill /f /im SecurityHealthService.exe > NUL 2>&1
+taskkill /f /im SecurityHealthSystray.exe > NUL 2>&1
 
 :: OneDrive Process
 taskkill /f /im OneDrive.exe > NUL 2>&1
+taskkill /f /im OneDriveStandaloneUpdater.exe > NUL 2>&1
 %SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
 rd "%USERPROFILE%\OneDrive" /Q /S > NUL 2>&1
 rd "C:\OneDriveTemp" /Q /S > NUL 2>&1
 rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S > NUL 2>&1
 rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S > NUL 2>&1
+powershell.exe -ex bypass -command "Get-ScheduledTask -TaskName *onedrive* | Disable-ScheduledTask
 taskkill /f /im explorer.exe
 start explorer.exe
+
+:: Overwolf Update Process
+schtasks /change /tn "Overwolf Updater Task" /disable
+
+:: Windows Defender Exploit Guard
+schtasks /change /tn "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable
 
 :: Diagnostic Policy Service
 sc config "DiagTrack" start=disabled
@@ -236,5 +255,5 @@ powershell.exe -command "Get-AppxPackage -allusers *todos* | Remove-AppxPackage"
 :: Microsoft Feedback Hub App
 powershell.exe -command "Get-AppxPackage -allusers *windowsfeedbackhub* | Remove-AppxPackage"
 
-:: Hold on
+:: Hold on console
 pause
