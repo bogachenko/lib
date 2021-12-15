@@ -167,17 +167,21 @@ sc config "SCardSvr" start=disabled
 sc stop SCardSvr
 sc delete SCardSvr
 
-:: Windows Office Application
-powershell.exe -command "Get-AppxPackage -allusers *officehub* | Remove-AppxPackage"
+:: Windows Office App
+powershell.exe -command "Get-AppxPackage -allusers *MicrosoftOfficeHub_* | Remove-AppxPackage"
 
 :: Microsoft Solitaire Collection Game
-powershell.exe -command "Get-AppxPackage -allusers *solitairecollection* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *MicrosoftSolitaireCollection_* | Remove-AppxPackage"
 
-:: Skype Application
-powershell.exe -command "Get-AppxPackage -allusers *skypeapp* | Remove-AppxPackage"
+:: People App
+powershell.exe -command "Get-AppxPackage -allusers *MicrosoftPeople* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *Microsoft.People_* | Remove-AppxPackage"
 
-:: People Application
-powershell.exe -command "Get-AppxPackage -allusers *people_* | Remove-AppxPackage"
+:: Cortana App
+powershell.exe -command "Get-AppxPackage -allusers *Microsoft.549981C3F5F10_* | Remove-AppxPackage"
 
-:: Cortana Application
-powershell.exe -command "Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage"
+:: Microsoft Teams App
+powershell.exe -command "Get-AppxPackage -allusers *MicrosoftTeams_* | Remove-AppxPackage"
+
+:: Bing News App
+powershell.exe -command "Get-AppxPackage -allusers *BingNews_* | Remove-AppxPackage"
