@@ -174,8 +174,8 @@ powershell.exe -command "Get-AppxPackage -allusers *MicrosoftOfficeHub_* | Remov
 powershell.exe -command "Get-AppxPackage -allusers *MicrosoftSolitaireCollection_* | Remove-AppxPackage"
 
 :: People App
-powershell.exe -command "Get-AppxPackage -allusers *MicrosoftPeople* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *Microsoft.People_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *MicrosoftPeople* | Remove-AppxPackage"
 
 :: Cortana App
 powershell.exe -command "Get-AppxPackage -allusers *Microsoft.549981C3F5F10_* | Remove-AppxPackage"
@@ -185,3 +185,21 @@ powershell.exe -command "Get-AppxPackage -allusers *MicrosoftTeams_* | Remove-Ap
 
 :: Bing News App
 powershell.exe -command "Get-AppxPackage -allusers *BingNews_* | Remove-AppxPackage"
+
+:: Xbox App
+powershell.exe -command "Get-AppxPackage -allusers *XboxGameOverlay_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *XboxIdentityProvider_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *XboxSpeechToTextOverlay_* | Remove-AppxPackage"
+powershell.exe -command "Get-AppxPackage -allusers *Xbox.TCUI_* | Remove-AppxPackage"
+
+:: YourPhone App
+powershell.exe -command "Get-AppxPackage -allusers *YourPhone_* | Remove-AppxPackage"
+
+:: Windows Communications Apps
+powershell.exe -command "Get-AppxPackage -allusers *windowscommunicationsapps_* | Remove-AppxPackage"
+
+:: Get-Help App
+powershell.exe -command "Get-AppxPackage -allusers *GetHelp_* | Remove-AppxPackage"
+
+:: Get Started App
+powershell.exe -command "Get-AppxPackage -allusers *Getstarted_* | Remove-AppxPackage"
