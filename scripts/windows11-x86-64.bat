@@ -10,6 +10,8 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: Microsoft Compatibility Telemetry Process
 taskkill /f /im compattelrunner.exe > NUL 2>&1
 schtasks /change /tn "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
+schtasks /change /tn "Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable
+schtasks /change /tn "Microsoft\Windows\Application Experience\StartupAppTask" /disable
 
 :: Windows Defender Process
 taskkill /f /im smartscreen.exe > NUL 2>&1
@@ -31,14 +33,46 @@ rd "C:\OneDriveTemp" /Q /S > NUL 2>&1
 rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S > NUL 2>&1
 rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S > NUL 2>&1
 powershell.exe -ex bypass -command "Get-ScheduledTask -TaskName *onedrive* | Disable-ScheduledTask
+powershell.exe -command "rm C:\Windows\System32\Tasks\OneDrive*"
 taskkill /f /im explorer.exe
 start explorer.exe
 
 :: Overwolf Update Process
 schtasks /change /tn "Overwolf Updater Task" /disable
 
-:: Windows Defender Exploit Guard
+:: Windows Defender Exploit Guard Process
 schtasks /change /tn "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable
+
+:: Windows Problem Reporting Process
+schtasks /change /tn "Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable
+
+:: Collecting SQM Data Process
+schtasks /change /tn "Microsoft\Windows\Autochk\Proxy" /disable
+
+:: CreateObjectTask Process
+schtasks /change /tn "\Microsoft\Windows\CloudExperienceHost\CreateObjectTask" /disable
+
+:: Software Quality Improvement Program Process
+schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
+schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /disable
+
+:: Windows Disk Diagnostics Process
+schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable
+schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver" /disable
+
+:: Disk Footprint Process
+schtasks /change /tn "\Microsoft\Windows\DiskFootprint\Diagnostics" /disable
+schtasks /change /tn "\Microsoft\Windows\DiskFootprint\StorageSense" /disable
+
+:: Power Efficiency Diagnostics Process
+schtasks /change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable
+
+:: Family Safety Process
+schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyMonitor" /disable
+schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefresh" /disable
+
+:: System Performance Diagnostics Process
+schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable
 
 :: Diagnostic Policy Service
 sc config "DiagTrack" start=disabled
@@ -254,6 +288,9 @@ powershell.exe -command "Get-AppxPackage -allusers *todos* | Remove-AppxPackage"
 
 :: Microsoft Feedback Hub App
 powershell.exe -command "Get-AppxPackage -allusers *windowsfeedbackhub* | Remove-AppxPackage"
+
+:: Showing all apps
+powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:TEMP\Apps_List.txt""
 
 :: Hold on console
 pause
