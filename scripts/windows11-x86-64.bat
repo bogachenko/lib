@@ -112,6 +112,11 @@ sc config "WdiServiceHost" start=disabled
 sc stop WdiServiceHost
 sc delete WdiServiceHost
 
+:: Diagnostic Host System Service
+sc config "WdiSystemHost" start=disabled
+sc stop WdiSystemHost
+sc delete WdiSystemHost
+
 :: SSDP Discovery Service
 sc config "SSDPSRV" start=disabled
 sc stop SSDPSRV
@@ -146,3 +151,33 @@ sc delete SharedAccess
 sc config "SmsRouter" start=disabled
 sc stop SmsRouter
 sc delete SmsRouter
+
+:: Certificate Distribution Service
+sc config "CertPropSvc" start=disabled
+sc stop CertPropSvc
+sc delete CertPropSvc
+
+:: Windows Event Collector Service
+sc config "Wecsvc" start=disabled
+sc stop Wecsvc
+sc delete Wecsvc
+
+:: Smart-Card Service
+sc config "SCardSvr" start=disabled
+sc stop SCardSvr
+sc delete SCardSvr
+
+:: Windows Office Application
+powershell.exe -command "Get-AppxPackage -allusers *officehub* | Remove-AppxPackage"
+
+:: Microsoft Solitaire Collection Game
+powershell.exe -command "Get-AppxPackage -allusers *solitairecollection* | Remove-AppxPackage"
+
+:: Skype Application
+powershell.exe -command "Get-AppxPackage -allusers *skypeapp* | Remove-AppxPackage"
+
+:: People Application
+powershell.exe -command "Get-AppxPackage -allusers *people_* | Remove-AppxPackage"
+
+:: Cortana Application
+powershell.exe -command "Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage"
