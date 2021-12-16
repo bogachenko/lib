@@ -7,11 +7,17 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: Windows 11 build 22000.318 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
+:: CCleaner Process
+echo Stop CCleaner Auto-update
+schtasks /change /tn "CCleaner Update" /disable
+
 :: Windows Security Health Service Process
+echo Stop Windows Security Health Service
 taskkill /f /im SecurityHealthService.exe > NUL 2>&1
 taskkill /f /im SecurityHealthSystray.exe > NUL 2>&1
 
-:: Uninstalling the OneDrive App
+:: OneDrive Process
+echo Stop And Uninstall OneDrive
 taskkill /f /im OneDrive.exe > NUL 2>&1
 taskkill /f /im OneDriveStandaloneUpdater.exe > NUL 2>&1
 %SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
@@ -25,17 +31,33 @@ taskkill /f /im explorer.exe
 start explorer.exe
 
 :: Microsoft Compatibility Telemetry Process
+echo Stop Microsoft Compatibility Telemetry
 taskkill /f /im compattelrunner.exe > NUL 2>&1
 schtasks /change /tn "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
 schtasks /change /tn "Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable
 schtasks /change /tn "Microsoft\Windows\Application Experience\StartupAppTask" /disable
 
 :: Windows Defender Process
-taskkill /f /im smartscreen.exe > NUL 2>&1
+echo ???
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable
+
+:: Windows Defender Security Centre Process
+echo Stop And Uninstall SmartScreen
+taskkill /f /im smartscreen.exe > NUL 2>&1
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
+reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "1" /f
+reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t "REG_DWORD" /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t "REG_DWORD" /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_SZ /d "Anywhere" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t "REG_DWORD" /d "0" /f
+takeown /s %computername% /u %username% /f "%WinDir%\System32\smartscreen.exe"
+icacls "%WinDir%\System32\smartscreen.exe" /grant:r %username%:F
+taskkill /im smartscreen.exe /f
+del "%WinDir%\System32\smartscreen.exe" /s /f /q
 
 :: Overwolf Update Process
 schtasks /change /tn "Overwolf Updater Task" /disable
