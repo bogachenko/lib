@@ -193,10 +193,6 @@ echo Stop Windows Search Service
 sc config "WSearch" start=disabled
 sc stop WSearch
 sc delete WSearch
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsAADCloudSearchEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsDeviceSearchHistoryEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsMSACloudSearchEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "SafeSearchMode" /t REG_DWORD /d "0" /f
 
 echo Stop Contact Data Service
 sc config "PimIndexMaintenanceSvc" start=disabled
@@ -278,28 +274,28 @@ sc config "SCardSvr" start=disabled
 sc stop SCardSvr
 sc delete SCardSvr
 
-:: Windows Office App
+echo Remove Windows Office App
 powershell.exe -command "Get-AppxPackage -allusers *officehub* | Remove-AppxPackage"
 
-:: Microsoft Solitaire Collection Game
+echo Remove Microsoft Solitaire Collection Game
 powershell.exe -command "Get-AppxPackage -allusers *solitairecollection* | Remove-AppxPackage"
 
-:: People App
+echo Remove People App
 powershell.exe -command "Get-AppxPackage -allusers *people* | Remove-AppxPackage"
 
-:: Cortana App
+echo Remove Cortana App
 powershell.exe -command "Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage"
 
-:: Microsoft Teams App
+echo Remove Microsoft Teams App
 powershell.exe -command "Get-AppxPackage -allusers *microsoftteams* | Remove-AppxPackage"
 
-:: Bing News App
+echo Remove Bing News App
 powershell.exe -command "Get-AppxPackage -allusers *bingnews* | Remove-AppxPackage"
 
-:: Bing Weather App
+echo Remove Bing Weather App
 powershell.exe -command "Get-AppxPackage -allusers *bingweather* | Remove-AppxPackage"
 
-:: Xbox App
+echo Remove Xbox Apps
 powershell.exe -command "Get-AppxPackage -allusers *xboxgamingoverlay* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *xboxidentityprovider* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *xboxspeechtotextoverlay* | Remove-AppxPackage" 
@@ -308,46 +304,47 @@ powershell.exe -command "Get-AppxPackage -allusers *xboxapp* | Remove-AppxPackag
 powershell.exe -command "Get-AppxPackage -allusers *gamingapp* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *gamingservices* | Remove-AppxPackage"
 
-:: YourPhone App
+echo Remove YourPhone App
 powershell.exe -command "Get-AppxPackage -allusers *yourphone* | Remove-AppxPackage"
 
-:: Power Automate App
+echo Remove Power Automate App
 powershell.exe -command "Get-AppxPackage -allusers *powerautomate* | Remove-AppxPackage"
 
-:: Windows Communications Apps
+echo Remove Windows Communications Apps
 powershell.exe -command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
 
-:: Get-Help App
+echo Remove Get-Help App
 powershell.exe -command "Get-AppxPackage -allusers *gethelp* | Remove-AppxPackage"
 
-:: Get Started App
+echo Remove Get Started App
 powershell.exe -command "Get-AppxPackage -allusers *getstarted* | Remove-AppxPackage"
 
-:: Microsoft To Do App
+echo Remove Microsoft To Do App
 powershell.exe -command "Get-AppxPackage -allusers *todos* | Remove-AppxPackage"
 
-:: Microsoft Feedback Hub App
+echo Remove Microsoft Feedback Hub App
 powershell.exe -command "Get-AppxPackage -allusers *windowsfeedbackhub* | Remove-AppxPackage"
 
-:: Maps App
+echo Remove Maps App
 powershell.exe -command "Get-AppxPackage -allusers *windowsmaps* | Remove-AppxPackage"
 
-:: Groove Music App
+echo Remove Groove Music App
 powershell.exe -command "Get-AppxPackage -allusers *zunemusic* | Remove-AppxPackage"
 
-:: Microsoft Movies & TV App
+echo Remove Microsoft Movies & TV App
 powershell.exe -command "Get-AppxPackage -allusers *zunevideo* | Remove-AppxPackage"
 
-:: Camera App
+echo Remove Camera App
 powershell.exe -command "Get-AppxPackage -allusers *windowscamera* | Remove-AppxPackage"
 
-:: Sound Recorder App
+echo Remove Sound Recorder App
 powershell.exe -command "Get-AppxPackage -allusers *windowssoundrecorder* | Remove-AppxPackage"
 
-:: Showing all apps
+echo The list of all Windows applications will be saved here:
+echo 'C:\Users\%USER%\AppData\Local\Temp'
 powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:TEMP\Apps_List.txt""
 
-echo Setting Privacy and Security Options
+echo Configuring Privacy And Security Options In Windows Settings
 rem Let apps show me personalized ads by using my advertising ID
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\AdvertisingInfo" /v "Value" /t REG_DWORD /d "0" /f
@@ -359,6 +356,34 @@ rem Show me suggested content in the Settings app
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353694Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353696Enabled" /t REG_DWORD /d "0" /f
+rem Online speech recognition
+reg add "HKCU\Software\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy" /v "HasAccepted" /t REG_DWORD /d "0" /f
+rem Inking and typing personalization
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\ImproveInkingAndTyping" /v "Value" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\InkingAndTypingPersonalization" /v "Value" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPolicy" /t REG_DWORD /d "0" /f
+rem Send optional dianostgic data
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "MaxTelemetryAllowed" /t REG_DWORD /d "0" /f
+rem Tailored experiences
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
+rem Feedback Frequency
+reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
+rem ???????????????????????????????????????????????
+rem activity history
 
-:: Rebooting the system
+rem Safe Search
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "SafeSearchMode" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsAADCloudSearchEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsDeviceSearchHistoryEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsMSACloudSearchEnabled" /t REG_DWORD /d "0" /f
+
+
+
+rem Location services
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f
+rem Let apps access your location
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f
+
+echo Rebooting the system
 shutdown /r
