@@ -74,6 +74,27 @@ schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefresh" /disable
 :: System Performance Diagnostics Process
 schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable
 
+:: Backup Location Process
+schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)" /disable
+
+:: Sqm Tasks Process
+schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable
+
+:: Network Information Collector Process
+schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
+
+:: Xbox Game Save Process
+schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTask" /disable
+
+:: Microsoft Office Telemetry Process
+schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentLogOn2016" /disable
+schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentFallBack2016" /disable
+schtasks /change /tn "\Microsoft\Office\Office ClickToRun Service Monitor" /disable
+
+:: Automatic Scanning And Troubleshooting Process
+schtasks /change /tn "\Microsoft\Windows\Diagnosis\Scheduled" /disable
+schtasks /change /tn "\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /disable
+
 :: Diagnostic Policy Service
 sc config "DiagTrack" start=disabled
 sc stop DiagTrack
@@ -288,6 +309,21 @@ powershell.exe -command "Get-AppxPackage -allusers *todos* | Remove-AppxPackage"
 
 :: Microsoft Feedback Hub App
 powershell.exe -command "Get-AppxPackage -allusers *windowsfeedbackhub* | Remove-AppxPackage"
+
+:: Maps App
+powershell.exe -command "Get-AppxPackage -allusers *windowsmaps* | Remove-AppxPackage"
+
+:: Groove Music App
+powershell.exe -command "Get-AppxPackage -allusers *zunemusic* | Remove-AppxPackage"
+
+:: Microsoft Movies & TV App
+powershell.exe -command "Get-AppxPackage -allusers *zunevideo* | Remove-AppxPackage"
+
+:: Camera App
+powershell.exe -command "Get-AppxPackage -allusers *windowscamera* | Remove-AppxPackage"
+
+:: Sound Recorder App
+powershell.exe -command "Get-AppxPackage -allusers *windowssoundrecorder* | Remove-AppxPackage"
 
 :: Showing all apps
 powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:TEMP\Apps_List.txt""
