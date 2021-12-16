@@ -7,9 +7,6 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: Windows 11 build 22000.318 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
-echo Stop CCleaner Auto-update
-schtasks /change /tn "CCleaner Update" /disable
-
 echo Stop Windows Security Health Service
 taskkill /f /im SecurityHealthService.exe > NUL 2>&1
 taskkill /f /im SecurityHealthSystray.exe > NUL 2>&1
@@ -42,9 +39,6 @@ schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Verifi
 echo Stop SmartScreen
 taskkill /f /im smartscreen.exe > NUL 2>&1
 
-echo Stop Overwolf Auto-update
-schtasks /change /tn "Overwolf Updater Task" /disable
-
 echo Stop Windows Defender Exploit Guard
 schtasks /change /tn "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable
 
@@ -53,9 +47,6 @@ schtasks /change /tn "Microsoft\Windows\Windows Error Reporting\QueueReporting" 
 
 echo Stop Collecting SQM Data
 schtasks /change /tn "Microsoft\Windows\Autochk\Proxy" /disable
-
-echo ???
-schtasks /change /tn "\Microsoft\Windows\CloudExperienceHost\CreateObjectTask" /disable
 
 echo Stop Windows Disk Diagnostics
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
@@ -88,28 +79,35 @@ schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable
 echo Stop Network Information Collector
 schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
 
-:: Xbox Game Save Process
-schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTask" /disable
-
-:: Microsoft Office Telemetry Process
+echo Stop Microsoft Office Telemetry
 schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentLogOn2016" /disable
 schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentFallBack2016" /disable
 schtasks /change /tn "\Microsoft\Office\Office ClickToRun Service Monitor" /disable
 
-:: Automatic Scanning And Troubleshooting Process
+echo Stop Automatic Scanning And Troubleshooting
 schtasks /change /tn "\Microsoft\Windows\Diagnosis\Scheduled" /disable
 schtasks /change /tn "\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /disable
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DiagLog" /v "Start" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "Start" /t REG_DWORD /d "0" /f
 
-:: Updating The Search Index Process
+echo Stop Supporting Updating Search Indexes
 schtasks /change /tn "\Microsoft\Windows\Shell\IndexerAutomaticMaintenance" /disable
 
-:: Windows Diagnostic Infrastructure Resolution Host Process
+echo Stop Windows Diagnostic Infrastructure Resolution Host
 schtasks /change /tn "\Microsoft\Windows\WDI\ResolutionHost" /disable
 
-:: Diagnostic Policy Service
+echo Stop Overwolf Auto-update
+schtasks /change /tn "Overwolf Updater Task" /disable
+
+echo Stop CCleaner Auto-update
+schtasks /change /tn "CCleaner Update" /disable
+
+echo Stop Diagnostics Tracking Service
 sc config "DiagTrack" start=disabled
 sc stop DiagTrack
 sc delete DiagTrack
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v "ShowedToastAtLevel" /t REG_DWORD /d "1" /f
 
 :: Diagnostic Execution Service
 sc config "diagsvc" start=disabled
@@ -126,7 +124,7 @@ sc config "diagnosticshub.standardcollector.service" start=disabled
 sc stop diagnosticshub.standardcollector.service
 sc delete diagnosticshub.standardcollector.service
 
-:: Xbox Service
+echo Stop Xbox Service
 sc config "XblGameSave" start=disabled
 sc stop XblGameSave
 sc delete XblGameSave
@@ -139,6 +137,7 @@ sc delete XboxNetApiSvc
 sc config "XboxGipSvc" start=disabled
 sc stop XboxGipSvc
 sc delete XboxGipSvc
+schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTask" /disable
 
 :: Windows Downloaded Maps Manager Service
 sc config "MapsBroker" start=disabled
