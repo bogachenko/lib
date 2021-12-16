@@ -124,7 +124,7 @@ sc config "diagnosticshub.standardcollector.service" start=disabled
 sc stop diagnosticshub.standardcollector.service
 sc delete diagnosticshub.standardcollector.service
 
-echo Stop Xbox Service
+echo Stop Gaming Services
 sc config "XblGameSave" start=disabled
 sc stop XblGameSave
 sc delete XblGameSave
@@ -138,6 +138,11 @@ sc config "XboxGipSvc" start=disabled
 sc stop XboxGipSvc
 sc delete XboxGipSvc
 schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTask" /disable
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AudioCaptureEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "CursorCaptureEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
 
 :: Windows Downloaded Maps Manager Service
 sc config "MapsBroker" start=disabled
@@ -184,7 +189,7 @@ sc config "SensorDataService" start=disabled
 sc stop SensorDataService
 sc delete SensorDataService
 
-:: Windows Search Service
+echo Stop Windows Search Service
 sc config "WSearch" start=disabled
 sc stop WSearch
 sc delete WSearch
@@ -193,17 +198,17 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsDe
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsMSACloudSearchEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "SafeSearchMode" /t REG_DWORD /d "0" /f
 
-:: Contact Data Service
+echo Stop Contact Data Service
 sc config "PimIndexMaintenanceSvc" start=disabled
 sc stop PimIndexMaintenanceSvc
 sc delete PimIndexMaintenanceSvc
 
-:: Windows Error Reporting Service
+echo Stop Windows Error Reporting Service
 sc config "WerSvc" start=disabled
 sc stop WerSvc
 sc delete WerSvc
 
-:: Data Usage Service
+echo Stop Data Usage Service
 sc config "DusmSvc" start=disabled
 sc stop DusmSvc
 sc delete DusmSvc
@@ -223,12 +228,12 @@ sc config "WdiSystemHost" start=disabled
 sc stop WdiSystemHost
 sc delete WdiSystemHost
 
-:: SSDP Discovery Service
+echo Stop SSDP Discovery Service
 sc config "SSDPSRV" start=disabled
 sc stop SSDPSRV
 sc delete SSDPSRV
 
-:: Geolocation Service
+echo Stop Geolocation Service
 sc config "lfsvc" start=disabled
 sc stop lfsvc
 sc delete lfsvc
@@ -341,6 +346,19 @@ powershell.exe -command "Get-AppxPackage -allusers *windowssoundrecorder* | Remo
 
 :: Showing all apps
 powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:TEMP\Apps_List.txt""
+
+echo Setting Privacy and Security Options
+rem Let apps show me personalized ads by using my advertising ID
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\AdvertisingInfo" /v "Value" /t REG_DWORD /d "0" /f
+rem Let websites show me locally relevant content by accessing my language list
+reg add "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f
+rem Let Windows improve Start and search results by tracking app launches
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /t REG_DWORD /d "0" /f
+rem Show me suggested content in the Settings app
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353694Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353696Enabled" /t REG_DWORD /d "0" /f
 
 :: Rebooting the system
 shutdown /r
