@@ -369,8 +369,6 @@ rem Tailored experiences
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
 rem Feedback Frequency
 reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
-rem activity history-activity history-activity history
-rem activity history-activity history-activity history
 rem Safe Search
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "SafeSearchMode" /t REG_DWORD /d "0" /f
 rem Cloud content search (Microsoft account)
