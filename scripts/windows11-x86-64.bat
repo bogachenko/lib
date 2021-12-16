@@ -7,6 +7,23 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: Windows 11 build 22000.318 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
+:: Windows Security Health Service Process
+taskkill /f /im SecurityHealthService.exe > NUL 2>&1
+taskkill /f /im SecurityHealthSystray.exe > NUL 2>&1
+
+:: Uninstalling the OneDrive App
+taskkill /f /im OneDrive.exe > NUL 2>&1
+taskkill /f /im OneDriveStandaloneUpdater.exe > NUL 2>&1
+%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
+rd "%USERPROFILE%\OneDrive" /Q /S > NUL 2>&1
+rd "C:\OneDriveTemp" /Q /S > NUL 2>&1
+rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S > NUL 2>&1
+rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S > NUL 2>&1
+powershell.exe -ex bypass -command "Get-ScheduledTask -TaskName *onedrive* | Disable-ScheduledTask
+powershell.exe -command "rm C:\Windows\System32\Tasks\OneDrive*"
+taskkill /f /im explorer.exe
+start explorer.exe
+
 :: Microsoft Compatibility Telemetry Process
 taskkill /f /im compattelrunner.exe > NUL 2>&1
 schtasks /change /tn "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
@@ -19,23 +36,6 @@ schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cache 
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable
-
-:: Windows Security Health Service Process
-taskkill /f /im SecurityHealthService.exe > NUL 2>&1
-taskkill /f /im SecurityHealthSystray.exe > NUL 2>&1
-
-:: OneDrive Process
-taskkill /f /im OneDrive.exe > NUL 2>&1
-taskkill /f /im OneDriveStandaloneUpdater.exe > NUL 2>&1
-%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
-rd "%USERPROFILE%\OneDrive" /Q /S > NUL 2>&1
-rd "C:\OneDriveTemp" /Q /S > NUL 2>&1
-rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S > NUL 2>&1
-rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S > NUL 2>&1
-powershell.exe -ex bypass -command "Get-ScheduledTask -TaskName *onedrive* | Disable-ScheduledTask
-powershell.exe -command "rm C:\Windows\System32\Tasks\OneDrive*"
-taskkill /f /im explorer.exe
-start explorer.exe
 
 :: Overwolf Update Process
 schtasks /change /tn "Overwolf Updater Task" /disable
@@ -69,7 +69,7 @@ schtasks /change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSys
 
 :: Family Safety Process
 schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyMonitor" /disable
-schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefresh" /disable
+schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefreshTask" /disable
 
 :: System Performance Diagnostics Process
 schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable
@@ -94,6 +94,12 @@ schtasks /change /tn "\Microsoft\Office\Office ClickToRun Service Monitor" /disa
 :: Automatic Scanning And Troubleshooting Process
 schtasks /change /tn "\Microsoft\Windows\Diagnosis\Scheduled" /disable
 schtasks /change /tn "\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /disable
+
+:: Updating The Search Index Process
+schtasks /change /tn "\Microsoft\Windows\Shell\IndexerAutomaticMaintenance" /disable
+
+:: Windows Diagnostic Infrastructure Resolution Host Process
+schtasks /change /tn "\Microsoft\Windows\WDI\ResolutionHost" /disable
 
 :: Diagnostic Policy Service
 sc config "DiagTrack" start=disabled
@@ -328,5 +334,5 @@ powershell.exe -command "Get-AppxPackage -allusers *windowssoundrecorder* | Remo
 :: Showing all apps
 powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:TEMP\Apps_List.txt""
 
-:: Hold on console
-pause
+:: Rebooting the system
+shutdown /r
