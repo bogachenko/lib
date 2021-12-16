@@ -7,16 +7,13 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: Windows 11 build 22000.318 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
-:: CCleaner Process
 echo Stop CCleaner Auto-update
 schtasks /change /tn "CCleaner Update" /disable
 
-:: Windows Security Health Service Process
 echo Stop Windows Security Health Service
 taskkill /f /im SecurityHealthService.exe > NUL 2>&1
 taskkill /f /im SecurityHealthSystray.exe > NUL 2>&1
 
-:: OneDrive Process
 echo Stop And Uninstall OneDrive
 taskkill /f /im OneDrive.exe > NUL 2>&1
 taskkill /f /im OneDriveStandaloneUpdater.exe > NUL 2>&1
@@ -30,79 +27,65 @@ powershell.exe -command "rm C:\Windows\System32\Tasks\OneDrive*"
 taskkill /f /im explorer.exe
 start explorer.exe
 
-:: Microsoft Compatibility Telemetry Process
 echo Stop Microsoft Compatibility Telemetry
 taskkill /f /im compattelrunner.exe > NUL 2>&1
 schtasks /change /tn "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
 schtasks /change /tn "Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable
 schtasks /change /tn "Microsoft\Windows\Application Experience\StartupAppTask" /disable
 
-:: Windows Defender Process
-echo ???
+echo Stop Windows Defender
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable
 
-:: Windows Defender Security Centre Process
-echo Stop And Uninstall SmartScreen
+echo Stop SmartScreen
 taskkill /f /im smartscreen.exe > NUL 2>&1
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
-reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "1" /f
-reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t "REG_DWORD" /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t "REG_DWORD" /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_SZ /d "Anywhere" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t "REG_DWORD" /d "0" /f
-takeown /s %computername% /u %username% /f "%WinDir%\System32\smartscreen.exe"
-icacls "%WinDir%\System32\smartscreen.exe" /grant:r %username%:F
-taskkill /im smartscreen.exe /f
-del "%WinDir%\System32\smartscreen.exe" /s /f /q
 
-:: Overwolf Update Process
+echo Stop Overwolf Auto-update
 schtasks /change /tn "Overwolf Updater Task" /disable
 
-:: Windows Defender Exploit Guard Process
+echo Stop Windows Defender Exploit Guard
 schtasks /change /tn "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable
 
-:: Windows Problem Reporting Process
+echo Stop Windows Problem Reporting
 schtasks /change /tn "Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable
 
-:: Collecting SQM Data Process
+echo Stop Collecting SQM Data
 schtasks /change /tn "Microsoft\Windows\Autochk\Proxy" /disable
 
-:: CreateObjectTask Process
+echo ???
 schtasks /change /tn "\Microsoft\Windows\CloudExperienceHost\CreateObjectTask" /disable
 
-:: Software Quality Improvement Program Process
+echo Stop Windows Disk Diagnostics
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /disable
 
-:: Windows Disk Diagnostics Process
+echo Stop Software Quality Improvement Program
 schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable
 schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver" /disable
 
-:: Disk Footprint Process
+echo Stop Disk Footprint
 schtasks /change /tn "\Microsoft\Windows\DiskFootprint\Diagnostics" /disable
 schtasks /change /tn "\Microsoft\Windows\DiskFootprint\StorageSense" /disable
 
-:: Power Efficiency Diagnostics Process
+echo Stop Power Efficiency Diagnostics System
 schtasks /change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable
 
-:: Family Safety Process
+echo Stop Family Safety
 schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyMonitor" /disable
 schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefreshTask" /disable
 
-:: System Performance Diagnostics Process
+echo Stop System Performance Diagnostics
 schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable
 
-:: Backup Location Process
+echo Stop Backup Location
 schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)" /disable
 
-:: Sqm Tasks Process
+echo Stop Sqm Tasks
 schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable
 
-:: Network Information Collector Process
+echo Stop Network Information Collector
 schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
 
 :: Xbox Game Save Process
@@ -206,6 +189,10 @@ sc delete SensorDataService
 sc config "WSearch" start=disabled
 sc stop WSearch
 sc delete WSearch
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsAADCloudSearchEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsDeviceSearchHistoryEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsMSACloudSearchEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "SafeSearchMode" /t REG_DWORD /d "0" /f
 
 :: Contact Data Service
 sc config "PimIndexMaintenanceSvc" start=disabled
