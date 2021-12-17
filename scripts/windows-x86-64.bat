@@ -15,13 +15,21 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 ::
 :: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-echo Stop Windows Security Health Service
+echo Stop necessary processes
+rem Stop Windows Explorer
+taskkill /f /im explorer.exe
+rem Stop Windows Security Health Service
 taskkill /f /im SecurityHealthService.exe > NUL 2>&1
 taskkill /f /im SecurityHealthSystray.exe > NUL 2>&1
-
-echo Stop And Uninstall OneDrive
+rem Stop OneDrive App
 taskkill /f /im OneDrive.exe > NUL 2>&1
 taskkill /f /im OneDriveStandaloneUpdater.exe > NUL 2>&1
+rem Stop Microsoft Compatibility Telemetry
+taskkill /f /im compattelrunner.exe > NUL 2>&1
+rem Stop SmartScreen
+taskkill /f /im smartscreen.exe > NUL 2>&1
+
+echo Remove OneDrive App
 %SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
 rd "%USERPROFILE%\OneDrive" /Q /S > NUL 2>&1
 rd "C:\OneDriveTemp" /Q /S > NUL 2>&1
@@ -29,87 +37,58 @@ rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S > NUL 2>&1
 rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S > NUL 2>&1
 powershell.exe -ex bypass -command "Get-ScheduledTask -TaskName *onedrive* | Disable-ScheduledTask
 powershell.exe -command "rm C:\Windows\System32\Tasks\OneDrive*"
-taskkill /f /im explorer.exe
-start explorer.exe
 
-echo Stop Microsoft Compatibility Telemetry
-taskkill /f /im compattelrunner.exe > NUL 2>&1
+
+echo Task Scheduler Settings
+rem Stop Microsoft Compatibility Appraiser
 schtasks /change /tn "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
 schtasks /change /tn "Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable
 schtasks /change /tn "Microsoft\Windows\Application Experience\StartupAppTask" /disable
-
-echo Stop Windows Defender
+rem Stop Windows Defender
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable
-
-echo Stop SmartScreen
-taskkill /f /im smartscreen.exe > NUL 2>&1
-rem SmartScreen PUA in Microsoft Edge
-reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
-rem SmartScreen Filter in Microsoft Edge
-reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "0" /f
-
-echo Stop Windows Defender Exploit Guard
+rem Stop Windows Defender Exploit Guard
 schtasks /change /tn "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable
-
-echo Stop Collecting SQM Data
+rem Stop Collecting SQM Data
 schtasks /change /tn "Microsoft\Windows\Autochk\Proxy" /disable
-
-echo Stop Windows Disk Diagnostics
+rem Stop Windows Disk Diagnostics
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /disable
-
-echo Stop Software Quality Improvement Program
+rem Stop Software Quality Improvement Program
 schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable
 schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver" /disable
-
-echo Stop Disk Footprint
+rem Stop Disk Footprint
 schtasks /change /tn "\Microsoft\Windows\DiskFootprint\Diagnostics" /disable
 schtasks /change /tn "\Microsoft\Windows\DiskFootprint\StorageSense" /disable
-
-echo Stop Power Efficiency Diagnostics System
+rem Stop Power Efficiency Diagnostics System
 schtasks /change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable
-
-echo Stop Family Safety
+rem Stop Family Safety
 schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyMonitor" /disable
 schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefreshTask" /disable
-
-echo Stop System Performance Diagnostics
+rem Stop System Performance Diagnostics
 schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable
-
-echo Stop Backup Location
+rem Stop Backup Location
 schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)" /disable
-
-echo Stop Sqm Tasks
+rem Stop Sqm Tasks
 schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable
-
-echo Stop Network Information Collector
+rem Stop Network Information Collector
 schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
-
-echo Stop Microsoft Office Telemetry
+rem Stop Microsoft Office Telemetry
 schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentLogOn2016" /disable
 schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentFallBack2016" /disable
 schtasks /change /tn "\Microsoft\Office\Office ClickToRun Service Monitor" /disable
-
-echo Stop Automatic Scanning And Troubleshooting
+rem Stop Automatic Scanning And Troubleshooting
 schtasks /change /tn "\Microsoft\Windows\Diagnosis\Scheduled" /disable
 schtasks /change /tn "\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /disable
-reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DiagLog" /v "Start" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "Start" /t REG_DWORD /d "0" /f
-
-echo Stop Supporting Updating Search Indexes
+rem Stop Supporting Updating Search Indexes
 schtasks /change /tn "\Microsoft\Windows\Shell\IndexerAutomaticMaintenance" /disable
-
-echo Stop Windows Diagnostic Infrastructure Resolution Host
+rem Stop Windows Diagnostic Infrastructure Resolution Host
 schtasks /change /tn "\Microsoft\Windows\WDI\ResolutionHost" /disable
-
-echo Stop Overwolf Auto-update
+rem Stop Overwolf Auto-update
 schtasks /change /tn "Overwolf Updater Task" /disable
-
-echo Stop CCleaner Auto-update
+rem Stop CCleaner Auto-update
 schtasks /change /tn "CCleaner Update" /disable
 
 echo Stopping And Removing Tracking Services
@@ -247,6 +226,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /
 echo Update And Security Settings
 rem Delivery optimization
 reg add "HKU\S-1-5-20\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings" /v "DownloadMode" /t REG_DWORD /d "0" /f
+rem SmartScreen PUA in Microsoft Edge
+reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
+rem SmartScreen Filter in Microsoft Edge
+reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "0" /f
 
 echo Privacy Settings
 rem Let apps show me personalized ads by using my advertising ID
@@ -417,7 +400,6 @@ rem Ads on Bing search results
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BingAdsSuppression" /t REG_DWORD /d "1" /f
 
 echo Windows fine-tuning
-taskkill /f /im explorer.exe
 rem Show hidden files, folders and drives
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Hidden" /t REG_DWORD /d "1" /f
 rem Show extensions for known file types
