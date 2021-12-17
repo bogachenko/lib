@@ -194,46 +194,47 @@ powershell.exe -command "Get-AppxPackage -allusers *windowscamera* | Remove-Appx
 rem Remove Sound Recorder App
 powershell.exe -command "Get-AppxPackage -allusers *windowssoundrecorder* | Remove-AppxPackage"
 rem Force Removal of Built-In Windows Apps
-set ProgramFiles=C:\Program Files
-:stepone
-for /d %%p in ("%ProgramFiles%\WindowsApps\*officehub*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*solitairecollection*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*Microsoft.549981C3F5F10*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*microsoftteams*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*bingnews*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*bingweather*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*xboxgamingoverlay*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*xboxidentityprovider*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*xboxspeechtotextoverlay*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*xbox.tcui*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*xboxapp*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*gamingapp*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*gamingservices*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*yourphone*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*powerautomate*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*windowscommunicationsapps*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*gethelp*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*getstarted*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*todos*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*windowsfeedbackhub*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*windowsmaps*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*zunemusic*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*zunevideo*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*windowscamera*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*windowssoundrecorder*") do (call :stepdelete "%%P")
-goto :steptwo
-:stepdelete
-echo "processing %1"
-takeown /F %1 /R /D Y
-icacls %1 /SETOWNER "LAdmin" /t /c /q
-icacls %1 /inheritance:r /grant:r Everyone:(F) /t /c /q
-attrib -R -S -H %1 /S /D
-del /f /s /q /A:RSHA %1\*.*
-rmdir /s /q %1
-goto :eof
-:steptwo
-del /f /s /q %LclTempDir%\*.*
-for /d %%p in ("%LclTempDir%\*.*") do rmdir "%p" /s /q
+:: set ProgramFiles=C:\Program Files
+:: set TempDirWIN=%WINDIR%\TEMP
+:: :stepone
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*officehub*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*solitairecollection*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*Microsoft.549981C3F5F10*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*microsoftteams*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*bingnews*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*bingweather*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*xboxgamingoverlay*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*xboxidentityprovider*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*xboxspeechtotextoverlay*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*xbox.tcui*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*xboxapp*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*gamingapp*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*gamingservices*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*yourphone*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*powerautomate*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*windowscommunicationsapps*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*gethelp*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*getstarted*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*todos*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*windowsfeedbackhub*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*windowsmaps*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*zunemusic*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*zunevideo*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*windowscamera*") do (call :stepdelete "%%P")
+:: for /d %%p in ("%ProgramFiles%\WindowsApps\*windowssoundrecorder*") do (call :stepdelete "%%P")
+:: goto :steptwo
+:: :stepdelete
+:: echo "processing %1"
+:: takeown /F %1 /R /D Y
+:: icacls %1 /SETOWNER "LAdmin" /t /c /q
+:: icacls %1 /inheritance:r /grant:r Everyone:(F) /t /c /q
+:: attrib -R -S -H %1 /S /D
+:: del /f /s /q /a:RSHA %1\*.*
+:: rmdir /s /q %1
+:: goto :eof
+:: :steptwo
+:: del /f /s /q %TempDirWIN%\*.*
+:: for /d %%p in ("%TempDirWIN%\*.*") do rmdir "%p" /s /q
 rem The list of all Windows applications will be saved here: 'C:\Users\%USER%\AppData\Local\Temp'
 powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:TEMP\Apps_List.txt""
 
