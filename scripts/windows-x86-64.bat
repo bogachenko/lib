@@ -38,12 +38,13 @@ schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Verifi
 
 echo Stop SmartScreen
 taskkill /f /im smartscreen.exe > NUL 2>&1
+rem SmartScreen PUA in Microsoft Edge
+reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
+rem SmartScreen Filter in Microsoft Edge
+reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "0" /f
 
 echo Stop Windows Defender Exploit Guard
 schtasks /change /tn "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable
-
-echo Stop Windows Problem Reporting
-schtasks /change /tn "Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable
 
 echo Stop Collecting SQM Data
 schtasks /change /tn "Microsoft\Windows\Autochk\Proxy" /disable
@@ -159,6 +160,7 @@ echo Stop Windows Error Reporting Service
 sc config "WerSvc" start=disabled
 sc stop WerSvc
 sc delete WerSvc
+schtasks /change /tn "Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable
 
 echo Stop Data Usage Service
 sc config "DusmSvc" start=disabled
@@ -204,6 +206,8 @@ powershell.exe -command "Get-AppxPackage -allusers *gamingservices* | Remove-App
 
 echo Remove YourPhone App
 powershell.exe -command "Get-AppxPackage -allusers *yourphone* | Remove-AppxPackage"
+rem Show me suggestions for using my Android phone with Windows
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
 
 echo Remove Power Automate App
 powershell.exe -command "Get-AppxPackage -allusers *powerautomate* | Remove-AppxPackage"
@@ -356,6 +360,29 @@ rem File system access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Deny" /f
 rem Let apps access your file system
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Deny" /f
+
+echo Windows fine-tuning
+taskkill /f /im explorer.exe
+rem Show hidden files, folders and drives
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Hidden" /t REG_DWORD /d "1" /f
+rem Show extensions for known file types
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d "0" /f
+rem Launch folder windows in a separate process
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "SeparateProcess" /t REG_DWORD /d "1" /f
+rem Show Sync Provider Notifications in Windows Explorer
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d "0" /f
+rem Checkboxes for item selection
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "AutoCheckSelect" /t REG_DWORD /d "1" /f
+rem Task view
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f
+rem Search icon on the taskbar
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
+rem Chat icon on the taskbar
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarMn" /t REG_DWORD /d "0" /f
+rem Widgets icon on the taskbar
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d "0" /f
+rem Taskbar Alignment
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "0" /f
 
 echo Rebooting the system
 shutdown /r
