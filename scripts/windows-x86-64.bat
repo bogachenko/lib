@@ -7,7 +7,13 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: Windows 11 build 22000.318 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
-:: README - Use this script at your own risk!
+:: Copyright 2021 Bogachenko Vyacheslav
+::
+:: Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+::
+:: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+::
+:: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 echo Stop Windows Security Health Service
 taskkill /f /im SecurityHealthService.exe > NUL 2>&1
@@ -106,28 +112,25 @@ schtasks /change /tn "Overwolf Updater Task" /disable
 echo Stop CCleaner Auto-update
 schtasks /change /tn "CCleaner Update" /disable
 
-echo Stop Diagnostics Tracking Service
+echo Stopping And Removing Tracking Services
+rem Stop Diagnostics Tracking Service
 sc config "DiagTrack" start=disabled
 sc stop DiagTrack
 sc delete DiagTrack
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v "ShowedToastAtLevel" /t REG_DWORD /d "1" /f
-
-echo Stop Diagnostic Execution Service
+rem Stop Diagnostic Execution Service
 sc config "diagsvc" start=disabled
 sc stop diagsvc
 sc delete diagsvc
-
-echo Stop WAP-push Service
+rem Stop WAP-push Service
 sc config "dmwappushservice" start=disabled
 sc stop dmwappushservice
 sc delete dmwappushservice
-
-echo Stop Diagnostics Hub Standard Collector Service
+rem Stop Diagnostics Hub Standard Collector Service
 sc config "diagnosticshub.standardcollector.service" start=disabled
 sc stop diagnosticshub.standardcollector.service
 sc delete diagnosticshub.standardcollector.service
-
-echo Stop Gaming Services
+rem Stop Gaming Services
 sc config "XblGameSave" start=disabled
 sc stop XblGameSave
 sc delete XblGameSave
@@ -146,58 +149,47 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AudioCaptur
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "CursorCaptureEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
-
-echo Stop Store Demonstration Service
+rem Stop Store Demonstration Service
 sc config "RetailDemo" start=disabled
 sc stop RetailDemo
 sc delete RetailDemo
 schtasks /change /tn "Microsoft\Windows\RetailDemo\CleanupOfflineContent" /disable
-
-echo Stop Windows Search Service
+rem Stop Windows Search Service
 sc config "WSearch" start=disabled
 sc stop WSearch
 sc delete WSearch
-
-echo Stop Windows Error Reporting Service
+rem Stop Windows Error Reporting Service
 sc config "WerSvc" start=disabled
 sc stop WerSvc
 sc delete WerSvc
 schtasks /change /tn "Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable
-
-echo Stop Data Usage Service
+rem Stop Data Usage Service
 sc config "DusmSvc" start=disabled
 sc stop DusmSvc
 sc delete DusmSvc
-
-echo Stop SSDP Discovery Service
+rem Stop SSDP Discovery Service
 sc config "SSDPSRV" start=disabled
 sc stop SSDPSRV
 sc delete SSDPSRV
-
-echo Stop Geolocation Service
+rem Stop Geolocation Service
 sc config "lfsvc" start=disabled
 sc stop lfsvc
 sc delete lfsvc
 
-echo Remove Windows Office App
+echo Remove built-in Windows Metro apps
+rem Remove Windows Office App
 powershell.exe -command "Get-AppxPackage -allusers *officehub* | Remove-AppxPackage"
-
-echo Remove Microsoft Solitaire Collection Game
+rem Remove Microsoft Solitaire Collection Game
 powershell.exe -command "Get-AppxPackage -allusers *solitairecollection* | Remove-AppxPackage"
-
-echo Remove Cortana App
+rem Remove Cortana App
 powershell.exe -command "Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage"
-
-echo Remove Microsoft Teams App
+rem Remove Microsoft Teams App
 powershell.exe -command "Get-AppxPackage -allusers *microsoftteams* | Remove-AppxPackage"
-
-echo Remove Bing News App
+rem Remove Bing News App
 powershell.exe -command "Get-AppxPackage -allusers *bingnews* | Remove-AppxPackage"
-
-echo Remove Bing Weather App
+rem Remove Bing Weather App
 powershell.exe -command "Get-AppxPackage -allusers *bingweather* | Remove-AppxPackage"
-
-echo Remove Xbox Apps
+rem Remove Xbox Apps
 powershell.exe -command "Get-AppxPackage -allusers *xboxgamingoverlay* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *xboxidentityprovider* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *xboxspeechtotextoverlay* | Remove-AppxPackage" 
@@ -205,49 +197,34 @@ powershell.exe -command "Get-AppxPackage -allusers *xbox.tcui* | Remove-AppxPack
 powershell.exe -command "Get-AppxPackage -allusers *xboxapp* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *gamingapp* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *gamingservices* | Remove-AppxPackage"
-
-echo Remove YourPhone App
+rem Remove YourPhone App
 powershell.exe -command "Get-AppxPackage -allusers *yourphone* | Remove-AppxPackage"
-rem Show me suggestions for using my Android phone with Windows
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
-
-echo Remove Power Automate App
+rem Remove Power Automate App
 powershell.exe -command "Get-AppxPackage -allusers *powerautomate* | Remove-AppxPackage"
-
-echo Remove Windows Communications Apps
+rem Remove Windows Communications Apps
 powershell.exe -command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
-
-echo Remove Get-Help App
+rem Remove Get-Help App
 powershell.exe -command "Get-AppxPackage -allusers *gethelp* | Remove-AppxPackage"
-
-echo Remove Get Started App
+rem Remove Get Started App
 powershell.exe -command "Get-AppxPackage -allusers *getstarted* | Remove-AppxPackage"
-
-echo Remove Microsoft To Do App
+rem Remove Microsoft To Do App
 powershell.exe -command "Get-AppxPackage -allusers *todos* | Remove-AppxPackage"
-
-echo Remove Microsoft Feedback Hub App
+rem Remove Microsoft Feedback Hub App
 powershell.exe -command "Get-AppxPackage -allusers *windowsfeedbackhub* | Remove-AppxPackage"
-
-echo Remove Maps App
+rem Remove Maps App
 powershell.exe -command "Get-AppxPackage -allusers *windowsmaps* | Remove-AppxPackage"
-
-echo Remove Groove Music App
+rem Remove Groove Music App
 powershell.exe -command "Get-AppxPackage -allusers *zunemusic* | Remove-AppxPackage"
-
-echo Remove Microsoft Movies and TV App
+rem Remove Microsoft Movies and TV App
 powershell.exe -command "Get-AppxPackage -allusers *zunevideo* | Remove-AppxPackage"
-
-echo Remove Camera App
+rem Remove Camera App
 powershell.exe -command "Get-AppxPackage -allusers *windowscamera* | Remove-AppxPackage"
-
-echo Remove Sound Recorder App
+rem Remove Sound Recorder App
 powershell.exe -command "Get-AppxPackage -allusers *windowssoundrecorder* | Remove-AppxPackage"
-
 rem The list of all Windows applications will be saved here: 'C:\Users\%USER%\AppData\Local\Temp'
 powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:TEMP\Apps_List.txt""
 
-echo Input settings
+echo Time And Language Setting
 rem Input analysis
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "InsightsEnabled" /t REG_DWORD /d "0" /f
 rem Autocorrect misspelled words
@@ -261,11 +238,17 @@ reg add "HKCU\Software\Microsoft\Input\Settings" /v "MultilingualEnabled" /t REG
 rem Voice Typing
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
 
-echo Configuring Windows Updates
+echo Bluetooth And Devices Settings
+rem Stopping the YourPhone app
+taskkill /im YourPhone.exe /f
+rem Show me suggestions for using my Android phone with Windows
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
+
+echo Update And Security Settings
 rem Delivery optimization
 reg add "HKU\S-1-5-20\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings" /v "DownloadMode" /t REG_DWORD /d "0" /f
 
-echo Configuring Privacy And Security Options In Windows Settings
+echo Privacy Settings
 rem Let apps show me personalized ads by using my advertising ID
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\AdvertisingInfo" /v "Value" /t REG_DWORD /d "0" /f
