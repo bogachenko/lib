@@ -247,6 +247,25 @@ powershell.exe -command "Get-AppxPackage -allusers *windowssoundrecorder* | Remo
 rem The list of all Windows applications will be saved here: 'C:\Users\%USER%\AppData\Local\Temp'
 powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:TEMP\Apps_List.txt""
 
+echo Input settings
+rem Input analysis
+reg add "HKCU\Software\Microsoft\Input\Settings" /v "InsightsEnabled" /t REG_DWORD /d "0" /f
+rem Autocorrect misspelled words
+reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableAutocorrection" /t REG_DWORD /d "0" /f
+rem Highlight misspelled words
+reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableSpellchecking" /t REG_DWORD /d "0" /f
+rem Show text suggestions when typing on the physical keyboard
+reg add "HKCU\Software\Microsoft\Input\Settings" /v "EnableHwkbTextPrediction" /t REG_DWORD /d "0" /f
+rem Multilingual text suggestions
+reg add "HKCU\Software\Microsoft\Input\Settings" /v "MultilingualEnabled" /t REG_DWORD /d "0" /f
+rem Voice Typing
+reg add "HKCU\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
+
+echo Configuring Windows Updates
+rem Delivery optimization
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v "DODownloadMode" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DODownloadMode" /t REG_DWORD /d "0" /f
+
 echo Configuring Privacy And Security Options In Windows Settings
 rem Let apps show me personalized ads by using my advertising ID
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
@@ -364,15 +383,15 @@ rem Let apps access your file system
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Deny" /f
 
 echo Edge fine-tuning
-rem Preload the new tab page for a faster experience
+rem Preload of the new tab page for faster rendering
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPagePrerenderEnabled" /t REG_DWORD /d "0" /f
-rem Allow Microsoft News content on the new tab page
+rem Microsoft News content on the new tab page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageContentEnabled" /t REG_DWORD /d "0" /f
-rem Hide the default top sites from the new tab page
+rem The default top sites from the new tab page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageHideDefaultTopSites" /t REG_DWORD /d "1" /f
-rem Allow quick links on the new tab page
+rem Quick links on the new tab page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageQuickLinksEnabled" /t REG_DWORD /d "0" /f
-rem Page Layout
+rem The type of background allowed for the layout of the new tab page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageAllowedBackgroundTypes" /t REG_DWORD /d "3" /f
 rem Show share button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ConfigureShare" /t REG_DWORD /d "1" /f
@@ -386,17 +405,17 @@ rem Show tab actions menu
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VerticalTabsAllowed" /t REG_DWORD /d "0" /f
 rem Tracking prevention
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TrackingPrevention" /t REG_DWORD /d "0" /f
-rem Use a web service to help resolve navigation errors
+rem Resolution of navigation errors using a web service
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWebService" /t REG_DWORD /d "0" /f
-rem Show me search and site suggestions using my typed characters
+rem Search suggestions
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "0" /f
-rem Suggest similar sites when a website can't be found
+rem Suggest similar pages when a webpage cannot be found
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AlternateErrorPagesEnabled" /t REG_DWORD /d "0" /f
-rem Diagnostic Data
+rem Send required and optional diagnostic data about browser usage
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD /d "0" /f
-rem Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
+rem Personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
-rem Allow recommendations and promotional notifications from Microsoft Edge
+rem Recommendations and promotional notifications from Microsoft Edge
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowRecommendationsEnabled" /t REG_DWORD /d "0" /f
 rem Visual search 
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VisualSearchEnabled" /t REG_DWORD /d "0" /f
@@ -404,10 +423,16 @@ rem Enable Microsoft Search in Bing suggestions in the address bar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarMicrosoftSearchInBingProviderEnabled" /t REG_DWORD /d "0" /f
 rem Search on new tabs uses search box or address bar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_SZ /d "redirect" /f
-rem Enable full-tab promotional content
+rem Full-tab promotional content
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromotionalTabsEnabled" /t REG_DWORD /d "0" /f
-rem Choose whether users can receive customized background images and text, suggestions, notifications, and tips for Microsoft services)
+rem Choose whether users can receive customized background images and text, suggestions, notifications, and tips for Microsoft services
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpotlightExperiencesAndRecommendationsEnabled" /t REG_DWORD /d "0" /f
+rem Typosquatting сhecker
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TyposquattingCheckerEnabled" /t REG_DWORD /d "0" /f
+rem Ask where to save downloaded files
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromptForDownloadLocation" /t REG_DWORD /d "1" /f
+rem Ads on Bing search results
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BingAdsSuppression" /t REG_DWORD /d "1" /f
 
 echo Windows fine-tuning
 taskkill /f /im explorer.exe
