@@ -199,7 +199,7 @@ set TempDirWIN=%WINDIR%\TEMP
 :stepone
 for /d %%p in ("%ProgramFiles%\WindowsApps\*officehub*") do (call :stepdelete "%%P")
 for /d %%p in ("%ProgramFiles%\WindowsApps\*solitairecollection*") do (call :stepdelete "%%P")
-for /d %%p in ("%ProgramFiles%\WindowsApps\*Microsoft.549981C3F5F10*") do (call :stepdelete "%%P")
+for /d %%p in ("%ProgramFiles%\WindowsApps\Microsoft.549981C3F5F10_*") do (call :stepdelete "%%P")
 for /d %%p in ("%ProgramFiles%\WindowsApps\*microsoftteams*") do (call :stepdelete "%%P")
 for /d %%p in ("%ProgramFiles%\WindowsApps\*bingnews*") do (call :stepdelete "%%P")
 for /d %%p in ("%ProgramFiles%\WindowsApps\*bingweather*") do (call :stepdelete "%%P")
@@ -225,12 +225,12 @@ for /d %%p in ("%ProgramFiles%\WindowsApps\*windowssoundrecorder*") do (call :st
 goto :steptwo
 :stepdelete
 echo "processing %1"
-takeown /f %1 /r /d y
-icacls %1 /SETOWNER "LAdmin" /t /c /q
-icacls %1 /inheritance:r /grant:r Everyone:(F) /t /c /q
+takeown /F %1 /R /D Y
+icacls %1 /SETOWNER "LAdmin" /T /C /Q
+icacls %1 /inheritance:r /grant:r Everyone:(F) /T /C /Q
 attrib -R -S -H %1 /S /D
-del /f /s /q /a:RSHA %1\*.*
-rmdir /s /q %1
+del /F /S /Q /A:RSHA %1\*.*
+rmdir /S /Q %1
 goto :eof
 :steptwo
 del /f /s /q %TempDirWIN%\*.*
