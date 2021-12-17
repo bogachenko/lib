@@ -89,13 +89,16 @@ rem Stop Overwolf Auto-update
 schtasks /change /tn "Overwolf Updater Task" /disable
 rem Stop CCleaner Auto-update
 schtasks /change /tn "CCleaner Update" /disable
+rem Stop Xbox
+schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTask" /disable
+rem Stop Auto Cleanup RetailDemo Offline content
+schtasks /change /tn "Microsoft\Windows\RetailDemo\CleanupOfflineContent" /disable
 
 echo Stopping And Removing Tracking Services
 rem Stop Diagnostics Tracking Service
 sc config "DiagTrack" start=disabled
 sc stop DiagTrack
 sc delete DiagTrack
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v "ShowedToastAtLevel" /t REG_DWORD /d "1" /f
 rem Stop Diagnostic Execution Service
 sc config "diagsvc" start=disabled
 sc stop diagsvc
@@ -121,17 +124,10 @@ sc delete XboxNetApiSvc
 sc config "XboxGipSvc" start=disabled
 sc stop XboxGipSvc
 sc delete XboxGipSvc
-schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTask" /disable
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AudioCaptureEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "CursorCaptureEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
 rem Stop Store Demonstration Service
 sc config "RetailDemo" start=disabled
 sc stop RetailDemo
 sc delete RetailDemo
-schtasks /change /tn "Microsoft\Windows\RetailDemo\CleanupOfflineContent" /disable
 rem Stop Windows Search Service
 sc config "WSearch" start=disabled
 sc stop WSearch
@@ -215,6 +211,14 @@ rem Multilingual text suggestions
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "MultilingualEnabled" /t REG_DWORD /d "0" /f
 rem Voice Typing
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
+
+echo Games Settings
+rem Xbox
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AudioCaptureEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "CursorCaptureEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
 
 echo Bluetooth And Devices Settings
 rem Stopping the YourPhone app
@@ -345,6 +349,12 @@ rem File system access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Deny" /f
 rem Let apps access your file system
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Deny" /f
+rem Diagnostics Tracking Service
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v "ShowedToastAtLevel" /t REG_DWORD /d "1" /f
+rem Microsoft Diagnostics Center Standard Collector Services
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DiagLog" /v "Start" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "Start" /t REG_DWORD /d "0" /f
 
 echo Edge Fine-Tuning
 rem Preload of the new tab page for faster rendering
