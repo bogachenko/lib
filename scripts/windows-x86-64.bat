@@ -148,16 +148,12 @@ echo Stop Store Demonstration Service
 sc config "RetailDemo" start=disabled
 sc stop RetailDemo
 sc delete RetailDemo
+schtasks /change /tn "Microsoft\Windows\RetailDemo\CleanupOfflineContent" /disable
 
 echo Stop Windows Search Service
 sc config "WSearch" start=disabled
 sc stop WSearch
 sc delete WSearch
-
-echo Stop Contact Data Service
-sc config "PimIndexMaintenanceSvc" start=disabled
-sc stop PimIndexMaintenanceSvc
-sc delete PimIndexMaintenanceSvc
 
 echo Stop Windows Error Reporting Service
 sc config "WerSvc" start=disabled
@@ -184,9 +180,6 @@ powershell.exe -command "Get-AppxPackage -allusers *officehub* | Remove-AppxPack
 
 echo Remove Microsoft Solitaire Collection Game
 powershell.exe -command "Get-AppxPackage -allusers *solitairecollection* | Remove-AppxPackage"
-
-echo Remove People App
-powershell.exe -command "Get-AppxPackage -allusers *people* | Remove-AppxPackage"
 
 echo Remove Cortana App
 powershell.exe -command "Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage"
