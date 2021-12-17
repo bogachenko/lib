@@ -147,6 +147,10 @@ rem Stop Geolocation Service
 sc config "lfsvc" start=disabled
 sc stop lfsvc
 sc delete lfsvc
+rem Downloaded Maps Manager
+sc config "MapsBroker" start=disabled
+sc stop MapsBroker
+sc delete MapsBroker
 
 echo Remove Built-In Windows Metro Apps
 rem Remove Windows Office App
@@ -211,11 +215,12 @@ FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.People_*") DO (call :stepdelete "%%
 FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.PowerAutomateDesktop_*") DO (call :stepdelete "%%P")
 FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.Todos_*") DO (call :stepdelete "%%P")
 FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.WindowsFeedbackHub_*") DO (call :stepdelete "%%P")
-:: FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.WindowsMaps_*") DO (call :stepdelete "%%P")
+FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.WindowsMaps_*") DO (call :stepdelete "%%P")
 FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.WindowsSoundRecorder_*") DO (call :stepdelete "%%P")
 FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.Xbox.TCUI_*") DO (call :stepdelete "%%P")
 FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.XboxGamingOverlay_*") DO (call :stepdelete "%%P")
 FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.XboxIdentityProvider_*") DO (call :stepdelete "%%P")
+FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.XboxSpeechToTextOverlay_*") DO (call :stepdelete "%%P")
 FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.ZuneMusic_*") DO (call :stepdelete "%%P")
 FOR /D %%P IN ("%ProgramFiles%\WindowsApps\*.ZuneVideo_*") DO (call :stepdelete "%%P")
 FOR /D %%P IN ("%ProgramFiles%\WindowsApps\MicrosoftTeams_*") DO (call :stepdelete "%%P")
@@ -223,7 +228,7 @@ goto :steptwo
 :stepdelete
 echo "processing %1"
 takeown /F %1 /R /D Y
-icacls %1 /SETOWNER "LAdmin" /T /C /Q
+icacls %1 /SETOWNER "administrators" /T /C /Q
 icacls %1 /inheritance:r /grant:r Everyone:(F) /T /C /Q
 attrib -R -S -H %1 /S /D
 del /F /S /Q /A:RSHA %1\*.*
