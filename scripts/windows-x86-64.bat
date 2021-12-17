@@ -109,17 +109,17 @@ sc stop DiagTrack
 sc delete DiagTrack
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v "ShowedToastAtLevel" /t REG_DWORD /d "1" /f
 
-:: Diagnostic Execution Service
+echo Stop Diagnostic Execution Service
 sc config "diagsvc" start=disabled
 sc stop diagsvc
 sc delete diagsvc
 
-:: WAP-push Service
+echo Stop WAP-push Service
 sc config "dmwappushservice" start=disabled
 sc stop dmwappushservice
 sc delete dmwappushservice
 
-:: Diagnostics Hub Standard Collector Service
+echo Stop Diagnostics Hub Standard Collector Service
 sc config "diagnosticshub.standardcollector.service" start=disabled
 sc stop diagnosticshub.standardcollector.service
 sc delete diagnosticshub.standardcollector.service
@@ -144,50 +144,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "CursorCaptu
 reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
 
-:: Windows Downloaded Maps Manager Service
-sc config "MapsBroker" start=disabled
-sc stop MapsBroker
-sc delete MapsBroker
-
-:: Wallet Service
-sc config "WalletService" start=disabled
-sc stop WalletService
-sc delete WalletService
-
-:: Windows Media Player Network Sharing Service
-sc config "WMPNetworkSvc" start=disabled
-sc stop WMPNetworkSvc
-sc delete WMPNetworkSvc
-
-:: Windows Connect Now Service
-sc config "wcncsvc" start=disabled
-sc stop wcncsvc
-sc delete wcncsvc
-
-:: Sensor Monitoring Service
-sc config "SensrSvc" start=disabled
-sc stop SensrSvc
-sc delete SensrSvc
-
-:: Windows Biometric Service
-sc config "WbioSrvc" start=disabled
-sc stop WbioSrvc
-sc delete WbioSrvc
-
-:: Store Demonstration Service
+echo Stop Store Demonstration Service
 sc config "RetailDemo" start=disabled
 sc stop RetailDemo
 sc delete RetailDemo
-
-:: Sensor Service
-sc config "SensorService" start=disabled
-sc stop SensorService
-sc delete SensorService
-
-:: Sensor Data Service
-sc config "SensorDataService" start=disabled
-sc stop SensorDataService
-sc delete SensorDataService
 
 echo Stop Windows Search Service
 sc config "WSearch" start=disabled
@@ -209,21 +169,6 @@ sc config "DusmSvc" start=disabled
 sc stop DusmSvc
 sc delete DusmSvc
 
-:: Windows License Manager Service
-sc config "LicenseManager" start=disabled
-sc stop LicenseManager
-sc delete LicenseManager
-
-:: Diagnostic Host Service
-sc config "WdiServiceHost" start=disabled
-sc stop WdiServiceHost
-sc delete WdiServiceHost
-
-:: Diagnostic Host System Service
-sc config "WdiSystemHost" start=disabled
-sc stop WdiSystemHost
-sc delete WdiSystemHost
-
 echo Stop SSDP Discovery Service
 sc config "SSDPSRV" start=disabled
 sc stop SSDPSRV
@@ -233,46 +178,6 @@ echo Stop Geolocation Service
 sc config "lfsvc" start=disabled
 sc stop lfsvc
 sc delete lfsvc
-
-:: ActiveX Installer
-sc config "AxInstSV" start=disabled
-sc stop AxInstSV
-sc delete AxInstSV
-
-:: AllJoyn Router Service
-sc config "AJRouter" start=disabled
-sc stop AJRouter
-sc delete AJRouter
-
-:: App Readiness
-sc config "AppReadiness" start=disabled
-sc stop AppReadiness
-sc delete AppReadiness
-
-:: Internet Connection Sharing
-sc config "SharedAccess" start=disabled
-sc stop SharedAccess
-sc delete SharedAccess
-
-:: SMS Router Service 
-sc config "SmsRouter" start=disabled
-sc stop SmsRouter
-sc delete SmsRouter
-
-:: Certificate Distribution Service
-sc config "CertPropSvc" start=disabled
-sc stop CertPropSvc
-sc delete CertPropSvc
-
-:: Windows Event Collector Service
-sc config "Wecsvc" start=disabled
-sc stop Wecsvc
-sc delete Wecsvc
-
-:: Smart-Card Service
-sc config "SCardSvr" start=disabled
-sc stop SCardSvr
-sc delete SCardSvr
 
 echo Remove Windows Office App
 powershell.exe -command "Get-AppxPackage -allusers *officehub* | Remove-AppxPackage"
@@ -331,7 +236,7 @@ powershell.exe -command "Get-AppxPackage -allusers *windowsmaps* | Remove-AppxPa
 echo Remove Groove Music App
 powershell.exe -command "Get-AppxPackage -allusers *zunemusic* | Remove-AppxPackage"
 
-echo Remove Microsoft Movies & TV App
+echo Remove Microsoft Movies and TV App
 powershell.exe -command "Get-AppxPackage -allusers *zunevideo* | Remove-AppxPackage"
 
 echo Remove Camera App
@@ -340,8 +245,7 @@ powershell.exe -command "Get-AppxPackage -allusers *windowscamera* | Remove-Appx
 echo Remove Sound Recorder App
 powershell.exe -command "Get-AppxPackage -allusers *windowssoundrecorder* | Remove-AppxPackage"
 
-echo The list of all Windows applications will be saved here:
-echo 'C:\Users\%USER%\AppData\Local\Temp'
+rem The list of all Windows applications will be saved here: 'C:\Users\%USER%\AppData\Local\Temp'
 powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:TEMP\Apps_List.txt""
 
 echo Configuring Privacy And Security Options In Windows Settings
