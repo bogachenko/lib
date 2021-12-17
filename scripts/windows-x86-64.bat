@@ -15,7 +15,7 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 ::
 :: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-echo Stop necessary processes
+echo Stop Necessary Processes
 rem Stop Windows Explorer
 taskkill /f /im explorer.exe
 rem Stop Windows Security Health Service
@@ -37,7 +37,6 @@ rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S > NUL 2>&1
 rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S > NUL 2>&1
 powershell.exe -ex bypass -command "Get-ScheduledTask -TaskName *onedrive* | Disable-ScheduledTask
 powershell.exe -command "rm C:\Windows\System32\Tasks\OneDrive*"
-
 
 echo Task Scheduler Settings
 rem Stop Microsoft Compatibility Appraiser
@@ -155,7 +154,7 @@ sc config "lfsvc" start=disabled
 sc stop lfsvc
 sc delete lfsvc
 
-echo Remove built-in Windows Metro apps
+echo Remove Built-In Windows Metro Apps
 rem Remove Windows Office App
 powershell.exe -command "Get-AppxPackage -allusers *officehub* | Remove-AppxPackage"
 rem Remove Microsoft Solitaire Collection Game
@@ -347,7 +346,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 rem Let apps access your file system
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Deny" /f
 
-echo Edge fine-tuning
+echo Edge Fine-Tuning
 rem Preload of the new tab page for faster rendering
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPagePrerenderEnabled" /t REG_DWORD /d "0" /f
 rem Microsoft News content on the new tab page
@@ -399,7 +398,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromptForDownloadLocation" /
 rem Ads on Bing search results
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BingAdsSuppression" /t REG_DWORD /d "1" /f
 
-echo Windows fine-tuning
+echo Windows Fine-Tuning
 rem Show hidden files, folders and drives
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Hidden" /t REG_DWORD /d "1" /f
 rem Show extensions for known file types
@@ -421,5 +420,5 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "T
 rem Taskbar Alignment
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "0" /f
 
-echo Rebooting the system
+rem Reboot
 shutdown /r
