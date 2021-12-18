@@ -25,6 +25,8 @@ rem Stop Microsoft Compatibility Telemetry
 taskkill /f /im compattelrunner.exe > NUL 2>&1
 rem Stop SmartScreen
 taskkill /f /im smartscreen.exe > NUL 2>&1
+rem Stopping the YourPhone app
+taskkill /im YourPhone.exe /f > NUL 2>&1
 
 echo Remove OneDrive App
 %SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
@@ -151,6 +153,10 @@ rem Downloaded Maps Manager
 sc config "MapsBroker" start=disabled
 sc stop MapsBroker
 sc delete MapsBroker
+rem Delivery optimization
+rem sc config "DoSvc" start=disabled
+rem sc stop DoSvc
+rem sc delete DoSvc
 
 echo Remove Built-In Windows Metro Apps
 rem Remove Windows Office App
@@ -252,6 +258,8 @@ rem Multilingual text suggestions
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "MultilingualEnabled" /t REG_DWORD /d "0" /f
 rem Voice Typing
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
+rem Collecting and transmitting the texts you type
+reg add "HKCU\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
 
 echo Games Settings
 rem Xbox
@@ -262,10 +270,10 @@ reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_
 reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
 
 echo Bluetooth And Devices Settings
-rem Stopping the YourPhone app
-taskkill /im YourPhone.exe /f
 rem Show me suggestions for using my Android phone with Windows
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
+rem Use Autoplay for all media and devices
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers" /v "DisableAutoplay" /t REG_DWORD /d "1" /f 
 
 echo Update And Security Settings
 rem Delivery optimization
@@ -277,8 +285,10 @@ reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "0
 
 echo Privacy Settings
 rem Let apps show me personalized ads by using my advertising ID
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d 0 /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\AdvertisingInfo" /v "Value" /t REG_DWORD /d "0" /f
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Id" /f
 rem Let websites show me locally relevant content by accessing my language list
 reg add "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f
 rem Let Windows improve Start and search results by tracking app launches
@@ -313,6 +323,7 @@ reg add "HKCU\Software\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPo
 rem Send optional dianostgic data
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "MaxTelemetryAllowed" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f 
 rem Tailored experiences
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
 rem Feedback Frequency
