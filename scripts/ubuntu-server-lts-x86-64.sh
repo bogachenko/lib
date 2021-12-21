@@ -12,19 +12,24 @@ clear
 # Screen resolution.
 xrandr --size 16:9
 
-# Russification of the system.
-sudo dpkg-reconfigure locales
-sudo localedef --delete-from-archive ru_UA.utf8
-
 # Installing updates and updating the data repositories.
 sudo apt update && sudo apt upgrade
 
 # Installing core packages.
-sudo apt-get --no-install-recommends --no-install-suggests install i3 xinit sddm firefox chromium-browser chromium-browser-l10n x11-xserver-utils fonts-noto fonts-ubuntu fonts-ubuntu-console hwinfo dmz-cursor-theme firefox-locale-ru unzip
-sudo snap install acestreamplayer
+sudo apt-get install i3 firefox fonts-noto fonts-ubuntu i3 unzip dmz-cursor-theme wget vlc ubuntu-restricted-extras tor
+sudo apt-get install xinit mesa-utils x11-xserver-utils x11-utils
+
+# Chrome
+cd /tmp
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+sudo apt-get update
+sudo apt-get install google-chrome-stable
+#sudo apt-get --no-install-recommends --no-install-suggests install
 
 # Enabling daemons.
-sudo systemctl enable sddm.service && sudo systemctl start sddm.service
+#sudo systemctl enable sddm.service && sudo systemctl start sddm.service
+sudo systemctl enable tor.service && sudo systemctl start tor.service
 
 # Installing the configuration file user.js for Firefox.
 cd /tmp
@@ -54,4 +59,4 @@ URxvt.geometry: 150x30
 URxvt.scrollTtyOutput: false
 URxvt.cursorBlink: true
 EOF
-xrdb -merge ~/.Xresources
+xrdb ~/.Xresources
