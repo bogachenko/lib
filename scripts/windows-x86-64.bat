@@ -94,6 +94,12 @@ rem Stop Auto Cleanup RetailDemo Offline Content Task
 schtasks /change /tn "Microsoft\Windows\RetailDemo\CleanupOfflineContent" /disable
 rem Stop Error Reporting Task 
 schtasks /change /tn "Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable
+rem Location Notification Tasks
+schtasks /change /tn "Microsoft\Windows\Location\Notifications" /disable
+schtasks /change /tn "Microsoft\Windows\Location\WindowsActionDialog" /disable
+rem Collecting And Sending Device Data Tasks
+schtasks /change /tn "Microsoft\Windows\Device Information\Device" /disable
+schtasks /change /tn "Microsoft\Windows\Device Information\Device User" /disable
 
 echo Stopping And Removing Tracking Services
 rem Stop Diagnostics Tracking Service
@@ -246,19 +252,19 @@ for /d %%p in ("%TempDirWIN%\*.*") do rmdir "%p" /s /q
 powershell.exe -command "Get-AppxPackage | Select Name, PackageFullName >"$env:TEMP\Apps_List.txt""
 
 echo Time And Language Setting
-rem Input analysis
+rem Input Analysis
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "InsightsEnabled" /t REG_DWORD /d "0" /f
-rem Autocorrect misspelled words
+rem Autocorrect Misspelled Words
 reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableAutocorrection" /t REG_DWORD /d "0" /f
-rem Highlight misspelled words
+rem Highlight Misspelled Words
 reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableSpellchecking" /t REG_DWORD /d "0" /f
-rem Show text suggestions when typing on the physical keyboard
+rem Show Text Suggestions When Typing On The Physical Keyboard
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "EnableHwkbTextPrediction" /t REG_DWORD /d "0" /f
-rem Multilingual text suggestions
+rem Multilingual Text Suggestions
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "MultilingualEnabled" /t REG_DWORD /d "0" /f
 rem Voice Typing
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
-rem Collecting and transmitting the texts you type
+rem Collecting And Transmitting The Texts You Type
 reg add "HKCU\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d 0 /f 
 
@@ -271,17 +277,17 @@ reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_
 reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
 
 echo Bluetooth And Devices Settings
-rem Show me suggestions for using my Android phone with Windows
+rem Show Me Suggestions For Using My Android Phone With Windows
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
-rem Use Autoplay for all media and devices
+rem Use Autoplay For All Media And Devices
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers" /v "DisableAutoplay" /t REG_DWORD /d "1" /f 
 
 echo Update And Security Settings
-rem Delivery optimization
+rem Delivery Optimization
 reg add "HKU\S-1-5-20\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings" /v "DownloadMode" /t REG_DWORD /d "0" /f
-rem SmartScreen PUA in Microsoft Edge
+rem SmartScreen PUA In Microsoft Edge
 reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
-rem SmartScreen Filter in Microsoft Edge
+rem SmartScreen Filter In Microsoft Edge
 reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "0" /f
 
 echo Privacy Settings
@@ -501,14 +507,14 @@ rem Widgets icon on the taskbar
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d "0" /f
 rem Taskbar Alignment
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "0" /f
-
-echo Personalization Settings
 rem Transparency Effects
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d "0" /f
 rem Show recently opened items in Start, Jump Lists, and File Explorer
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d "0" /f
 rem Look For An App In The Store option
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "NoUseStoreOpenWith" /t REG_DWORD /d 1 /f 
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "NoUseStoreOpenWith" /t REG_DWORD /d 1 /f
+rem Displaying the This PC Icon on the Desktop
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f
 
 rem Reboot
 shutdown /r

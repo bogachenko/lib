@@ -16,10 +16,10 @@ xrandr --size 16:9
 sudo apt update && sudo apt upgrade
 
 # Installing core packages.
-sudo apt-get install i3 firefox fonts-noto fonts-ubuntu i3 unzip dmz-cursor-theme wget vlc ubuntu-restricted-extras tor
+sudo apt-get install i3 firefox fonts-noto fonts-ubuntu i3 unzip dmz-cursor-theme wget vlc ubuntu-restricted-extras tor libavcodec-extra libdvd-pkg p7zip-full rar unrar ffmpeg pcmanfm-qt privoxy
 sudo apt-get install xinit mesa-utils x11-xserver-utils x11-utils
 
-# Chrome
+# Adding third-party repository
 cd /tmp
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
@@ -30,6 +30,10 @@ sudo apt-get install google-chrome-stable
 # Enabling daemons.
 #sudo systemctl enable sddm.service && sudo systemctl start sddm.service
 sudo systemctl enable tor.service && sudo systemctl start tor.service
+sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
+
+# 
+echo "exec_always --no-startup-id xsetroot -solid \"#003760\"" >> ~/.config/i3/config
 
 # Installing the configuration file user.js for Firefox.
 cd /tmp
