@@ -173,6 +173,7 @@ rem Remove Microsoft Solitaire Collection Game
 powershell.exe -command "Get-AppxPackage -allusers *solitairecollection* | Remove-AppxPackage"
 rem Remove Cortana App
 powershell.exe -command "Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage"
+winget uninstall "cortana"
 rem Remove Microsoft Teams App
 powershell.exe -command "Get-AppxPackage -allusers *microsoftteams* | Remove-AppxPackage"
 rem Remove Bing News App
@@ -187,14 +188,20 @@ powershell.exe -command "Get-AppxPackage -allusers *xbox.tcui* | Remove-AppxPack
 powershell.exe -command "Get-AppxPackage -allusers *xboxapp* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *gamingapp* | Remove-AppxPackage"
 powershell.exe -command "Get-AppxPackage -allusers *gamingservices* | Remove-AppxPackage"
+winget uninstall "xbox game bar"
+winget uninstall "xbox game bar plugin"
+winget uninstall "xbox game speech window"
+winget uninstall "xbox identity provider"
 rem Remove YourPhone App
 powershell.exe -command "Get-AppxPackage -allusers *yourphone* | Remove-AppxPackage"
+winget uninstall "your phone"
 rem Remove Power Automate App
 powershell.exe -command "Get-AppxPackage -allusers *powerautomate* | Remove-AppxPackage"
 rem Remove Windows Communications Apps
 powershell.exe -command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
 rem Remove Get-Help App
 powershell.exe -command "Get-AppxPackage -allusers *gethelp* | Remove-AppxPackage"
+winget uninstall "get help"
 rem Remove Get Started App
 powershell.exe -command "Get-AppxPackage -allusers *getstarted* | Remove-AppxPackage"
 rem Remove Microsoft To Do App
@@ -203,6 +210,7 @@ rem Remove Microsoft Feedback Hub App
 powershell.exe -command "Get-AppxPackage -allusers *windowsfeedbackhub* | Remove-AppxPackage"
 rem Remove Maps App
 powershell.exe -command "Get-AppxPackage -allusers *windowsmaps* | Remove-AppxPackage"
+winget uninstall "windows maps"
 rem Remove Groove Music App
 powershell.exe -command "Get-AppxPackage -allusers *zunemusic* | Remove-AppxPackage"
 rem Remove Microsoft Movies and TV App
@@ -211,6 +219,8 @@ rem Remove Camera App
 powershell.exe -command "Get-AppxPackage -allusers *windowscamera* | Remove-AppxPackage"
 rem Remove Sound Recorder App
 powershell.exe -command "Get-AppxPackage -allusers *windowssoundrecorder* | Remove-AppxPackage"
+rem Remove Microsoft People App
+winget uninstall "microsoft people"
 rem Force Removal of Built-In Windows Apps
 set ProgramFiles=C:\Program Files
 set TempDirWIN=%WINDIR%\TEMP
