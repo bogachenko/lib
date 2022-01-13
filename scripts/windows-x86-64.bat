@@ -7,7 +7,7 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: Windows 11 build 22000.318 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
-:: Copyright 2021 Bogachenko Vyacheslav
+:: Copyright 2022 Bogachenko Vyacheslav
 ::
 :: This script is provided "AS IS" without warranty of any kind, either expressed or implied.
 :: Use it at your own risk! The author is not responsible for any claims for damage that may arise from the use of this script.
@@ -100,6 +100,8 @@ schtasks /change /tn "Microsoft\Windows\Location\WindowsActionDialog" /disable
 rem Collecting And Sending Device Data Tasks
 schtasks /change /tn "Microsoft\Windows\Device Information\Device" /disable
 schtasks /change /tn "Microsoft\Windows\Device Information\Device User" /disable
+rem Microsoft Office Task
+schtasks /change /tn "Microsoft\Office\Office ClickToRun Service Monitor" /disable
 
 echo Stopping And Removing Tracking Services
 rem Stop Diagnostics Tracking Service

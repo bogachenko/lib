@@ -16,7 +16,7 @@ xrandr --size 16:9
 sudo apt update && sudo apt upgrade
 
 # Installing core packages.
-sudo apt-get install i3 firefox fonts-noto fonts-ubuntu i3 unzip dmz-cursor-theme wget vlc ubuntu-restricted-extras tor libavcodec-extra libdvd-pkg p7zip-full rar unrar ffmpeg pcmanfm-qt privoxy
+sudo apt-get install i3 firefox fonts-noto fonts-ubuntu i3 unzip dmz-cursor-theme wget vlc ubuntu-restricted-extras tor libavcodec-extra libdvd-pkg p7zip-full rar unrar ffmpeg privoxy
 sudo apt-get install xinit mesa-utils x11-xserver-utils x11-utils
 
 # Adding third-party repository
