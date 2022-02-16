@@ -365,12 +365,6 @@ user_pref("app.shield.optoutstudies.enabled", false);
 // Предугадывание доменов URL-адреса в адресной строке
 user_pref("browser.fixup.alternate.enabled", false);
 
-// DNS over HTTPS
-// DNS поверх HTTPS
-user_pref("network.trr.mode", 2);
-user_pref("network.trr.uri", "https://dns.google/dns-query");
-user_pref("network.trr.custom_uri", "https://dns.google/dns-query");
-
 // Reader View
 user_pref("reader.parse-on-load.enabled", false);
 

@@ -510,6 +510,8 @@ rem Ask where to save downloaded files
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromptForDownloadLocation" /t REG_DWORD /d "1" /f
 rem Ads on Bing search results
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BingAdsSuppression" /t REG_DWORD /d "1" /f
+rem Automatic image enhancement
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEnhanceImagesEnabled" /t REG_DWORD /d "0" /f
 
 echo Windows Fine-Tuning
 rem Show hidden files, folders and drives
