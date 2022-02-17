@@ -8,3 +8,8 @@ udp://tracker.tiny-vps.com:6969/announce
 udp://exodus.desync.com:6969/announce
 udp://tracker.openbittorrent.com:1337/announce
 http://tracker.openbittorrent.com:80/announce
+udp://opentor.net:6969
+udp://tracker.dler.com:6969/announce
+http://bt02.nnm-club.cc:2710/announce
+http://bt02.nnm-club.info:2710/announce
+udp://tracker.torrent.eu.org:451/announce

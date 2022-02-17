@@ -627,3 +627,7 @@ user_pref("permissions.default.xr", 2);
 //		1 = Компактный
 //		2 = Большой
 user_pref("browser.uidensity", 1);
+
+// Search from the address bar
+// Поиск из адресной строки
+user_pref("keyword.enabled", false);

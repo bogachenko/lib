@@ -608,3 +608,7 @@ user_pref("extensions.torlauncher.quickstart", false);
 //		2 = Высокий
 //		4 = Обычный
 user_pref("extensions.torbutton.security_slider", 2);
+
+// Search from the address bar
+// Поиск из адресной строки
+user_pref("keyword.enabled", false);
