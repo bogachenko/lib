@@ -216,7 +216,7 @@ mv /tmp/user.js ~/.thunderbird/$USERNAME/user.js
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/torbrowser-user.js
 mv /tmp/user.js ~/.local/opt/tor-browser/app/Browser/TorBrowser/Data/Browser/profile.default/user.js
 
-# Configuration for the Xresources file.
+# Xresources file configuration.
 cat > ~/.Xresources <<EOF
 Xft.dpi: 96
 Xft.antialias: 1
