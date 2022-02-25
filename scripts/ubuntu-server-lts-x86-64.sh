@@ -13,15 +13,15 @@ clear
 sudo apt update && sudo apt upgrade
 
 # Installing core packages
-sudo apt-get install fonts-noto i3 xinit x11-xserver-utils virtualbox-guest-x11
+sudo apt install fonts-noto i3 fping firefox tor privoxy ttf-mscorefonts-installer
+sudo apt install xinit x11-xserver-utils virtualbox-guest-x11 mesa-utils
+sudo apt --no-install-recommends install sddm ffmpeg
 
 # Disabling recommended and suggested packages during installation
 cat > /etc/apt/apt.conf.d/99norecommends <<EOF
 APT::Install-Recommends "0";
 APT::Install-Suggests "0";
 EOF
-
-sudo apt-get install vlc sddm firefox fping tor privoxy ffmpeg
 
 # Enabling daemons
 sudo systemctl enable sddm.service
@@ -33,11 +33,6 @@ xrandr --size 16:9
 
 # Desktop background configuration
 echo "exec_always --no-startup-id xsetroot -solid \"#003760\"" >> ~/.config/i3/config
-
-# Installing the configuration file user.js for Firefox
-cd /tmp
-curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
-mv /tmp/user.js ~/.mozilla/firefox/$USERNAME/user.js
 
 # Xresources file configuration
 cat > ~/.Xresources <<EOF
