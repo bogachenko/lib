@@ -4,7 +4,7 @@
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
 USERNAME=$(whoami)
-FONT='Ubuntu Mono'
+FONT='Noto Mono'
 
 # Clear the console
 clear
@@ -13,9 +13,9 @@ clear
 sudo apt update && sudo apt upgrade
 
 # Installing core packages
-sudo apt install fonts-noto i3 fping firefox tor privoxy ttf-mscorefonts-installer
+sudo apt install fonts-noto i3 fping firefox tor privoxy ttf-mscorefonts-installer make python
 sudo apt install xinit x11-xserver-utils virtualbox-guest-x11 mesa-utils
-sudo apt --no-install-recommends install sddm ffmpeg
+sudo apt --no-install-recommends install sddm ffmpeg gvfs xdg-dbus-proxy xdg-user-dirs-gtk xdg-utils
 
 # Disabling recommended and suggested packages during installation
 cat > /etc/apt/apt.conf.d/99norecommends <<EOF
@@ -27,9 +27,6 @@ EOF
 sudo systemctl enable sddm.service
 sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
-
-# Screen resolution
-xrandr --size 16:9
 
 # Desktop background configuration
 echo "exec_always --no-startup-id xsetroot -solid \"#003760\"" >> ~/.config/i3/config
