@@ -13,7 +13,7 @@ clear
 sudo apt update && sudo apt upgrade
 
 # Installing core packages
-sudo apt-get install fonts-noto i3 xinit x11-xserver-utils
+sudo apt-get install fonts-noto i3 xinit x11-xserver-utils virtualbox-guest-x11
 
 # Disabling recommended and suggested packages during installation
 cat > /etc/apt/apt.conf.d/99norecommends <<EOF
@@ -21,9 +21,7 @@ APT::Install-Recommends "0";
 APT::Install-Suggests "0";
 EOF
 
-sudo apt-get install vlc sddm firefox fping
-
-#vlc ubuntu-restricted-extras tor libavcodec-extra libdvd-pkg   ffmpeg privoxy
+sudo apt-get install vlc sddm firefox fping tor privoxy ffmpeg
 
 # Enabling daemons
 sudo systemctl enable sddm.service
