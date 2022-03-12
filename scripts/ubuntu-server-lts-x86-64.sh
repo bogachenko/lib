@@ -12,7 +12,7 @@ clear
 sudo apt update && sudo apt upgrade
 
 # Installing core packages
-sudo apt install fonts-noto i3 fping firefox tor privoxy ttf-mscorefonts-installer make python
+sudo apt install fonts-noto i3 fping firefox tor privoxy ttf-mscorefonts-installer make python speedtest-cli chromium-browser libgtk-3-dev
 sudo apt install xinit x11-xserver-utils virtualbox-guest-x11 mesa-utils
 sudo apt --no-install-recommends install sddm ffmpeg gvfs xdg-dbus-proxy xdg-user-dirs-gtk xdg-utils ranger
 
