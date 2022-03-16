@@ -628,6 +628,6 @@ user_pref("permissions.default.xr", 2);
 //		2 = Большой
 user_pref("browser.uidensity", 1);
 
-// Search from the address bar
-// Поиск из адресной строки
-user_pref("keyword.enabled", false);
+// Больше от Mozilla
+// More from Mozilla
+user_pref("moreFromMozilla", false);
