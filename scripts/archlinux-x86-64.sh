@@ -3,10 +3,10 @@
 # Arch Linux x86_64
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
-USERNAME=$(whoami)
-FONT='Noto Sans'
-FONTM='Noto Sans Mono'
-FONTMM='Noto Sans Medium'
+USERNAME="$(whoami)"
+FONT="Noto Sans"
+FONTM="Noto Sans Mono"
+FONTMM="Noto Sans Medium"
 
 # Clear the console.
 clear

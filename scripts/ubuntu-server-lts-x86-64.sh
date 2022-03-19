@@ -3,7 +3,8 @@
 # Ubuntu Server LTS x86_64
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
-FONT='Noto Mono'
+FONT="Noto Mono"
+USERNAME="$(whoami)"
 
 # Clear the console
 clear
@@ -12,14 +13,21 @@ clear
 sudo apt update && sudo apt upgrade
 
 # Installing core packages
-sudo apt install fonts-noto i3 fping firefox tor privoxy ttf-mscorefonts-installer make python speedtest-cli chromium-browser libgtk-3-dev
+sudo apt install fonts-noto i3 fping firefox tor privoxy ttf-mscorefonts-installer make python speedtest-cli chromium-browser libgtk-3-dev net-tools python3-php
 sudo apt install xinit x11-xserver-utils virtualbox-guest-x11 mesa-utils
 sudo apt --no-install-recommends install sddm ffmpeg gvfs xdg-dbus-proxy xdg-user-dirs-gtk xdg-utils ranger
 
 # Disabling recommended and suggested packages during installation
-cat > /etc/apt/apt.conf.d/99norecommends <<EOF
+sudo cat > /etc/apt/apt.conf.d/99norecommends <<EOF
 APT::Install-Recommends "0";
 APT::Install-Suggests "0";
+EOF
+
+# Automatic login to the system.
+sudo cat > /etc/sddm.conf <<EOF
+[Autologin]
+User=$USERNAME
+Session=i3.desktop
 EOF
 
 # Installing the VSCodium package
