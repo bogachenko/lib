@@ -446,6 +446,10 @@ user_pref("dom.block_multiple_popups", true);
 // Максимальное количество всплывающих окон
 user_pref("dom.popup_maximum", 3);
 
+// Limit events that can trigger a popup
+// Ограничить события, которые могут вызвать всплывающее окно
+user_pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
+
 // Setting default permissions (resource://app/defaults/permissions) in the Permission Manager
 // Установка по умолчанию разрешений (resource://app/defaults/permissions) в Менеджере Разрешений
 user_pref("permissions.manager.defaultsUrl", "");
