@@ -43,6 +43,38 @@ user_pref("browser.newtabpage.activity-stream.section.highlights.includeVisited"
 user_pref("browser.newtabpage.activity-stream.showSearch", false);
 user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
 user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.cfr", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.message-groups", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.messaging-experiments", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.onboarding", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.whats-new-panel", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.useRemoteL10n", false);
+user_pref("browser.newtabpage.activity-stream.discoverystream.config", "");
+user_pref("browser.newtabpage.activity-stream.discoverystream.enabled", false);
+user_pref("browser.newtabpage.activity-stream.discoverystream.isCollectionDismissible", false);
+user_pref("browser.newtabpage.activity-stream.discoverystream.personalization.enabled", false);
+user_pref("browser.newtabpage.activity-stream.feeds.section.topstories.options", "");
+user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", "");
+user_pref("browser.newtabpage.activity-stream.discoverystream.readTime.enabled", "");
+user_pref("browser.newtabpage.activity-stream.discoverystream.personalization.modelKeys", "");
+user_pref("browser.newtabpage.activity-stream.discoverystream.spocs.personalized", false);
+user_pref("browser.newtabpage.activity-stream.feeds.aboutpreferences", false);
+user_pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false);
+user_pref("browser.newtabpage.activity-stream.feeds.favicon", false);
+user_pref("browser.newtabpage.activity-stream.feeds.newtabinit", false);
+user_pref("browser.newtabpage.activity-stream.feeds.places", false);
+user_pref("browser.newtabpage.activity-stream.feeds.prefs", false);
+user_pref("browser.newtabpage.activity-stream.feeds.recommendationprovider", false);
+user_pref("browser.newtabpage.activity-stream.feeds.sections", false);
+user_pref("browser.newtabpage.activity-stream.feeds.system.topsites", false);
+user_pref("browser.newtabpage.activity-stream.feeds.systemtick", false);
+user_pref("browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar", false);
+user_pref("browser.newtabpage.activity-stream.improvesearch.noDefaultSearchTile", false);
+user_pref("browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts", false);
+user_pref("browser.newtabpage.activity-stream.logowordmark.alwaysVisible", false);
+user_pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
+user_pref("browser.newtabpage.activity-stream.showSponsored", false);
 
 // Restriction on opening new windows 
 //		0 = Open all links in tabs 
@@ -634,4 +666,4 @@ user_pref("browser.uidensity", 1);
 
 // Больше от Mozilla
 // More from Mozilla
-user_pref("moreFromMozilla", false);
+user_pref("browser.preferences.moreFromMozilla", false);
