@@ -73,10 +73,6 @@ rem Stop Sqm Tasks
 schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable
 rem Stop Network Information Collector Task
 schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
-rem Stop Microsoft Office Telemetry Tasks
-schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentLogOn2016" /disable
-schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentFallBack2016" /disable
-schtasks /change /tn "\Microsoft\Office\Office ClickToRun Service Monitor" /disable
 rem Stop Automatic Scanning And Troubleshooting Tasks
 schtasks /change /tn "\Microsoft\Windows\Diagnosis\Scheduled" /disable
 schtasks /change /tn "\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /disable
@@ -102,6 +98,7 @@ schtasks /change /tn "Microsoft\Windows\Device Information\Device" /disable
 schtasks /change /tn "Microsoft\Windows\Device Information\Device User" /disable
 rem Microsoft Office Task
 schtasks /change /tn "Microsoft\Office\Office ClickToRun Service Monitor" /disable
+schtasks /change /tn "Microsoft\Office\Office Performance Monitor" /disable
 
 echo Stopping And Removing Tracking Services
 rem Stop Diagnostics Tracking Service
