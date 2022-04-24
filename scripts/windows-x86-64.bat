@@ -159,9 +159,9 @@ sc config "MapsBroker" start=disabled
 sc stop MapsBroker
 sc delete MapsBroker
 rem Delivery optimization
-rem sc config "DoSvc" start=disabled
-rem sc stop DoSvc
-rem sc delete DoSvc
+sc config "DoSvc" start=disabled
+sc stop DoSvc
+sc delete DoSvc
 
 echo Remove Built-In Windows Metro Apps
 rem Remove Windows Office App
@@ -294,10 +294,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandler
 echo Update And Security Settings
 rem Delivery Optimization
 reg add "HKU\S-1-5-20\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings" /v "DownloadMode" /t REG_DWORD /d "0" /f
-rem SmartScreen PUA In Microsoft Edge
-reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
-rem SmartScreen Filter In Microsoft Edge
-reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "0" /f
 
 echo Privacy Settings
 rem Let apps show me personalized ads by using my advertising ID
@@ -509,6 +505,10 @@ rem Ads on Bing search results
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BingAdsSuppression" /t REG_DWORD /d "1" /f
 rem Automatic image enhancement
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEnhanceImagesEnabled" /t REG_DWORD /d "0" /f
+rem SmartScreen PUA In Microsoft Edge
+reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
+rem SmartScreen Filter In Microsoft Edge
+reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "0" /f
 
 echo Windows Fine-Tuning
 rem Show hidden files, folders and drives
