@@ -421,7 +421,7 @@ reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "S
 rem Windows Media Player statistics
 reg add "HKCU\SOFTWARE\Microsoft\MediaPlayer\Preferences" /v "UsageTracking" /t REG_DWORD /d "0" /f
 rem Update Apps Automatically
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /v "AutoDownload" /t REG_DWORD /d "4" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /v "AutoDownload" /t REG_DWORD /d "2" /f
 rem System Debugger (Dr. Watson)
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\AeDebug" /v "Auto" /t REG_SZ /d "0" /f
 rem Windows Error Reporting
