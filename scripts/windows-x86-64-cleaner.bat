@@ -1,5 +1,7 @@
 @echo off
 
+set TempDirWIN="%WINDIR%\TEMP"
+
 rem Firefox Browser
 del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\favicons.sqlite" /s /q
 del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\favicons.sqlite-shm" /s /q
@@ -22,6 +24,9 @@ rd "%ProgramData%\Mozilla" /s /q
 rem MS Search
 del "%ProgramData%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q
 
+rem DirectX
+rd "%LOCALAPPDATA%\D3DSCache" /s /q
+
 rem Spotify
 del "%LOCALAPPDATA%\Spotify\Browser\*.log" /s /q
 rd "%LOCALAPPDATA%\Spotify\Browser\Cache" /s /q
@@ -36,8 +41,10 @@ del "%PROGRAMFILES(x86)%\Steam\*.log" /s /q
 rd "%PROGRAMFILES(x86)%\Steam\dumps" /s /q
 rd "%PROGRAMFILES(x86)%\Steam\logs" /s /q
 
-:: Opera
+rem Opera Browser
 del "%APPDATA%\Opera Software\Opera Stable\*.log" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\PartnerRules" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Visited Links" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Cookies" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Cookies-journal" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\default_partner_content.json" /s /q
@@ -81,5 +88,7 @@ rd "%APPDATA%\Opera Software\Opera Stable\Session Storage" /s /q
 rd "%APPDATA%\Opera Software\Opera Stable\ShaderCache" /s /q
 rd "%APPDATA%\Opera Software\Opera Stable\shared_proto_db" /s /q
 rd "%APPDATA%\Opera Software\Opera Stable\StatsSessions" /s /q
-rd "%LOCALAPPDATA%\Opera Software\Opera Stable\cache" /s /q
-rd "%LOCALAPPDATA%\Opera Software\Opera Stable\System Cache" /s /q
+rd "%LOCALAPPDATA%\Opera Software\Opera Stable" /s /q
+
+rem AdGuard VPN
+rd "%ProgramData%\AdguardVpn\Logs" /s /q
