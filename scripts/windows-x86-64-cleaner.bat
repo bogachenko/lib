@@ -90,5 +90,26 @@ rd "%APPDATA%\Opera Software\Opera Stable\shared_proto_db" /s /q
 rd "%APPDATA%\Opera Software\Opera Stable\StatsSessions" /s /q
 rd "%LOCALAPPDATA%\Opera Software\Opera Stable" /s /q
 
+rem Edge Browser
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\GPUCache" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\GrShaderCache" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\ShaderCache" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Extension State" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\BrowserMetrics" /S /Q
+DEL "%LOCALAPPDATA%\Microsoft\Edge\User Data\BrowserMetrics-spare.pma" /S /Q
+DEL "%LOCALAPPDATA%\Microsoft\Edge\User Data\CrashpadMetrics-active.pma" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\databases" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Extension Rules" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Session Storage" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Sessions" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\shared_proto_db" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Local Storage" /S /Q
+DEL "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\History Provider Cache" /S /Q
+DEL "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network Action Predictor" /S /Q
+DEL "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Top Sites" /S /Q
+DEL "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Visited Links" /S /Q
+RD "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\IndexedDB" /S /Q
+
 rem AdGuard VPN
 rd "%ProgramData%\AdguardVpn\Logs" /s /q
