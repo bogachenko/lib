@@ -23,10 +23,15 @@ rem MS Search
 del "%ProgramData%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q
 
 rem Spotify
-rd "%LOCALAPPDATA%\Spotify\Browser\Cache" /S /Q
-rd "%LOCALAPPDATA%\Spotify\Data" /S /Q
-rd "%LOCALAPPDATA%\Spotify\Storage" /S /Q
-rd "%LOCALAPPDATA%\Spotify\Browser\GPUCache" /S /Q
-rd "%LOCALAPPDATA%\Spotify\Browser\databases" /S /Q
-rd "%LOCALAPPDATA%\Spotify\Browser\Service Worker" /S /Q
-del "%LOCALAPPDATA%\Spotify\Browser\*.log" /S /Q
+rd "%LOCALAPPDATA%\Spotify\Browser\Cache" /s /q
+rd "%LOCALAPPDATA%\Spotify\Data" /s /q
+rd "%LOCALAPPDATA%\Spotify\Storage" /s /q
+rd "%LOCALAPPDATA%\Spotify\Browser\GPUCache" /s /q
+rd "%LOCALAPPDATA%\Spotify\Browser\databases" /s /q
+rd "%LOCALAPPDATA%\Spotify\Browser\Service Worker" /s /q
+del "%LOCALAPPDATA%\Spotify\Browser\*.log" /s /q
+
+rem Steam
+RD "%PROGRAMFILES(x86)%\Steam\logs" /s /q
+RD "%PROGRAMFILES(x86)%\Steam\dumps" /s /q
+DEL "%PROGRAMFILES(x86)%\Steam\*.log" /s /q
