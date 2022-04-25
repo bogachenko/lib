@@ -23,15 +23,63 @@ rem MS Search
 del "%ProgramData%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q
 
 rem Spotify
+del "%LOCALAPPDATA%\Spotify\Browser\*.log" /s /q
 rd "%LOCALAPPDATA%\Spotify\Browser\Cache" /s /q
+rd "%LOCALAPPDATA%\Spotify\Browser\databases" /s /q
+rd "%LOCALAPPDATA%\Spotify\Browser\GPUCache" /s /q
+rd "%LOCALAPPDATA%\Spotify\Browser\Service Worker" /s /q
 rd "%LOCALAPPDATA%\Spotify\Data" /s /q
 rd "%LOCALAPPDATA%\Spotify\Storage" /s /q
-rd "%LOCALAPPDATA%\Spotify\Browser\GPUCache" /s /q
-rd "%LOCALAPPDATA%\Spotify\Browser\databases" /s /q
-rd "%LOCALAPPDATA%\Spotify\Browser\Service Worker" /s /q
-del "%LOCALAPPDATA%\Spotify\Browser\*.log" /s /q
 
 rem Steam
-RD "%PROGRAMFILES(x86)%\Steam\logs" /s /q
-RD "%PROGRAMFILES(x86)%\Steam\dumps" /s /q
-DEL "%PROGRAMFILES(x86)%\Steam\*.log" /s /q
+del "%PROGRAMFILES(x86)%\Steam\*.log" /s /q
+rd "%PROGRAMFILES(x86)%\Steam\dumps" /s /q
+rd "%PROGRAMFILES(x86)%\Steam\logs" /s /q
+
+:: Opera
+del "%APPDATA%\Opera Software\Opera Stable\*.log" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Cookies" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Cookies-journal" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\default_partner_content.json" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Extension Cookies" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Extension Cookies-journal" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Favicons" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Favicons-journal" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\History" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\History-journal" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\History Provider Cache" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Media History" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Media History-journal" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Network Action Predictor" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Network Action Predictor-journal" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Network Persistent State" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Network Persistent State.backup" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\QuotaManager" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\QuotaManager-journal" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Reporting and NEL" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Reporting and NEL-journal" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Shortcuts" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Shortcuts-journal" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Visited Links" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Web Data" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Web Data-journal" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\Crash Reports" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\databases" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\Extension Rules" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\Extension State" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\File System" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\GPUCache" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\GrShaderCache" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\IndexedDB" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\Jump List Icons" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\Jump List IconsOld" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\Local Storage" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\SafetyTips" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\Service Worker" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\Sessions" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\Session Storage" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\ShaderCache" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\shared_proto_db" /s /q
+rd "%APPDATA%\Opera Software\Opera Stable\StatsSessions" /s /q
+rd "%LOCALAPPDATA%\Opera Software\Opera Stable\cache" /s /q
+rd "%LOCALAPPDATA%\Opera Software\Opera Stable\System Cache" /s /q
