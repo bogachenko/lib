@@ -43,8 +43,6 @@ rd "%PROGRAMFILES(x86)%\Steam\logs" /s /q
 
 rem Opera Browser
 del "%APPDATA%\Opera Software\Opera Stable\*.log" /s /q
-del "%APPDATA%\Opera Software\Opera Stable\PartnerRules" /s /q
-del "%APPDATA%\Opera Software\Opera Stable\Visited Links" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Cookies" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Cookies-journal" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\default_partner_content.json" /s /q
@@ -61,12 +59,14 @@ del "%APPDATA%\Opera Software\Opera Stable\Network Action Predictor" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Network Action Predictor-journal" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Network Persistent State" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Network Persistent State.backup" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\PartnerRules" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\QuotaManager" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\QuotaManager-journal" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Reporting and NEL" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Reporting and NEL-journal" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Shortcuts" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Shortcuts-journal" /s /q
+del "%APPDATA%\Opera Software\Opera Stable\Visited Links" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Visited Links" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Web Data" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Web Data-journal" /s /q
@@ -93,29 +93,44 @@ rd "%LOCALAPPDATA%\Opera Software\Opera Stable" /s /q
 rem Edge Browser
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\BrowserMetrics-spare.pma" /s /q
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\CrashpadMetrics-active.pma" /s /q
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Favicons" /s /q
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Favicons-journal" /s /q
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\heavy_ad_intervention_opt_out.db" /s /q
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\heavy_ad_intervention_opt_out.db-journal" /s /q
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\History" /s /q
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\History-journal" /s /q
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\History Provider Cache" /s /q
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\load_statistics.db" /s /q
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /q
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Shortcuts" /s /q
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Shortcuts-journal" /s /q
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Storage" /s /q
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Top Sites" /s /q
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Visited Links" /s /q
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Storage" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\BrowserMetrics" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache" /s /q
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Service Worker" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Collections" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\databases" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\EdgeCoupons" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\EdgePushStorageWithConnectTokenAndKey" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Extension Rules" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Extension State" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Feedback Reports" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\GPUCache" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\IndexedDB" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\optimization_guide_hint_cache_store" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\optimization_guide_model_and_features_store" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Platform Notifications" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Safe Browsing Network" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Service Worker" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Sessions" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Session Storage" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\shared_proto_db" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Site Characteristics Database" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\VideoDecodeStats" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\GrShaderCache" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\ShaderCache" /s /q
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\History" /s /q
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\History-journal" /s /q
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Favicons" /s /q
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Favicons-journal" /s /q
 
 rem AdGuard VPN
 rd "%ProgramData%\AdguardVpn\Logs" /s /q
