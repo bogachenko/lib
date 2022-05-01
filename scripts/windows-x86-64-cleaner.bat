@@ -1,7 +1,5 @@
 @echo off
 
-set TempDirWIN="%WINDIR%\TEMP"
-
 rem Firefox Browser
 del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\favicons.sqlite" /s /q
 del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\favicons.sqlite-shm" /s /q
@@ -134,3 +132,11 @@ rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\ShaderCache" /s /q
 
 rem AdGuard VPN
 rd "%ProgramData%\AdguardVpn\Logs" /s /q
+
+rem Overwolf
+rd "%ProgramData%\Overwolf\Log" /s /q
+
+:: Windows
+del "%WINDIR%\*.log" /s /q
+del "%WINDIR%\Temp\" /s /q
+del "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" /s /q
