@@ -1,5 +1,17 @@
 @echo off
 
+rem Getting root
+set "params=%*"
+cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
+
+:: Windows Cleaner
+:: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
+
+:: Copyright 2022 Bogachenko Vyacheslav
+::
+:: This script is provided "AS IS" without warranty of any kind, either expressed or implied.
+:: Use it at your own risk! The author is not responsible for any claims for damage that may arise from the use of this script.
+
 rem Firefox Browser
 del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\favicons.sqlite" /s /q
 del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\favicons.sqlite-shm" /s /q
