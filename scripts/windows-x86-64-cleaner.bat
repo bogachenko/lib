@@ -152,3 +152,4 @@ rd "%ProgramData%\Overwolf\Log" /s /q
 del "%WINDIR%\*.log" /s /q
 del "%WINDIR%\Temp\" /s /q
 del "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" /s /q
+rd "%ProgramData%\Microsoft\Diagnosis" /s /q
