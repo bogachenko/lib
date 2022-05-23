@@ -4,7 +4,7 @@ rem Getting root
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
-:: Windows 11 build 22000.318 x86_64
+:: Windows 10 LTSC build 19044.1706 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
 :: Copyright 2022 Bogachenko Vyacheslav
@@ -18,24 +18,12 @@ taskkill /f /im explorer.exe
 rem Stop Windows Security Health Service
 taskkill /f /im SecurityHealthService.exe > NUL 2>&1
 taskkill /f /im SecurityHealthSystray.exe > NUL 2>&1
-rem Stop OneDrive App
-taskkill /f /im OneDrive.exe > NUL 2>&1
-taskkill /f /im OneDriveStandaloneUpdater.exe > NUL 2>&1
 rem Stop Microsoft Compatibility Telemetry
 taskkill /f /im compattelrunner.exe > NUL 2>&1
 rem Stop SmartScreen
 taskkill /f /im smartscreen.exe > NUL 2>&1
 rem Stopping the YourPhone app
 taskkill /im YourPhone.exe /f > NUL 2>&1
-
-echo Remove OneDrive App
-%SYSTEMROOT%\SysWOW64\OneDriveSetup.exe /uninstall
-rd "%USERPROFILE%\OneDrive" /Q /S > NUL 2>&1
-rd "C:\OneDriveTemp" /Q /S > NUL 2>&1
-rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S > NUL 2>&1
-rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S > NUL 2>&1
-powershell.exe -ex bypass -command "Get-ScheduledTask -TaskName *onedrive* | Disable-ScheduledTask
-powershell.exe -command "rm C:\Windows\System32\Tasks\OneDrive*"
 
 echo Task Scheduler Settings
 rem Stop Microsoft Compatibility Appraiser Tasks
