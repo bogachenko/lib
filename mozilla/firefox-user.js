@@ -234,7 +234,7 @@ user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion.endp
 // Health report details
 // [NOTE] This function collects advanced information about the health of the program and sends it to Mozilla servers, in particular: the number of crashes, information about slow loading. It includes data on equipment, operating system, version of this program, installed add-ons (number and type), intra-browser events, rendering, restoration of sessions, their duration, profile age, number of pages visited.
 // Данные об отчета о здоровье
-// [NOTE] Данная функция собирает расширенную информацию о работоспособности программы и отсылает ее на серверы Mozilla, в частности: количество падений, сведения о медленной загрузке. Она включает в себя данные об оборудовании, операционной системе, версии этой программы, установленных дополнениях (количество и тип), внутрибраузерных событиях, рендеринге, восстановлении сессий, их длительности, возрасте профиля, количестве посещенных страниц.
+// [ЗАМЕТКА] Данная функция собирает расширенную информацию о работоспособности программы и отсылает ее на серверы Mozilla, в частности: количество падений, сведения о медленной загрузке. Она включает в себя данные об оборудовании, операционной системе, версии этой программы, установленных дополнениях (количество и тип), внутрибраузерных событиях, рендеринге, восстановлении сессий, их длительности, возрасте профиля, количестве посещенных страниц.
 user_pref("datareporting.healthreport.uploadEnabled", false);
 user_pref("datareporting.policy.dataSubmissionEnabled", false);
 
@@ -527,7 +527,7 @@ user_pref("browser.search.openintab", true);
 user_pref("view_source.wrap_long_lines", true);
 
 // CSS :visited selectors
-// [ЗАМЕТКА] Disables the use of styles with the: visited selector to visited links, which prevents the user from finding out what URLs the user has in the browser history.
+// [NOTE] Disables the use of styles with the: visited selector to visited links, which prevents the user from finding out what URLs the user has in the browser history.
 // CSS :visited селекторы
 // [ЗАМЕТКА] Отключает применение к посещенным ссылкам стилей с селектором :visited, что предотвращает возможность выяснить, какие URL есть у пользователя в истории браузера.
 user_pref("layout.css.visited_links_enabled", false);
@@ -667,3 +667,8 @@ user_pref("browser.uidensity", 1);
 // Больше от Mozilla
 // More from Mozilla
 user_pref("browser.preferences.moreFromMozilla", false);
+
+// Firefox Default Browser Agent
+// [ЗАМЕТКА] Задача Агента браузера по умолчанию проверяет, не изменилось ли значение по умолчанию с Firefox на другой браузер.
+// [NOTE] The Default Browser Agent task checks to see if the default value has changed from Firefox to another browser.
+user_pref("default-browser-agent.enabled", false);

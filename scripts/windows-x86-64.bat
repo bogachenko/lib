@@ -66,10 +66,6 @@ rem Stop Supporting Updating Search Indexes Task
 schtasks /change /tn "\Microsoft\Windows\Shell\IndexerAutomaticMaintenance" /disable
 rem Stop Windows Diagnostic Infrastructure Resolution Host Task
 schtasks /change /tn "\Microsoft\Windows\WDI\ResolutionHost" /disable
-rem Stop Overwolf Auto-update Task
-schtasks /change /tn "Overwolf Updater Task" /disable
-rem Stop CCleaner Auto-update Task
-schtasks /change /tn "CCleaner Update" /disable
 rem Stop Xbox Task
 schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTask" /disable
 rem Stop Auto Cleanup RetailDemo Offline Content Task
