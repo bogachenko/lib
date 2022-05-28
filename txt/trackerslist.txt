@@ -3,13 +3,22 @@
 
 http://bt02.nnm-club.cc:2710/announce
 http://bt02.nnm-club.info:2710/announce
+http://p4p.arenabg.ch:1337/announce
+http://retracker.local/announce
 http://tracker.dler.org:6969/announce
 http://tracker.openbittorrent.com:80/announce
 http://tracker.tiny-vps.com:6969/announce
+http://tracker.torrentson.net:2710/announce
 udp://exodus.desync.com:6969/announce
+udp://explodie.org:6969
+udp://open.stealth.si:80
 udp://opentor.net:6969
+udp://opentor.org:2710
+udp://tracker.coppersurfer.tk:6969
 udp://tracker.dler.com:6969/announce
+udp://tracker.leechers-paradise.org:6969
 udp://tracker.openbittorrent.com:80/announce
 udp://tracker.openbittorrent.com:1337/announce
+udp://tracker.opentrackr.org:1337
 udp://tracker.tiny-vps.com:6969/announce
 udp://tracker.torrent.eu.org:451/announce

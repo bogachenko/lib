@@ -13,9 +13,10 @@ clear
 sudo apt update && sudo apt upgrade
 
 # Installing core packages
-sudo apt install fonts-noto i3 fping firefox tor privoxy ttf-mscorefonts-installer make python speedtest-cli chromium-browser libgtk-3-dev net-tools python3-php
-sudo apt install xinit x11-xserver-utils virtualbox-guest-x11 mesa-utils
-sudo apt --no-install-recommends install sddm ffmpeg gvfs xdg-dbus-proxy xdg-user-dirs-gtk xdg-utils ranger
+sudo apt install i3 fonts-noto fping make privoxy tor ttf-mscorefonts-installer net-tools speedtest-cli xinit x11-xserver-utils virtualbox-guest-x11 mesa-utils gvfs vim
+
+sudo apt install chromium-browser
+sudo apt --no-install-recommends install sddm ffmpeg  xdg-dbus-proxy xdg-user-dirs-gtk xdg-utils ranger
 
 # Disabling recommended and suggested packages during installation
 sudo cat > /etc/apt/apt.conf.d/99norecommends <<EOF
