@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Raspberry Pi
-# Manjaro ARM Linux aarch64
+# Manjaro Linux aarch64
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
 USERNAME="$(whoami)"
