@@ -11,7 +11,15 @@ FONTMM="Noto Sans Medium"
 # Clear the console.
 clear
 
-# Installing the Arch User Repository.
+# Checking and installing updates.
+sudo pacman -Syyuu
+
+# Installing main packages.
+sudo pacman -S xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python2 python perl net-tools htop netctl openresolv linux-firmware
+sudo pacman -S git i3 sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4
+sudo pacman -S firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru 
+
+# Installing the Arch User Repository (AUR).
 cd /tmp
 git clone https://aur.archlinux.org/package-query.git
 git clone https://aur.archlinux.org/yaourt.git
@@ -27,23 +35,18 @@ curl -O https://blackarch.org/strap.sh
 chmod +x strap.sh
 sudo ./strap.sh
 
+# Installing fonts.
+yaourt -S ttf-ms-fonts noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans
+
 # Update mirrorlist.
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 curl -sSL 'https://archlinux.org/mirrorlist/?country=RU&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on' | sudo sed 's/^#Server/Server/g' > /etc/pacman.d/mirrorlist
 
-# Installing updates and updating the data repositories.
+# Checking and installing updates.
 yaourt -Syua
-sudo pacman -Syyuu
-
-# Installing main packages from the Arch User Repository.
-yaourt -S peerflix spotify tor-browser aic94xx-firmware wd719x-firmware upd72020x-fw xcursor-we10xos ttf-ms-fonts
-
-# Import keys.
-gpg --recv-keys EB774491D9FF06E2
-gpg --recv-keys D1742AD60D811D58
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau xorg-drivers xorg-xrdb xorg-xclock xorg-xsetroot xorg-xmodmap zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk scrot dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli gtk2 gtk3 gtk4 dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl python2 python ttf-carlito ttf-caladea ttf-croscore perl npm nodejs terminus-font mesa mesa-demos qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober lib32-mesa pulseaudio-alsa lib32-mesa-libgl qt6-base qt5-base php ffmpeg ttf-opensans libinput xf86-input-libinput qbittorrent plasma sddm sddm-kcm plasma-wayland-session kde-applications cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids linux-firmware hwinfo xorg-xwayland libxcb egl-wayland thunderbird thunderbird-i18n-ru obs-studio jre-openjdk-headless jre-openjdk jdk-openjdk lib32-libxcb qt6ct desktop-file-utils ufw giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-lib libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt gst-plugins-base-libs lib32-gst-plugins-base-libs vkd3d lib32-vkd3d sdl2 lib32-sdl2 libgphoto2 sane gsm samba dosbox discord dkms wqy-zenhei lib32-sdl2
+# sudo pacman -S --needed --noconfirm     privoxy     gparted    scrot dhclient alsa-plugins alsa-utils pulseaudio nyx  speedtest-cli  dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl terminus-font  qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober  pulseaudio-alsa  qt6-base qt5-base php ffmpeg  libinput xf86-input-libinput qbittorrent cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids  hwinfo xorg-xwayland libxcb egl-wayland obs-studio jre-openjdk-headless jre-openjdk jdk-openjdk lib32-libxcb qt6ct desktop-file-utils ufw giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-lib libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt gst-plugins-base-libs lib32-gst-plugins-base-libs vkd3d lib32-vkd3d sdl2 lib32-sdl2 libgphoto2 sane gsm samba dosbox discord dkms wqy-zenhei lib32-sdl2
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -104,12 +107,6 @@ sudo pacman -S --needed --noconfirm steam steam-native-runtime retroarch libretr
 
 # Entering superuser mode.
 su
-
-# Setting the Windows 10 cursor by default.
-cat > /usr/share/icons/default/index.theme <<EOF
-[Icon Theme]
-Inherits=We10XOS-cursors
-EOF
 
 # Change the shell.
 chsh -s /bin/zsh $USERNAME
