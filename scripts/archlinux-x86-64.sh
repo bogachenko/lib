@@ -16,8 +16,8 @@ sudo pacman -Syyuu
 
 # Installing main packages.
 sudo pacman -S xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python2 python perl net-tools htop netctl openresolv linux-firmware
-sudo pacman -S git i3 sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode
-sudo pacman -S firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru  chromium
+sudo pacman -S git i3 dmenu sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg
+sudo pacman -S firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins
 
 # Installing the Arch User Repository (AUR).
 cd /tmp
@@ -39,14 +39,14 @@ sudo ./strap.sh
 yaourt -S ttf-ms-fonts noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans
 
 # Update mirrorlist.
-sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-curl -sSL 'https://archlinux.org/mirrorlist/?country=RU&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on' | sudo sed 's/^#Server/Server/g' > /etc/pacman.d/mirrorlist
+#sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+#curl -sSL 'https://archlinux.org/mirrorlist/?country=RU&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on' | sudo sed 's/^#Server/Server/g' > /etc/pacman.d/mirrorlist
 
 # Checking and installing updates.
 yaourt -Syua
 
 # Installing main packages.
-# sudo pacman -S --needed --noconfirm     privoxy     gparted    scrot dhclient alsa-plugins alsa-utils pulseaudio nyx  speedtest-cli  dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax youtube-dl terminus-font  qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe lib32-alsa-lib lib32-alsa-plugins os-prober  pulseaudio-alsa  qt6-base qt5-base php ffmpeg  libinput xf86-input-libinput qbittorrent cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang weston wayland qt5-wayland qt6-wayland kf5 kf5-aids  hwinfo xorg-xwayland libxcb egl-wayland obs-studio jre-openjdk-headless jre-openjdk jdk-openjdk lib32-libxcb qt6ct desktop-file-utils ufw giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-lib libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt gst-plugins-base-libs lib32-gst-plugins-base-libs vkd3d lib32-vkd3d sdl2 lib32-sdl2 libgphoto2 sane gsm samba dosbox discord dkms wqy-zenhei lib32-sdl2
+# sudo pacman -S --needed --noconfirm     privoxy     gparted    scrot dhclient  nyx  speedtest-cli  dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax  qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe   os-prober  pulseaudio-alsa  qt6-base qt5-base   libinput xf86-input-libinput qbittorrent cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang  qt5-wayland qt6-wayland  hwinfo  libxcb egl-wayland obs-studio jre-openjdk-headless jre-openjdk jdk-openjdk lib32-libxcb qt6ct desktop-file-utils ufw giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt gst-plugins-base-libs lib32-gst-plugins-base-libs vkd3d lib32-vkd3d sdl2 lib32-sdl2 libgphoto2 sane gsm samba dosbox discord dkms wqy-zenhei lib32-sdl2
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -89,6 +89,8 @@ EOF
 fi
 if [[ -n "$nvidia" && -n "$intel" ]]; then
 sudo pacman -S --needed --noconfirm bumblebee bbswitch primus lib32-primus
+sudo systemctl enable bumblebeed.service
+sudo gpasswd -a $USERNAME bumblebee
 sudo cat > /etc/modprobe.d/killnouveau.conf <<EOF
 blacklist nouveau
 EOF
@@ -195,18 +197,9 @@ sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
 sudo systemctl disable dhcpcd.service && sudo systemctl stop dhcpcd.service
-sudo systemctl disable hostapd.service && sudo systemctl stop hostapd.service
-sudo systemctl disable dnsmasq.service && sudo systemctl stop dnsmasq.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
-sudo systemctl enable ModemManager.service && sudo systemctl start ModemManager.service
-sudo systemctl enable NetworkManager.service && sudo systemctl start NetworkManager.service
-sudo systemctl enable ufw.service && sudo systemctl start ufw.service && sudo ufw enable
 sudo systemctl enable sddm.service
-sudo systemctl enable bumblebeed.service
 pulseaudio -k && pulseaudio --start
-
-# Adding to groups.
-sudo gpasswd -a $USERNAME bumblebee
 
 # Starting the NTP service.
 sudo timedatectl set-ntp true
