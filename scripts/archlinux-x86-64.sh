@@ -11,13 +11,16 @@ FONTMM="Noto Sans Medium"
 # Clear the console.
 clear
 
+# 
+# xrandr --output Virualall --mode "1280x800"
+
 # Checking and installing updates.
 sudo pacman -Syyuu
 
 # Installing main packages.
 sudo pacman -S xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python2 python perl net-tools htop netctl openresolv linux-firmware
-sudo pacman -S git i3 dmenu sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg
-sudo pacman -S firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins
+sudo pacman -S git i3 dmenu sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg privoxy alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils nyx speedtest-cli libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk
+sudo pacman -S firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord
 
 # Installing the Arch User Repository (AUR).
 cd /tmp
@@ -46,7 +49,7 @@ yaourt -S ttf-ms-fonts noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-fon
 yaourt -Syua
 
 # Installing main packages.
-# sudo pacman -S --needed --noconfirm     privoxy     gparted    scrot dhclient  nyx  speedtest-cli  dhcpcd hostapd dnsmasq unzip ppp bluez bluez-utils mathjax  qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa pulseaudio-bluetooth pulseaudio-equalizer phonon-qt5-vlc rp-pppoe   os-prober  pulseaudio-alsa  qt6-base qt5-base   libinput xf86-input-libinput qbittorrent cronie hunspell telegram-desktop glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang  qt5-wayland qt6-wayland  hwinfo  libxcb egl-wayland obs-studio jre-openjdk-headless jre-openjdk jdk-openjdk lib32-libxcb qt6ct desktop-file-utils ufw giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt gst-plugins-base-libs lib32-gst-plugins-base-libs vkd3d lib32-vkd3d sdl2 lib32-sdl2 libgphoto2 sane gsm samba dosbox discord dkms wqy-zenhei lib32-sdl2
+# sudo pacman -S --needed --noconfirm          gparted    scrot dhclient      dhcpcd hostapd dnsmasq unzip ppp bluez  mathjax  qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa  pulseaudio-equalizer phonon-qt5-vlc rp-pppoe   os-prober  pulseaudio-alsa  qt6-base qt5-base   libinput xf86-input-libinput qbittorrent cronie hunspell  glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang  qt5-wayland qt6-wayland libxcb egl-wayland obs-studio jre-openjdk-headless jre-openjdk jdk-openjdk lib32-libxcb qt6ct desktop-file-utils ufw giflib lib32-giflib  libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse  libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt gst-plugins-base-libs lib32-gst-plugins-base-libs vkd3d lib32-vkd3d sdl2 lib32-sdl2 libgphoto2 sane gsm samba dosbox  dkms wqy-zenhei
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -194,15 +197,10 @@ sudo chfn $USERNAME
 # Enabling daemons.
 sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
-sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
-sudo systemctl disable dhcpcd.service && sudo systemctl stop dhcpcd.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
 sudo systemctl enable sddm.service
 pulseaudio -k && pulseaudio --start
-
-# Starting the NTP service.
-sudo timedatectl set-ntp true
 
 # Installing the configuration files user.js.
 cd /tmp
