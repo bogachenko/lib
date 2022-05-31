@@ -16,8 +16,8 @@ sudo pacman -Syyuu
 
 # Installing main packages.
 sudo pacman -S xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python2 python perl net-tools htop netctl openresolv linux-firmware
-sudo pacman -S git i3 sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4
-sudo pacman -S firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru 
+sudo pacman -S git i3 sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode
+sudo pacman -S firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru  chromium
 
 # Installing the Arch User Repository (AUR).
 cd /tmp
@@ -111,6 +111,13 @@ su
 # Change the shell.
 chsh -s /bin/zsh $USERNAME
 chsh -s /bin/zsh root
+
+# Automatic login to the system.
+cat > /etc/sddm.conf <<EOF
+[Autologin]
+User=$USERNAME
+Session=i3.desktop
+EOF
 
 # Subpixel hinting mode.
 cat > /etc/profile.d/freetype2.sh <<EOF
