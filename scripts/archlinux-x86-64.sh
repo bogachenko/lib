@@ -12,7 +12,7 @@ FONTMM="Noto Sans Medium"
 clear
 
 # 
-# xrandr --output Virualall --mode "1280x800"
+# xrandr --output Virtual1 --mode "1280x800"
 
 # Checking and installing updates.
 sudo pacman -Syyuu
@@ -47,9 +47,6 @@ yaourt -S ttf-ms-fonts noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-fon
 
 # Checking and installing updates.
 yaourt -Syua
-
-# Installing main packages.
-# sudo pacman -S --needed --noconfirm          gparted    scrot dhclient      dhcpcd hostapd dnsmasq unzip ppp bluez  mathjax  qt5ct yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa  pulseaudio-equalizer phonon-qt5-vlc rp-pppoe   os-prober  pulseaudio-alsa  qt6-base qt5-base   libinput xf86-input-libinput qbittorrent cronie hunspell  glu lib32-glu freeglut lib32-freeglut glew lib32-glew glslang  qt5-wayland qt6-wayland libxcb egl-wayland obs-studio jre-openjdk-headless jre-openjdk jdk-openjdk lib32-libxcb qt6ct desktop-file-utils ufw giflib lib32-giflib  libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse  libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt gst-plugins-base-libs lib32-gst-plugins-base-libs vkd3d lib32-vkd3d sdl2 lib32-sdl2 libgphoto2 sane gsm samba dosbox  dkms wqy-zenhei
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -172,16 +169,16 @@ EOF
 locale-gen
 setfont cyr-sun16
 localectl set-locale LANG="ru_RU.UTF-8"
-cat > /etc/X11/xorg.conf.d/00-keyboard.conf <<EOF
-Section "InputClass"
-        Identifier "system-keyboard"
-        MatchIsKeyboard "on"
-        Option "XkbLayout" "us,ru"
-        Option "XkbModel" "pc105"
-        Option "XkbVariant" ""
-        Option "XkbOptions" "grp:alt_shift_toggle"
-EndSection
-EOF
+# cat > /etc/X11/xorg.conf.d/00-keyboard.conf <<EOF
+# Section "InputClass"
+#        Identifier "system-keyboard"
+#        MatchIsKeyboard "on"
+#        Option "XkbLayout" "us,ru"
+#        Option "XkbModel" "pc105"
+#        Option "XkbVariant" ""
+#        Option "XkbOptions" "grp:alt_shift_toggle"
+# EndSection
+# EOF
 
 # Convert SOCKS to HTTP proxy via Privoxy.
 echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
