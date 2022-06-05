@@ -11,16 +11,13 @@ FONTMM="Noto Sans Medium"
 # Clear the console.
 clear
 
-# 
-# xrandr --output Virtual1 --mode "1280x800"
-
 # Checking and installing updates.
 sudo pacman -Syyuu
 
 # Installing main packages.
 sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python2 python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant
 sudo pacman -S --needed --noconfirm git i3 dmenu sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg privoxy alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils nyx speedtest-cli libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans gvfs gvfs-nfs gvfs-mtp	pcmanfm-qt papirus-icon-theme
-sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord
+sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko
 
 # Installing the Arch User Repository (AUR).
 cd /tmp
@@ -103,9 +100,6 @@ sudo sed -i -e "s/GRUB_TIMEOUT=5\"/GRUB_TIMEOUT=0\"/g" /etc/default/grub
 sudo sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumblebee/xorg.conf.nvidia
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
-
-# Leisure.
-sudo pacman -S --needed --noconfirm steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko
 
 # Entering superuser mode.
 su
