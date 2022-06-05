@@ -18,9 +18,9 @@ clear
 sudo pacman -Syyuu
 
 # Installing main packages.
-sudo pacman -S xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python2 python perl net-tools htop netctl openresolv linux-firmware
-sudo pacman -S git i3 dmenu sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg privoxy alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils nyx speedtest-cli libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk
-sudo pacman -S firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord
+sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python2 python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant
+sudo pacman -S --needed --noconfirm git i3 dmenu sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg privoxy alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils nyx speedtest-cli libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans
+sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord
 
 # Installing the Arch User Repository (AUR).
 cd /tmp
@@ -39,7 +39,7 @@ chmod +x strap.sh
 sudo ./strap.sh
 
 # Installing fonts.
-yaourt -S ttf-ms-fonts noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans
+yaourt -S ttf-ms-fonts
 
 # Update mirrorlist.
 #sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
