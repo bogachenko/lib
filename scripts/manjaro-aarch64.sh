@@ -27,7 +27,8 @@ curl -O https://blackarch.org/strap.sh
 chmod +x strap.sh
 sudo ./strap.sh
 
-# Installing updates and updating the data repositories.
+# Checking and installing updates.
+sudo sed -i 's/#Color/Color/' /etc/pacman.conf
 yaourt -Syua
 sudo pacman -Syyuu
 

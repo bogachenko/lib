@@ -12,11 +12,12 @@ FONTMM="Noto Sans Medium"
 clear
 
 # Checking and installing updates.
+sudo sed -i 's/#Color/Color/' /etc/pacman.conf
 sudo pacman -Syyuu
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python2 python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant
-sudo pacman -S --needed --noconfirm git i3 dmenu sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg privoxy alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils nyx speedtest-cli libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans gvfs gvfs-nfs gvfs-mtp	pcmanfm-qt papirus-icon-theme
+sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python2 python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic
+sudo pacman -S --needed --noconfirm git i3 dmenu sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg privoxy alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils nyx speedtest-cli libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans gvfs gvfs-nfs gvfs-mtp	pcmanfm-qt papirus-icon-theme ntp
 sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko
 
 # Installing the Arch User Repository (AUR).
@@ -36,7 +37,7 @@ chmod +x strap.sh
 sudo ./strap.sh
 
 # Installing main packages.
-yaourt -S ttf-ms-fonts tor-browser
+yaourt -S --needed --noconfirm ttf-ms-fonts tor-browser
 
 # Update mirrorlist.
 #sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
@@ -44,6 +45,13 @@ yaourt -S ttf-ms-fonts tor-browser
 
 # Checking and installing updates.
 yaourt -Syua
+
+# Time.
+sudo timedatectl set-timezone Europe/Moscow
+sudo sed -i -e "s/server 0.arch.pool.ntp.org/server 0.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 1.arch.pool.ntp.org/server 1.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 2.arch.pool.ntp.org/server 2.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 3.arch.pool.ntp.org/server 3.ru.pool.ntp.org/g" /etc/ntp.conf
 
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
@@ -190,6 +198,7 @@ sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
+sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
 sudo systemctl enable sddm.service
 pulseaudio -k && pulseaudio --start
 
