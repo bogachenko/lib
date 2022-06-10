@@ -39,10 +39,6 @@ sudo ./strap.sh
 # Installing main packages.
 yaourt -S --needed --noconfirm ttf-ms-fonts tor-browser
 
-# Update mirrorlist.
-#sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-#curl -sSL 'https://archlinux.org/mirrorlist/?country=RU&protocol=http&protocol=https&ip_version=4&ip_version=6&use_mirror_status=on' | sudo sed 's/^#Server/Server/g' > /etc/pacman.d/mirrorlist
-
 # Checking and installing updates.
 yaourt -Syua
 
@@ -159,29 +155,6 @@ cat > /etc/fonts/local.conf <<EOF
 </fontconfig>
 EOF
 
-# Russification of the system.
-cat > /etc/vconsole.conf <<EOF
-FONT=cyr-sun16
-KEYMAP=ru
-EOF
-cat > /etc/locale.gen <<EOF
-ru_RU.UTF-8 UTF-8
-en_US.UTF-8 UTF-8
-EOF
-locale-gen
-setfont cyr-sun16
-localectl set-locale LANG="ru_RU.UTF-8"
-# cat > /etc/X11/xorg.conf.d/00-keyboard.conf <<EOF
-# Section "InputClass"
-#        Identifier "system-keyboard"
-#        MatchIsKeyboard "on"
-#        Option "XkbLayout" "us,ru"
-#        Option "XkbModel" "pc105"
-#        Option "XkbVariant" ""
-#        Option "XkbOptions" "grp:alt_shift_toggle"
-# EndSection
-# EOF
-
 # Convert SOCKS to HTTP proxy via Privoxy.
 echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
 echo "forward-socks4 / localhost:9050 ." >> /etc/privoxy/config
@@ -210,6 +183,9 @@ curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/
 mv /tmp/user.js ~/.thunderbird/$USERNAME/user.js
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/torbrowser-user.js
 mv /tmp/user.js ~/.local/opt/tor-browser/app/Browser/TorBrowser/Data/Browser/profile.default/user.js
+
+# Create user directories.
+# xdg-user-dirs-update
 
 # Xresources file configuration.
 cat > ~/.Xresources <<EOF

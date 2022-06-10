@@ -29,11 +29,7 @@ sudo ./strap.sh
 
 # Checking and installing updates.
 sudo sed -i 's/#Color/Color/' /etc/pacman.conf
-yaourt -Syua
 sudo pacman -Syyuu
-
-# Installing main packages from the Arch User Repository.
-yaourt -S peerflix xcursor-we10xos
 
 # Sorting mirrors for the pacman package manager.
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
@@ -42,91 +38,22 @@ sudo pacman-mirrors --fasttrack && sudo pacman -Syyu
 # Installing core packages.
 sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xf86-video-nouveau xorg-drivers xorg-xrdb xorg-xclock xorg-xsetroot xorg-xmodmap zsh git vim htop net-tools tor privoxy cmake pkgconf make iw base-devel wget ttf-ubuntu-font-family ttf-dejavu ttf-liberation netctl gparted openresolv code firefox-i18n-ru firefox jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk sddm dmenu i3-wm scrot xorg-xsetroot i3status gvfs dhclient alsa-plugins alsa-utils pulseaudio nyx vlc speedtest-cli xdg-user-dirs gtk2 gtk3 gtk4 dhcpcd xdg-utils xautolock hostapd dnsmasq rxvt-unicode unzip i3lock ppp bluez bluez-utils mathjax youtube-dl pcmanfm-qt python2 python ttf-carlito ttf-caladea ttf-croscore ttf-opensans libevent perl xorg-xclock xorg-xmodmap npm nodejs terminus-font mesa mesa-demos qt5ct pwgen dunst breeze-icons chromium yajl zip unrar p7zip bzip2 lrzip lz4 lzop xz zstd arj lhasa lxqt-archiver pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-alsa qt6-base qt5-base php ffmpeg glu freeglut glew glslang libxcb jre-openjdk-headless jre-openjdk jdk-openjdk qt6ct desktop-file-utils create_ap
 
-# Getting root permissions.
+# Checking and installing updates.
+yaourt -Syua
+
+# Time.
+sudo timedatectl set-timezone Europe/Moscow
+sudo sed -i -e "s/server 0.arch.pool.ntp.org/server 0.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 1.arch.pool.ntp.org/server 1.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 2.arch.pool.ntp.org/server 2.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 3.arch.pool.ntp.org/server 3.ru.pool.ntp.org/g" /etc/ntp.conf
+
+# Entering superuser mode.
 su
 
 # Change the shell.
 chsh -s /bin/zsh $USERNAME
 chsh -s /bin/zsh root
-
-# Russification of the system.
-cat > /etc/vconsole.conf <<EOF
-FONT=ter-k16n
-KEYMAP=ru
-EOF
-cat > /etc/locale.gen <<EOF
-ru_RU.UTF-8 UTF-8
-en_US.UTF-8 UTF-8
-EOF
-locale-gen
-setfont ter-k16n
-localectl set-locale LANG="ru_RU.UTF-8"
-cat > /etc/X11/xorg.conf.d/00-keyboard.conf <<EOF
-Section "InputClass"
-        Identifier "system-keyboard"
-        MatchIsKeyboard "on"
-        Option "XkbLayout" "us,ru"
-        Option "XkbModel" "pc105"
-        Option "XkbVariant" ""
-        Option "XkbOptions" "grp:alt_shift_toggle"
-EndSection
-EOF
-
-# Setting a parameter for QT.
-cat > /etc/environment <<EOF
-QT_QPA_PLATFORMTHEME="qt5ct"
-EOF
-
-# Configuring configuration files for GTK themes.
-cat > /usr/share/gtk-2.0/gtkrc <<EOF
-gtk-icon-theme-name="Breeze"
-gtk-theme-name="Adwaita"
-gtk-cursor-theme-name="We10XOS-cursors"
-gtk-font-name="$FONT 9"
-gtk-menu-images=0
-gtk-button-images=0
-gtk-enable-event-sounds=0
-gtk-enable-input-feedback-sounds=0
-gtk-xft-antialias=1
-gtk-xft-hinting=1
-gtk-xft-hintstyle="hintslight"
-gtk-xft-rgba="rgb"
-EOF
-cat > /usr/share/gtk-3.0/settings.ini <<EOF
-[Settings]
-gtk-icon-theme-name=Breeze
-gtk-theme-name=Adwaita
-gtk-cursor-theme-name=We10XOS-cursors
-gtk-font-name=$FONT 9
-gtk-menu-images=0
-gtk-button-images=0
-gtk-enable-event-sounds=0
-gtk-enable-input-feedback-sounds=0
-gtk-xft-antialias=1
-gtk-xft-hinting=1
-gtk-xft-hintstyle=hintslight
-gtk-xft-rgba=rgb
-EOF
-cat > /usr/share/gtk-4.0/settings.ini <<EOF
-[Settings]
-gtk-icon-theme-name=Breeze
-gtk-theme-name=Adwaita
-gtk-cursor-theme-name=We10XOS-cursors
-gtk-font-name=$FONT 9
-gtk-menu-images=0
-gtk-button-images=0
-gtk-enable-event-sounds=0
-gtk-enable-input-feedback-sounds=0
-gtk-xft-antialias=1
-gtk-xft-hinting=1
-gtk-xft-hintstyle=hintslight
-gtk-xft-rgba=rgb
-EOF
-mkdir -p ~/.config/gtk-{3.0,4.0}/
-chown $USERNAME:$USERNAME ~/.config/gtk-{3.0,4.0}/
-cp /usr/share/gtk-2.0/gtkrc ~/.gtkrc-2.0
-cp /usr/share/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
-cp /usr/share/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini
 
 # Automatic login to the system.
 cat > /etc/sddm.conf <<EOF
@@ -135,10 +62,40 @@ User=$USERNAME
 Session=i3.desktop
 EOF
 
-# Setting the Windows 10 cursor by default.
-cat > /usr/share/icons/default/index.theme <<EOF
-[Icon Theme] 
-Inherits=We10XOS-cursors
+# Subpixel hinting mode.
+cat > /etc/profile.d/freetype2.sh <<EOF
+export FREETYPE_PROPERTIES="truetype:interpreter-version=38"
+EOF
+
+# Настройка Fontconfig.
+cat > /etc/fonts/local.conf <<EOF
+<?xml version='1.0'?>
+<!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+<fontconfig>
+ <match target="font">
+
+  <edit mode="assign" name="rgba">
+   <const>rgb</const>
+  </edit>
+
+  <edit mode="assign" name="hinting">
+   <bool>true</bool>
+  </edit>
+
+  <edit mode="assign" name="hintstyle">
+   <const>hintslight</const>
+  </edit>
+
+  <edit mode="assign" name="antialias">
+   <bool>true</bool>
+  </edit>
+
+  <edit mode="assign" name="lcdfilter">
+    <const>lcddefault</const>
+  </edit>
+
+ </match>
+</fontconfig>
 EOF
 
 # Convert SOCKS to HTTP proxy via Privoxy.
@@ -149,25 +106,32 @@ echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
 # Exiting superuser mode.
 exit
 
+# Fill in the information for GECOS.
+sudo chfn $USERNAME
+
 # Enabling daemons.
 sudo systemctl enable tor.service && sudo systemctl start tor.service
 sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
-sudo systemctl enable sshd.service && sudo systemctl start sshd.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
-sudo systemctl enable sddm.service && sudo systemctl start sddm.service
-sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
+sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
 sudo systemctl disable hostapd.service && sudo systemctl stop hostapd.service
 sudo systemctl disable dnsmasq.service && sudo systemctl stop dnsmasq.service
-sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
+sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
+sudo systemctl enable sddm.service
 pulseaudio -k && pulseaudio --start
 
-# Starting the NTP service.
-sudo timedatectl set-ntp true
+# Installing the configuration file user.js for Firefox.
+cd /tmp
+curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
+mv /tmp/user.js ~/.mozilla/firefox/$USERNAME/user.js
+
+# Downloading and installing Adguard Home.
+curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 
 # Create user directories.
-xdg-user-dirs-update
+# xdg-user-dirs-update
 
-# Configuring the Xresources file.
+# Xresources file configuration.
 cat > ~/.Xresources <<EOF
 Xft.dpi: 96
 Xft.antialias: 1
@@ -194,17 +158,6 @@ URxvt.scrollTtyOutput: false
 URxvt.cursorBlink: true
 EOF
 xrdb -merge ~/.Xresources
-
-# Installing the configuration file user.js for Firefox.
-cd /tmp
-curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
-mv /tmp/user.js ~/.mozilla/firefox/$USERNAME/user.js
-
-# Downloading and installing Adguard Home.
-curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-
-# Fill in the information for GECOS.
-sudo chfn $USERNAME
 
 # Configuring i3wm and i3status.
 mkdir -p ~/.config/i3status
@@ -373,7 +326,7 @@ set encoding=utf8
 EOF
 sudo cp ~/.vimrc /root/.vimrc
 
-# Configuration for the Z shell.
+# Configuration for the Zsh shell.
 cat > ~/.zshrc <<EOF
 PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
 
