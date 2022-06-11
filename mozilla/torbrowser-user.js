@@ -612,3 +612,23 @@ user_pref("extensions.torbutton.security_slider", 2);
 // Search from the address bar
 // Поиск из адресной строки
 user_pref("keyword.enabled", false);
+
+// Icon mode
+//		0 = Normal
+//		1 = Compact
+//		2 = Large
+// Режим иконок
+//		0 = Обычный
+//		1 = Компактный
+//		2 = Большой
+user_pref("browser.uidensity", 1);
+
+// Limit events that can trigger a popup
+// Ограничить события, которые могут вызвать всплывающее окно
+user_pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
+
+// DNS over HTTPS
+// DNS поверх HTTPS
+user_pref("network.trr.mode", 2);
+user_pref("network.trr.uri", "https://dns.cloudflare.com/dns-query");
+user_pref("network.trr.custom_uri", "https://dns.cloudflare.com/dns-query");

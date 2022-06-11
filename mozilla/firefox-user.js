@@ -306,6 +306,9 @@ user_pref("dom.push.connection.enabled", false);
 // Disk cache
 // Кэш-диска
 user_pref("browser.cache.disk.enable", false);
+user_pref("browser.cache.disk_cache_ssl", false);
+user_pref("browser.cache.disk.smart_size.enabled", false);
+user_pref("browser.cache.disk.capacity", 0);
 
 // Saving settings to disk for the permission manager
 //		TRUE = Keep them until the browser is closed
@@ -672,3 +675,13 @@ user_pref("browser.preferences.moreFromMozilla", false);
 // [ЗАМЕТКА] Задача Агента браузера по умолчанию проверяет, не изменилось ли значение по умолчанию с Firefox на другой браузер.
 // [NOTE] The Default Browser Agent task checks to see if the default value has changed from Firefox to another browser.
 user_pref("default-browser-agent.enabled", false);
+
+// WebGL
+user_pref("webgl.enable-webgl2", true);
+user_pref("webgl.disabled", true);
+user_pref("webgl.min_capability_mode", true);
+
+// WebRTC
+user_pref("media.peerconnection.enabled", false);
+user_pref("media.peerconnection.ice.proxy_only_if_behind_proxy", true);
+user_pref("media.peerconnection.ice.default_address_only", true);
