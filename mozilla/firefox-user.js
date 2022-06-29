@@ -107,7 +107,6 @@ user_pref("browser.urlbar.speculativeConnect.enabled", false);
 // Suggestion types in the address bar
 // Типы предложений в адресной строке
 user_pref("browser.urlbar.suggest.history", false);
-user_pref("browser.urlbar.suggest.bookmark", false);
 user_pref("browser.urlbar.suggest.openpage", false);
 user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.suggest.engines", false);
@@ -476,6 +475,7 @@ user_pref("webchannel.allowObject.urlWhitelist", "");
 // Блокировать всплывающие окна
 user_pref("dom.disable_open_during_load", true);
 user_pref("dom.block_multiple_popups", true);
+user_pref("dom.disable_window_move_resize", true);
 
 // Maximum number of pop-ups
 // Максимальное количество всплывающих окон
@@ -685,3 +685,11 @@ user_pref("webgl.min_capability_mode", true);
 user_pref("media.peerconnection.enabled", false);
 user_pref("media.peerconnection.ice.proxy_only_if_behind_proxy", true);
 user_pref("media.peerconnection.ice.default_address_only", true);
+
+// Атрибут rel=noopener
+// rel=noopener attribute
+user_pref("dom.targetBlankNoOpener.enabled", "");
+
+// "Confirm that you want to leave" dialog on the closing page
+// "Подтвердите, что вы хотите уйти" диалог на странице закрытия
+user_pref("dom.disable_beforeunload", true);

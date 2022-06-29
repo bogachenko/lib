@@ -66,7 +66,6 @@ user_pref("browser.urlbar.speculativeConnect.enabled", false);
 // Suggestion types in the address bar
 // Типы предложений в адресной строке
 user_pref("browser.urlbar.suggest.history", false);
-user_pref("browser.urlbar.suggest.bookmark", false);
 user_pref("browser.urlbar.suggest.openpage", false);
 user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.suggest.topsites", false);
@@ -419,6 +418,7 @@ user_pref("webchannel.allowObject.urlWhitelist", "");
 // Блокировать всплывающие окна
 user_pref("dom.disable_open_during_load", true);
 user_pref("dom.block_multiple_popups", true);
+user_pref("dom.disable_window_move_resize", true);
 
 // Maximum number of pop-ups
 // Максимальное количество всплывающих окон
@@ -632,3 +632,7 @@ user_pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
 user_pref("network.trr.mode", 2);
 user_pref("network.trr.uri", "https://dns.cloudflare.com/dns-query");
 user_pref("network.trr.custom_uri", "https://dns.cloudflare.com/dns-query");
+
+// Атрибут rel=noopener
+// rel=noopener attribute
+user_pref("dom.targetBlankNoOpener.enabled", "");
