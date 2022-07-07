@@ -1,4 +1,4 @@
-// Mozilla User Preferences
+// Firefox User Preferences
 // Author: Bogachenko Vyacheslav
 
 // Warning in "about:config"

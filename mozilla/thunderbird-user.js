@@ -1,4 +1,4 @@
-// Mozilla User Preferences
+// Thunderbird User Preferences
 // Author: Bogachenko Vyacheslav
 
 // Warning in "about:config"

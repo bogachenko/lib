@@ -1,4 +1,4 @@
-// Mozilla User Preferences
+// Tor Browser User Preferences
 // Author: Bogachenko Vyacheslav
 
 // Warning in "about:config"
