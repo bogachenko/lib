@@ -336,7 +336,7 @@ user_pref("browser.sessionstore.resume_from_crash", false);
 
 // Interval between saving sessions
 // Интервал между сохранением сеансов
-user_pref("browser.sessionstore.interval", 30000);
+user_pref("browser.sessionstore.interval", 120000);
 
 // Restoring the browser after restarting the operating system
 // Восстановление браузера после перезагрузки операционной системы
@@ -398,7 +398,6 @@ user_pref("gecko.handlerService.schemes.mailto.3.uriTemplate", "");
 // Sending telemetry data and website address, about where and how the plugin failed
 // Отправка телеметрических данных и адреса сайта, о том, где и как произошел сбой плагина
 user_pref("dom.ipc.plugins.reportCrashURL", false);
-user_pref("dom.ipc.plugins.flash.subprocess.crashreporter.enabled", false);
 
 // Autocomplete user name and password
 // Aвтоматическое заполнение имени пользователя и пароля
@@ -687,8 +686,12 @@ user_pref("media.peerconnection.ice.default_address_only", true);
 
 // Атрибут rel=noopener
 // rel=noopener attribute
-user_pref("dom.targetBlankNoOpener.enabled", "");
+user_pref("dom.targetBlankNoOpener.enabled", false);
 
 // "Confirm that you want to leave" dialog on the closing page
+//		TRUE = Hide this dialog
+//		FALSE = Show this dialog
 // "Подтвердите, что вы хотите уйти" диалог на странице закрытия
+//		TRUE = Скрывать этот диалог
+//		FALSE = Показывать этот диалог
 user_pref("dom.disable_beforeunload", true);
