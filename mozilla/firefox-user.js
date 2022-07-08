@@ -197,7 +197,6 @@ user_pref("privacy.trackingprotection.annotate_channels", false);
 user_pref("privacy.trackingprotection.cryptomining.enabled", false);
 user_pref("privacy.trackingprotection.fingerprinting.enabled", false);
 user_pref("privacy.trackingprotection.pbmode.enabled", false);
-user_pref("privacy.trackingprotection.enabled", false);
 
 // Automatically play sound in non-active tabs
 //		TRUE = Do not play
