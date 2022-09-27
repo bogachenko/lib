@@ -423,6 +423,7 @@ user_pref("general.smoothScroll", false);
 //		1 = Загрузки
 //		2 = Последняя используемая папка
 user_pref("browser.download.folderList", 1);
+user_pref("browser.download.useDownloadDir", true);
 
 // Adding downloads to the list of recent system documents
 // Добавление загрузок в список последних документов системы
