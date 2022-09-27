@@ -4,7 +4,7 @@ rem Getting root
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
-:: Windows 10 Enterprise LTSC build 19044.1706 x86_64
+:: Windows 10 Enterprise LTSC build 19044.2075 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
 :: Copyright 2022 Bogachenko Vyacheslav
@@ -318,6 +318,12 @@ rem Transparency Effects
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d "0" /f
 rem Show recently opened items in Start, Jump Lists, and File Explorer
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d "0" /f
+rem Size of the taskbar buttons
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSmallIcons" /t REG_DWORD /d "0" /f
+rem Size of the desktop icons
+reg add "HKCU\SOFTWARE\Microsoft\Windows\Shell\Bags\1\Desktop" /V "IconSize" /T REG_DWORD /D 32 /F
+reg add "HKCU\SOFTWARE\Microsoft\Windows\Shell\Bags\1\Desktop" /V "Mode" /T REG_DWORD /D 1 /F
+reg add "HKCU\SOFTWARE\Microsoft\Windows\Shell\Bags\1\Desktop" /V "LogicalViewMode" /T REG_DWORD /D 3 /F
 
 rem Hibernation
 powercfg /hibernate off
