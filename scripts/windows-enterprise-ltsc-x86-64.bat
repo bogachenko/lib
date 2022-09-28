@@ -204,7 +204,6 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App a
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection" /v "UILockdown" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Family options" /v "UILockdown" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection" /v "UILockdown" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows Defender\Reporting" /v "UILockdown" /t DisableEnhancedNotifications /d "1" /f
 powershell.exe -command "Set-MpPreference -PUAProtection 0"
 powershell.exe -command "Set-MpPreference -DisableRealtimeMonitoring 1"
 powershell.exe -command "Set-MpPreference -DisableScanningNetworkFiles 1"
