@@ -120,6 +120,8 @@ rem Delivery optimization
 reg add "HKLM\System\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d 4 /f
 rem SysMain Service
 reg add "HKLM\System\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d 4 /f
+rem Eventlog Service
+reg add "HKLM\System\CurrentControlSet\Services\EventLog" /v "Start" /t REG_DWORD /d 4 /f
 
 echo Time And Language Setting
 rem Input Analysis
@@ -308,6 +310,8 @@ reg add "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /v "DontShowUI
 reg add "HKLM\Software\Microsoft\Windows\Windows Error Reporting" /v "DontShowUI" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Microsoft\Windows\Windows Error Reporting" /v "LoggingDisabled" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows\Windows Error Reporting" /v "LoggingDisabled" /t REG_DWORD /d "1" /f
+rem Windows Customer Experience Improvement Program
+reg add "HKLM\SOFTWARE\Policies\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t REG_DWORD /d 0 /f 
 
 echo Windows Fine-Tuning
 rem Online tips
