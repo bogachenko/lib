@@ -90,36 +90,36 @@ schtasks /Change /TN "Microsoft\Windows\Sysmain\WsSwapAssessmentTask" /Disable
 
 echo Removing Tracking Services
 rem Diagnostics Tracking Service
-reg delete "HKLM\System\CurrentControlSet\Services\DiagTrack" /f
-rem Stop Diagnostic Execution Service
-reg delete "HKLM\System\CurrentControlSet\Services\diagsvc" /f
-rem Stop WAP-push Service
-reg delete "HKLM\System\CurrentControlSet\Services\dmwappushservice" /f
-rem Stop Diagnostics Hub Standard Collector Service
-reg delete "HKLM\System\CurrentControlSet\Services\diagnosticshub.standardcollector.service" /f
-rem Stop Gaming Services
-reg delete "HKLM\System\CurrentControlSet\Services\XblGameSave" /f
-reg delete "HKLM\System\CurrentControlSet\Services\XblAuthManager" /f
-reg delete "HKLM\System\CurrentControlSet\Services\XboxNetApiSvc" /f
-reg delete "HKLM\System\CurrentControlSet\Services\XboxGipSvc" /f
-rem Stop Store Demonstration Service
-reg delete "HKLM\System\CurrentControlSet\Services\RetailDemo" /f
-rem Stop Windows Search Service
-reg delete "HKLM\System\CurrentControlSet\Services\WSearch" /f
-rem Stop Windows Error Reporting Service
-reg delete "HKLM\System\CurrentControlSet\Services\WerSvc" /f
-rem Stop Data Usage Service
-reg delete "HKLM\System\CurrentControlSet\Services\DusmSvc" /f
-rem Stop SSDP Discovery Service
-reg delete "HKLM\System\CurrentControlSet\Services\SSDPSRV" /f
-rem Stop Geolocation Service
-reg delete "HKLM\System\CurrentControlSet\Services\lfsvc" /f
+reg add "HKLM\System\CurrentControlSet\Services\DiagTrack" /v "Start" /t REG_DWORD /d 4 /f
+rem Diagnostic Execution Service
+reg add "HKLM\System\CurrentControlSet\Services\diagsvc" /v "Start" /t REG_DWORD /d 4 /f
+rem WAP-push Service
+reg add "HKLM\System\CurrentControlSet\Services\dmwappushservice" /v "Start" /t REG_DWORD /d 4 /f
+rem Diagnostics Hub Standard Collector Service
+reg add "HKLM\System\CurrentControlSet\Services\diagnosticshub.standardcollector.service" /v "Start" /t REG_DWORD /d 4 /f
+rem Gaming Services
+reg add "HKLM\System\CurrentControlSet\Services\XblGameSave" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKLM\System\CurrentControlSet\Services\XblAuthManager" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKLM\System\CurrentControlSet\Services\XboxNetApiSvc" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKLM\System\CurrentControlSet\Services\XboxGipSvc" /v "Start" /t REG_DWORD /d 4 /f
+rem Store Demonstration Service
+reg add "HKLM\System\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d 4 /f
+rem Windows Search Service
+reg add "HKLM\System\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d 4 /f
+rem Windows Error Reporting Service
+reg add "HKLM\System\CurrentControlSet\Services\WerSvc" /v "Start" /t REG_DWORD /d 4 /f
+rem Data Usage Service
+reg add "HKLM\System\CurrentControlSet\Services\DusmSvc" /v "Start" /t REG_DWORD /d 4 /f
+rem SSDP Discovery Service
+reg add "HKLM\System\CurrentControlSet\Services\SSDPSRV" /v "Start" /t REG_DWORD /d 4 /f
+rem Geolocation Service
+reg add "HKLM\System\CurrentControlSet\Services\lfsvc" /v "Start" /t REG_DWORD /d 4 /f
 rem Downloaded Maps Manager
-reg delete "HKLM\System\CurrentControlSet\Services\MapsBroker" /f
+reg add "HKLM\System\CurrentControlSet\Services\MapsBroker" /v "Start" /t REG_DWORD /d 4 /f
 rem Delivery optimization
-reg delete "HKLM\System\CurrentControlSet\Services\DoSvc" /f
+reg add "HKLM\System\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d 4 /f
 rem SysMain Service
-reg delete "HKLM\System\CurrentControlSet\Services\SysMain" /f
+reg add "HKLM\System\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d 4 /f
 
 echo Time And Language Setting
 rem Input Analysis
