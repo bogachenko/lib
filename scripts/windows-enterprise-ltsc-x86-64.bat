@@ -88,70 +88,38 @@ rem Boot Optimization
 schtasks /Change /TN "Microsoft\Windows\Sysmain\ResPriStaticDbSync" /Disable
 schtasks /Change /TN "Microsoft\Windows\Sysmain\WsSwapAssessmentTask" /Disable
 
-echo Stopping And Removing Tracking Services
-rem Stop Diagnostics Tracking Service
-sc config "DiagTrack" start=disabled
-sc stop DiagTrack
-sc delete DiagTrack
+echo Removing Tracking Services
+rem Diagnostics Tracking Service
+reg delete "HKLM\System\CurrentControlSet\Services\DiagTrack" /f
 rem Stop Diagnostic Execution Service
-sc config "diagsvc" start=disabled
-sc stop diagsvc
-sc delete diagsvc
+reg delete "HKLM\System\CurrentControlSet\Services\diagsvc" /f
 rem Stop WAP-push Service
-sc config "dmwappushservice" start=disabled
-sc stop dmwappushservice
-sc delete dmwappushservice
+reg delete "HKLM\System\CurrentControlSet\Services\dmwappushservice" /f
 rem Stop Diagnostics Hub Standard Collector Service
-sc config "diagnosticshub.standardcollector.service" start=disabled
-sc stop diagnosticshub.standardcollector.service
-sc delete diagnosticshub.standardcollector.service
+reg delete "HKLM\System\CurrentControlSet\Services\diagnosticshub.standardcollector.service" /f
 rem Stop Gaming Services
-sc config "XblGameSave" start=disabled
-sc stop XblGameSave
-sc delete XblGameSave
-sc config "XblAuthManager" start=disabled
-sc stop XblAuthManager
-sc delete XblAuthManager
-sc config "XboxNetApiSvc" start=disabled
-sc stop XboxNetApiSvc
-sc delete XboxNetApiSvc
-sc config "XboxGipSvc" start=disabled
-sc stop XboxGipSvc
-sc delete XboxGipSvc
+reg delete "HKLM\System\CurrentControlSet\Services\XblGameSave" /f
+reg delete "HKLM\System\CurrentControlSet\Services\XblAuthManager" /f
+reg delete "HKLM\System\CurrentControlSet\Services\XboxNetApiSvc" /f
+reg delete "HKLM\System\CurrentControlSet\Services\XboxGipSvc" /f
 rem Stop Store Demonstration Service
-sc config "RetailDemo" start=disabled
-sc stop RetailDemo
-sc delete RetailDemo
+reg delete "HKLM\System\CurrentControlSet\Services\RetailDemo" /f
 rem Stop Windows Search Service
-sc config "WSearch" start=disabled
-sc stop WSearch
-sc delete WSearch
+reg delete "HKLM\System\CurrentControlSet\Services\WSearch" /f
 rem Stop Windows Error Reporting Service
-sc config "WerSvc" start=disabled
-sc stop WerSvc
-sc delete WerSvc
+reg delete "HKLM\System\CurrentControlSet\Services\WerSvc" /f
 rem Stop Data Usage Service
-sc config "DusmSvc" start=disabled
-sc stop DusmSvc
-sc delete DusmSvc
+reg delete "HKLM\System\CurrentControlSet\Services\DusmSvc" /f
 rem Stop SSDP Discovery Service
-sc config "SSDPSRV" start=disabled
-sc stop SSDPSRV
-sc delete SSDPSRV
+reg delete "HKLM\System\CurrentControlSet\Services\SSDPSRV" /f
 rem Stop Geolocation Service
-sc config "lfsvc" start=disabled
-sc stop lfsvc
-sc delete lfsvc
+reg delete "HKLM\System\CurrentControlSet\Services\lfsvc" /f
 rem Downloaded Maps Manager
-sc config "MapsBroker" start=disabled
-sc stop MapsBroker
-sc delete MapsBroker
+reg delete "HKLM\System\CurrentControlSet\Services\MapsBroker" /f
 rem Delivery optimization
 reg delete "HKLM\System\CurrentControlSet\Services\DoSvc" /f
 rem SysMain Service
-sc config "SysMain" start=disabled
-sc stop SysMain
-sc delete SysMain
+reg delete "HKLM\System\CurrentControlSet\Services\SysMain" /f
 
 echo Time And Language Setting
 rem Input Analysis
