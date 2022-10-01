@@ -187,13 +187,13 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandler
 
 echo Update And Security Settings
 rem Delivery Optimization
-reg add "HKU\S-1-5-20\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings" /v "DownloadMode" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DownloadMode" /t REG_DWORD /d "0" /f
 rem Real-time protection
 powershell.exe -command "Set-MpPreference -DisableRealtimeMonitoring 1"
 powershell.exe -command "Set-MpPreference -DisableScanningMappedNetworkDrivesForFullScan 1"
 powershell.exe -command "Set-MpPreference -DisableScanningNetworkFiles 1"
 powershell.exe -command "Set-MpPreference -PUAProtection 0"
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiVirus" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection" /v "DisallowExploitProtectionOverride" /t REG_DWORD /d "1" /f
@@ -223,7 +223,6 @@ rem Logging
 reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger" /v "Start" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderAuditLogger" /v "Start" /t REG_DWORD /d "0" /f
 rem Logs
-:: HKLM\SYSTEM\CurrentControlSet\Services\EventLog
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-PowerShell/Admin" /v "Enabled" /t REG_DWORD /d "0" /f
 
 echo Privacy Settings
