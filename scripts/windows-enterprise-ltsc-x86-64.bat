@@ -23,79 +23,79 @@ taskkill /f /im SecurityHealthService.exe > nul 2>&1
 taskkill /f /im SecurityHealthSystray.exe > nul 2>&1
 rem Microsoft Compatibility Telemetry
 taskkill /f /im compattelrunner.exe > nul 2>&1
-rem SmartScreen
+rem Microsoft SmartScreen
 taskkill /f /im smartscreen.exe > nul 2>&1
 
 echo Windows Task Scheduler
 rem Microsoft Compatibility Telemetry
-schtasks /change /tn "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
-schtasks /change /tn "Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable
-schtasks /change /tn "Microsoft\Windows\Application Experience\StartupAppTask" /disable
-rem Windows Defender Tasks
-schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /disable
-schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /disable
-schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable
-schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable
-rem Windows Defender Exploit Guard Task
-schtasks /change /tn "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable
-rem Collecting SQM Data Task
-schtasks /change /tn "Microsoft\Windows\Autochk\Proxy" /disable
-rem Windows Disk Diagnostics Tasks
-schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
-schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /disable
-rem Software Quality Improvement Program Tasks
-schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable
-schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver" /disable
-rem Disk Footprint Tasks
-schtasks /change /tn "\Microsoft\Windows\DiskFootprint\Diagnostics" /disable
-schtasks /change /tn "\Microsoft\Windows\DiskFootprint\StorageSense" /disable
-rem Power Efficiency Diagnostics System Task
-schtasks /change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable
-rem Family Safety Tasks
-schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyMonitor" /disable
-schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefreshTask" /disable
-rem System Performance Diagnostics Task
-schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable
-rem Backup Location Task
-schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)" /disable
+schtasks /change /tn "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Application Experience\StartupAppTask" /disable > nul 2>&1
+rem Windows Defender
+schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable > nul 2>&1
+rem Windows Exploit Guard Defender
+schtasks /change /tn "\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable > nul 2>&1
+rem Collecting and uploading SQM data
+schtasks /change /tn "\Microsoft\Windows\Autochk\Proxy" /disable > nul 2>&1
+rem Windows Disk Diagnostics
+schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /disable > nul 2>&1
+rem Software Quality Improvement Program
+schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver" /disable > nul 2>&1
+rem Disk Footprint
+schtasks /change /tn "\Microsoft\Windows\DiskFootprint\Diagnostics" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\DiskFootprint\StorageSense" /disable > nul 2>&1
+rem Power Efficiency Diagnostics
+schtasks /change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable > nul 2>&1
+rem Family Safety
+schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyMonitor" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefreshTask" /disable > nul 2>&1
+rem System Performance Diagnostics
+schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable > nul 2>&1
+rem Backup Location
+schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)" /disable > nul 2>&1
 rem Sqm Tasks
-schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable
+schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable > nul 2>&1
 rem Network Information Collector Task
-schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
+schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable > nul 2>&1
 rem Automatic Scanning And Troubleshooting Tasks
-schtasks /change /tn "\Microsoft\Windows\Diagnosis\Scheduled" /disable
-schtasks /change /tn "\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /disable
+schtasks /change /tn "\Microsoft\Windows\Diagnosis\Scheduled" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /disable > nul 2>&1
 rem Supporting Updating Search Indexes Task
-schtasks /change /tn "\Microsoft\Windows\Shell\IndexerAutomaticMaintenance" /disable
+schtasks /change /tn "\Microsoft\Windows\Shell\IndexerAutomaticMaintenance" /disable > nul 2>&1
 rem Windows Diagnostic Infrastructure Resolution Host Task
-schtasks /change /tn "\Microsoft\Windows\WDI\ResolutionHost" /disable
+schtasks /change /tn "\Microsoft\Windows\WDI\ResolutionHost" /disable > nul 2>&1
 rem Xbox Task
-schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTask" /disable
-schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTaskLogon" /disable
+schtasks /change /tn "\Microsoft\XblGameSave\XblGameSaveTask" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\XblGameSave\XblGameSaveTaskLogon" /disable > nul 2>&1
 rem Auto Cleanup RetailDemo Offline Content Task
-schtasks /change /tn "Microsoft\Windows\RetailDemo\CleanupOfflineContent" /disable
+schtasks /change /tn "\Microsoft\Windows\RetailDemo\CleanupOfflineContent" /disable > nul 2>&1
 rem Error Reporting Task 
-schtasks /change /tn "Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable
+schtasks /change /tn "\Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable > nul 2>&1
 rem Location Notification Tasks
-schtasks /change /tn "Microsoft\Windows\Location\Notifications" /disable
-schtasks /change /tn "Microsoft\Windows\Location\WindowsActionDialog" /disable
+schtasks /change /tn "\Microsoft\Windows\Location\Notifications" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Location\WindowsActionDialog" /disable > nul 2>&1
 rem Collecting And Sending Device Data Tasks
-schtasks /change /tn "Microsoft\Windows\Device Information\Device" /disable
-schtasks /change /tn "Microsoft\Windows\Device Information\Device User" /disable
+schtasks /change /tn "\Microsoft\Windows\Device Information\Device" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Device Information\Device User" /disable > nul 2>&1
 rem Microsoft Office Task
-schtasks /change /tn "Microsoft\Office\Office ClickToRun Service Monitor" /disable
-schtasks /change /tn "Microsoft\Office\Office Performance Monitor" /disable
+schtasks /change /tn "\Microsoft\Office\Office ClickToRun Service Monitor" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Office\Office Performance Monitor" /disable > nul 2>&1
 rem Boot Optimization
-schtasks /change /tn "Microsoft\Windows\Sysmain\ResPriStaticDbSync" /disable
-schtasks /change /tn "Microsoft\Windows\Sysmain\WsSwapAssessmentTask" /disable
-rem Mobile network metadata analysis task
-schtasks /change /tn "Microsoft\Windows\Mobile Broadband Accounts\MNO Metadata Parser" /disable
+schtasks /change /tn "\Microsoft\Windows\Sysmain\ResPriStaticDbSync" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Sysmain\WsSwapAssessmentTask" /disable > nul 2>&1
+rem Mobile Network Metadata Analysis Task
+schtasks /change /tn "\Microsoft\Windows\Mobile Broadband Accounts\MNO Metadata Parser" /disable > nul 2>&1
 rem Data Usage Subscription Management Task
-schtasks /change /tn "Microsoft\Windows\DUSM\dusmtask" /disable
-rem Send diagnostics task
-schtasks /change /tn "Microsoft\Windows\Flighting\OneSettings\RefreshCache" /disable
-rem Windows Update Telemetry Task
-schtasks /change /tn "Microsoft\Windows\UNP\RunUpdateNotificationMgr" /disable
+schtasks /change /tn "\Microsoft\Windows\DUSM\dusmtask" /disable > nul 2>&1
+rem Diagnostic Sending Task
+schtasks /change /tn "\Microsoft\Windows\Flighting\OneSettings\RefreshCache" /disable > nul 2>&1
+rem Update Center Telemetry Task
+schtasks /change /tn "\Microsoft\Windows\UNP\RunUpdateNotificationMgr" /disable > nul 2>&1
 
 echo Stopping Tracking Services
 rem Diagnostics Tracking Service
