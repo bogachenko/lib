@@ -3,7 +3,7 @@
 color 1f
 title Windows 10 Enterprise LTSC
 
-rem Getting root
+rem Getting superuser rights
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
@@ -15,66 +15,66 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: This script is provided "AS IS" without warranty of any kind, either expressed or implied.
 :: Use it at your own risk! The author is not responsible for any claims for damage that may arise from the use of this script.
 
-echo Stop Necessary Processes
-rem Stop Windows Explorer
+echo Stop processes
+rem Windows Explorer
 taskkill /f /im explorer.exe
-rem Stop Windows Security Health Service
+rem Windows Security Health Service
 taskkill /f /im SecurityHealthService.exe > nul 2>&1
 taskkill /f /im SecurityHealthSystray.exe > nul 2>&1
-rem Stop Microsoft Compatibility Telemetry
+rem Microsoft Compatibility Telemetry
 taskkill /f /im compattelrunner.exe > nul 2>&1
-rem Stop SmartScreen
+rem SmartScreen
 taskkill /f /im smartscreen.exe > nul 2>&1
 
-echo Task Scheduler Settings
-rem Stop Microsoft Compatibility Appraiser Tasks
+echo Windows Task Scheduler
+rem Microsoft Compatibility Telemetry
 schtasks /change /tn "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
 schtasks /change /tn "Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable
 schtasks /change /tn "Microsoft\Windows\Application Experience\StartupAppTask" /disable
-rem Stop Windows Defender Tasks
+rem Windows Defender Tasks
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable
 schtasks /change /tn "Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable
-rem Stop Windows Defender Exploit Guard Task
+rem Windows Defender Exploit Guard Task
 schtasks /change /tn "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable
-rem Stop Collecting SQM Data Task
+rem Collecting SQM Data Task
 schtasks /change /tn "Microsoft\Windows\Autochk\Proxy" /disable
-rem Stop Windows Disk Diagnostics Tasks
+rem Windows Disk Diagnostics Tasks
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /disable
-rem Stop Software Quality Improvement Program Tasks
+rem Software Quality Improvement Program Tasks
 schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable
 schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver" /disable
-rem Stop Disk Footprint Tasks
+rem Disk Footprint Tasks
 schtasks /change /tn "\Microsoft\Windows\DiskFootprint\Diagnostics" /disable
 schtasks /change /tn "\Microsoft\Windows\DiskFootprint\StorageSense" /disable
-rem Stop Power Efficiency Diagnostics System Task
+rem Power Efficiency Diagnostics System Task
 schtasks /change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable
-rem Stop Family Safety Tasks
+rem Family Safety Tasks
 schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyMonitor" /disable
 schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefreshTask" /disable
-rem Stop System Performance Diagnostics Task
+rem System Performance Diagnostics Task
 schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable
-rem Stop Backup Location Task
+rem Backup Location Task
 schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)" /disable
-rem Stop Sqm Tasks
+rem Sqm Tasks
 schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable
-rem Stop Network Information Collector Task
+rem Network Information Collector Task
 schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
-rem Stop Automatic Scanning And Troubleshooting Tasks
+rem Automatic Scanning And Troubleshooting Tasks
 schtasks /change /tn "\Microsoft\Windows\Diagnosis\Scheduled" /disable
 schtasks /change /tn "\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /disable
-rem Stop Supporting Updating Search Indexes Task
+rem Supporting Updating Search Indexes Task
 schtasks /change /tn "\Microsoft\Windows\Shell\IndexerAutomaticMaintenance" /disable
-rem Stop Windows Diagnostic Infrastructure Resolution Host Task
+rem Windows Diagnostic Infrastructure Resolution Host Task
 schtasks /change /tn "\Microsoft\Windows\WDI\ResolutionHost" /disable
-rem Stop Xbox Task
+rem Xbox Task
 schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTask" /disable
 schtasks /change /tn "Microsoft\XblGameSave\XblGameSaveTaskLogon" /disable
-rem Stop Auto Cleanup RetailDemo Offline Content Task
+rem Auto Cleanup RetailDemo Offline Content Task
 schtasks /change /tn "Microsoft\Windows\RetailDemo\CleanupOfflineContent" /disable
-rem Stop Error Reporting Task 
+rem Error Reporting Task 
 schtasks /change /tn "Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable
 rem Location Notification Tasks
 schtasks /change /tn "Microsoft\Windows\Location\Notifications" /disable
