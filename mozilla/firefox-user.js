@@ -126,7 +126,6 @@ user_pref("privacy.sanitize.sanitizeOnShutdown", true);
 // Which data items should be automatically deleted when the browser is closed
 // Какие элементы данных должны быть автоматически удалены при закрытии браузера
 user_pref("privacy.clearOnShutdown.cache", true);
-user_pref("privacy.clearOnShutdown.cookies", true);
 user_pref("privacy.clearOnShutdown.downloads", true);
 user_pref("privacy.clearOnShutdown.formdata", true);
 user_pref("privacy.clearOnShutdown.history", true);
