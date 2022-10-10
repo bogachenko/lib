@@ -627,12 +627,6 @@ user_pref("browser.uidensity", 1);
 // Ограничить события, которые могут вызвать всплывающее окно
 user_pref("dom.popup_allowed_events", "click dblclick mousedown pointerdown");
 
-// DNS over HTTPS
-// DNS поверх HTTPS
-user_pref("network.trr.mode", 2);
-user_pref("network.trr.uri", "https://dns.cloudflare.com/dns-query");
-user_pref("network.trr.custom_uri", "https://dns.cloudflare.com/dns-query");
-
 // Атрибут rel=noopener
 // rel=noopener attribute
 user_pref("dom.targetBlankNoOpener.enabled", "");
