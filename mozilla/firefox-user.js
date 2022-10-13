@@ -75,6 +75,7 @@ user_pref("browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcu
 user_pref("browser.newtabpage.activity-stream.logowordmark.alwaysVisible", false);
 user_pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
+user_pref("browser.newtabpage.activity-stream.impressionId", "");
 
 // Restriction on opening new windows 
 //		0 = Open all links in tabs 
@@ -695,3 +696,7 @@ user_pref("dom.targetBlankNoOpener.enabled", false);
 //		TRUE = Скрывать этот диалог
 //		FALSE = Показывать этот диалог
 user_pref("dom.disable_beforeunload", true);
+
+// DNS over HTTPS
+user_pref("network.trr.mode", 2);
+user_pref("network.trr.uri", "https://dns.google/dns-query");
