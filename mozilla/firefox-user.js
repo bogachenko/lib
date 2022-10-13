@@ -98,7 +98,8 @@ user_pref("browser.tabs.loadDivertedInBackground", true);
 // [NOTE] The default search engine uses geolocation-related data (your real location, determined by IP address).
 // Поисковые предложения
 // [ЗАМЕТКА] Поисковый механизм по умолчанию использует данные, связанные с геолокацией (вашим реальным местонахождением, определяемым по IP-адресу).
-user_pref("browser.search.suggest.enabled", false);
+user_pref("browser.search.suggest.enabled", true);
+user_pref("browser.search.suggest.enabled.private", true);
 
 // Preloading autocomplete URLs (when you enter in the address bar)
 // Предварительная загрузка URL-адресов автозаполнения (при вводе в адресную строку)
@@ -111,9 +112,7 @@ user_pref("browser.urlbar.suggest.openpage", false);
 user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.suggest.engines", false);
 user_pref("browser.urlbar.suggest.topsites", false);
-user_pref("browser.urlbar.suggest.quicksuggest", false);
 user_pref("browser.urlbar.showSearchSuggestionsFirst", false);
-user_pref("browser.urlbar.delay", 0);
 
 // Remember the search history and form data
 // Помнить историю поиска и данные формы
@@ -133,6 +132,7 @@ user_pref("privacy.clearOnShutdown.offlineApps", true);
 user_pref("privacy.clearOnShutdown.sessions", true);
 user_pref("privacy.clearOnShutdown.siteSettings", true);
 user_pref("privacy.clearOnShutdown.openWindows", true);
+user_pref("privacy.clearOnShutdown.cookies", false);
 
 // Browser cleanup wizard 
 // [NOTE] This dialog window is invoked by hotkeys - Ctrl + Shift + Del.
@@ -422,7 +422,7 @@ user_pref("general.smoothScroll", false);
 //		1 = Загрузки
 //		2 = Последняя используемая папка
 user_pref("browser.download.folderList", 1);
-user_pref("browser.download.useDownloadDir", true);
+user_pref("browser.download.useDownloadDir", false);
 
 // Adding downloads to the list of recent system documents
 // Добавление загрузок в список последних документов системы

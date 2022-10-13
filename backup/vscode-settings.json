@@ -1,8 +1,6 @@
 {
     "workbench.colorTheme": "Visual Studio Light",
     "workbench.iconTheme": "vs-minimal",
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false,
     "workbench.enableExperiments": false,
     "editor.wordWrap": "on",
     "typescript.surveys.enabled": false,
@@ -13,5 +11,6 @@
     "editor.minimap.enabled": false,
     "workbench.welcomePage.walkthroughs.openOnInstall": false,
     "workbench.tips.enabled": false,
-    "workbench.startupEditor": "none"
+    "workbench.startupEditor": "none",
+    "telemetry.telemetryLevel": "off"
 }
