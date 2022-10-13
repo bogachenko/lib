@@ -104,13 +104,13 @@ user_pref("browser.search.suggest.enabled.private", true);
 
 // Preloading autocomplete URLs (when you enter in the address bar)
 // Предварительная загрузка URL-адресов автозаполнения (при вводе в адресную строку)
-user_pref("browser.urlbar.speculativeConnect.enabled", false);
+//user_pref("browser.urlbar.speculativeConnect.enabled", false);
 
 // Suggestion types in the address bar
 // Типы предложений в адресной строке
 user_pref("browser.urlbar.suggest.history", false);
 user_pref("browser.urlbar.suggest.openpage", false);
-user_pref("browser.urlbar.suggest.searches", false);
+//user_pref("browser.urlbar.suggest.searches", false);
 user_pref("browser.urlbar.suggest.engines", false);
 user_pref("browser.urlbar.suggest.topsites", false);
 user_pref("browser.urlbar.showSearchSuggestionsFirst", false);
@@ -140,7 +140,7 @@ user_pref("privacy.clearOnShutdown.cookies", false);
 // Мастер очистки браузера
 // [ЗАМЕТКА] Это диалоговое окно вызывается горячими клавишами - Ctrl + Shift + Del.
 user_pref("privacy.cpd.cache", true);
-user_pref("privacy.cpd.cookies", true);
+user_pref("privacy.cpd.cookies", false);
 user_pref("privacy.cpd.downloads", true);
 user_pref("privacy.cpd.formdata", true);
 user_pref("privacy.cpd.history", true);
@@ -349,7 +349,8 @@ user_pref("toolkit.winRegisterApplicationRestart", false);
 //		1 = Block third-party cookies
 //		2 = Block all cookies
 //		3 = Block cookies from sites not visited
-//      4 = Cross-site and social media trackers
+//      4 = Block cross-site tracking cookies
+//      5 = Block cross-site tracking cookies and isolate other cross-site tracking cookies
 // Куки
 // [ЗАМЕТКА] Cookie - фрагмент данных (небольшой текстовый файл), отправляемый сервером и сохраняющийся в браузере. Когда пользователь вновь загружает ту же самую страницу, браузер отсылает cookie назад на сервер и уведомляет его о предыдущей активности. Cookie хранят такую информацию, как пароли, логины, сеансовые данные, данные кредитных карт, электронные почтовые адреса и записывают различную пользовательскую активность и прочую статистику.
 // [ВНИМАНИЕ] Cookie активно используются многими веб-ресурсами в процессе контроля и слежки за пользовательской активностью. Похищение и анализ cookie является потенциально опасной и серьезной атакой, приводящей к глобальным утечкам пользовательских данных и их использованию.
@@ -357,7 +358,8 @@ user_pref("toolkit.winRegisterApplicationRestart", false);
 //		1 = Блокировать стороннии куки
 //		2 = Блокировать все куки
 //		3 = Блокировать куки с не посещенных сайтов
-//      4 = Трекеры для межсайтовых и социальных сетей
+//      4 = Блокировать межсайтовые отслеживающие куки
+//      5 = Блокировать межсайтовые отслеживающие куки, а также изолировать другие межсайтовые отслеживающие куки
 user_pref("network.cookie.cookieBehavior", 0);
 
 // Сookie lifetime policy
