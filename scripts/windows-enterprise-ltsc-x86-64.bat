@@ -129,8 +129,6 @@ rem Delivery optimization
 reg add "HKLM\System\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
 rem SysMain Service
 reg add "HKLM\System\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
-rem Eventlog Service
-reg add "HKLM\System\CurrentControlSet\Services\EventLog" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
 rem Custom DVR service for gaming and streaming
 reg add "HKLM\System\CurrentControlSet\Services\BcastDVRUserService " /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
 
