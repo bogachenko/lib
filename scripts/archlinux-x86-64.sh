@@ -16,9 +16,9 @@ sudo sed -i 's/#Color/Color/' /etc/pacman.conf
 sudo pacman -Syyuu
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python2 python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic
-sudo pacman -S --needed --noconfirm git i3 dmenu sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg privoxy alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils nyx speedtest-cli libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans gvfs gvfs-nfs gvfs-mtp	pcmanfm-qt papirus-icon-theme ntp
-sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko
+sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic
+sudo pacman -S --needed --noconfirm git i3 rofi sddm vim zsh jack2 wget tor gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg privoxy alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans gvfs gvfs-nfs gvfs-mtp ntp
+sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko nyx speedtest-cli pcmanfm-qt papirus-icon-theme
 
 # Installing the Arch User Repository (AUR).
 cd /tmp
@@ -37,7 +37,7 @@ chmod +x strap.sh
 sudo ./strap.sh
 
 # Installing main packages.
-yaourt -S --needed --noconfirm ttf-ms-fonts tor-browser
+yaourt -S --needed --noconfirm ttf-ms-fonts tor-browser python2
 
 # Checking and installing updates.
 yaourt -Syua
