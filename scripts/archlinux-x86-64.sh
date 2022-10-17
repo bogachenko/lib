@@ -14,7 +14,7 @@ sudo pacman -Syyuu
 
 # Installing main packages.
 sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic
-sudo pacman -S --needed --noconfirm git i3 xdg-user-dirs dmenu rofi sddm vim zsh jack2 wget gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans gvfs gvfs-nfs gvfs-mtp ntp
+sudo pacman -S --needed --noconfirm git i3 xdg-user-dirs dmenu rofi sddm vim zsh jack2 wget gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans gvfs gvfs-nfs gvfs-mtp ntp pwgen
 sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko nyx speedtest-cli pcmanfm-qt papirus-icon-theme tor privoxy
 
 # Installing the Arch User Repository (AUR).
@@ -118,7 +118,7 @@ EOF
 
 # Subpixel hinting mode.
 cat > /etc/profile.d/freetype2.sh <<EOF
-export FREETYPE_PROPERTIES="truetype:interpreter-version=38"
+export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 EOF
 
 # Настройка Fontconfig.
@@ -226,6 +226,7 @@ alias updXres='xrdb -merge ~/.Xresources'
 alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
 alias cl='clear'
+alias passgen='pwgen 20 5 -y -s -n -v -c -1'
 
 EOF
 sudo cat > /root/.zshrc <<EOF
@@ -239,6 +240,7 @@ alias ls='ls -la'
 alias unlockpac='rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
 alias cl='clear'
+alias passgen='pwgen 20 5 -y -s -n -v -c -1'
 
 EOF
 
