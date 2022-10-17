@@ -14,8 +14,8 @@ sudo pacman -Syyuu
 
 # Installing main packages.
 sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic
-sudo pacman -S --needed --noconfirm git i3 xdg-user-dirs dmenu rofi sddm vim zsh jack2 wget gtk2 gtk3 gtk4 rxvt-unicode weston wayland php ffmpeg alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-ubuntu-font-family ttf-dejavu ttf-liberation ttf-carlito ttf-caladea ttf-croscore ttf-opensans gvfs gvfs-nfs gvfs-mtp ntp pwgen
-sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko nyx speedtest-cli pcmanfm-qt papirus-icon-theme tor privoxy
+sudo pacman -S --needed --noconfirm git sddm vim zsh jack2 wget weston wayland php ffmpeg alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ntp pwgen plasma konsole	
+sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko nyx speedtest-cli tor privoxy
 
 # Installing the Arch User Repository (AUR).
 cd /tmp
@@ -61,7 +61,7 @@ case $norleg in
 Normal )
 sudo pacman -S --needed --noconfirm nvidia-dkms libglvnd
 sudo pacman -S --needed --noconfirm lib32-nvidia-utils lib32-opencl-nvidia lib32-libglvnd
-sudo pacman -S --needed --noconfirm virtualgl lib32-virtualgl libvdpau lib32-libvdpau
+sudo pacman -S --needed --noconfirm virtualgl lib32-virtualgl libvdpau lib32-libvdpau opencl-nvidia lib32-opencl-nvidia
 ;;
 Legacy )
 yaourt -S nvidia-390xx-dkms libglvnd
@@ -76,7 +76,6 @@ if [[ -n "$intel" ]]; then
 sudo pacman -S --needed --noconfirm xf86-video-intel intel-ucode libva libva-utils libva-intel-driver vulkan-intel iucode-tool
 sudo pacman -S --needed --noconfirm lib32-libva lib32-libva-intel-driver lib32-vulkan-intel
 sudo modprobe cpuid
-sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo cat > /etc/X11/xorg.conf.d/20-intel.conf <<EOF
 Section "Device"
    Identifier  "Intel Graphics"
@@ -96,10 +95,7 @@ sudo sed -i -e "s/Driver=/Driver=nvidia/g" /etc/bumblebee/bumblebee.conf
 sudo sed -i -e "s/Bridge=auto/Bridge=virtualgl/g" /etc/bumblebee/bumblebee.conf
 sudo sed -i -e "s/MODULES=()/MODULES=(i915 bbswitch nvidia nvidia_modeset nvidia_uvm nvidia_drm)/g" /etc/mkinitcpio.conf
 sudo mkinitcpio -p linux
-sudo sed -i -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\"/GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet rcutree.rcu_idle_gp_delay=1 nvidia-drm.modeset=1 i915.modeset=1\"/g" /etc/default/grub
-sudo sed -i -e "s/GRUB_TIMEOUT=5\"/GRUB_TIMEOUT=0\"/g" /etc/default/grub
 sudo sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumblebee/xorg.conf.nvidia
-sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
 # Entering superuser mode.
