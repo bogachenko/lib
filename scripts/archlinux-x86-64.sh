@@ -14,7 +14,7 @@ sudo pacman -Syyuu
 
 # Installing main packages.
 sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic
-sudo pacman -S --needed --noconfirm git sddm vim zsh jack2 wget weston wayland php ffmpeg alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ntp pwgen plasma konsole	
+sudo pacman -S --needed --noconfirm git sddm vim jack2 wget weston wayland php ffmpeg alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ntp pwgen plasma konsole dolphin phonon-qt5-vlc wireplumber
 sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko nyx speedtest-cli tor privoxy
 
 # Installing the Arch User Repository (AUR).
@@ -105,13 +105,6 @@ su
 chsh -s /bin/zsh $USERNAME
 chsh -s /bin/zsh root
 
-# Automatic login to the system.
-cat > /etc/sddm.conf <<EOF
-[Autologin]
-User=$USERNAME
-Session=i3.desktop
-EOF
-
 # Subpixel hinting mode.
 cat > /etc/profile.d/freetype2.sh <<EOF
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
@@ -165,6 +158,7 @@ sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
 sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
+sudo systemctl enable NetworkManager.service && sudo systemctl start NetworkManager.service
 sudo systemctl enable sddm.service
 pulseaudio -k && pulseaudio --start
 
@@ -176,9 +170,6 @@ curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/
 mv /tmp/user.js ~/.thunderbird/$USERNAME/user.js
 curl -o user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/torbrowser-user.js
 mv /tmp/user.js ~/.local/opt/tor-browser/app/Browser/TorBrowser/Data/Browser/profile.default/user.js
-
-# Create user directories.
-xdg-user-dirs-update
 
 # Xresources file configuration.
 cat > ~/.Xresources <<EOF
