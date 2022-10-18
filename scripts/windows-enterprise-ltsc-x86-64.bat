@@ -450,8 +450,10 @@ rem Do not keep history of recently opened documents
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /t REG_DWORD /d "0" /f > nul 2>&1
 rem Show a list of frequent programs from the beginning
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoStartMenuMFUprogramsList" /t REG_DWORD /d "0" /f > nul 2>&1
-rem the Getting Started welcome screen at logon
+rem Getting Started welcome screen at logon
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoWelcomeScreen" /t REG_DWORD /d "0" /f > nul 2>&1
+rem Show recently added apps in start menu
+reg add "HKLM\Software\Policies\Microsoft\Windows\Explorer" /v "HideRecentlyAddedApps" /t REG_DWORD /d "1" /f > nul 2>&1
 
 rem Hibernation
 powercfg /hibernate off
