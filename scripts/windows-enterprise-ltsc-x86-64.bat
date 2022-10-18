@@ -454,6 +454,25 @@ rem Getting Started welcome screen at logon
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoWelcomeScreen" /t REG_DWORD /d "0" /f > nul 2>&1
 rem Show recently added apps in start menu
 reg add "HKLM\Software\Policies\Microsoft\Windows\Explorer" /v "HideRecentlyAddedApps" /t REG_DWORD /d "1" /f > nul 2>&1
+rem OneDrive advertising that shows up in file explorer
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d "1" /f > nul 2>&1
+rem Turn off the caching of thumbnails in hidden thumbs.db files
+reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableThumbsDBOnNetworkFolders" /t REG_DWORD /d "1" /f > nul 2>&1
+rem Display color of elements in window titles
+reg add "HKCU\Software\Microsoft\Windows\DWM" /v "ColorPrevalence" /t REG_DWORD /d "1" /f > nul 2>&1
+rem Active Help
+reg add "HKLM\Software\Policies\Microsoft\Assistance\Client\1.0" /v " NoActiveHelp" /t REG_DWORD /d "1" /f > nul 2>&1
+reg add "HKCU\Software\Policies\Microsoft\Assistance\Client\1.0" /v "NoImplicitFeedback" /t REG_DWORD /d "1" /f > nul 2>&1
+reg add "HKCU\Software\Policies\Microsoft\Assistance\Client\1.0" /v "NoExplicitFeedback" /t REG_DWORD /d "1" /f > nul 2>&1
+reg delete "HKCU\Software\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}" /f > nul 2>&1
+reg add "HKCU\Software\Classes\AppID\{8cec58ae-07a1-11d9-b15e-000d56bfe6ee}" /v "RunAs" /t REG_SZ /d "" /f > nul 2>&1
+rem Publish to WEB in the task list for files
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoPublishingWizard" /t REG_DWORD /d "1" /f > nul 2>&1
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoPublishingWizard" /t REG_DWORD /d "1" /f > nul 2>&1
+rem Search Companion Files Update
+reg add "HKLM\Software\Policies\Microsoft\SearchCompanion" /v "DisableContentFileUpdates" /t REG_DWORD /d "1" /f > nul 2>&1
+rem Background Image Quality
+reg add "HKCU\Control Panel\Desktop" /v "JPEGImportQuality" /t REG_DWORD /d "100" /f > nul 2>&1
 
 rem Hibernation
 powercfg /hibernate off
@@ -465,6 +484,11 @@ rem Boot optimization
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t REG_DWORD /d "0" /f > nul 2>&1
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t REG_DWORD /d "0" /f > nul 2>&1
 reg add "HKLM\System\CurrentControlSet\Control\WMI\AutoLogger\ReadyBoot" /v "Start" /t REG_DWORD /d "0" /f > nul 2>&1
+
+rem Windows Activation
+slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX > nul 2>&1
+slmgr /skms kms.digiboy.ir > nul 2>&1
+slmgr /ato > nul 2>&1
 
 rem Countdown
 timeout 5
