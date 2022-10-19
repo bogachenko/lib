@@ -15,37 +15,6 @@ sudo pacman -Syyuu
 # Installing main packages.
 sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic
 sudo pacman -S --needed --noconfirm git sddm vim jack2 wget weston wayland php ffmpeg alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ntp pwgen plasma konsole dolphin phonon-qt5-vlc wireplumber
-sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko nyx speedtest-cli tor privoxy
-
-# Installing the Arch User Repository (AUR).
-cd /tmp
-git clone https://aur.archlinux.org/package-query.git
-git clone https://aur.archlinux.org/yaourt.git
-cd package-query/
-makepkg -si
-cd ..
-cd yaourt/
-makepkg -si
-
-# Installing the BlackArch repository.
-cd /tmp
-curl -O https://blackarch.org/strap.sh
-chmod +x strap.sh
-sudo ./strap.sh
-
-# Installing main packages.
-yaourt -S --needed --noconfirm ttf-ms-fonts tor-browser
-
-# Checking and installing updates.
-yaourt -Syua
-
-# Time.
-sudo timedatectl set-timezone Europe/Moscow
-sudo sed -i -e "s/server 0.arch.pool.ntp.org/server 0.ru.pool.ntp.org/g" /etc/ntp.conf
-sudo sed -i -e "s/server 1.arch.pool.ntp.org/server 1.ru.pool.ntp.org/g" /etc/ntp.conf
-sudo sed -i -e "s/server 2.arch.pool.ntp.org/server 2.ru.pool.ntp.org/g" /etc/ntp.conf
-sudo sed -i -e "s/server 3.arch.pool.ntp.org/server 3.ru.pool.ntp.org/g" /etc/ntp.conf
-
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
 intel=$(lspci | grep -e VGA -e 3D | grep 'Intel' 2> /dev/null || echo '')
@@ -96,22 +65,50 @@ sudo sed -i -e "s/Bridge=auto/Bridge=virtualgl/g" /etc/bumblebee/bumblebee.conf
 sudo sed -i -e "s/MODULES=()/MODULES=(i915 bbswitch nvidia nvidia_modeset nvidia_uvm nvidia_drm)/g" /etc/mkinitcpio.conf
 sudo mkinitcpio -p linux
 sudo sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumblebee/xorg.conf.nvidia
+sudo bootctl update
 fi
+sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko nyx speedtest-cli tor privoxy
 
-# Entering superuser mode.
-su
+# Installing the Arch User Repository.
+cd /tmp
+git clone https://aur.archlinux.org/package-query.git
+git clone https://aur.archlinux.org/yaourt.git
+cd package-query/
+makepkg -si
+cd ..
+cd yaourt/
+makepkg -si
+
+# Installing the BlackArch repository.
+cd /tmp
+curl -O https://blackarch.org/strap.sh
+chmod +x strap.sh
+sudo ./strap.sh
+
+# Installing main packages.
+yaourt -S --needed --noconfirm ttf-ms-fonts tor-browser
+
+# Checking and installing updates.
+yaourt -Syua
+
+# Time.
+sudo timedatectl set-timezone Europe/Moscow
+sudo sed -i -e "s/server 0.arch.pool.ntp.org/server 0.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 1.arch.pool.ntp.org/server 1.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 2.arch.pool.ntp.org/server 2.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 3.arch.pool.ntp.org/server 3.ru.pool.ntp.org/g" /etc/ntp.conf
 
 # Change the shell.
-chsh -s /bin/zsh $USERNAME
-chsh -s /bin/zsh root
+sudo chsh -s /bin/zsh $USERNAME
+sudo chsh -s /bin/zsh root
 
 # Subpixel hinting mode.
-cat > /etc/profile.d/freetype2.sh <<EOF
+sudo sh -c "cat > /etc/profile.d/freetype2.sh" <<EOF
 export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
 EOF
 
 # Настройка Fontconfig.
-cat > /etc/fonts/local.conf <<EOF
+sudo sh -c "cat > /etc/fonts/local.conf" <<EOF
 <?xml version='1.0'?>
 <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
 <fontconfig>
@@ -142,12 +139,9 @@ cat > /etc/fonts/local.conf <<EOF
 EOF
 
 # Convert SOCKS to HTTP proxy via Privoxy.
-echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
-echo "forward-socks4 / localhost:9050 ." >> /etc/privoxy/config
-echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
-
-# Exiting superuser mode.
-exit
+sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"
+sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config"
+sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config"
 
 # Fill in the information for GECOS.
 sudo chfn $USERNAME
@@ -216,7 +210,7 @@ alias cl='clear'
 alias passgen='pwgen 20 5 -y -s -n -v -c -1'
 
 EOF
-sudo cat > /root/.zshrc <<EOF
+sudo sh -c "cat > /root/.zshrc" <<EOF
 PROMPT="%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# "
 
 export BROWSER="firefox"
