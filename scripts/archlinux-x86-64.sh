@@ -45,7 +45,8 @@ if [[ -n "$intel" ]]; then
 sudo pacman -S --needed --noconfirm xf86-video-intel intel-ucode libva libva-utils libva-intel-driver vulkan-intel iucode-tool
 sudo pacman -S --needed --noconfirm lib32-libva lib32-libva-intel-driver lib32-vulkan-intel
 sudo modprobe cpuid
-sudo cat > /etc/X11/xorg.conf.d/20-intel.conf <<EOF
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo sh -c "cat > /etc/X11/xorg.conf.d/20-intel.conf" <<EOF
 Section "Device"
    Identifier  "Intel Graphics"
    Driver      "intel"
@@ -57,15 +58,17 @@ if [[ -n "$nvidia" && -n "$intel" ]]; then
 sudo pacman -S --needed --noconfirm bumblebee bbswitch primus lib32-primus
 sudo systemctl enable bumblebeed.service
 sudo gpasswd -a $USERNAME bumblebee
-sudo cat > /etc/modprobe.d/killnouveau.conf <<EOF
+sudo sh -c "cat > /etc/modprobe.d/killnouveau.conf" <<EOF
 blacklist nouveau
 EOF
 sudo sed -i -e "s/Driver=/Driver=nvidia/g" /etc/bumblebee/bumblebee.conf
 sudo sed -i -e "s/Bridge=auto/Bridge=virtualgl/g" /etc/bumblebee/bumblebee.conf
 sudo sed -i -e "s/MODULES=()/MODULES=(i915 bbswitch nvidia nvidia_modeset nvidia_uvm nvidia_drm)/g" /etc/mkinitcpio.conf
 sudo mkinitcpio -p linux
+sudo sed -i -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet\"/GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet rcutree.rcu_idle_gp_delay=1 nvidia-drm.modeset=1 i915.modeset=1\"/g" /etc/default/grub
+sudo sed -i -e "s/GRUB_TIMEOUT=5\"/GRUB_TIMEOUT=0\"/g" /etc/default/grub
 sudo sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumblebee/xorg.conf.nvidia
-sudo bootctl update
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko nyx speedtest-cli tor privoxy
 
