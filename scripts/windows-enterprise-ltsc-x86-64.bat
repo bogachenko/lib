@@ -193,8 +193,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandler
 
 echo Update And Security Settings > nul 2>&1
 rem Delivery Optimization
-reg add "HKU\S-1-5-20\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings" /v "DownloadMode" /t REG_DWORD /d "0" /f > nul 2>&1
-reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DownloadMode" /t REG_DWORD /d "0" /f > nul 2>&1
+reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DoDownLoadMode" /t REG_DWORD /d "0" /f > nul 2>&1
 rem Real-time protection
 powershell.exe -command "Set-MpPreference -DisableRealtimeMonitoring 1"
 powershell.exe -command "Set-MpPreference -DisableScanningMappedNetworkDrivesForFullScan 1"
@@ -415,6 +414,9 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Error Reporting" /v "A
 rem Windows Customer Experience Improvement Program
 reg add "HKLM\Software\Policies\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t REG_DWORD /d "0" /f > nul 2>&1
 reg add "HKLM\Software\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t REG_DWORD /d "0" /f > nul 2>&1
+rem Insider Preview builds
+reg add "HKLM\Software\Policies\Microsoft\Windows\PreviewBuilds" /v "AllowBuildPreview" /t REG_DWORD /d "0" /f > nul 2>&1
+reg add "HKLM\Software\Microsoft\WindowsSelfHost\UI\Visibility" /v "HideInsiderPage" /t REG_DWORD /d "1" /f > nul 2>&1
 
 echo Windows Fine-Tuning > nul 2>&1
 rem Online tips

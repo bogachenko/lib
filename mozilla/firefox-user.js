@@ -698,7 +698,3 @@ user_pref("dom.targetBlankNoOpener.enabled", false);
 //		TRUE = Скрывать этот диалог
 //		FALSE = Показывать этот диалог
 user_pref("dom.disable_beforeunload", true);
-
-// DNS over HTTPS
-user_pref("network.trr.mode", 2);
-user_pref("network.trr.uri", "https://dns.google/dns-query");
