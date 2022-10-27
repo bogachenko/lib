@@ -31,7 +31,7 @@ rd "%APPDATA%\Mozilla\SystemExtensionsDev" /s /q
 rd "%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%username%" /s /q
 rd "%ProgramData%\Mozilla" /s /q
 
-rem MS Search
+rem Windows Search
 del "%ProgramData%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q
 
 rem DirectX
@@ -76,7 +76,6 @@ del "%APPDATA%\Opera Software\Opera Stable\Reporting and NEL" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Reporting and NEL-journal" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Shortcuts" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Shortcuts-journal" /s /q
-del "%APPDATA%\Opera Software\Opera Stable\Visited Links" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Visited Links" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Web Data" /s /q
 del "%APPDATA%\Opera Software\Opera Stable\Web Data-journal" /s /q
@@ -141,6 +140,23 @@ rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Site Characteristics Databas
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\VideoDecodeStats" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\GrShaderCache" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\ShaderCache" /s /q
+
+rem Chromium
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Favicons" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Favicons-journal" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\History" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\History-journal" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Web Data" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Web Data-journal" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Shortcuts" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Shortcuts-journal" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics-*" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\heavy_ad_intervention_opt_out.db" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\heavy_ad_intervention_opt_out.db-journal" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Network Action Predictor" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Network Action Predictor-journal" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Visited Links" /s /q
 
 rem AdGuard VPN
 rd "%ProgramData%\AdguardVpn\Logs" /s /q
