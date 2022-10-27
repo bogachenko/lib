@@ -27,39 +27,36 @@ rem Microsoft SmartScreen
 taskkill /f > nul 2>&1 /im smartscreen.exe > nul 2>&1
 
 echo Windows Task Scheduler > nul 2>&1
-rem Microsoft Compatibility Telemetry
+rem Microsoft Compatibility Telemetry Tasks
 schtasks /change /tn "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable > nul 2>&1
 schtasks /change /tn "\Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable > nul 2>&1
 schtasks /change /tn "\Microsoft\Windows\Application Experience\StartupAppTask" /disable > nul 2>&1
-rem Windows Defender
+rem Windows Defender Tasks
 schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /disable > nul 2>&1
 schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /disable > nul 2>&1
 schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable > nul 2>&1
 schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable > nul 2>&1
-rem Windows Exploit Guard Defender
+rem Windows Exploit Guard Defender Task
 schtasks /change /tn "\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable > nul 2>&1
-rem Collecting and uploading SQM data
-schtasks /change /tn "\Microsoft\Windows\Autochk\Proxy" /disable > nul 2>&1
-rem Windows Disk Diagnostics
-schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable > nul 2>&1
-schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /disable > nul 2>&1
-rem Software Quality Improvement Program
-schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable > nul 2>&1
-schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver" /disable > nul 2>&1
-rem Disk Footprint
+rem Disk Fingerprint Tasks
 schtasks /change /tn "\Microsoft\Windows\DiskFootprint\Diagnostics" /disable > nul 2>&1
 schtasks /change /tn "\Microsoft\Windows\DiskFootprint\StorageSense" /disable > nul 2>&1
-rem Power Efficiency Diagnostics
+rem System Analysis and Diagnostics Task
 schtasks /change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable > nul 2>&1
-rem Family Safety
+rem Family Safety Tasks
 schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyMonitor" /disable > nul 2>&1
 schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefreshTask" /disable > nul 2>&1
-rem System Performance Diagnostics
+rem System Performance Diagnostics Task
 schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable > nul 2>&1
-rem Backup Location
+rem File Usage Statistics Collection Task
 schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)" /disable > nul 2>&1
-rem Sqm Tasks
+rem Customer Experience Improvement Program Task
 schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Windows\Autochk\Proxy" /disable > nul 2>&1
 rem Network Information Collector Task
 schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable > nul 2>&1
 rem Automatic Scanning And Troubleshooting Tasks
@@ -123,9 +120,9 @@ rem SSDP Discovery Service
 reg add "HKLM\System\CurrentControlSet\Services\SSDPSRV" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
 rem Geolocation Service
 reg add "HKLM\System\CurrentControlSet\Services\lfsvc" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
-rem Downloaded Maps Manager
+rem Downloaded Maps Manager Service
 reg add "HKLM\System\CurrentControlSet\Services\MapsBroker" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
-rem Delivery optimization
+rem Delivery optimization Service
 reg add "HKLM\System\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
 rem SysMain Service
 reg add "HKLM\System\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
