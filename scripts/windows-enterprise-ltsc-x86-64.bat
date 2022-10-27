@@ -475,6 +475,39 @@ rem Search Companion Files Update
 reg add "HKLM\Software\Policies\Microsoft\SearchCompanion" /v "DisableContentFileUpdates" /t REG_DWORD /d "1" /f > nul 2>&1
 rem Background Image Quality
 reg add "HKCU\Control Panel\Desktop" /v "JPEGImportQuality" /t REG_DWORD /d "100" /f > nul 2>&1
+rem Hide Bitlocker options from context menu and Explorer
+reg add "HKLM\Software\Classes\Drive\shell\change-passphrase" /v "LegacyDisable" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\Drive\shell\change-pin" /v "LegacyDisable" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\Drive\shell\encrypt-bde-elev" /v "LegacyDisable" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\Drive\shell\encrypt-bde" /v "LegacyDisable" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\Drive\shell\manage-bde" /v "LegacyDisable" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\Drive\shell\resume-bde" /v "LegacyDisable" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\Drive\shell\resume-bde-elev" /v "LegacyDisable" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\Drive\shell\unlock-bde" /v "LegacyDisable" /t REG_SZ /d "" /f > nul 2>&1
+rem Hide 3D Print and 3D Edit items from the context menu
+reg add "HKLM\Software\Classes\SystemFileAssociations\.3ds\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.3mf\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.3mf\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.bmp\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.dae\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.dxf\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.fbx\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.gif\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.glb\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.jfif\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.jpe\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.jpeg\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.jpg\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.obj\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.obj\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.ply\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.ply\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.png\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.stl\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.stl\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.tif\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.tiff\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
+reg add "HKLM\Software\Classes\SystemFileAssociations\.wrl\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
 
 rem Hibernation
 powercfg /hibernate off
