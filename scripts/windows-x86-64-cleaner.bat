@@ -30,6 +30,7 @@ rd "%APPDATA%\Mozilla\Firefox\Profiles\%username%\personality-provider" /s /q
 rd "%APPDATA%\Mozilla\SystemExtensionsDev" /s /q
 rd "%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%username%" /s /q
 rd "%ProgramData%\Mozilla" /s /q
+rd "%ProgramData%\Mozilla-*" /s /q
 
 rem Windows Search
 del "%ProgramData%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q
@@ -100,7 +101,7 @@ rd "%APPDATA%\Opera Software\Opera Stable\StatsSessions" /s /q
 rd "%LOCALAPPDATA%\Opera Software\Opera Stable" /s /q
 
 rem Edge Browser
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\BrowserMetrics-spare.pma" /s /q
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\BrowserMetrics-*" /s /q
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\CrashpadMetrics-active.pma" /s /q
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Favicons" /s /q
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Favicons-journal" /s /q
@@ -142,21 +143,42 @@ rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\GrShaderCache" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\ShaderCache" /s /q
 
 rem Chromium
+del "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics-*" /s /q
 del "%LOCALAPPDATA%\Chromium\User Data\Default\Favicons" /s /q
 del "%LOCALAPPDATA%\Chromium\User Data\Default\Favicons-journal" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\History" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\History-journal" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Web Data" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Web Data-journal" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Shortcuts" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Shortcuts-journal" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics-*" /s /q
 del "%LOCALAPPDATA%\Chromium\User Data\Default\heavy_ad_intervention_opt_out.db" /s /q
 del "%LOCALAPPDATA%\Chromium\User Data\Default\heavy_ad_intervention_opt_out.db-journal" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\History" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\History-journal" /s /q
 del "%LOCALAPPDATA%\Chromium\User Data\Default\Network Action Predictor" /s /q
 del "%LOCALAPPDATA%\Chromium\User Data\Default\Network Action Predictor-journal" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Shortcuts" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Shortcuts-journal" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Top Sites" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Top Sites-journal" /s /q
 del "%LOCALAPPDATA%\Chromium\User Data\Default\Visited Links" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Web Data" /s /q
+del "%LOCALAPPDATA%\Chromium\User Data\Default\Web Data-journal" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\Cache" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\commerce_subscription_db" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\coupon_db" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\databases" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\DawnCache" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\Feature Engagement Tracker" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\GPUCache" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\IndexedDB" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\Local Storage" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\Network" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\optimization_guide_hint_cache_store" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\optimization_guide_model_metadata_store" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\Platform Notifications" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\Sessions" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\Session Storage" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\shared_proto_db" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\Site Characteristics Database" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\VideoDecodeStats" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\WebrtcVideoStats" /s /q
 
 rem AdGuard VPN
 rd "%ProgramData%\AdguardVpn\Logs" /s /q
