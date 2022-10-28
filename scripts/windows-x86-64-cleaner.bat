@@ -41,6 +41,9 @@ del "%ProgramData%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q
 rem DirectX
 rd "%LOCALAPPDATA%\D3DSCache" /s /q
 
+rem Windows Defender
+rd "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Resource" /s /q
+
 rem Spotify
 del "%LOCALAPPDATA%\Spotify\Browser\*.log" /s /q
 rd "%LOCALAPPDATA%\Spotify\Browser\Cache" /s /q
@@ -182,6 +185,7 @@ rd "%LOCALAPPDATA%\Chromium\User Data\Default\shared_proto_db" /s /q
 rd "%LOCALAPPDATA%\Chromium\User Data\Default\Site Characteristics Database" /s /q
 rd "%LOCALAPPDATA%\Chromium\User Data\Default\VideoDecodeStats" /s /q
 rd "%LOCALAPPDATA%\Chromium\User Data\Default\WebrtcVideoStats" /s /q
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\Extension State" /s /q
 
 rem AdGuard VPN
 rd "%ProgramData%\AdguardVpn\Logs" /s /q
@@ -194,6 +198,12 @@ del "%WINDIR%\*.log" /s /q
 del "%WINDIR%\Temp\" /s /q
 del "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" /s /q
 rd "%ProgramData%\Microsoft\Diagnosis" /s /q
+rd "%WINDIR%\Logs" /s /q
+del "%WINDIR%\System32\sru\SRU*.*" /s /q
+rd "%LOCALAPPDATA%\Temp" /s /q
+
+rem Notepad Plus Plus
+del "%APPDATA%\notepad++\session.xml" /s /q
 
 rem Countdown
 timeout 5
