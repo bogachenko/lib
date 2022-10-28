@@ -15,9 +15,6 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: This script is provided "AS IS" without warranty of any kind, either expressed or implied.
 :: Use it at your own risk! The author is not responsible for any claims for damage that may arise from the use of this script.
 
-rem Flush DNS Cache
-ipconfig /flushdns
-
 echo Stop processes > nul 2>&1
 rem Windows Explorer
 taskkill /f > nul 2>&1 /im explorer.exe > nul 2>&1
@@ -451,7 +448,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "S
 rem Thumbnail Caching In Hidden Files
 reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableThumbsDBOnNetworkFolders" /t REG_DWORD /d "1" /f > nul 2>&1
 rem Colors Of Elements In Window Titles
-reg add "HKCU\Software\Microsoft\Windows\DWM" /v "ColorPrevalence" /t REG_DWORD /d "1" /f > nul 2>&1
+reg add "HKCU\Software\Microsoft\Windows\DWM" /v "ColorPrevalence" /t REG_DWORD /d "0" /f > nul 2>&1
 rem Active Help
 reg add "HKCU\Software\Classes\AppID\{8cec58ae-07a1-11d9-b15e-000d56bfe6ee}" /v "RunAs" /t REG_SZ /d "" /f > nul 2>&1
 reg add "HKCU\Software\Policies\Microsoft\Assistance\Client\1.0" /v "NoExplicitFeedback" /t REG_DWORD /d "1" /f > nul 2>&1
