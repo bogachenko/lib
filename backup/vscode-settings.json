@@ -6,11 +6,11 @@
     "typescript.surveys.enabled": false,
     "typescript.suggestionActions.enabled": false,
     "editor.fontSize": 13,
-    "editor.cursorStyle": "block",
     "editor.cursorSmoothCaretAnimation": true,
     "editor.minimap.enabled": false,
     "workbench.welcomePage.walkthroughs.openOnInstall": false,
     "workbench.tips.enabled": false,
     "workbench.startupEditor": "none",
-    "telemetry.telemetryLevel": "off"
+    "telemetry.telemetryLevel": "off",
+    "editor.mouseWheelZoom": true
 }
