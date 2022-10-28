@@ -12,6 +12,9 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: This script is provided "AS IS" without warranty of any kind, either expressed or implied.
 :: Use it at your own risk! The author is not responsible for any claims for damage that may arise from the use of this script.
 
+rem Flush DNS Cache
+ipconfig /flushdns
+
 rem Firefox Browser
 del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\favicons.sqlite" /s /q
 del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\favicons.sqlite-shm" /s /q
@@ -20,6 +23,7 @@ del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\formhistory.sqlite" /s /q
 del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\places.sqlite" /s /q
 del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\sessionCheckpoints.json" /s /q
 del "%APPDATA%\Mozilla\Firefox\Profiles\%username%\SiteSecurityServiceState.txt" /s /q
+rd "%APPDATA%\Mozilla\Firefox\Background Tasks Profiles" /s /q
 rd "%APPDATA%\Mozilla\Extensions" /s /q
 rd "%APPDATA%\Mozilla\Firefox\Crash Reports" /s /q
 rd "%APPDATA%\Mozilla\Firefox\Pending Pings" /s /q
@@ -30,7 +34,6 @@ rd "%APPDATA%\Mozilla\Firefox\Profiles\%username%\personality-provider" /s /q
 rd "%APPDATA%\Mozilla\SystemExtensionsDev" /s /q
 rd "%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%username%" /s /q
 rd "%ProgramData%\Mozilla" /s /q
-rd "%ProgramData%\Mozilla-*" /s /q
 
 rem Windows Search
 del "%ProgramData%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q
@@ -186,8 +189,11 @@ rd "%ProgramData%\AdguardVpn\Logs" /s /q
 rem Overwolf
 rd "%ProgramData%\Overwolf\Log" /s /q
 
-:: Windows
+rem Windows
 del "%WINDIR%\*.log" /s /q
 del "%WINDIR%\Temp\" /s /q
 del "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" /s /q
 rd "%ProgramData%\Microsoft\Diagnosis" /s /q
+
+rem Countdown
+timeout 5
