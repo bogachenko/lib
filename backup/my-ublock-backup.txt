@@ -1,22 +1,20 @@
 {
-  "timeStamp": 1627802131225,
-  "version": "1.37.2",
+  "timeStamp": 1670774070659,
+  "version": "1.45.2",
   "userSettings": {
     "advancedUserEnabled": true,
-    "alwaysDetachLogger": false,
-    "externalLists": "https://easylist-downloads.adblockplus.org/bitblock.txt\nhttps://easylist-downloads.adblockplus.org/cntblock.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoFL.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt\nhttps://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
+    "uiTheme": "light",
+    "externalLists": "https://easylist-downloads.adblockplus.org/bitblock.txt\nhttps://easylist-downloads.adblockplus.org/cntblock.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt\nhttps://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
     "firewallPaneMinimized": false,
-    "ignoreGenericCosmeticFilters": true,
     "importedLists": [
       "https://easylist-downloads.adblockplus.org/bitblock.txt",
       "https://easylist-downloads.adblockplus.org/cntblock.txt",
-      "https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoFL.txt",
+      "https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt",
       "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
       "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt"
     ],
     "popupPanelSections": 63,
-    "tooltipsDisabled": true,
-    "webrtcIPAddressHidden": true
+    "tooltipsDisabled": true
   },
   "selectedFilterLists": [
     "user-filters",
@@ -24,26 +22,24 @@
     "ublock-abuse",
     "easylist",
     "easyprivacy",
-    "fanboy-social",
-    "ublock-annoyances",
+    "urlhaus-1",
     "RUS-0",
-    "https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoFL.txt",
     "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
     "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
     "https://easylist-downloads.adblockplus.org/bitblock.txt",
-    "https://easylist-downloads.adblockplus.org/cntblock.txt"
+    "https://easylist-downloads.adblockplus.org/cntblock.txt",
+    "https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt"
   ],
   "hiddenSettings": {
     "autoCommentFilterTemplate": "unset",
-    "autoUpdatePeriod": 7,
-    "blockingProfiles": "11111/#F00 11011/#C0F 11001/#00F 00001",
-    "cloudStorageCompression": false,
     "filterAuthorMode": true,
     "loggerPopupType": "normal",
+    "uiPopupConfig": "+logger",
     "userResourcesLocation": "https://raw.githubusercontent.com/bogachenko/lib/master/txt/scriptlets.txt https://raw.githubusercontent.com/uBlock-user/uBO-Scriptlets/master/scriptlets.js"
   },
   "whitelist": [
     "[::1]",
+    "0.0.0.0",
     "10.0.0.1",
     "127.0.0.1",
     "192.168.0.1",
@@ -52,8 +48,6 @@
     "chrome-extension-scheme",
     "chrome-scheme",
     "edge-scheme",
-    "local",
-    "localhost",
     "moz-extension-scheme",
     "opera-scheme",
     "vivaldi-scheme",

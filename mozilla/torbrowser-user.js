@@ -590,6 +590,7 @@ user_pref("permissions.default.geo", 2);
 user_pref("permissions.default.camera", 2);
 user_pref("permissions.default.desktop-notification", 2);
 user_pref("permissions.default.microphone", 2);
+user_pref("permissions.default.xr", 2);
 
 // Quickstart
 // [NOTE] Quickstart allows Tor Browser to connect automatically.
@@ -607,7 +608,7 @@ user_pref("extensions.torlauncher.quickstart", false);
 //		1 = Высший
 //		2 = Высокий
 //		4 = Обычный
-user_pref("extensions.torbutton.security_slider", 2);
+user_pref("browser.security_level.security_slider", 2);
 
 // Search from the address bar
 // Поиск из адресной строки
