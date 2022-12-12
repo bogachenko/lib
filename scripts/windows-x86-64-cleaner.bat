@@ -34,15 +34,18 @@ rd "%APPDATA%\Mozilla\Firefox\Profiles\%username%\personality-provider" /s /q
 rd "%APPDATA%\Mozilla\SystemExtensionsDev" /s /q
 rd "%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%username%" /s /q
 rd "%ProgramData%\Mozilla" /s /q
+rd "%USERPROFILE%\AppData\LocalLow\Mozilla" /s /q
 
-rem Windows Search
-del "%ProgramData%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q
+rem Adobe
+rd "%USERPROFILE%\AppData\LocalLow\Adobe" /s /q
 
 rem DirectX
 rd "%LOCALAPPDATA%\D3DSCache" /s /q
 
-rem Windows Defender
-rd "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Resource" /s /q
+rem Discord
+rd "%APPDATA%\discord\Cache" /s /q
+rd "%APPDATA%\discord\Code Cache" /s /q
+rd "%APPDATA%\discord\GPUCache" /s /q
 
 rem Spotify
 del "%LOCALAPPDATA%\Spotify\Browser\*.log" /s /q
@@ -194,6 +197,7 @@ rem Overwolf
 rd "%ProgramData%\Overwolf\Log" /s /q
 
 rem Windows
+rd "%SYSTEMDRIVE%\$Recycle.bin" /s /q
 del "%WINDIR%\*.log" /s /q
 del "%WINDIR%\Temp\" /s /q
 del "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" /s /q
@@ -201,9 +205,22 @@ rd "%ProgramData%\Microsoft\Diagnosis" /s /q
 rd "%WINDIR%\Logs" /s /q
 del "%WINDIR%\System32\sru\SRU*.*" /s /q
 rd "%LOCALAPPDATA%\Temp" /s /q
+rd "%WINDIR%\Installer\$PatchCache$\Managed" /s /q
+rd "%LOCALAPPDATA%\Microsoft\Windows\WebCache" /s /q
+del "%LOCALAPPDATA%\Microsoft\CLR_*" /s /q
+rd "%APPDATA%\Microsoft\Windows\Recent" /s /q
+rd "%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache" /s /q
+rd "%USERPROFILE%\AppData\LocalLow\\Microsoft\Internet Explorer" /s /q
+rd "%ProgramData%\Microsoft\Windows Defender" /s /q
+del "%ProgramData%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q
 
-rem Notepad Plus Plus
+rem Notepad++
 del "%APPDATA%\notepad++\session.xml" /s /q
+
+rem Telegram
+rd "%APPDATA%\Telegram Desktop\tdata\user_data" /s /q
+rd "%APPDATA%\\Telegram Desktop\tdata\dumps" /s /q
+del "%APPDATA%\Telegram Desktop\log.txt" /s /q
 
 rem Countdown
 timeout 5
