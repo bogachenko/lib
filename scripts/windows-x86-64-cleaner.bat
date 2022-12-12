@@ -257,6 +257,10 @@ rd "%WINDIR%\Logs" /s /q > nul 2>&1
 rd "%WINDIR%\Prefetch" /s /q > nul 2>&1
 rd "%WINDIR%\SoftwareDistribution" /s /q > nul 2>&1
 rd "%WINDIR%\Temp" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Windows\Caches" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Windows\Temporary Internet Files" /s /q > nul 2>&1
+rd "%WINDIR%\Offline Web Pages" /s /q > nul 2>&1
+rd "%PROGRAMDATA%\Microsoft\Windows\WER" /s /q > nul 2>&1
 
 echo Notepad++ > nul 2>&1
 del "%APPDATA%\notepad++\session.xml" /s /q > nul 2>&1
