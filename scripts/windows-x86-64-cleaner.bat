@@ -277,9 +277,6 @@ rd "%LOCALAPPDATA%\Rockstar Games\Launcher\CrashLogs" /s /q > nul 2>&1
 echo Squirrel > nul 2>&1
 rd "%LOCALAPPDATA%\SquirrelTemp" /s /q > nul 2>&1
 
-echo NVIDIA Corporation > nul 2>&1
-rd "%PROGRAMDATA%\NVIDIA Corporation" /s /q > nul 2>&1
-
 echo GitHub Desktop > nul 2>&1
 rd "%LOCALAPPDATA%\GitHubDesktop\*.log" /s /q > nul 2>&1
 
@@ -317,6 +314,11 @@ del "%APPDATA%\notepad++\session.xml" /s /q > nul 2>&1
 echo Nvidia > nul 2>&1
 rd "%LOCALAPPDATA%\NVIDIA\DXCache" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\NVIDIA\GLCache" /s /q > nul 2>&1
+rd "%PROGRAMDATA%\NVIDIA Corporation" /s /q > nul 2>&1
+rd "%PROGRAMDATA%\NVIDIA" /s /q > nul 2>&1
+
+echo Intel > nul 2>&1
+rd "%PROGRAMDATA%\Intel" /s /q > nul 2>&1
 
 echo IObit Driver Booster > nul 2>&1
 rd "%APPDATA%\IObit\Driver Booster\Logs" /s /q > nul 2>&1
