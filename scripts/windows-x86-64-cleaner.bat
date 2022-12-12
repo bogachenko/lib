@@ -289,9 +289,13 @@ echo GitHub Desktop > nul 2>&1
 rd "%LOCALAPPDATA%\GitHubDesktop\*.log" /s /q > nul 2>&1
 
 echo Windows > nul 2>&1
+rd "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization" /s /q > nul 2>&1
+rd "%WINDIR%\ServiceProfiles\NetworkService\AppData\LocalLow\Microsoft\CryptnetUrlCache" /s /q > nul 2>&1
+rd "%PROGRAMDATA%\USOShared\Logs" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" /s /q > nul 2>&1
 del "%PROGRAMDATA%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q > nul 2>&1
 del "%WINDIR%\*.log" /s /q > nul 2>&1
+del "%WINDIR%\inf\*.log" /s /q > nul 2>&1
 powershell.exe -command "Remove-item '%LOCALAPPDATA%\Microsoft\CLR_*'" -Recurse
 powershell.exe -command "Remove-item '%WINDIR%\System32\sru\SRU*.*'" -Recurse
 rd "%APPDATA%\Microsoft\Windows\Recent" /s /q > nul 2>&1
@@ -301,7 +305,6 @@ rd "%LOCALAPPDATA%\Temp" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\Microsoft\Diagnosis" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\Microsoft\Windows Defender" /s /q > nul 2>&1
 rd "%SYSTEMDRIVE%\$Recycle.bin" /s /q > nul 2>&1
-rd "%USERPROFILE%\AppData\LocalLow\Microsoft\Internet Explorer" /s /q > nul 2>&1
 rd "%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache" /s /q > nul 2>&1
 rd "%WINDIR%\DiagTrack" /s /q > nul 2>&1
 rd "%WINDIR%\Installer\$PatchCache$\Managed" /s /q > nul 2>&1
@@ -318,6 +321,12 @@ rd "%LOCALAPPDATA%\cache" /s /q > nul 2>&1
 
 echo Notepad++ > nul 2>&1
 del "%APPDATA%\notepad++\session.xml" /s /q > nul 2>&1
+
+echo Internet Explorer > nul 2>&1
+rd "%USERPROFILE%\AppData\LocalLow\Microsoft\Internet Explorer" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Internet Explorer\Recovery" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Internet Explorer" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Windows\INetCache" /s /q > nul 2>&1
 
 echo Nvidia > nul 2>&1
 rd "%LOCALAPPDATA%\NVIDIA\DXCache" /s /q > nul 2>&1
