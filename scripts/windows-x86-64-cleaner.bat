@@ -33,7 +33,7 @@ rd "%APPDATA%\Mozilla\Firefox\Profiles\%username%\minidumps" /s /q
 rd "%APPDATA%\Mozilla\Firefox\Profiles\%username%\personality-provider" /s /q
 rd "%APPDATA%\Mozilla\SystemExtensionsDev" /s /q
 rd "%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%username%" /s /q
-rd "%ProgramData%\Mozilla" /s /q
+powershell.exe -command "Remove-item %ProgramData%\Mozilla-*" -Recurse
 rd "%USERPROFILE%\AppData\LocalLow\Mozilla" /s /q
 
 rem Adobe
@@ -207,7 +207,7 @@ del "%WINDIR%\System32\sru\SRU*.*" /s /q
 rd "%LOCALAPPDATA%\Temp" /s /q
 rd "%WINDIR%\Installer\$PatchCache$\Managed" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Windows\WebCache" /s /q
-del "%LOCALAPPDATA%\Microsoft\CLR_*" /s /q
+powershell.exe -command "Remove-item %LOCALAPPDATA%\Microsoft\CLR_*" -Recurse
 rd "%APPDATA%\Microsoft\Windows\Recent" /s /q
 rd "%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache" /s /q
 rd "%USERPROFILE%\AppData\LocalLow\\Microsoft\Internet Explorer" /s /q
