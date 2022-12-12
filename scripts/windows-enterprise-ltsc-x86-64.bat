@@ -524,7 +524,7 @@ slmgr /skms kms.digiboy.ir > nul 2>&1
 slmgr /ato > nul 2>&1
 
 rem Countdown
-timeout 5
+timeout 5 > nul 2>&1
 
 rem Reboot
 shutdown /r /f /t 0

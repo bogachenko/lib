@@ -3,7 +3,7 @@
 color 1f
 title Windows Cleaner
 
-echo Getting superuser rights
+rem Getting superuser rights
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
@@ -42,6 +42,8 @@ rem Telegram
 taskkill /f > nul 2>&1 /im telegram.exe > nul 2>&1
 rem Notepad++
 taskkill /f > nul 2>&1 /im notepad++.exe > nul 2>&1
+rem Thunderbird
+taskkill /f > nul 2>&1 /im thunderbird.exe > nul 2>&1
 
 echo Flush DNS Cache > nul 2>&1
 ipconfig /flushdns > nul 2>&1
@@ -51,7 +53,6 @@ del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\favicons.sqlite-shm" /s /q > 
 del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\favicons.sqlite-wal" /s /q > nul 2>&1
 del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\favicons.sqlite" /s /q > nul 2>&1
 del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\formhistory.sqlite" /s /q > nul 2>&1
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\places.sqlite" /s /q > nul 2>&1
 del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\sessionCheckpoints.json" /s /q > nul 2>&1
 del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\SiteSecurityServiceState.txt" /s /q > nul 2>&1
 powershell.exe -command "Remove-item %PROGRAMDATA%\Mozilla-*" -Recurse
@@ -66,6 +67,21 @@ rd "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\personality-provider" /s /q > 
 rd "%APPDATA%\Mozilla\SystemExtensionsDev" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%USERNAME%" /s /q > nul 2>&1
 rd "%USERPROFILE%\AppData\LocalLow\Mozilla" /s /q > nul 2>&1
+del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\cookies.sqlite" /s /q > nul 2>&1
+del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\cookies.sqlite-shm" /s /q > nul 2>&1
+del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\cookies.sqlite-wal" /s /q > nul 2>&1
+del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\places.sqlite" /s /q > nul 2>&1
+del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\places.sqlite-shm" /s /q > nul 2>&1
+del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\places.sqlite-wal" /s /q > nul 2>&1
+rd "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\shader-cache" /s /q > nul 2>&1
+rd "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%sessionstore-backups" /s /q > nul 2>&1
+
+echo Thunderbird > nul 2>&1
+rd "%LOCALAPPDATA%\Thunderbird\Profiles\%USERNAME%" /s /q > nul 2>&1
+rd "%APPDATA%\Thunderbird\Crash Reports" /s /q > nul 2>&1
+rd "%APPDATA%\Thunderbird\Pending Pings" /s /q > nul 2>&1
+del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\favicons.sqlite" /s /q > nul 2>&1
+del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\cookies.sqlite" /s /q > nul 2>&1
 
 echo Adobe > nul 2>&1
 rd "%USERPROFILE%\AppData\LocalLow\Adobe" /s /q > nul 2>&1
@@ -275,7 +291,7 @@ rd "%APPDATA%\\Telegram Desktop\tdata\dumps" /s /q > nul 2>&1
 rd "%APPDATA%\Telegram Desktop\tdata\user_data" /s /q > nul 2>&1
 
 echo Countdown > nul 2>&1
-timeout 5
+timeout 5 > nul 2>&1
 
 echo Start process > nul 2>&1
 rem Windows Explorer
