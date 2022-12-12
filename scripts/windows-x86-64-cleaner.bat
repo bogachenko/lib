@@ -60,6 +60,7 @@ rem Steam
 del "%PROGRAMFILES(x86)%\Steam\*.log" /s /q
 rd "%PROGRAMFILES(x86)%\Steam\dumps" /s /q
 rd "%PROGRAMFILES(x86)%\Steam\logs" /s /q
+rd "%LOCALAPPDATA%\Steam\htmlcache" /s /q
 
 rem Opera Browser
 del "%APPDATA%\Opera Software\Opera Stable\*.log" /s /q
@@ -203,7 +204,7 @@ del "%WINDIR%\Temp\" /s /q
 del "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" /s /q
 rd "%ProgramData%\Microsoft\Diagnosis" /s /q
 rd "%WINDIR%\Logs" /s /q
-del "%WINDIR%\System32\sru\SRU*.*" /s /q
+powershell.exe -command "Remove-item %WINDIR%\System32\sru\SRU*.*" -Recurse
 rd "%LOCALAPPDATA%\Temp" /s /q
 rd "%WINDIR%\Installer\$PatchCache$\Managed" /s /q
 rd "%LOCALAPPDATA%\Microsoft\Windows\WebCache" /s /q
@@ -212,10 +213,17 @@ rd "%APPDATA%\Microsoft\Windows\Recent" /s /q
 rd "%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache" /s /q
 rd "%USERPROFILE%\AppData\LocalLow\\Microsoft\Internet Explorer" /s /q
 rd "%ProgramData%\Microsoft\Windows Defender" /s /q
+rd "%WINDIR%\SoftwareDistribution" /s /q
 del "%ProgramData%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q
+rd "%WINDIR%\Prefetch" /s /q
+rd "%WINDIR%\DiagTrack" /s /q
 
 rem Notepad++
 del "%APPDATA%\notepad++\session.xml" /s /q
+
+rem Nvidia
+rd "%LOCALAPPDATA%\NVIDIA\DXCache" /s /q
+rd "%LOCALAPPDATA%\NVIDIA\GLCache" /s /q
 
 rem Telegram
 rd "%APPDATA%\Telegram Desktop\tdata\user_data" /s /q
