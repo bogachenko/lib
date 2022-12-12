@@ -48,6 +48,14 @@ taskkill /f > nul 2>&1 /im thunderbird.exe > nul 2>&1
 echo Flush DNS Cache > nul 2>&1
 ipconfig /flushdns > nul 2>&1
 
+echo Tor Browser > nul 2>&1
+del "%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\cookies.sqlite" /s /q > nul 2>&1
+del "%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\favicons.sqlite" /s /q > nul 2>&1
+del "%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\formhistory.sqlite" /s /q > nul 2>&1
+del "%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\places.sqlite" /s /q > nul 2>&1
+rd "%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\datareporting" /s /q > nul 2>&1
+rd "%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\shader-cache" /s /q > nul 2>&1
+
 echo Firefox Browser > nul 2>&1
 del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\favicons.sqlite-shm" /s /q > nul 2>&1
 del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\favicons.sqlite-wal" /s /q > nul 2>&1
@@ -319,6 +327,7 @@ rd "%PROGRAMDATA%\NVIDIA" /s /q > nul 2>&1
 
 echo Intel > nul 2>&1
 rd "%PROGRAMDATA%\Intel" /s /q > nul 2>&1
+rd "%USERPROFILE%\AppData\LocalLow\Intel\ShaderCache" /s /q > nul 2>&1
 
 echo IObit Driver Booster > nul 2>&1
 rd "%APPDATA%\IObit\Driver Booster\Logs" /s /q > nul 2>&1
@@ -337,6 +346,10 @@ rd "%APPDATA%\Code\User\History" /s /q > nul 2>&1
 rd "%APPDATA%\Code\CachedData" /s /q > nul 2>&1
 rd "%APPDATA%\Code\Crashpad" /s /q > nul 2>&1
 rd "%APPDATA%\Code\Code Cache" /s /q > nul 2>&1
+del "%APPDATA%\Microsoft VS Code\*.log" /s /q > nul 2>&1
+
+echo VLC media player > nul 2>&1
+rd "%APPDATA%\vlc\crashdump" /s /q > nul 2>&1
 
 echo Countdown > nul 2>&1
 timeout 5 > nul 2>&1
