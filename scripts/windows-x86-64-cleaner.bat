@@ -292,7 +292,7 @@ rd "%LOCALAPPDATA%\Temp" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\Microsoft\Diagnosis" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\Microsoft\Windows Defender" /s /q > nul 2>&1
 rd "%SYSTEMDRIVE%\$Recycle.bin" /s /q > nul 2>&1
-rd "%USERPROFILE%\AppData\LocalLow\\Microsoft\Internet Explorer" /s /q > nul 2>&1
+rd "%USERPROFILE%\AppData\LocalLow\Microsoft\Internet Explorer" /s /q > nul 2>&1
 rd "%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache" /s /q > nul 2>&1
 rd "%WINDIR%\DiagTrack" /s /q > nul 2>&1
 rd "%WINDIR%\Installer\$PatchCache$\Managed" /s /q > nul 2>&1
@@ -322,6 +322,11 @@ del "%APPDATA%\Telegram Desktop\log.txt" /s /q > nul 2>&1
 powershell.exe -command "Remove-item '%APPDATA%\Telegram Desktop\log_*.txt'" -Recurse
 rd "%APPDATA%\Telegram Desktop\tdata\dumps" /s /q > nul 2>&1
 rd "%APPDATA%\Telegram Desktop\tdata\user_data" /s /q > nul 2>&1
+
+echo Visual Studio Code > nul 2>&1
+rd "%APPDATA%\Code\logs" /s /q > nul 2>&1
+rd "%APPDATA%\Code\Cache" /s /q > nul 2>&1
+rd "%APPDATA%\Code\GPUCache" /s /q > nul 2>&1
 
 echo Countdown > nul 2>&1
 timeout 5 > nul 2>&1
