@@ -196,6 +196,7 @@ del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\History-journal" /s /q > nu
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\History" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\load_statistics.db" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network Action Predictor-journal" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Shortcuts-journal" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Shortcuts" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Storage" /s /q > nul 2>&1
@@ -203,6 +204,7 @@ del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Top Sites" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Visited Links" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\BrowserMetrics" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Code Cache" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Collections" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\databases" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\EdgeCoupons" /s /q > nul 2>&1
@@ -225,6 +227,21 @@ rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Site Characteristics Databas
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\VideoDecodeStats" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\GrShaderCache" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\ShaderCache" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\File System" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\ExtensionActivityComp-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\ExtensionActivityComp" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\ExtensionActivityEdge-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\ExtensionActivityEdge" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network\Cookies-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network\Cookies" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network\Reporting and NEL-journal" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network\Reporting and NEL" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Web Data-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Web Data" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\WebAssistDatabase-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\WebAssistDatabase" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\JumpListIconsRecentClosed" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\WebStorage" /s /q > nul 2>&1
 
 echo Chromium Browser > nul 2>&1
 del "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics-*" /s /q > nul 2>&1
