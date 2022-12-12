@@ -44,7 +44,7 @@ rem Notepad++
 taskkill /f > nul 2>&1 /im notepad++.exe > nul 2>&1
 
 echo Flush DNS Cache > nul 2>&1
-ipconfig /flushdns
+ipconfig /flushdns > nul 2>&1
 
 echo Firefox Browser > nul 2>&1
 del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\favicons.sqlite-shm" /s /q > nul 2>&1
@@ -272,3 +272,7 @@ rd "%APPDATA%\Telegram Desktop\tdata\user_data" /s /q > nul 2>&1
 
 echo Countdown > nul 2>&1
 timeout 5
+
+echo Start process > nul 2>&1
+rem Windows Explorer
+start explorer.exe
