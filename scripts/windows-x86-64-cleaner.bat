@@ -31,7 +31,7 @@ taskkill /f > nul 2>&1 /im spotify.exe > nul 2>&1
 rem Skype
 taskkill /f > nul 2>&1 /im skype.exe > nul 2>&1
 rem Edge
-taskkill /f > nul 2>&1 /im microsoftedge.exe > nul 2>&1
+taskkill /f > nul 2>&1 /im msedge.exe > nul 2>&1
 rem Google Chrome
 taskkill /f > nul 2>&1 /im chrome.exe > nul 2>&1
 rem AdGuard
@@ -63,7 +63,7 @@ del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\favicons.sqlite" /s /q > nul 
 del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\formhistory.sqlite" /s /q > nul 2>&1
 del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\sessionCheckpoints.json" /s /q > nul 2>&1
 del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\SiteSecurityServiceState.txt" /s /q > nul 2>&1
-powershell.exe -command "Remove-item '%PROGRAMDATA%\Mozilla-*'" -Recurse
+powershell.exe -command "Remove-item '%PROGRAMDATA%\Mozilla-*'" -Recurse > nul 2>&1
 rd "%APPDATA%\Mozilla\Extensions" /s /q > nul 2>&1
 rd "%APPDATA%\Mozilla\Firefox\Background Tasks Profiles" /s /q > nul 2>&1
 rd "%APPDATA%\Mozilla\Firefox\Crash Reports" /s /q > nul 2>&1
@@ -296,8 +296,8 @@ del "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" /s /q > nul 2>&1
 del "%PROGRAMDATA%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q > nul 2>&1
 del "%WINDIR%\*.log" /s /q > nul 2>&1
 del "%WINDIR%\inf\*.log" /s /q > nul 2>&1
-powershell.exe -command "Remove-item '%LOCALAPPDATA%\Microsoft\CLR_*'" -Recurse
-powershell.exe -command "Remove-item '%WINDIR%\System32\sru\SRU*.*'" -Recurse
+powershell.exe -command "Remove-item '%LOCALAPPDATA%\Microsoft\CLR_*'" -Recurse > nul 2>&1
+powershell.exe -command "Remove-item '%WINDIR%\System32\sru\SRU*.*'" -Recurse > nul 2>&1
 rd "%APPDATA%\Microsoft\Windows\Recent" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\ElevatedDiagnostics" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Windows\WebCache" /s /q > nul 2>&1
@@ -343,7 +343,7 @@ rd "%APPDATA%\IObit\Driver Booster\Logs" /s /q > nul 2>&1
 
 echo Telegram > nul 2>&1
 del "%APPDATA%\Telegram Desktop\log.txt" /s /q > nul 2>&1
-powershell.exe -command "Remove-item '%APPDATA%\Telegram Desktop\log_*.txt'" -Recurse
+powershell.exe -command "Remove-item '%APPDATA%\Telegram Desktop\log_*.txt'" -Recurse > nul 2>&1
 rd "%APPDATA%\Telegram Desktop\tdata\dumps" /s /q > nul 2>&1
 rd "%APPDATA%\Telegram Desktop\tdata\user_data" /s /q > nul 2>&1
 
