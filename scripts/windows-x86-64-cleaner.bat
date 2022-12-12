@@ -15,6 +15,34 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: This script is provided "AS IS" without warranty of any kind, either expressed or implied.
 :: Use it at your own risk! The author is not responsible for any claims for damage that may arise from the use of this script.
 
+echo Stop processes > nul 2>&1
+rem Windows Explorer
+taskkill /f > nul 2>&1 /im explorer.exe > nul 2>&1
+rem Firefox
+taskkill /f > nul 2>&1 /im firefox.exe > nul 2>&1
+rem Adobe Acrobat DC
+taskkill /f > nul 2>&1 /im acrobat.exe > nul 2>&1
+rem Discord
+taskkill /f > nul 2>&1 /im discord.exe > nul 2>&1
+rem Steam
+taskkill /f > nul 2>&1 /im steam.exe > nul 2>&1
+rem Spotify
+taskkill /f > nul 2>&1 /im spotify.exe > nul 2>&1
+rem Skype
+taskkill /f > nul 2>&1 /im skype.exe > nul 2>&1
+rem Edge
+taskkill /f > nul 2>&1 /im microsoftedge.exe > nul 2>&1
+rem Google Chrome
+taskkill /f > nul 2>&1 /im chrome.exe > nul 2>&1
+rem AdGuard
+taskkill /f > nul 2>&1 /im adguard.exe > nul 2>&1
+rem AdGuard VPN
+taskkill /f > nul 2>&1 /im adguardvpn.exe > nul 2>&1
+rem Telegram
+taskkill /f > nul 2>&1 /im telegram.exe > nul 2>&1
+rem Notepad++
+taskkill /f > nul 2>&1 /im notepad++.exe > nul 2>&1
+
 echo Flush DNS Cache > nul 2>&1
 ipconfig /flushdns
 
@@ -207,9 +235,6 @@ echo AdGuard > nul 2>&1
 rd "%PROGRAMDATA%\Adguard\Logs" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\Adguard\Temp" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\Adguard\Crashes" /s /q > nul 2>&1
-
-echo Overwolf > nul 2>&1
-rd "%PROGRAMDATA%\Overwolf\Log" /s /q > nul 2>&1
 
 echo Windows > nul 2>&1
 del "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" /s /q > nul 2>&1
