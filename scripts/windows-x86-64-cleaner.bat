@@ -271,10 +271,14 @@ echo qBittorrent > nul 2>&1
 rd "%LOCALAPPDATA%\qBittorrent" /s /q > nul 2>&1
 
 echo Rockstar Games Launcher > nul 2>&1
+del "%PROGRAMDATA%\Rockstar Games\Launcher\*.log" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Rockstar Games\Launcher\CrashLogs" /s /q > nul 2>&1
 
 echo Squirrel > nul 2>&1
 rd "%LOCALAPPDATA%\SquirrelTemp" /s /q > nul 2>&1
+
+echo NVIDIA Corporation > nul 2>&1
+rd "%PROGRAMDATA%\NVIDIA Corporation" /s /q > nul 2>&1
 
 echo GitHub Desktop > nul 2>&1
 rd "%LOCALAPPDATA%\GitHubDesktop\*.log" /s /q > nul 2>&1
@@ -327,6 +331,10 @@ echo Visual Studio Code > nul 2>&1
 rd "%APPDATA%\Code\logs" /s /q > nul 2>&1
 rd "%APPDATA%\Code\Cache" /s /q > nul 2>&1
 rd "%APPDATA%\Code\GPUCache" /s /q > nul 2>&1
+rd "%APPDATA%\Code\User\History" /s /q > nul 2>&1
+rd "%APPDATA%\Code\CachedData" /s /q > nul 2>&1
+rd "%APPDATA%\Code\Crashpad" /s /q > nul 2>&1
+rd "%APPDATA%\Code\Code Cache" /s /q > nul 2>&1
 
 echo Countdown > nul 2>&1
 timeout 5 > nul 2>&1
