@@ -383,3 +383,6 @@ timeout 5 > nul 2>&1
 echo Start process > nul 2>&1
 rem Windows Explorer
 start explorer.exe
+
+echo Shutdown > nul 2>&1
+exit
