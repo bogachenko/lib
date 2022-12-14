@@ -67,8 +67,10 @@ user_pref("browser.urlbar.speculativeConnect.enabled", false);
 // Типы предложений в адресной строке
 user_pref("browser.urlbar.suggest.history", false);
 user_pref("browser.urlbar.suggest.openpage", false);
-user_pref("browser.urlbar.suggest.searches", false);
+user_pref("browser.urlbar.suggest.bookmark", false);
+user_pref("browser.urlbar.suggest.engines", false);
 user_pref("browser.urlbar.suggest.topsites", false);
+user_pref("browser.urlbar.showSearchSuggestionsFirst", false);
 user_pref("browser.urlbar.delay", 0);
 
 // Remember the search history and form data
