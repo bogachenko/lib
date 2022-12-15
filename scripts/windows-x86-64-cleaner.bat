@@ -1,6 +1,5 @@
 @echo off
 
-color 1f
 title Windows Cleaner
 
 rem Getting superuser rights
