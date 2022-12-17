@@ -289,32 +289,6 @@ user_pref("browser.sessionstore.interval", 30000);
 // Восстановление браузера после перезагрузки операционной системы
 user_pref("toolkit.winRegisterApplicationRestart", false);
 
-// Cookies
-// [NOTE] A Cookie is a piece of data (a small text file) sent by the server and stored in the browser. When the user reloads the same page, the browser sends the cookie back to the server and notifies it of the previous activity. Cookies store information such as passwords, logins, session data, credit card data, email addresses, and record various user activity and other statistics.
-// [WARNING] Cookies are actively used by many web resources in the process of monitoring and tracking user activity. Theft and analysis of cookies is a potentially dangerous and serious attack, leading to global leaks of user data and use.
-//		0 = Accept cookies and site data
-//		1 = Block third-party cookies
-//		2 = Block all cookies
-//		3 = Block cookies from sites not visited
-//      4 = Cross-site and social media trackers
-// Куки
-// [ЗАМЕТКА] Cookie - фрагмент данных (небольшой текстовый файл), отправляемый сервером и сохраняющийся в браузере. Когда пользователь вновь загружает ту же самую страницу, браузер отсылает cookie назад на сервер и уведомляет его о предыдущей активности. Cookie хранят такую информацию, как пароли, логины, сеансовые данные, данные кредитных карт, электронные почтовые адреса и записывают различную пользовательскую активность и прочую статистику.
-// [ВНИМАНИЕ] Cookie активно используются многими веб-ресурсами в процессе контроля и слежки за пользовательской активностью. Похищение и анализ cookie является потенциально опасной и серьезной атакой, приводящей к глобальным утечкам пользовательских данных и их использованию.
-//		0 = Принимать куки и данные сайтов
-//		1 = Блокировать стороннии куки
-//		2 = Блокировать все куки
-//		3 = Блокировать куки с не посещенных сайтов
-//      4 = Трекеры для межсайтовых и социальных сетей
-user_pref("network.cookie.cookieBehavior", 1);
-
-// Сookie lifetime policy
-//		0 = Keep them until they expire
-//		2 = Keep them until you close the browser
-// Политика жизни куки
-//		0 = Сохранять их до истечения срока действия
-//		2 = Сохранять их до закрытия браузера
-user_pref("network.cookie.lifetimePolicy", 2);
-
 // Storage API
 // [NOTE] Disables another way for sites to store their data on the users personal computer.
 // API Хранилища

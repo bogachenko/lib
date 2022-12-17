@@ -362,14 +362,6 @@ user_pref("toolkit.winRegisterApplicationRestart", false);
 //      5 = Блокировать межсайтовые отслеживающие куки, а также изолировать другие межсайтовые отслеживающие куки
 user_pref("network.cookie.cookieBehavior", 0);
 
-// Сookie lifetime policy
-//		0 = Keep them until they expire
-//		2 = Keep them until you close the browser
-// Политика жизни куки
-//		0 = Сохранять их до истечения срока действия
-//		2 = Сохранять их до закрытия браузера
-user_pref("network.cookie.lifetimePolicy", 2);
-
 // Storage API
 // [NOTE] Disables another way for sites to store their data on the users personal computer.
 // API Хранилища
