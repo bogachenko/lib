@@ -6,4 +6,4 @@
 pkg install root-repo x11-repo
 pkg upgrade
 termux-change-repo
-pkg install tor vim iw htop cmake make git
+pkg install tor vim iw htop cmake make git youtube-dl speedtest-go
