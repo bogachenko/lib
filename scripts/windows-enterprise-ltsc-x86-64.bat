@@ -92,6 +92,8 @@ rem Send Diagnostic Task
 schtasks /change /tn "\Microsoft\Windows\Flighting\OneSettings\RefreshCache" /disable > nul 2>&1
 rem Update Center Telemetry Task
 schtasks /change /tn "\Microsoft\Windows\UNP\RunUpdateNotificationMgr" /disable > nul 2>&1
+rem Adobe Acrobat Update Task
+schtasks /change /tn "\Adobe Acrobat Update Task" /disable > nul 2>&1
 
 echo Stopping Tracking Services > nul 2>&1
 rem Diagnostics Tracking Service
