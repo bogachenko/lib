@@ -95,6 +95,8 @@ rem Update Center Telemetry Task
 schtasks /change /tn "\Microsoft\Windows\UNP\RunUpdateNotificationMgr" /disable > nul 2>&1
 rem Adobe Acrobat Update Task
 schtasks /change /tn "\Adobe Acrobat Update Task" /disable > nul 2>&1
+rem Firefox Default Browser Agent
+schtasks /change /tn "\Mozilla\Firefox Default Browser Agent 308046B0AF4A39CB" /disable > nul 2>&1
 
 echo Stopping Tracking Services > nul 2>&1
 rem Diagnostics Tracking Service
@@ -114,7 +116,7 @@ rem Store Demonstration Service
 reg add "HKLM\System\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
 rem Windows Search Service
 reg add "HKLM\System\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
-rem Windows Error Logging Service
+rem Windows Error Logging Services
 reg add "HKLM\System\CurrentControlSet\Services\WerSvc" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
 reg add "HKLM\System\CurrentControlSet\Services\wercplsupport" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
 rem Data Usage Service
@@ -135,6 +137,8 @@ rem Windows Biometric Service
 reg add "HKLM\System\CurrentControlSet\Services\WbioSrvc" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
 rem Windows Insider Service
 reg add "HKLM\System\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
+rem Adobe Service
+reg add "HKLM\System\CurrentControlSet\Services\AdobeARMservice" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
 
 echo Time And Language Setting > nul 2>&1
 rem Show Text Suggestions When Typing On The Physical Keyboard
@@ -229,9 +233,9 @@ reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f > nul 2>&1
 reg delete "HKLM\Software\Policies\Microsoft\Windows\System" /v "ShellSmartScreenLevel" /f > nul 2>&1
 
 echo Privacy Settings > nul 2>&1
-rem Windows PowerShell
+rem Windows PowerShell Telemetry
 setx POWERSHELL_TELEMETRY_OPTOUT 1 > nul 2>&1
-rem DOTNET cli
+rem DOTNET cli Telemetry
 setx DOTNET_CLI_TELEMETRY_OPTOUT 1 > nul 2>&1
 rem Windows Tips
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableSoftLanding" /t REG_DWORD /d "1" /f > nul 2>&1
@@ -424,8 +428,6 @@ reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DiagLog" /v "Start
 reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f > nul 2>&1
 reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\SetupPlatformTel" /v "Start" /t REG_DWORD /d "0" /f > nul 2>&1
 reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "Start" /t REG_DWORD /d "0" /f > nul 2>&1
-rem Windows Media Player Collecting Statistics
-reg add "HKCU\Software\Microsoft\MediaPlayer\Preferences" /v "UsageTracking" /t REG_DWORD /d "0" /f > nul 2>&1
 rem System Debugger
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\AeDebug" /v "Auto" /t REG_SZ /d "0" /f > nul 2>&1
 rem Windows Error Reports
