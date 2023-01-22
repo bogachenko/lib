@@ -98,6 +98,19 @@ schtasks /change /tn "\Adobe Acrobat Update Task" /disable > nul 2>&1
 rem Firefox Default Browser Agent
 schtasks /change /tn "\Mozilla\Firefox Default Browser Agent 308046B0AF4A39CB" /disable > nul 2>&1
 
+rem Windows Media Components
+dism /Online /Disable-Feature /FeatureName:"MediaPlayback" /NoRestart
+dism /Online /Disable-Feature /FeatureName:"WindowsMediaPlayer" /NoRestart
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Media.WindowsMediaPlayer*' | Remove-WindowsCapability -Online"
+rem Internet Explorer 11 Components
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*' | Remove-WindowsCapability -Online"
+rem Steps Recorder Components
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.StepsRecorder*' | Remove-WindowsCapability -Online"
+rem Quick Assist Components
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*' | Remove-WindowsCapability -Online"
+rem Hello Face Components
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Hello.Face*' | Remove-WindowsCapability -Online"
+
 echo Stopping Tracking Services > nul 2>&1
 rem Diagnostics Tracking Service
 reg add "HKLM\System\CurrentControlSet\Services\DiagTrack" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
