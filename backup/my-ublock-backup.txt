@@ -1,6 +1,6 @@
 {
-  "timeStamp": 1670774070659,
-  "version": "1.45.2",
+  "timeStamp": 1674354788095,
+  "version": "1.46.0",
   "userSettings": {
     "advancedUserEnabled": true,
     "uiTheme": "light",
@@ -14,6 +14,7 @@
       "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt"
     ],
     "popupPanelSections": 63,
+    "suspendUntilListsAreLoaded": true,
     "tooltipsDisabled": true
   },
   "selectedFilterLists": [
@@ -22,13 +23,12 @@
     "ublock-abuse",
     "easylist",
     "easyprivacy",
-    "urlhaus-1",
     "RUS-0",
+    "https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt",
     "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
     "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
     "https://easylist-downloads.adblockplus.org/bitblock.txt",
-    "https://easylist-downloads.adblockplus.org/cntblock.txt",
-    "https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt"
+    "https://easylist-downloads.adblockplus.org/cntblock.txt"
   ],
   "hiddenSettings": {
     "autoCommentFilterTemplate": "unset",
