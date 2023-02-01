@@ -107,6 +107,7 @@ rd "%APPDATA%\Thunderbird\Profiles\%USERNAME%\datareporting" /s /q > nul 2>&1
 echo Adobe > nul 2>&1
 rd "%USERPROFILE%\AppData\LocalLow\Adobe" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\Adobe\Temp" /s /q > nul 2>&1
+rd "%APPDATA%\com.adobe.dunamis" /s /q > nul 2>&1
 
 echo DirectX > nul 2>&1
 rd "%LOCALAPPDATA%\D3DSCache" /s /q > nul 2>&1
@@ -274,6 +275,7 @@ del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Service Worker" /s /q > nul 
 del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Storage" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Google\Chrome\User Data\Default\BrowserMetrics" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\BrowserMetrics-*" /s /q > nul 2>&1
+rd "%PROGRAMFILES%\Google\Chrome\Application\SetupMetrics" /s /q > nul 2>&1
 
 echo Chromium Browser > nul 2>&1
 del "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics-*" /s /q > nul 2>&1
@@ -344,6 +346,7 @@ rd "%PROGRAMDATA%\USOShared\Logs" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" /s /q > nul 2>&1
 del "%PROGRAMDATA%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q > nul 2>&1
 del "%WINDIR%\*.log" /s /q > nul 2>&1
+del "%WINDIR%\Debug\*.log" /s /q > nul 2>&1
 del "%WINDIR%\inf\*.log" /s /q > nul 2>&1
 powershell.exe -command "Remove-item '%LOCALAPPDATA%\Microsoft\CLR_*'" -Recurse > nul 2>&1
 powershell.exe -command "Remove-item '%WINDIR%\System32\sru\SRU*.*'" -Recurse > nul 2>&1
@@ -352,12 +355,13 @@ rd "%LOCALAPPDATA%\ElevatedDiagnostics" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Windows\WebCache" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Temp" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\Microsoft\Diagnosis" /s /q > nul 2>&1
-rd "%PROGRAMDATA%\Microsoft\Windows Defender" /s /q > nul 2>&1
+rd "%PROGRAMDATA%\Microsoft\Windows Defender\" /s /q > nul 2>&1
 rd "%SYSTEMDRIVE%\$Recycle.bin" /s /q > nul 2>&1
 rd "%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache" /s /q > nul 2>&1
 rd "%WINDIR%\DiagTrack" /s /q > nul 2>&1
 rd "%WINDIR%\Installer\$PatchCache$\Managed" /s /q > nul 2>&1
 rd "%WINDIR%\Logs" /s /q > nul 2>&1
+del "%WINDIR%\Logs\waasmedic\*.etl" /s /q > nul 2>&1
 rd "%WINDIR%\Prefetch" /s /q > nul 2>&1
 rd "%WINDIR%\SoftwareDistribution" /s /q > nul 2>&1
 rd "%WINDIR%\Temp" /s /q > nul 2>&1
@@ -367,6 +371,10 @@ rd "%WINDIR%\Offline Web Pages" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\Microsoft\Windows\WER" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\IconCache.db" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\cache" /s /q > nul 2>&1
+
+echo Microsoft Office > nul 2>&1
+rd "%APPDATA%\Microsoft\Office" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Office" /s /q > nul 2>&1
 
 echo Notepad++ > nul 2>&1
 del "%APPDATA%\notepad++\session.xml" /s /q > nul 2>&1
