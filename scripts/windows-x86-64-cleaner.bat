@@ -254,6 +254,27 @@ del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Vpn Tokens" /s /q > nul 2>&
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\AssistanceHome" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Nurturing" /s /q > nul 2>&1
 
+echo Google Chrome Browser > nul 2>&1
+rd "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Favicons-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Favicons" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\heavy_ad_intervention_opt_out.db-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\heavy_ad_intervention_opt_out.db" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\History-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\History" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Shortcuts-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Shortcuts" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Top Sites-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Top Sites" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Web Data-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Web Data" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\GPUCache" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Code Cache" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Service Worker" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Storage" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Google\Chrome\User Data\Default\BrowserMetrics" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\BrowserMetrics-*" /s /q > nul 2>&1
+
 echo Chromium Browser > nul 2>&1
 del "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics-*" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\Chromium\User Data\Default\Favicons-journal" /s /q > nul 2>&1
