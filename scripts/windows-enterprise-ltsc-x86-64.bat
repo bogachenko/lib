@@ -79,9 +79,11 @@ schtasks /change /tn "\Microsoft\Windows\Location\WindowsActionDialog" /disable 
 rem Device Data Collection and Sending Tasks
 schtasks /change /tn "\Microsoft\Windows\Device Information\Device" /disable > nul 2>&1
 schtasks /change /tn "\Microsoft\Windows\Device Information\Device User" /disable > nul 2>&1
-rem Microsoft Office Task
+rem Microsoft Office Tasks
 schtasks /change /tn "\Microsoft\Office\Office ClickToRun Service Monitor" /disable > nul 2>&1
 schtasks /change /tn "\Microsoft\Office\Office Performance Monitor" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentFallBack2016" /disable > nul 2>&1
+schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentLogOn2016" /disable > nul 2>&1
 rem Boot Optimization Task
 schtasks /change /tn "\Microsoft\Windows\Sysmain\ResPriStaticDbSync" /disable > nul 2>&1
 schtasks /change /tn "\Microsoft\Windows\Sysmain\WsSwapAssessmentTask" /disable > nul 2>&1
@@ -95,7 +97,7 @@ rem Update Center Telemetry Task
 schtasks /change /tn "\Microsoft\Windows\UNP\RunUpdateNotificationMgr" /disable > nul 2>&1
 rem Adobe Acrobat Update Task
 schtasks /change /tn "\Adobe Acrobat Update Task" /disable > nul 2>&1
-rem Firefox Default Browser Agent
+rem Firefox Default Browser Agent Task
 schtasks /change /tn "\Mozilla\Firefox Default Browser Agent 308046B0AF4A39CB" /disable > nul 2>&1
 
 rem Windows Media Components
