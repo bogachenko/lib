@@ -241,6 +241,18 @@ del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\WebAssistDatabase-journal" 
 del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\WebAssistDatabase" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\JumpListIconsRecentClosed" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\WebStorage" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\DashTrackerDatabase" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\DashTrackerDatabase-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Extension Cookies" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Extension Cookies-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\HubApps Icons-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\HubApps Icons" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Top Sites-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Top Sites" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Vpn Tokens-journal" /s /q > nul 2>&1
+del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Vpn Tokens" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\AssistanceHome" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Nurturing" /s /q > nul 2>&1
 
 echo Chromium Browser > nul 2>&1
 del "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics-*" /s /q > nul 2>&1
