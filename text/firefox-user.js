@@ -245,10 +245,15 @@ user_pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 user_pref("browser.crashReports.unsubmittedCheck.enabled", false);
 user_pref("browser.tabs.crashReporting.sendReport", false);
 
-// Promo for mobile phones
-// Акция для мобильных телефонов
+// Mozilla VPN Mobile Promotions and Advertisements
+// Мобильные акции и реклама Mozilla VPN
 user_pref("identity.mobilepromo.android", "");
 user_pref("identity.mobilepromo.ios", "");
+user_pref("browser.privatebrowsing.vpnpromourl", "");
+user_pref("browser.contentblocking.report.vpn-promo.url", "");
+user_pref("browser.promo.focus.enabled", false);
+user_pref("browser.promo.pin.enabled", false);
+user_pref("identity.sendtabpromo.url", "");
 
 // PingCentre telemetry
 // Телеметрия ПингЦентра
