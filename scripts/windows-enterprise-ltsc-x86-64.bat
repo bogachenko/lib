@@ -101,17 +101,17 @@ rem Firefox Default Browser Agent Task
 schtasks /change /tn "\Mozilla\Firefox Default Browser Agent 308046B0AF4A39CB" /disable > nul 2>&1
 
 rem Windows Media Components
-dism /Online /Disable-Feature /FeatureName:"MediaPlayback" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"WindowsMediaPlayer" /NoRestart
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Media.WindowsMediaPlayer*' | Remove-WindowsCapability -Online"
+dism /Online /Disable-Feature /FeatureName:"MediaPlayback" /NoRestart > nul 2>&1
+dism /Online /Disable-Feature /FeatureName:"WindowsMediaPlayer" /NoRestart > nul 2>&1
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Media.WindowsMediaPlayer*' | Remove-WindowsCapability -Online" > nul 2>&1
 rem Internet Explorer 11 Components
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*' | Remove-WindowsCapability -Online"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*' | Remove-WindowsCapability -Online" > nul 2>&1
 rem Steps Recorder Components
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.StepsRecorder*' | Remove-WindowsCapability -Online"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.StepsRecorder*' | Remove-WindowsCapability -Online" > nul 2>&1
 rem Quick Assist Components
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*' | Remove-WindowsCapability -Online"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*' | Remove-WindowsCapability -Online" > nul 2>&1
 rem Hello Face Components
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Hello.Face*' | Remove-WindowsCapability -Online"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Hello.Face*' | Remove-WindowsCapability -Online" > nul 2>&1
 
 echo Stopping Tracking Services > nul 2>&1
 rem Diagnostics Tracking Service
@@ -590,6 +590,8 @@ rem Windows Spotlight
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsSpotlightFeatures" /t "REG_DWORD" /d "1" /f > nul 2>&1
 rem Microsoft Consumer Experiences
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t "REG_DWORD" /d "1" /f > nul 2>&1
+rem Lock the Taskbar
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "LockTaskbar" /t "REG_DWORD" /d "1" /f > nul 2>&1
 
 rem Hibernation
 powercfg /hibernate off
