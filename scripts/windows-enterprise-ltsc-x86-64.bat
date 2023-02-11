@@ -154,6 +154,9 @@ rem Windows Insider Service
 reg add "HKLM\System\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
 rem Adobe Service
 reg add "HKLM\System\CurrentControlSet\Services\AdobeARMservice" /v "Start" /t REG_DWORD /d "4" /f > nul 2>&1
+rem Smart Card
+reg add "HKLM\System\CurrentControlSet\Services\SCardSvr" /t REG_DWORD /d "4" /f > nul 2>&1
+reg add "HKLM\System\CurrentControlSet\Services\CertPropSvc" /t REG_DWORD /d "4" /f > nul 2>&1
 
 echo Time And Language Setting > nul 2>&1
 rem Show Text Suggestions When Typing On The Physical Keyboard

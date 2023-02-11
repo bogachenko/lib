@@ -44,6 +44,10 @@ taskkill /f > nul 2>&1 /im notepad++.exe > nul 2>&1
 rem Thunderbird
 taskkill /f > nul 2>&1 /im thunderbird.exe > nul 2>&1
 
+echo Stop services > nul 2>&1
+rem Windows Update Center
+net stop wuauserv
+
 echo Flush DNS Cache > nul 2>&1
 ipconfig /flushdns > nul 2>&1
 
@@ -296,6 +300,7 @@ del "%LOCALAPPDATA%\Chromium\User Data\Default\Web Data-journal" /s /q > nul 2>&
 del "%LOCALAPPDATA%\Chromium\User Data\Default\Web Data" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Chromium\User Data\Default\Cache" /s /q > nul 2>&1
+rd "%LOCALAPPDATA%\Chromium\User Data\Default\Code Cache" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Chromium\User Data\Default\commerce_subscription_db" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Chromium\User Data\Default\coupon_db" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Chromium\User Data\Default\databases" /s /q > nul 2>&1
@@ -340,6 +345,8 @@ echo GitHub Desktop > nul 2>&1
 rd "%LOCALAPPDATA%\GitHubDesktop\*.log" /s /q > nul 2>&1
 
 echo Windows > nul 2>&1
+rd "%WINDIR%\Panther" /s /q > nul 2>&1
+rd "%WINDIR%\softwareDistribution" /s /q > nul 2>&1
 rd "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization" /s /q > nul 2>&1
 rd "%WINDIR%\ServiceProfiles\NetworkService\AppData\LocalLow\Microsoft\CryptnetUrlCache" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\USOShared\Logs" /s /q > nul 2>&1
@@ -423,6 +430,10 @@ timeout 5 > nul 2>&1
 echo Start process > nul 2>&1
 rem Windows Explorer
 start explorer.exe
+
+echo Start services > nul 2>&1
+rem Windows Update Center
+net start wuauserv
 
 echo Shutdown > nul 2>&1
 exit
