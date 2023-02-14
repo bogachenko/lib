@@ -6,24 +6,12 @@ rem Getting superuser rights
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
-:: Windows 10 Enterprise LTSC build 19044.2075 x86_64
+:: Windows 10 Enterprise LTSC build 19044.2546 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
-
-:: Copyright 2022 Bogachenko Vyacheslav
-::
-:: This script is provided "AS IS" without warranty of any kind, either expressed or implied.
-:: Use it at your own risk! The author is not responsible for any claims for damage that may arise from the use of this script.
 
 echo Stop processes > nul 2>&1
 rem Windows Explorer
 taskkill /f > nul 2>&1 /im explorer.exe > nul 2>&1
-rem Windows Security Health Service
-taskkill /f > nul 2>&1 /im SecurityHealthService.exe > nul 2>&1
-taskkill /f > nul 2>&1 /im SecurityHealthSystray.exe > nul 2>&1
-rem Microsoft Compatibility Telemetry
-taskkill /f > nul 2>&1 /im compattelrunner.exe > nul 2>&1
-rem Microsoft SmartScreen
-taskkill /f > nul 2>&1 /im smartscreen.exe > nul 2>&1
 
 echo Windows Task Scheduler > nul 2>&1
 rem Microsoft Compatibility Telemetry Tasks
@@ -157,6 +145,8 @@ reg add "HKLM\System\CurrentControlSet\Services\AdobeARMservice" /v "Start" /t R
 rem Smart Card
 reg add "HKLM\System\CurrentControlSet\Services\SCardSvr" /t REG_DWORD /d "4" /f > nul 2>&1
 reg add "HKLM\System\CurrentControlSet\Services\CertPropSvc" /t REG_DWORD /d "4" /f > nul 2>&1
+rem Chemtable Startup Checking
+reg add "HKLM\System\CurrentControlSet\Services\Chemtable Startup Checking" /t REG_DWORD /d "4" /f > nul 2>&1
 
 echo Time And Language Setting > nul 2>&1
 rem Show Text Suggestions When Typing On The Physical Keyboard
