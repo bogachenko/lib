@@ -1,31 +1,32 @@
 {
-  "timeStamp": 1674354788095,
+  "timeStamp": 1676353913136,
   "version": "1.46.0",
   "userSettings": {
     "advancedUserEnabled": true,
     "uiTheme": "light",
-    "externalLists": "https://easylist-downloads.adblockplus.org/bitblock.txt\nhttps://easylist-downloads.adblockplus.org/cntblock.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt\nhttps://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
+    "externalLists": "https://easylist-downloads.adblockplus.org/bitblock.txt\nhttps://easylist-downloads.adblockplus.org/cntblock.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt\nhttps://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
     "firewallPaneMinimized": false,
     "importedLists": [
       "https://easylist-downloads.adblockplus.org/bitblock.txt",
       "https://easylist-downloads.adblockplus.org/cntblock.txt",
       "https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt",
+      "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt",
       "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
       "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt"
     ],
     "popupPanelSections": 63,
-    "suspendUntilListsAreLoaded": true,
     "tooltipsDisabled": true
   },
   "selectedFilterLists": [
     "user-filters",
     "ublock-filters",
-    "ublock-abuse",
     "easylist",
     "easyprivacy",
+    "ublock-annoyances",
     "RUS-0",
     "https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt",
     "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
+    "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt",
     "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
     "https://easylist-downloads.adblockplus.org/bitblock.txt",
     "https://easylist-downloads.adblockplus.org/cntblock.txt"
@@ -35,7 +36,7 @@
     "filterAuthorMode": true,
     "loggerPopupType": "normal",
     "uiPopupConfig": "+logger",
-    "userResourcesLocation": "https://raw.githubusercontent.com/bogachenko/lib/master/txt/scriptlets.txt https://raw.githubusercontent.com/uBlock-user/uBO-Scriptlets/master/scriptlets.js"
+    "userResourcesLocation": "https://raw.githubusercontent.com/bogachenko/lib/master/text/scriptlets.txt https://raw.githubusercontent.com/uBlock-user/uBO-Scriptlets/master/scriptlets.js"
   },
   "whitelist": [
     "[::1]",

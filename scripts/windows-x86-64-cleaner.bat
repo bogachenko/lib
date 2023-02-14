@@ -109,6 +109,7 @@ del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\history.sqlite-wal" /s /q > nul 2
 rd "%APPDATA%\Thunderbird\Profiles\%USERNAME%\crashes" /s /q > nul 2>&1
 rd "%APPDATA%\Thunderbird\Profiles\%USERNAME%\minidumps" /s /q > nul 2>&1
 rd "%APPDATA%\Thunderbird\Profiles\%USERNAME%\datareporting" /s /q > nul 2>&1
+del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\formhistory.sqlite" /s /q > nul 2>&1
 
 echo Adobe > nul 2>&1
 rd "%USERPROFILE%\AppData\LocalLow\Adobe" /s /q > nul 2>&1
