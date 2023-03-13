@@ -14,7 +14,7 @@ sudo pacman -Syyuu
 
 # Installing main packages.
 sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic man-db gparted
-sudo pacman -S --needed --noconfirm git sddm vim jack2 wget weston wayland php ffmpeg alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ntp pwgen i3 dmenu xdg-user-dirs rxvt-unicode gvfs
+sudo pacman -S --needed --noconfirm git sddm vim dbus-broker jack2-dbus wget weston wayland php ffmpeg alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ntp pwgen i3 dmenu xdg-user-dirs rxvt-unicode gvfs realtime-privileges cpupower
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
 intel=$(lspci | grep -e VGA -e 3D | grep 'Intel' 2> /dev/null || echo '')
@@ -42,8 +42,8 @@ esac
 done
 fi
 if [[ -n "$intel" ]]; then
-sudo pacman -S --needed --noconfirm xf86-video-intel intel-ucode libva libva-utils libva-intel-driver vulkan-intel iucode-tool
-sudo pacman -S --needed --noconfirm lib32-libva lib32-libva-intel-driver lib32-vulkan-intel
+sudo pacman -S --needed --noconfirm xf86-video-intel intel-ucode libva libva-utils libva-intel-driver vulkan-intel iucode-tool vulkan-icd-loader
+sudo pacman -S --needed --noconfirm lib32-libva lib32-libva-intel-driver lib32-vulkan-intel lib32-vulkan-icd-loader
 sudo modprobe cpuid
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo sh -c "cat > /etc/X11/xorg.conf.d/20-intel.conf" <<EOF
@@ -162,6 +162,7 @@ sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable gpm.service && sudo systemctl start gpm.service
 sudo systemctl enable bluetooth.service && sudo systemctl start bluetooth.service
 sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
+sudo systemctl enable dbus-broker.service
 sudo systemctl enable sddm.service
 pulseaudio -k && pulseaudio --start
 
