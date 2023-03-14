@@ -143,12 +143,6 @@ user_pref("network.connectivity-service.IPv6.url", "");
 user_pref("network.captive-portal-service.enabled", false);
 user_pref("network.connectivity-service.enabled", false);
 
-// Cache API (Cache storage)
-// [NOTE] It is a repository on the users computer where scripts can store information. It is part of the "Service workers" specification, but can be used without them.
-// API Кэша (Хранилище кэша)
-// [ЗАМЕТКА] Это хранилище на компьютере пользователя, куда скрипты могут складывать информацию. Оно является частью спецификации "Service workers", но может быть использовано и без них.
-user_pref("dom.caches.enabled", false);
-
 // Web notifications
 // [NOTE] Data is sent to the site(s) not currently open in the browser.
 // Веб-уведомления

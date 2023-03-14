@@ -290,12 +290,6 @@ user_pref("services.sync.engine.history", false);
 user_pref("services.sync.engine.prefs", false);
 user_pref("services.sync.engine.tabs", false);
 
-// Cache API (Cache storage)
-// [NOTE] It is a repository on the users computer where scripts can store information. It is part of the "Service workers" specification, but can be used without them.
-// API Кэша (Хранилище кэша)
-// [ЗАМЕТКА] Это хранилище на компьютере пользователя, куда скрипты могут складывать информацию. Оно является частью спецификации "Service workers", но может быть использовано и без них.
-user_pref("dom.caches.enabled", false);
-
 // Web notifications
 // [NOTE] Data is sent to the site(s) not currently open in the browser.
 // Веб-уведомления
@@ -675,7 +669,7 @@ user_pref("browser.preferences.moreFromMozilla", false);
 user_pref("default-browser-agent.enabled", false);
 
 // WebGL
-user_pref("webgl.enable-webgl2", true);
+user_pref("webgl.enable-webgl2", false);
 user_pref("webgl.disabled", true);
 user_pref("webgl.min_capability_mode", true);
 

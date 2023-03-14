@@ -82,12 +82,6 @@ user_pref("network.connectivity-service.IPv6.url", "");
 user_pref("network.captive-portal-service.enabled", false);
 user_pref("network.connectivity-service.enabled", false);
 
-// Cache API (Cache storage)
-// [NOTE] It is a repository on the users computer where scripts can store information. It is part of the "Service workers" specification, but can be used without them.
-// API Кэша (Хранилище кэша)
-// [ЗАМЕТКА] Это хранилище на компьютере пользователя, куда скрипты могут складывать информацию. Оно является частью спецификации "Service workers", но может быть использовано и без них.
-user_pref("dom.caches.enabled", false);
-
 // Web notifications
 // [NOTE] Data is sent to the site(s) not currently open in the browser.
 // Веб-уведомления
@@ -325,7 +319,7 @@ user_pref("browser.region.network.url", "");
 user_pref("browser.region.update.enabled", false);
 
 // WebGL
-user_pref("webgl.enable-webgl2", true);
+user_pref("webgl.enable-webgl2", false);
 user_pref("webgl.disabled", true);
 user_pref("webgl.min_capability_mode", true);
 
