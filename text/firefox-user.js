@@ -76,6 +76,12 @@ user_pref("browser.newtabpage.activity-stream.logowordmark.alwaysVisible", false
 user_pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
 user_pref("browser.newtabpage.activity-stream.impressionId", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.cfr", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.message-groups", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.messaging-experiments", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.onboarding", "");
+user_pref("browser.newtabpage.activity-stream.asrouter.providers.whats-new-panel", "");
 
 // Restriction on opening new windows 
 //		0 = Open all links in tabs 
