@@ -26,11 +26,11 @@ user_pref("privacy.trackingprotection.pbmode.enabled", false);
 user_pref("privacy.sanitize.sanitizeOnShutdown", true);
 
 // Automatically play sound in non-active tabs
-//		TRUE = Do not play
-//		FALSE = Play
+//      TRUE = Do not play
+//      FALSE = Play
 // Автоматическое воспроизведение звука в неактивных вкладках
-//		TRUE = Не воспроизводить
-//		FALSE = Воспроизводить
+//      TRUE = Не воспроизводить
+//      FALSE = Воспроизводить
 user_pref("media.block-autoplay-until-in-foreground", true);
 
 // Telemetry
@@ -104,13 +104,13 @@ user_pref("browser.cache.disk.capacity", 0);
 user_pref("browser.cache.offline.enable", false);
 
 // Storing extra session data
-//		0 = Everywhere
-//		1 = Unencrypted sites
-//		2 = Nowhere
+//      0 = Everywhere
+//      1 = Unencrypted sites
+//      2 = Nowhere
 // Сохранение дополнительных данных сеанса
-//		0 = Везде
-//		1 = Незашифрованные сайты
-//		2 = Нигде
+//      0 = Везде
+//      1 = Незашифрованные сайты
+//      2 = Нигде
 user_pref("browser.sessionstore.privacy_level", 2);
 
 // Restore active session in case of browser crash
@@ -124,18 +124,18 @@ user_pref("browser.sessionstore.interval", 120000);
 // Cookies
 // [NOTE] A Cookie is a piece of data (a small text file) sent by the server and stored in the browser. When the user reloads the same page, the browser sends the cookie back to the server and notifies it of the previous activity. Cookies store information such as passwords, logins, session data, credit card data, email addresses, and record various user activity and other statistics.
 // [WARNING] Cookies are actively used by many web resources in the process of monitoring and tracking user activity. Theft and analysis of cookies is a potentially dangerous and serious attack, leading to global leaks of user data and use.
-//		0 = Accept cookies and site data
-//		1 = Block third-party cookies
-//		2 = Block all cookies
-//		3 = Block cookies from sites not visited
+//      0 = Accept cookies and site data
+//      1 = Block third-party cookies
+//      2 = Block all cookies
+//      3 = Block cookies from sites not visited
 //      4 = Cross-site and social media trackers
 // Куки
 // [ЗАМЕТКА] Cookie - фрагмент данных (небольшой текстовый файл), отправляемый сервером и сохраняющийся в браузере. Когда пользователь вновь загружает ту же самую страницу, браузер отсылает cookie назад на сервер и уведомляет его о предыдущей активности. Cookie хранят такую информацию, как пароли, логины, сеансовые данные, данные кредитных карт, электронные почтовые адреса и записывают различную пользовательскую активность и прочую статистику.
 // [ВНИМАНИЕ] Cookie активно используются многими веб-ресурсами в процессе контроля и слежки за пользовательской активностью. Похищение и анализ cookie является потенциально опасной и серьезной атакой, приводящей к глобальным утечкам пользовательских данных и их использованию.
-//		0 = Принимать куки и данные сайтов
-//		1 = Блокировать стороннии куки
-//		2 = Блокировать все куки
-//		3 = Блокировать куки с не посещенных сайтов
+//      0 = Принимать куки и данные сайтов
+//      1 = Блокировать стороннии куки
+//      2 = Блокировать все куки
+//      3 = Блокировать куки с не посещенных сайтов
 //      4 = Трекеры для межсайтовых и социальных сетей
 user_pref("network.cookie.cookieBehavior", 0);
 
@@ -196,11 +196,11 @@ user_pref("xpinstall.signatures.required", false);
 user_pref("dom.serviceWorkers.enabled", false);
 
 // Thumbnails of visited pages
-//		TRUE = Page thumbnails will not be created
-//		FALSE = Page thumbnails will be created 
+//      TRUE = Page thumbnails will not be created
+//      FALSE = Page thumbnails will be created 
 // Эскизы посещенных страниц
-//		TRUE = Эскизы страниц создаваться не будут
-//		FALSE = Эскизы страниц создаваться будут
+//      TRUE = Эскизы страниц создаваться не будут
+//      FALSE = Эскизы страниц создаваться будут
 user_pref("browser.pagethumbnails.capturing_disabled", true);
 
 // Block pop-ups
@@ -234,11 +234,11 @@ user_pref("dom.fileHandle.enabled", false);
 user_pref("device.storage.enabled", false);
 
 // Showing search results
-//		TRUE = To wrap lines
-//		FALSE = Do not wrap lines
+//      TRUE = To wrap lines
+//      FALSE = Do not wrap lines
 // Показ результатов поиска
-//		TRUE = Переносить строки
-//		FALSE = Не переносить строки
+//      TRUE = Переносить строки
+//      FALSE = Не переносить строки
 user_pref("view_source.wrap_long_lines", true);
 
 // CSS :visited selectors

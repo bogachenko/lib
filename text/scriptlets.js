@@ -1,5 +1,7 @@
 // Collection of scriptlets to be used for injection in uBlock Origin.
 
+'use strict';
+
 /// eval-logger
 /// alias eval-logger.js
 (() => {

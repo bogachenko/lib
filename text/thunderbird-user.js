@@ -13,11 +13,11 @@ user_pref("mailnews.auto_config.addons_url", "");
 user_pref("mailnews.auto_config_url", "");
 
 // Start page
-//		true = Enable
-//		false = Disable
+//      true = Enable
+//      false = Disable
 // Стартовая страница
-//		true = Включить
-//		false = Отключить
+//      true = Включить
+//      false = Отключить
 user_pref("mailnews.start_page.enabled", false);
 
 // Homepage
@@ -25,11 +25,11 @@ user_pref("mailnews.start_page.enabled", false);
 user_pref("mailnews.start_page.url", "about:blank");
 
 // Opening tabs and external applications in the background
-//		TRUE = Open such tabs in the background
-//		FALSE = Switch to openable tabs
+//      TRUE = Open such tabs in the background
+//      FALSE = Switch to openable tabs
 // Открытие вкладок и внешних приложений в фоновом режиме
-//		TRUE = Открывать такие вкладки в фоне
-//		FALSE = Переключаться на открываемые вкладки
+//      TRUE = Открывать такие вкладки в фоне
+//      FALSE = Переключаться на открываемые вкладки
 user_pref("browser.tabs.loadDivertedInBackground", true);
 
 // Search suggestions
@@ -59,17 +59,17 @@ user_pref("privacy.cpd.cookies", true);
 user_pref("privacy.cpd.history", true);
 
 // Time range to clear
-//		0 = Everything
-//		1 = Last hour
-//		2 = Last two hours
-//		3 = Last four hours
-//		4 = Today
+//      0 = Everything
+//      1 = Last hour
+//      2 = Last two hours
+//      3 = Last four hours
+//      4 = Today
 // Диапазон времени для очистки
-//		0 = Все
-//		1 = Последний час
-//		2 = Последние два часа
-//		3 = Последние четыре часа
-//		4 = Сегодня
+//      0 = Все
+//      1 = Последний час
+//      2 = Последние два часа
+//      3 = Последние четыре часа
+//      4 = Сегодня
 user_pref("privacy.sanitize.timeSpan", 0);
 
 // Maximum number of backup bookmarks
@@ -86,11 +86,11 @@ user_pref("privacy.trackingprotection.pbmode.enabled", false);
 user_pref("privacy.trackingprotection.enabled", false);
 
 // Automatically play sound in non-active tabs
-//		TRUE = Do not play
-//		FALSE = Play
+//      TRUE = Do not play
+//      FALSE = Play
 // Автоматическое воспроизведение звука в неактивных вкладках
-//		TRUE = Не воспроизводить
-//		FALSE = Воспроизводить
+//      TRUE = Не воспроизводить
+//      FALSE = Воспроизводить
 user_pref("media.block-autoplay-until-in-foreground", true);
 
 // Telemetry
@@ -164,17 +164,17 @@ user_pref("browser.cache.offline.enable", false);
 // Cookies
 // [NOTE] A Cookie is a piece of data (a small text file) sent by the server and stored in the browser. When the user reloads the same page, the browser sends the cookie back to the server and notifies it of the previous activity. Cookies store information such as passwords, logins, session data, credit card data, email addresses, and record various user activity and other statistics.
 // [WARNING] Cookies are actively used by many web resources in the process of monitoring and tracking user activity. Theft and analysis of cookies is a potentially dangerous and serious attack, leading to global leaks of user data and use.
-//		0 = Accept cookies and site data
-//		1 = Block third-party cookies
-//		2 = Block all cookies
-//		3 = Block cookies from sites not visited
+//      0 = Accept cookies and site data
+//      1 = Block third-party cookies
+//      2 = Block all cookies
+//      3 = Block cookies from sites not visited
 // Куки
 // [ЗАМЕТКА] Cookie - фрагмент данных (небольшой текстовый файл), отправляемый сервером и сохраняющийся в браузере. Когда пользователь вновь загружает ту же самую страницу, браузер отсылает cookie назад на сервер и уведомляет его о предыдущей активности. Cookie хранят такую информацию, как пароли, логины, сеансовые данные, данные кредитных карт, электронные почтовые адреса и записывают различную пользовательскую активность и прочую статистику.
 // [ВНИМАНИЕ] Cookie активно используются многими веб-ресурсами в процессе контроля и слежки за пользовательской активностью. Похищение и анализ cookie является потенциально опасной и серьезной атакой, приводящей к глобальным утечкам пользовательских данных и их использованию.
-//		0 = Принимать куки и данные сайтов
-//		1 = Блокировать стороннии куки
-//		2 = Блокировать все куки
-//		3 = Блокировать куки с не посещенных сайтов
+//      0 = Принимать куки и данные сайтов
+//      1 = Блокировать стороннии куки
+//      2 = Блокировать все куки
+//      3 = Блокировать куки с не посещенных сайтов
 user_pref("network.cookie.cookieBehavior", 0);
 
 // Storage API
@@ -210,13 +210,13 @@ user_pref("signon.autofillForms.http", false);
 user_pref("general.smoothScroll", false);
 
 // Path to save files
-//		0 = Desktop
-//		1 = Downloads
-//		2 = Last used folder
+//      0 = Desktop
+//      1 = Downloads
+//      2 = Last used folder
 // Путь для сохранения файлов
-//		0 = Рабочий стол
-//		1 = Загрузки
-//		2 = Последняя используемая папка
+//      0 = Рабочий стол
+//      1 = Загрузки
+//      2 = Последняя используемая папка
 user_pref("browser.download.folderList", 1);
 
 // Adding downloads to the list of recent system documents
@@ -284,11 +284,11 @@ user_pref("dom.fileHandle.enabled", false);
 user_pref("device.storage.enabled", false);
 
 // Showing search results
-//		TRUE = To wrap lines
-//		FALSE = Do not wrap lines
+//      TRUE = To wrap lines
+//      FALSE = Do not wrap lines
 // Показ результатов поиска
-//		TRUE = Переносить строки
-//		FALSE = Не переносить строки
+//      TRUE = Переносить строки
+//      FALSE = Не переносить строки
 user_pref("view_source.wrap_long_lines", true);
 
 // CSS :visited selectors
