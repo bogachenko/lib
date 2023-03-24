@@ -1,7 +1,7 @@
-# Collection of scriptlets to be used for injection in uBlock Origin.
+// Collection of scriptlets to be used for injection in uBlock Origin.
 
-# eval-logger
-eval-logger.js application/javascript
+/// eval-logger
+/// alias eval-logger.js
 (() => {
 	'use strict';
 	let z = window.eval,
@@ -12,8 +12,8 @@ eval-logger.js application/javascript
 	}.bind(window);
 })();
 
-# decodeURIComponent-logger
-duc-logger.js application/javascript
+/// decodeURIComponent-logger
+/// alias duc-logger.js
 (() => {
     let z = window.decodeURIComponent,
         log = console.log.bind(console);
@@ -23,8 +23,8 @@ duc-logger.js application/javascript
     }.bind(window);
 })();
 
-# encodeURIComponent-logger
-euc-logger.js application/javascript
+/// encodeURIComponent-logger
+/// alias euc-logger.js
 (() => {
     let z = window.encodeURIComponent,
         log = console.log.bind(console);
@@ -34,8 +34,8 @@ euc-logger.js application/javascript
     }.bind(window);
 })();
 
-# document.write-defuser
-dwrite.js application/javascript
+/// document.write-defuser
+/// alias dwrite.js
 (() => {
     let needle = '{{1}}';
     if (needle === '' || needle === '{{1}}') {
@@ -54,8 +54,8 @@ dwrite.js application/javascript
     }.bind(window);
 })();
 
-# document.write-logger
-dwrite-logger.js application/javascript
+/// document.write-logger
+/// alias dwrite-logger.js
 (() => {
     let z = window.document.write.bind(document),
         log = console.log.bind(console);
@@ -65,8 +65,8 @@ dwrite-logger.js application/javascript
     }.bind(window);
 })();
 
-# document.createElement-logger
-dce-logger.js application/javascript
+/// document.createElement-logger
+/// alias dce-logger.js
 (() => {
 	let z = window.document.createElement.bind(document),
 		log = console.log.bind(console);
@@ -76,8 +76,8 @@ dce-logger.js application/javascript
 	}.bind(window);
 })();
 
-# document.getElementsByName-logger
-dgebn-logger.js application/javascript
+/// document.getElementsByName-logger
+/// alias dgebn-logger.js
 (() => {
 	let z = window.document.getElementsByName.bind(document),
 		log = console.log.bind(console);
@@ -87,8 +87,8 @@ dgebn-logger.js application/javascript
 	}.bind(window);
 })();
 
-# document.getElementsByTagName-logger
-dgebtn-logger.js application/javascript
+/// document.getElementsByTagName-logger
+/// alias dgebtn-logger.js
 (() => {
 	let z = window.document.getElementsByTagName.bind(document),
 		log = console.log.bind(console);
@@ -98,8 +98,8 @@ dgebtn-logger.js application/javascript
 	}.bind(window);
 })();
 
-# mouseclick-defuser
-mousedef.js application/javascript
+/// mouseclick-defuser
+/// alias mousedef.js
 (() => {
     'use strict';
     document.body.removeAttribute('oncopy');
@@ -112,8 +112,8 @@ mousedef.js application/javascript
     document.ondrag = null;
 })();
 
-# mouseclick-defuser-2
-mousedef2.js application/javascript
+/// mouseclick-defuser-2
+/// alias mousedef2.js
 ! function() {
     function e(e) {
         for (var t = 0; t < r.length; t++) {
@@ -131,16 +131,16 @@ mousedef2.js application/javascript
     } catch (e) {}(t = document.createElement("style")).type = "text/css", t.innerHTML = "* { -webkit-touch-callout: default !important; -webkit-user-select: text !important; -moz-user-select: text !important; -ms-user-select: text !important; user-select: text !important; } ", document.head.appendChild(t)
 }();
 
-# oncontextmenu-defuser
-contextmenudef.js application/javascript
+/// oncontextmenu-defuser
+/// alias contextmenudef.js
 function clearEventListeners() {
     document.oncontextmenu = null;
     document.body.removeAttribute("oncontextmenu")
 }
 window.addEventListener('load', clearEventListeners, false);
 
-# btoa-logger
-btoa-logger.js application/javascript
+/// btoa-logger
+/// alias btoa-logger.js
 (() => {
 	let z = window.btoa,
 		log = console.log.bind(console);
@@ -150,15 +150,15 @@ btoa-logger.js application/javascript
 	}.bind(window);
 })();
 
-# cookie-setter
-cookie-set.js application/javascript
+/// cookie-setter
+/// alias cookie-set.js
 (() => {
 	     'use strict';
 	     document.cookie = '{{1}}={{2}}; max-age={{3}}; secure; path=/;';
 })();
 
-# js-rm
-js-rm.js application/javascript
+/// js-rm
+/// alias js-rm.js
 (() => { 
 	  'use strict';
 	  let needle = '{{1}}';
@@ -186,8 +186,8 @@ js-rm.js application/javascript
 	  if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
 
-# css-rm
-css-rm.js application/javascript
+/// css-rm
+/// alias css-rm.js
 (() => { 
           'use strict';
 	  let needle = '{{1}}';
@@ -215,8 +215,8 @@ css-rm.js application/javascript
 	  if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
 
-# frame-rm
-frame-rm.js application/javascript
+/// frame-rm
+/// alias frame-rm.js
 (() => { 
           'use strict';
 	  let needle = '{{1}}';
@@ -244,8 +244,8 @@ frame-rm.js application/javascript
 	  if (document.readyState === 'complete') { observer.disconnect(); return; }
 })();
 
-# meta-rm
-meta-rm.js application/javascript
+/// meta-rm
+/// alias meta-rm.js
 (() => { 
           'use strict';
 	  let needle = '{{1}}';
@@ -273,8 +273,8 @@ meta-rm.js application/javascript
 	  if (document.readyState === 'complete') { observer.disconnect(); return; } 
 })();
 
-# javascript-logger
-js-logger.js application/javascript
+/// javascript-logger
+/// alias js-logger.js
 (() => {
 		'use strict';
 		const logscripts = ev => {
@@ -297,8 +297,8 @@ js-logger.js application/javascript
 		}
 })();
 
-# noscript-logger
-noscript-logger.js application/javascript
+/// noscript-logger
+/// alias noscript-logger.js
 (() => {
 		'use strict';
 		const lognoscripts = ev => {
@@ -321,8 +321,8 @@ noscript-logger.js application/javascript
 		}
 })();
 
-# div-tag-logger
-div-logger.js application/javascript
+/// div-tag-logger
+/// alias div-logger.js
 (() => {
 		'use strict';
 		const logdivs = ev => {
@@ -345,8 +345,8 @@ div-logger.js application/javascript
 		}
 })();
 
-# element-clicker
-eclick.js application/javascript
+/// element-clicker
+/// alias eclick.js
 (() => {
 	'use strict';
 	let selector = '{{1}}';
@@ -364,8 +364,8 @@ eclick.js application/javascript
 	}
 })();
 
-# element-clicker-onload
-eclick2.js application/javascript
+/// element-clicker-onload
+/// alias eclick2.js
 (() => {
 		'use strict';
 		 let selector = '{{1}}';
