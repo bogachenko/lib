@@ -597,6 +597,9 @@ reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t REG_DWORD /d "0" /f > nul 2>&1
 reg add "HKLM\System\CurrentControlSet\Control\WMI\AutoLogger\ReadyBoot" /v "Start" /t REG_DWORD /d "0" /f > nul 2>&1
 
+rem Firewall
+netsh advfirewall set allprofiles state off
+
 rem Windows Activation
 slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX > nul 2>&1
 slmgr /skms kms.digiboy.ir > nul 2>&1
