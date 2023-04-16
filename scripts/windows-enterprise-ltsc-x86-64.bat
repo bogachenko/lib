@@ -589,6 +589,10 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "L
 rem Hibernation
 powercfg /hibernate off
 
+rem Sleep Settings
+powercfg -x standby-timeout-dc 0
+powercfg -x standby-timeout-ac 0
+
 rem Fast Startup
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f > nul 2>&1
 

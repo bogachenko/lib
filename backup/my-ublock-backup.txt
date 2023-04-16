@@ -1,10 +1,10 @@
 {
-  "timeStamp": 1676353913136,
-  "version": "1.46.0",
+  "timeStamp": 1681564372560,
+  "version": "1.48.4",
   "userSettings": {
     "advancedUserEnabled": true,
     "uiTheme": "light",
-    "externalLists": "https://easylist-downloads.adblockplus.org/bitblock.txt\nhttps://easylist-downloads.adblockplus.org/cntblock.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt\nhttps://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
+    "externalLists": "https://easylist-downloads.adblockplus.org/bitblock.txt\nhttps://easylist-downloads.adblockplus.org/cntblock.txt\nhttps://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt\nhttps://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt\nhttps://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt\nhttps://www.i-dont-care-about-cookies.eu/abp/",
     "firewallPaneMinimized": false,
     "importedLists": [
       "https://easylist-downloads.adblockplus.org/bitblock.txt",
@@ -12,7 +12,8 @@
       "https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt",
       "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt",
       "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
-      "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt"
+      "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
+      "https://www.i-dont-care-about-cookies.eu/abp/"
     ],
     "popupPanelSections": 63,
     "tooltipsDisabled": true
@@ -22,11 +23,15 @@
     "ublock-filters",
     "easylist",
     "easyprivacy",
+    "fanboy-cookiemonster",
+    "fanboy-annoyance",
+    "fanboy-social",
     "ublock-annoyances",
     "RUS-0",
     "https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoPF.txt",
     "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
     "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt",
+    "https://www.i-dont-care-about-cookies.eu/abp/",
     "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
     "https://easylist-downloads.adblockplus.org/bitblock.txt",
     "https://easylist-downloads.adblockplus.org/cntblock.txt"
@@ -54,7 +59,7 @@
     "vivaldi-scheme",
     "wyciwyg-scheme"
   ],
-  "dynamicFilteringString": "",
+  "dynamicFilteringString": "* local.adguard.org * allow\n* injections.adguard.org * allow",
   "urlFilteringString": "",
   "hostnameSwitchesString": "no-csp-reports: * true",
   "userFilters": ""
