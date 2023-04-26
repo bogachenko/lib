@@ -400,6 +400,7 @@ rd "%LOCALAPPDATA%\NVIDIA\DXCache" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\NVIDIA\GLCache" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\NVIDIA Corporation" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\NVIDIA" /s /q > nul 2>&1
+rd "%PROGRAMDATA%\NVIDIA Corporation\Installer2" /s /q > nul 2>&1
 
 echo Intel > nul 2>&1
 rd "%PROGRAMDATA%\Intel" /s /q > nul 2>&1

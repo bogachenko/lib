@@ -587,11 +587,11 @@ rem Lock the Taskbar
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "LockTaskbar" /t "REG_DWORD" /d "1" /f > nul 2>&1
 
 rem Hibernation
-powercfg /hibernate off
+powercfg /hibernate off > nul 2>&1
 
 rem Sleep Settings
-powercfg -x standby-timeout-dc 0
-powercfg -x standby-timeout-ac 0
+powercfg -x standby-timeout-dc 0 > nul 2>&1
+powercfg -x standby-timeout-ac 0 > nul 2>&1
 
 rem Fast Startup
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f > nul 2>&1
@@ -602,7 +602,7 @@ reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management
 reg add "HKLM\System\CurrentControlSet\Control\WMI\AutoLogger\ReadyBoot" /v "Start" /t REG_DWORD /d "0" /f > nul 2>&1
 
 rem Firewall
-netsh advfirewall set allprofiles state off
+netsh advfirewall set allprofiles state off > nul 2>&1
 
 rem Windows Activation
 slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX > nul 2>&1
