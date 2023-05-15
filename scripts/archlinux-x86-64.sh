@@ -9,11 +9,11 @@ USERNAME="$(whoami)"
 clear
 
 # Checking and installing updates.
-sudo sed -i 's/#Color/Color/' /etc/pacman.conf
+sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
 sudo pacman -Syyuu
 
 # Installing main packages.
-sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic man-db gparted
+sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic man-db gparted ruby lua
 sudo pacman -S --needed --noconfirm git sddm vim dbus-broker jack2-dbus wget weston wayland php ffmpeg alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ntp pwgen i3 dmenu xdg-user-dirs rxvt-unicode gvfs realtime-privileges cpupower ranger
 # Installing drivers.
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
