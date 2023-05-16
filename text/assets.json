@@ -5,9 +5,6 @@
     "contentURL": [
       "https://github.com/bogachenko/lib/raw/master/text/assets.json",
       "assets/assets.json"
-    ],
-    "cdnURLs": [
-      "https://about:blank/"
     ]
   },
   "public_suffix_list.dat": {
@@ -47,7 +44,8 @@
       "https://raw.githack.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
       "https://cdn.jsdelivr.net/gh/bogachenko/fuckfuckadblock/fuckfuckadblock.txt"
     ],
-    "supportURL": "https://github.com/bogachenko/fuckfuckadblock/"
+    "supportURL": "https://github.com/bogachenko/fuckfuckadblock/",
+    "instructionURL": "https://github.com/bogachenko/fuckfuckadblock/wiki/About-Fuck-Fuckadblock"
   },
   "ublock-badware": {
     "content": "filters",
