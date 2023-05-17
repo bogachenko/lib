@@ -245,6 +245,7 @@
  "content": "filters",
  "group": "annoyances",
  "title": "Fuck Fuckadblock",
+ "updateAfter": 13,
  "contentURL": [
   "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt"
  ],
@@ -256,6 +257,37 @@
  "supportURL": "https://github.com/bogachenko/fuckfuckadblock/",
  "instructionURL": "https://github.com/bogachenko/fuckfuckadblock/wiki/About-Fuck-Fuckadblock"
  },
+ "fuckfuckadblock-mining": {
+  "content": "filters",
+  "group": "annoyances",
+  "title": "Fuck Fuckadblock: Mining",
+  "updateAfter": 13,
+  "contentURL": [
+  "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt"
+  ],
+  "cdnURLs": [
+  "https://raw.githack.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt",
+  "https://cdn.statically.io/gh/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt",
+  "https://cdn.jsdelivr.net/gh/bogachenko/fuckfuckadblock/fuckfuckadblock-mining.txt"
+  ],
+  "supportURL": "https://github.com/bogachenko/fuckfuckadblock/",
+  "instructionURL": "https://github.com/bogachenko/fuckfuckadblock/wiki/About-Fuck-Fuckadblock"
+  },
+  "nocoin": {
+    "content": "filters",
+    "group": "annoyances",
+    "title": "NoCoin Filter List",
+    "updateAfter": 13,
+    "contentURL": [
+    "https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt"
+    ],
+    "cdnURLs": [
+    "https://raw.githack.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
+    "https://cdn.statically.io/gh/hoshsadiq/adblock-nocoin-list/master/nocoin.txt",
+    "https://cdn.jsdelivr.net/gh/hoshsadiq/adblock-nocoin-list@master/nocoin.txt"
+    ],
+    "supportURL": "https://github.com/hoshsadiq/adblock-nocoin-list/"
+    },
  "adguard-annoyance": {
  "content": "filters",
  "group": "annoyances",
@@ -333,7 +365,6 @@
  "content": "filters",
  "group": "annoyances",
  "title": "uBlock filters – Annoyances",
- "off": true,
  "contentURL": "https://ublockorigin.github.io/uAssets/filters/annoyances.txt",
  "cdnURLs": [
   "https://ublockorigin.github.io/uAssetsCDN/filters/annoyances.min.txt",
