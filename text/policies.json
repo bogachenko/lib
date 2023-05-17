@@ -1,0 +1,13 @@
+{
+  "policies": {
+    "3rdparty": {
+      "Extensions": {
+        "uBlock0@raymondhill.net": {
+          "adminSettings": {
+            "assetsBootstrapLocation": "https://raw.githubusercontent.com/bogachenko/lib/master/text/assets.json"
+          }
+        }
+      }
+    }
+  }
+}
