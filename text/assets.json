@@ -32,26 +32,12 @@
     ],
     "supportURL": "https://github.com/uBlockOrigin/uAssets"
   },
-  "fuckfuckadblock": {
-    "content": "filters",
-    "group": "default",
-    "title": "Fuck Fuckadblock",
-    "contentURL": [
-      "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt"
-    ],
-    "cdnURLs": [
-      "https://cdn.statically.io/gh/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
-      "https://raw.githack.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
-      "https://cdn.jsdelivr.net/gh/bogachenko/fuckfuckadblock/fuckfuckadblock.txt"
-    ],
-    "supportURL": "https://github.com/bogachenko/fuckfuckadblock/",
-    "instructionURL": "https://github.com/bogachenko/fuckfuckadblock/wiki/About-Fuck-Fuckadblock"
-  },
   "ublock-badware": {
     "content": "filters",
     "group": "default",
     "parent": "uBlock filters",
     "title": "uBlock filters – Badware risks",
+    "off": true,
     "contentURL": [
       "https://ublockorigin.github.io/uAssets/filters/badware.txt",
       "assets/ublock/badware.txt"
@@ -70,6 +56,7 @@
     "group": "default",
     "parent": "uBlock filters",
     "title": "uBlock filters – Privacy",
+    "off": true,
     "contentURL": [
       "https://ublockorigin.github.io/uAssets/filters/privacy.txt",
       "assets/ublock/privacy.min.txt"
@@ -87,6 +74,7 @@
     "group": "default",
     "parent": "uBlock filters",
     "title": "uBlock filters – Resource abuse",
+    "off": true,
     "contentURL": [
       "https://ublockorigin.github.io/uAssets/filters/resource-abuse.txt",
       "assets/ublock/resource-abuse.txt"
@@ -104,6 +92,7 @@
     "group": "default",
     "parent": "uBlock filters",
     "title": "uBlock filters – Unbreak",
+    "off": true,
     "contentURL": [
       "https://ublockorigin.github.io/uAssets/filters/unbreak.txt",
       "assets/ublock/unbreak.txt"
@@ -121,6 +110,7 @@
     "group": "default",
     "parent": "uBlock filters",
     "title": "uBlock filters – Quick fixes",
+    "off": true,
     "contentURL": [
       "https://ublockorigin.github.io/uAssets/filters/quick-fixes.txt",
       "assets/ublock/quick-fixes.txt"
@@ -249,6 +239,21 @@
       "https://pup-filter.pages.dev/pup-filter.txt"
     ],
     "supportURL": "https://gitlab.com/malware-filter/pup-filter#pup-domains-blocklist"
+  },
+  "fuckfuckadblock": {
+    "content": "filters",
+    "group": "annoyances",
+    "title": "Fuck Fuckadblock",
+    "contentURL": [
+      "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt"
+    ],
+    "cdnURLs": [
+      "https://cdn.statically.io/gh/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
+      "https://raw.githack.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
+      "https://cdn.jsdelivr.net/gh/bogachenko/fuckfuckadblock/fuckfuckadblock.txt"
+    ],
+    "supportURL": "https://github.com/bogachenko/fuckfuckadblock/",
+    "instructionURL": "https://github.com/bogachenko/fuckfuckadblock/wiki/About-Fuck-Fuckadblock"
   },
   "adguard-annoyance": {
     "content": "filters",
