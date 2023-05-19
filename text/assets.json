@@ -250,6 +250,7 @@
   "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt"
  ],
  "cdnURLs": [
+  "https://fuckfuckadblock.pages.dev/fuckfuckadblock.txt",
   "https://cdn.statically.io/gh/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
   "https://raw.githack.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock.txt",
   "https://cdn.jsdelivr.net/gh/bogachenko/fuckfuckadblock/fuckfuckadblock.txt"
@@ -266,6 +267,7 @@
   "https://raw.githubusercontent.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt"
   ],
   "cdnURLs": [
+  "https://fuckfuckadblock.pages.dev/fuckfuckadblock-mining.txt",
   "https://raw.githack.com/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt",
   "https://cdn.statically.io/gh/bogachenko/fuckfuckadblock/master/fuckfuckadblock-mining.txt",
   "https://cdn.jsdelivr.net/gh/bogachenko/fuckfuckadblock/fuckfuckadblock-mining.txt"
