@@ -35,8 +35,8 @@ user_pref("browser.startup.blankWindow", false);
 user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.newtab.preload", false);
 
-// Restriction on opening new windows 
-//		0 = Open all links in tabs 
+// Restriction on opening new windows
+//		0 = Open all links in tabs
 //		1 = Open links in windows
 //		2 = Open links in tabs, except when custom window options are specified
 // Ограничение на открытие новых окон
@@ -93,7 +93,7 @@ user_pref("privacy.clearOnShutdown.sessions", true);
 user_pref("privacy.clearOnShutdown.siteSettings", true);
 user_pref("privacy.clearOnShutdown.openWindows", true);
 
-// Browser cleanup wizard 
+// Browser cleanup wizard
 // [NOTE] This dialog window is invoked by hotkeys - Ctrl + Shift + Del.
 // Мастер очистки браузера
 // [ЗАМЕТКА] Это диалоговое окно вызывается горячими клавишами - Ctrl + Shift + Del.
@@ -376,7 +376,7 @@ user_pref("dom.serviceWorkers.enabled", false);
 
 // Thumbnails of visited pages
 //		TRUE = Page thumbnails will not be created
-//		FALSE = Page thumbnails will be created 
+//		FALSE = Page thumbnails will be created
 // Эскизы посещенных страниц
 //		TRUE = Эскизы страниц создаваться не будут
 //		FALSE = Эскизы страниц создаваться будут

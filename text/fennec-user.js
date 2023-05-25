@@ -197,7 +197,7 @@ user_pref("dom.serviceWorkers.enabled", false);
 
 // Thumbnails of visited pages
 //      TRUE = Page thumbnails will not be created
-//      FALSE = Page thumbnails will be created 
+//      FALSE = Page thumbnails will be created
 // Эскизы посещенных страниц
 //      TRUE = Эскизы страниц создаваться не будут
 //      FALSE = Эскизы страниц создаваться будут
