@@ -75,6 +75,8 @@ sudo sed -i -e "s/server 3.arch.pool.ntp.org/server 3.ru.pool.ntp.org/g" /etc/nt
 
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 curl -o ~/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
+curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
+xrdb -merge ~/.Xresources
 
 cat > /tmp/.zshrc <<EOF
 PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
