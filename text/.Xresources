@@ -21,3 +21,5 @@ URxvt.boldItalicFont: xft:Noto Sans Mono:bold:italic:size=8
 URxvt.geometry: 150x30
 URxvt.scrollTtyOutput: false
 URxvt.cursorBlink: true
+URxvt.perl-ext-common: fullscreen
+URxvt.keysym.F11: perl:fullscreen:switch
