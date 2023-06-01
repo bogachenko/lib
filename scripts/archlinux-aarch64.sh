@@ -5,7 +5,8 @@
 
 sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
 sudo sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers
-UN="$(whoami)"
+#USERNAME="$(whoami)"
+#MYDIR="/home/username/"
 
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 cat > /tmp/mirrorlist <<EOF
@@ -30,6 +31,9 @@ sudo pacman -S --needed --noconfirm git vim wget alsa-plugins alsa-utils pulseau
 echo 'Installing the extra packages.'
 sudo pacman -S --needed --noconfirm chromium firefox tor vlc zip unrar p7zip bzip2 arj lrzip lz4 lzop xz zstd yt-dlp unzip sddm i3-wm i3status i3lock i3blocks dunst rofi dmenu rxvt-unicode plymouth
 
+echo ''
+sudo sed -i 's/HOOKS=\(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck\)/HOOKS=\(base udev autodetect modconf kms keyboard keymap plymouth consolefont block filesystems fsck\)/g' /etc/mkinitcpio.conf
+
 echo 'Installing additional repositories.'
 cd /tmp
 git clone https://aur.archlinux.org/package-query.git
@@ -48,7 +52,7 @@ chmod +x strap.sh
 sudo ./strap.sh
 
 echo 'Installing the extra packages from AUR'
-yaourt -S --needed --noconfirm ttf-ms-fonts xrdp
+yaourt -S --needed --noconfirm ttf-ms-fonts
 
 echo 'Enabling and running services...'
 sudo systemctl enable sshd.service
@@ -61,7 +65,6 @@ sudo systemctl enable privoxy.service
 sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
 sudo systemctl enable gpm.service
 sudo systemctl enable ufw.service
-sudo systemctl enable xrdp.service && sudo systemctl start xrdp.service
 sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
 
 echo 'Changing the system time.'
@@ -83,6 +86,14 @@ sudo passwd username
 sudo chsh -s /bin/zsh root
 
 echo ''
+cat > /tmp/etc/sddm.conf <<EOF
+[Autologin]
+User=username
+Session=i3.desktop
+EOF
+sudo mv /tmp/etc/sddm.conf /etc/sddm.conf
+
+echo ''
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config"
@@ -93,6 +104,7 @@ sudo localectl set-keymap en
 sudo setfont cyr-sun16
 sudo localectl set-locale LANG="en_US.UTF-8"
 export LANG=en_US.UTF-8
+sudo sh -c "FONT=cyr-sun16 >> /etc/vconsole.conf"
 sudo cp /etc/locale.gen /etc/locale.gen.backup
 cat > /tmp/locale.gen <<EOF
 en_US.UTF-8 UTF-8
@@ -101,47 +113,43 @@ sudo mv /tmp/locale.gen /etc/locale.gen
 sudo locale-gen
 
 echo ''
+# Creating dirictory.
+cd ~
+mkdir '~/.config'
+mkdir -p '/home/username/.mozilla/firefox'
+mkdir -p '/home/username/.config/{i3status,i3}'
+#
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-curl -o /tmp/.mozilla/firefox/$UN/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
-curl -o /tmp/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
-mv /tmp/.Xresources /home/$UN/.Xresources
-mkdir '.config'
-mkdir '/home/$UN/{.i3status,i3}'
-cp /etc/i3status.conf /home/$UN/.config/i3status/config
-cp /etc/i3/config /home/$UN/.config/i3/config
+curl -o ~/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
+curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
+#
+cp /etc/i3status.conf /home/username/.config/i3status/config
+cp /etc/i3/config /home/username/.config/i3/config
+sed -ie 's/Mod1/$mod/g' /home/username/.config/i3/config
+sed -i 's/exec --no-startup-id nm-applet/#exec --no-startup-id nm-applet/g' /home/username/.config/i3/config
+echo "exec_always --no-startup-id xsetroot -solid \"#003760\"" >> /home/username/.config/i3/config
+echo "set \$mod Mod4" >> /home/username/.config/i3/config
+echo "exec i3" >> /home/username/.xinitrc
 
-echo ''
-cat > /tmp/.xinitrc <<EOF
-exec i3
-EOF
-mv /tmp/.xinitrc /home/$UN/.xinitrc
-
-echo ''
+echo 'Setting preferences for .zsh'
 cat > /tmp/.zshrc <<EOF
 PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
 export BROWSER="firefox"
 export EDITOR="vim"
 alias ls='ls -la'
 alias reboot='sudo reboot'
+alias poweroff='sudo poweroff'
+alias ping-cli='ping -c 3 1.1.1.1'
 alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
 alias cl='clear'
-alias sysctl='systemctl'
+alias sysctl='sudo systemctl'
 EOF
-mv /tmp/.zshrc /home/$UN/.zshrc
-cat > /tmp/.zshrc <<EOF
-PROMPT="%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# "
-export BROWSER="firefox"
-export EDITOR="vim"
-alias ls='ls -la'
-alias unlockpac='rm -f /var/lib/pacman/db.lck'
-alias vi='vim'
-alias cl='clear'
-alias sysctl='systemctl'
-EOF
+cp /tmp/.zshrc ~/.zshrc
+sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /tmp/.zshrc
 sudo mv /tmp/.zshrc /root/.zshrc
 
-echo ''
+echo 'Setting preferences for Vim'
 cat > /tmp/.vimrc <<EOF
 set number
 syntax on
