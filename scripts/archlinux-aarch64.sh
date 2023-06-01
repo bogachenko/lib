@@ -24,11 +24,11 @@ sudo cp /tmp/mirrorlist /etc/pacman.d/mirrorlist
 sudo pacman -Syyuu
 
 echo 'Installing the core packages.'
-sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos python perl net-tools htop netctl linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic man-db ruby lua base-devel zsh xorg-xclock xorg-xmodmap xorg-xsetroot python-pip php go gpm pacman-contrib whois weston wayland jre-openjdk jdk-openjdk apache xorg-fonts-misc xorg-xlsfonts rp-pppoe xorg-xauth xorg-xhost autossh dhcpcd xorg-xrdb
+sudo pacman -S --needed --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm cmake make mesa mesa-demos mesa-libgl python perl net-tools htop netctl linux-firmware dialog wpa_supplicant openssh man-db ruby lua base-devel zsh python-pip php go gpm pacman-contrib whois weston wayland jre-openjdk jdk-openjdk apache rp-pppoe dhcpcd ant
 echo 'Installing the sub-core packages.'
 sudo pacman -S --needed --noconfirm git vim wget alsa-plugins alsa-utils pulseaudio alsa-lib ffmpeg jack2 pulseaudio-alsa pulseaudio-bluetooth noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli yajl bluez-utils bluez qt5 qt6 gtk2 gtk3 gtk4 ufw
 echo 'Installing the extra packages.'
-sudo pacman -S --needed --noconfirm chromium firefox tor vlc zip unrar p7zip bzip2 arj lrzip lz4 lzop xz zstd yt-dlp unzip plasma-desktop phonon-qt5-vlc wireplumber sddm-kcm plasma-pa plasma-nm bluedevil usb_modeswitch breeze-gtk breeze-plymouth xdg-desktop-portal-kde xdg-desktop-portal plymouth plymouth-kcm plasma-vault plasma-systemmonitor plasma-firewall plasma-disks kwayland-integration kwallet-pam ksshaskpass khotkeys kgamma5 kde-gtk-config flatpak-kcm kde-accessibility-meta colord-kde gwenview kcolorchooser kdegraphics-thumbnailers koko kolourpaint okular spectacle svgpart elisa ffmpegthumbs k3b kmix kget dolphin krdc krfb ktorrent konsole kalendar kleopatra kcron cronie kjournald ksystemlog partitionmanager ntfs-3g fatresize xfsprogs e2fsprogs f2fs-tools exfat-utils udftools kdf ark kalk kate kcharselect kclock kdialog keysmith kfind kgpg krecorder ktimer kwalletmanager markdownpart sweeper akonadi-calendar-tools akonadi-import-wizard akonadiconsole dolphin-plugins filelight kalarm kamoso kbackup kde-inotify-survey kdepim-addons drkonqi encfs cryfs plasma-workspace-wallpapers kdeplasma-addons kwrited kompare cups libcups system-config-printer libreoffice-fresh libappindicator-gtk2 libappindicator-gtk3 qt6-multimedia-ffmpeg plasma-wayland-session i3-wm dmenu i3status i3lock rxvt-unicode gimp modemmanager thunderbird archlinux-appstream-data
+sudo pacman -S --needed --noconfirm chromium firefox tor vlc zip unrar p7zip bzip2 arj lrzip lz4 lzop xz zstd yt-dlp unzip sddm i3-wm i3status i3lock i3blocks dunst rofi dmenu rxvt-unicode plymouth
 
 echo 'Installing additional repositories.'
 cd /tmp
@@ -47,29 +47,22 @@ curl -O https://blackarch.org/strap.sh
 chmod +x strap.sh
 sudo ./strap.sh
 
-echo ''
-gpg --recv-key 03993B4065E7193B
-
 echo 'Installing the extra packages from AUR'
-yaourt -S snapd ttf-ms-fonts urxvt-fullscreen xrdp xorgxrdp
+yaourt -S --needed --noconfirm ttf-ms-fonts xrdp
 
 echo 'Enabling and running services...'
 sudo systemctl enable sshd.service
-sudo systemctl enable snapd.service
-sudo systemctl enable NetworkManager.service
-sudo systemctl enable ModemManager.service
 sudo systemctl enable dnsmasq.service
 sudo systemctl enable hostapd.service
 sudo systemctl enable bluetooth.service
 sudo systemctl enable sddm.service
 sudo systemctl enable tor.service
-sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
+sudo systemctl enable privoxy.service
 sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
 sudo systemctl enable gpm.service
 sudo systemctl enable ufw.service
-sudo systemctl enable cups.service
-sudo systemctl enable xrdp.service && sudo systemctl start ntpd.service
-sudo systemctl enable dhcpcd.service && sudo systemctl start ntpd.service
+sudo systemctl enable xrdp.service && sudo systemctl start xrdp.service
+sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
 
 echo 'Changing the system time.'
 echo 'Starting system time synchronization.'
@@ -90,9 +83,9 @@ sudo passwd username
 sudo chsh -s /bin/zsh root
 
 echo ''
-sudo echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
-sudo echo "forward-socks4 / localhost:9050 ." >> /etc/privoxy/config
-sudo echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
+sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"
+sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config"
+sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config"
 sudo systemctl restart privoxy.service
 
 echo ''
@@ -109,17 +102,19 @@ sudo locale-gen
 
 echo ''
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-curl -o /tmp/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
+curl -o /tmp/.mozilla/firefox/$UN/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
 curl -o /tmp/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
-mv /tmp/.Xresources /home/username/.Xresources
-xrdb -merge ~/.Xresources
+mv /tmp/.Xresources /home/$UN/.Xresources
+mkdir '.config'
+mkdir '/home/$UN/{.i3status,i3}'
+cp /etc/i3status.conf /home/$UN/.config/i3status/config
+cp /etc/i3/config /home/$UN/.config/i3/config
 
 echo ''
 cat > /tmp/.xinitrc <<EOF
 exec i3
-exec_always --no-startup-id xsetroot -solid "#003760"
 EOF
-mv /tmp/.xinitrc /home/username/.xinitrc
+mv /tmp/.xinitrc /home/$UN/.xinitrc
 
 echo ''
 cat > /tmp/.zshrc <<EOF
@@ -133,7 +128,7 @@ alias vi='vim'
 alias cl='clear'
 alias sysctl='systemctl'
 EOF
-mv /tmp/.zshrc /home/username/.zshrc
+mv /tmp/.zshrc /home/$UN/.zshrc
 cat > /tmp/.zshrc <<EOF
 PROMPT="%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# "
 export BROWSER="firefox"
@@ -156,4 +151,4 @@ set ttyfast
 set encoding=utf8
 EOF
 sudo cp /tmp/.vimrc /root/.vimrc
-mv /tmp/.vimrc /home/username/.vimrc
+mv /tmp/.vimrc /home/$UN/.vimrc
