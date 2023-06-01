@@ -5,6 +5,7 @@
 
 sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
 sudo sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers
+UN="$(whoami)"
 
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 cat > /tmp/mirrorlist <<EOF
@@ -46,9 +47,13 @@ curl -O https://blackarch.org/strap.sh
 chmod +x strap.sh
 sudo ./strap.sh
 
+echo ''
+gpg --recv-key 03993B4065E7193B
+
 echo 'Installing the extra packages from AUR'
 yaourt -S snapd ttf-ms-fonts urxvt-fullscreen xrdp xorgxrdp
 
+echo 'Enabling and running services...'
 sudo systemctl enable sshd.service
 sudo systemctl enable snapd.service
 sudo systemctl enable NetworkManager.service
@@ -58,7 +63,7 @@ sudo systemctl enable hostapd.service
 sudo systemctl enable bluetooth.service
 sudo systemctl enable sddm.service
 sudo systemctl enable tor.service
-sudo systemctl enable privoxy.service
+sudo systemctl enable privoxy.service && sudo systemctl start privoxy.service
 sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
 sudo systemctl enable gpm.service
 sudo systemctl enable ufw.service
@@ -66,6 +71,8 @@ sudo systemctl enable cups.service
 sudo systemctl enable xrdp.service && sudo systemctl start ntpd.service
 sudo systemctl enable dhcpcd.service && sudo systemctl start ntpd.service
 
+echo 'Changing the system time.'
+echo 'Starting system time synchronization.'
 sudo timedatectl set-timezone Europe/Moscow
 sudo timedatectl set-ntp true
 sudo sed -i -e "s/server 0.arch.pool.ntp.org/server 0.ru.pool.ntp.org/g" /etc/ntp.conf
@@ -73,17 +80,22 @@ sudo sed -i -e "s/server 1.arch.pool.ntp.org/server 1.ru.pool.ntp.org/g" /etc/nt
 sudo sed -i -e "s/server 2.arch.pool.ntp.org/server 2.ru.pool.ntp.org/g" /etc/ntp.conf
 sudo sed -i -e "s/server 3.arch.pool.ntp.org/server 3.ru.pool.ntp.org/g" /etc/ntp.conf
 
+echo 'Subpixel hinting mode.'
 sudo sed -i 's/#export FREETYPE_PROPERTIES/export FREETYPE_PROPERTIES/g' /etc/profile.d/freetype2.sh
 
+echo ''
 sudo hostnamectl set-hostname raspberry
 sudo useradd -m -g users -G wheel -s /bin/zsh username
 sudo passwd username
 sudo chsh -s /bin/zsh root
 
+echo ''
 sudo echo "forward-socks5 / localhost:9050 ." >> /etc/privoxy/config
 sudo echo "forward-socks4 / localhost:9050 ." >> /etc/privoxy/config
 sudo echo "forward-socks4a / localhost:9050 ." >> /etc/privoxy/config
+sudo systemctl restart privoxy.service
 
+echo ''
 sudo localectl set-keymap en
 sudo setfont cyr-sun16
 sudo localectl set-locale LANG="en_US.UTF-8"
@@ -95,17 +107,21 @@ EOF
 sudo mv /tmp/locale.gen /etc/locale.gen
 sudo locale-gen
 
+echo ''
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-curl -o ~/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
-curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
+curl -o /tmp/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
+curl -o /tmp/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
+mv /tmp/.Xresources /home/username/.Xresources
 xrdb -merge ~/.Xresources
 
+echo ''
 cat > /tmp/.xinitrc <<EOF
 exec i3
 exec_always --no-startup-id xsetroot -solid "#003760"
 EOF
 mv /tmp/.xinitrc /home/username/.xinitrc
 
+echo ''
 cat > /tmp/.zshrc <<EOF
 PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
 export BROWSER="firefox"
@@ -130,7 +146,7 @@ alias sysctl='systemctl'
 EOF
 sudo mv /tmp/.zshrc /root/.zshrc
 
-
+echo ''
 cat > /tmp/.vimrc <<EOF
 set number
 syntax on
@@ -140,4 +156,4 @@ set ttyfast
 set encoding=utf8
 EOF
 sudo cp /tmp/.vimrc /root/.vimrc
-sudo cp /tmp/.vimrc /home/username/.vimrc
+mv /tmp/.vimrc /home/username/.vimrc
