@@ -29,14 +29,7 @@ sudo pacman -S --needed --noconfirm git vim wget alsa-plugins alsa-utils pulseau
 echo 'Installing the extra packages.'
 sudo pacman -S --needed --noconfirm chromium firefox tor vlc zip unrar p7zip bzip2 arj lrzip lz4 lzop xz zstd yt-dlp unzip plasma-desktop phonon-qt5-vlc wireplumber sddm-kcm plasma-pa plasma-nm bluedevil usb_modeswitch breeze-gtk breeze-plymouth xdg-desktop-portal-kde xdg-desktop-portal plymouth plymouth-kcm plasma-vault plasma-systemmonitor plasma-firewall plasma-disks kwayland-integration kwallet-pam ksshaskpass khotkeys kgamma5 kde-gtk-config flatpak-kcm kde-accessibility-meta colord-kde gwenview kcolorchooser kdegraphics-thumbnailers koko kolourpaint okular spectacle svgpart elisa ffmpegthumbs k3b kmix kget dolphin krdc krfb ktorrent konsole kalendar kleopatra kcron cronie kjournald ksystemlog partitionmanager ntfs-3g fatresize xfsprogs e2fsprogs f2fs-tools exfat-utils udftools kdf ark kalk kate kcharselect kclock kdialog keysmith kfind kgpg krecorder ktimer kwalletmanager markdownpart sweeper akonadi-calendar-tools akonadi-import-wizard akonadiconsole dolphin-plugins filelight kalarm kamoso kbackup kde-inotify-survey kdepim-addons drkonqi encfs cryfs plasma-workspace-wallpapers kdeplasma-addons kwrited kompare cups libcups system-config-printer libreoffice-fresh libappindicator-gtk2 libappindicator-gtk3 qt6-multimedia-ffmpeg plasma-wayland-session i3-wm dmenu i3status i3lock rxvt-unicode gimp modemmanager thunderbird archlinux-appstream-data
 
-sudo timedatectl set-timezone Europe/Moscow
-sudo timedatectl set-ntp true
-sudo hwclock --systohc --utc
-sudo sed -i -e "s/server 0.arch.pool.ntp.org/server 0.ru.pool.ntp.org/g" /etc/ntp.conf
-sudo sed -i -e "s/server 1.arch.pool.ntp.org/server 1.ru.pool.ntp.org/g" /etc/ntp.conf
-sudo sed -i -e "s/server 2.arch.pool.ntp.org/server 2.ru.pool.ntp.org/g" /etc/ntp.conf
-sudo sed -i -e "s/server 3.arch.pool.ntp.org/server 3.ru.pool.ntp.org/g" /etc/ntp.conf
-
+echo 'Installing additional repositories.'
 cd /tmp
 git clone https://aur.archlinux.org/package-query.git
 git clone https://aur.archlinux.org/yaourt.git
@@ -53,6 +46,7 @@ curl -O https://blackarch.org/strap.sh
 chmod +x strap.sh
 sudo ./strap.sh
 
+echo 'Installing the extra packages from AUR'
 yaourt -S snapd ttf-ms-fonts urxvt-fullscreen xrdp xorgxrdp
 
 sudo systemctl enable sshd.service
@@ -65,12 +59,19 @@ sudo systemctl enable bluetooth.service
 sudo systemctl enable sddm.service
 sudo systemctl enable tor.service
 sudo systemctl enable privoxy.service
-sudo systemctl enable ntpd.service
+sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
 sudo systemctl enable gpm.service
 sudo systemctl enable ufw.service
 sudo systemctl enable cups.service
-sudo systemctl enable xrdp.service
-sudo systemctl enable dhcpcd.service
+sudo systemctl enable xrdp.service && sudo systemctl start ntpd.service
+sudo systemctl enable dhcpcd.service && sudo systemctl start ntpd.service
+
+sudo timedatectl set-timezone Europe/Moscow
+sudo timedatectl set-ntp true
+sudo sed -i -e "s/server 0.arch.pool.ntp.org/server 0.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 1.arch.pool.ntp.org/server 1.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 2.arch.pool.ntp.org/server 2.ru.pool.ntp.org/g" /etc/ntp.conf
+sudo sed -i -e "s/server 3.arch.pool.ntp.org/server 3.ru.pool.ntp.org/g" /etc/ntp.conf
 
 sudo sed -i 's/#export FREETYPE_PROPERTIES/export FREETYPE_PROPERTIES/g' /etc/profile.d/freetype2.sh
 
@@ -87,6 +88,12 @@ sudo localectl set-keymap en
 sudo setfont cyr-sun16
 sudo localectl set-locale LANG="en_US.UTF-8"
 export LANG=en_US.UTF-8
+sudo cp /etc/locale.gen /etc/locale.gen.backup
+cat > /tmp/locale.gen <<EOF
+en_US.UTF-8 UTF-8
+EOF
+sudo mv /tmp/locale.gen /etc/locale.gen
+sudo locale-gen
 
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 curl -o ~/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
@@ -98,13 +105,6 @@ exec i3
 exec_always --no-startup-id xsetroot -solid "#003760"
 EOF
 mv /tmp/.xinitrc /home/username/.xinitrc
-
-sudo cp /etc/locale.gen /etc/locale.gen.backup
-cat > /tmp/locale.gen <<EOF
-en_US.UTF-8 UTF-8
-EOF
-sudo mv /tmp/locale.gen /etc/locale.gen
-sudo locale-gen
 
 cat > /tmp/.zshrc <<EOF
 PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
@@ -130,7 +130,8 @@ alias sysctl='systemctl'
 EOF
 sudo mv /tmp/.zshrc /root/.zshrc
 
-cat > ~/.vimrc <<EOF
+
+cat > /tmp/.vimrc <<EOF
 set number
 syntax on
 set noswapfile
@@ -138,4 +139,5 @@ set wrap
 set ttyfast
 set encoding=utf8
 EOF
-sudo cp ~/.vimrc /root/.vimrc
+sudo cp /tmp/.vimrc /root/.vimrc
+sudo cp /tmp/.vimrc /home/username/.vimrc
