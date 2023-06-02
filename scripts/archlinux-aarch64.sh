@@ -30,7 +30,7 @@ sudo pacman -S --needed --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot 
 echo 'Installing the sub-core packages.'
 sudo pacman -S --needed --noconfirm git vim wget alsa-plugins alsa-utils pulseaudio alsa-lib ffmpeg jack2 pulseaudio-alsa pulseaudio-bluetooth noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli yajl bluez-utils bluez qt5 qt6 gtk2 gtk3 gtk4 ufw
 echo 'Installing the extra packages.'
-sudo pacman -S --needed --noconfirm chromium firefox tor vlc zip unrar p7zip bzip2 arj lrzip lz4 lzop xz zstd yt-dlp unzip sddm i3-wm i3status i3lock i3blocks dunst rofi dmenu rxvt-unicode plymouth
+sudo pacman -S --needed --noconfirm chromium firefox tor vlc zip unrar p7zip bzip2 arj lrzip lz4 lzop xz zstd yt-dlp unzip sddm i3-wm i3status i3lock i3blocks dunst rofi dmenu rxvt-unicode plymouth thunderbird
 
 echo 'Setting preferences for kernel parameters.'
 sudo sed -i 's/HOOKS=\(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck\)/HOOKS=\(base udev autodetect modconf kms keyboard keymap plymouth consolefont block filesystems fsck\)/g' /etc/mkinitcpio.conf
@@ -53,7 +53,7 @@ chmod +x strap.sh
 sudo ./strap.sh
 
 echo 'Installing the extra packages from AUR'
-yaourt -S --needed --noconfirm ttf-ms-fonts apple_cursor
+yaourt -S --needed --noconfirm ttf-ms-fonts
 
 echo 'Enabling and running services...'
 sudo systemctl enable sshd.service
@@ -67,6 +67,7 @@ sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
 sudo systemctl enable gpm.service
 sudo systemctl enable ufw.service
 sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
+sudo systemctl enable systemd-resolved
 
 echo 'Changing the system time.'
 echo 'Starting system time synchronization.'
@@ -115,16 +116,13 @@ sudo mv /tmp/locale.gen /etc/locale.gen
 sudo locale-gen
 
 echo 'Setting preferences for working directories.'
-# Creating dirictory.
 cd ~
 mkdir '~/.config'
-mkdir -p '/home/username/.mozilla/firefox'
+mkdir -p '/home/username/.mozilla/firefox/username'
 mkdir -p '/home/username/.config/{i3status,i3}'
-#
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-curl -o ~/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js
+curl -o ~/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/firefox-user.js
 curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
-#
 cp /etc/i3status.conf /home/username/.config/i3status/config
 cp /etc/i3/config /home/username/.config/i3/config
 sed -ie 's/Mod1/$mod/g' /home/username/.config/i3/config
@@ -137,7 +135,24 @@ echo 'Setting preferences for DNS'
 sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
 sudo sed -i 's/#FallbackDNS=1.1.1.1#cloudflare-dns.com 9.9.9.9#dns.quad9.net 8.8.8.8#dns.google 2606:4700:4700::1111#cloudflare-dns.com 2620:fe::9#dns.quad9.net 2001:4860:4860::8888#dns.google/FallbackDNS=8.8.8.8#dns.google 8.8.4.4#dns.google 2001:4860:4860::8844#dns.google 2001:4860:4860::8888#dns.google/g' /etc/systemd/resolved.conf
 sudo sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
+sudo ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo systemctl restart systemd-resolved
+
+#cat > ~/.config/dnsmasq.conf <<EOF
+#interface=wlan0
+#dhcp-range=192.168.0.100, 192.168.0.110, 255.255.255.0, 12h
+#dhcp-option=3, 192.168.0.103
+#dhcp-option=6, 192.168.0.103
+#listen-address=127.0.0.1
+#port=5353
+#EOF
+#cat > ~/.config/hostapd.conf <<EOF
+#interface=wlan0
+#ssid=username
+#hw_mode=g
+#channel=1
+#driver=nl80211
+#EOF
 
 echo 'Setting preferences for Z shell'
 cat > /tmp/.zshrc <<EOF
@@ -167,4 +182,4 @@ set ttyfast
 set encoding=utf8
 EOF
 sudo cp /tmp/.vimrc /root/.vimrc
-mv /tmp/.vimrc /home/$UN/.vimrc
+mv /tmp/.vimrc /home/username/.vimrc
