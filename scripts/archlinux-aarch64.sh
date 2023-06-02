@@ -116,13 +116,13 @@ sudo mv /tmp/locale.gen /etc/locale.gen
 sudo locale-gen
 
 echo 'Setting preferences for working directories.'
-cd ~
-mkdir '~/.config'
+mkdir '/home/username/.config'
 mkdir -p '/home/username/.mozilla/firefox/username'
-mkdir -p '/home/username/.config/{i3status,i3}'
+mkdir -p '/home/username/.config/i3status'
+mkdir -p '/home/username/.config/i3'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-curl -o ~/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/firefox-user.js
-curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
+curl -o /home/username/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/firefox-user.js
+curl -o /home/username/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
 cp /etc/i3status.conf /home/username/.config/i3status/config
 cp /etc/i3/config /home/username/.config/i3/config
 sed -ie 's/Mod1/$mod/g' /home/username/.config/i3/config
