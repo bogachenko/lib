@@ -133,13 +133,19 @@ echo "exec_always --no-startup-id xsetroot -solid \"#003760\"" >> /home/username
 echo "set \$mod Mod4" >> /home/username/.config/i3/config
 echo "exec i3" >> /home/username/.xinitrc
 
+echo 'Setting preferences for DNS'
+sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
+sed -i 's/#FallbackDNS=1.1.1.1#cloudflare-dns.com 9.9.9.9#dns.quad9.net 8.8.8.8#dns.google 2606:4700:4700::1111#cloudflare-dns.com 2620:fe::9#dns.quad9.net 2001:4860:4860::8888#dns.google/FallbackDNS=8.8.8.8#dns.google 8.8.4.4#dns.google 2001:4860:4860::8844#dns.google 2001:4860:4860::8888#dns.google/g' /etc/systemd/resolved.conf
+sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
+sudo systemctl restart systemd-resolved
+
 echo 'Setting preferences for Z shell'
 cat > /tmp/.zshrc <<EOF
 PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
 export BROWSER="firefox"
 export EDITOR="vim"
 alias ls='ls -la'
-alias reboot='sudo reboot'
+alias reboot='sudo reboot -f'
 alias poweroff='sudo poweroff'
 alias ping-cli='ping -c 3 1.1.1.1'
 alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
