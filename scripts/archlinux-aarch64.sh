@@ -106,7 +106,6 @@ echo 'Setting preferences for the language.'
 sudo localectl set-keymap en
 sudo setfont cyr-sun16
 sudo localectl set-locale LANG="en_US.UTF-8"
-export LANG=en_US.UTF-8
 sudo sh -c "FONT=cyr-sun16 >> /etc/vconsole.conf"
 sudo cp /etc/locale.gen /etc/locale.gen.backup
 cat > /tmp/locale.gen <<EOF
@@ -168,7 +167,7 @@ alias vi='vim'
 alias cl='clear'
 alias sysctl='sudo systemctl'
 EOF
-cp /tmp/.zshrc ~/.zshrc
+cp /tmp/.zshrc /home/username/.zshrc
 sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /tmp/.zshrc
 sudo mv /tmp/.zshrc /root/.zshrc
 
