@@ -53,7 +53,7 @@ chmod +x strap.sh
 sudo ./strap.sh
 
 echo 'Installing the extra packages from AUR'
-yaourt -S --needed --noconfirm ttf-ms-fonts
+yaourt -S --needed --noconfirm ttf-ms-fonts apple_cursor
 
 echo 'Enabling and running services...'
 sudo systemctl enable sshd.service
@@ -134,9 +134,9 @@ echo "set \$mod Mod4" >> /home/username/.config/i3/config
 echo "exec i3" >> /home/username/.xinitrc
 
 echo 'Setting preferences for DNS'
-sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
-sed -i 's/#FallbackDNS=1.1.1.1#cloudflare-dns.com 9.9.9.9#dns.quad9.net 8.8.8.8#dns.google 2606:4700:4700::1111#cloudflare-dns.com 2620:fe::9#dns.quad9.net 2001:4860:4860::8888#dns.google/FallbackDNS=8.8.8.8#dns.google 8.8.4.4#dns.google 2001:4860:4860::8844#dns.google 2001:4860:4860::8888#dns.google/g' /etc/systemd/resolved.conf
-sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#FallbackDNS=1.1.1.1#cloudflare-dns.com 9.9.9.9#dns.quad9.net 8.8.8.8#dns.google 2606:4700:4700::1111#cloudflare-dns.com 2620:fe::9#dns.quad9.net 2001:4860:4860::8888#dns.google/FallbackDNS=8.8.8.8#dns.google 8.8.4.4#dns.google 2001:4860:4860::8844#dns.google 2001:4860:4860::8888#dns.google/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
 sudo systemctl restart systemd-resolved
 
 echo 'Setting preferences for Z shell'
