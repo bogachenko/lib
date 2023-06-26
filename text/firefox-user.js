@@ -652,7 +652,7 @@ user_pref("browser.region.update.enabled", false);
 user_pref("permissions.default.geo", 2);
 user_pref("permissions.default.camera", 2);
 user_pref("permissions.default.desktop-notification", 2);
-user_pref("permissions.default.microphone", 2);
+user_pref("permissions.default.microphone", 0);
 user_pref("permissions.default.xr", 2);
 
 // Icon mode
