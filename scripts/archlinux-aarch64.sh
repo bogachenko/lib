@@ -26,11 +26,11 @@ sudo cp /tmp/mirrorlist /etc/pacman.d/mirrorlist
 sudo pacman -Syyuu
 
 echo 'Installing the core packages.'
-sudo pacman -S --needed --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm cmake make mesa mesa-demos mesa-libgl python perl net-tools htop netctl linux-firmware dialog wpa_supplicant openssh man-db ruby lua base-devel zsh python-pip php go gpm pacman-contrib whois weston wayland jre-openjdk jdk-openjdk apache rp-pppoe dhcpcd ant
+sudo pacman -S --needed --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm cmake make mesa mesa-demos mesa-libgl python perl net-tools htop netctl linux-firmware dialog wpa_supplicant openssh man-db ruby lua base-devel zsh python-pip php go gpm pacman-contrib whois weston wayland jre-openjdk jdk-openjdk apache rp-pppoe dhcpcd ant xrdp
 echo 'Installing the sub-core packages.'
 sudo pacman -S --needed --noconfirm git vim wget alsa-plugins alsa-utils pulseaudio alsa-lib ffmpeg jack2 pulseaudio-alsa pulseaudio-bluetooth noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli yajl bluez-utils bluez qt5 qt6 gtk2 gtk3 gtk4 ufw
 echo 'Installing the extra packages.'
-sudo pacman -S --needed --noconfirm chromium firefox tor vlc zip unrar p7zip bzip2 arj lrzip lz4 lzop xz zstd yt-dlp unzip sddm i3-wm i3status i3lock i3blocks dunst rofi dmenu rxvt-unicode plymouth thunderbird ranger
+sudo pacman -S --needed --noconfirm chromium firefox tor vlc zip unrar p7zip bzip2 arj lrzip lz4 lzop xz zstd yt-dlp unzip sddm i3-wm i3status i3lock i3blocks dunst rofi dmenu rxvt-unicode plymouth thunderbird ranger plasma-desktop phonon-qt5-vlc wireplumber sddm-kcm plasma-pa plasma-nm bluedevil usb_modeswitch breeze-gtk breeze-plymouth xdg-desktop-portal-kde xdg-desktop-portal plymouth plymouth-kcm plasma-vault plasma-systemmonitor plasma-firewall plasma-disks kwayland-integration kwallet-pam ksshaskpass khotkeys kgamma5 kde-gtk-config flatpak-kcm kde-accessibility-meta colord-kde gwenview kcolorchooser kdegraphics-thumbnailers koko kolourpaint okular spectacle svgpart elisa ffmpegthumbs k3b kmix kget dolphin krdc krfb ktorrent konsole kalendar kleopatra kcron cronie kjournald ksystemlog partitionmanager ntfs-3g fatresize xfsprogs e2fsprogs f2fs-tools exfat-utils udftools kdf ark kalk kate kcharselect kclock kdialog keysmith kfind kgpg krecorder ktimer kwalletmanager markdownpart sweeper akonadi-calendar-tools akonadi-import-wizard akonadiconsole dolphin-plugins filelight kalarm kamoso kbackup kde-inotify-survey kdepim-addons drkonqi encfs cryfs plasma-workspace-wallpapers kdeplasma-addons kwrited kompare cups libcups system-config-printer libreoffice-fresh libappindicator-gtk2 libappindicator-gtk3 qt6-multimedia-ffmpeg plasma-wayland-session archlinux-appstream-data gimp
 
 echo 'Setting preferences for kernel parameters.'
 sudo sed -i 's/HOOKS=\(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck\)/HOOKS=\(base udev autodetect modconf kms keyboard keymap plymouth consolefont block filesystems fsck\)/g' /etc/mkinitcpio.conf
@@ -68,6 +68,7 @@ sudo systemctl enable gpm.service
 sudo systemctl enable ufw.service
 sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
 sudo systemctl enable systemd-resolved
+sudo systemctl enable xrdp.service && sudo systemctl start xrdp.service
 
 echo 'Changing the system time.'
 echo 'Starting system time synchronization.'
