@@ -22,10 +22,14 @@ mts.ru
 myaccount.google.com
 nspk.ru
 oauth.vk.com
+local.adguard.org
+injections.adguard.org
 oauth.yandex.com
+gstatic.com
 oauth.yandex.ru
 octocaptcha.com
 onfastspring.com
+recaptcha.net
 passport.twitch.tv
 passport.yandex.com
 passport.yandex.ru
