@@ -1,4 +1,5 @@
 account.google.com
+accounts.google.com
 account.xiaomi.com
 account.yandex.ru
 accounts.firefox.com
@@ -15,10 +16,14 @@ googleapis.com
 googlevideo.com
 gstatic.com
 id.vk.com
+payment-3ds.com
 id.yandex.com
 id.yandex.ru
 imap.gmail.com
 imap.yandex.ru
+id.yandex.ru
+gpb.ru
+gazprombank.ru
 injections.adguard.org
 lava.ru
 link.adtidy.org
