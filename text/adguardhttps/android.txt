@@ -10,6 +10,7 @@ cardlink.link
 cdn.whatsapp.net
 cloudflare.com
 cloudpayments.ru
+kassa.ai
 googleapis.com
 googlevideo.com
 gosuslugi.ru
@@ -18,6 +19,7 @@ gpb.ru
 gazprombank.ru
 id.yandex.ru
 android.apis.google.com
+smartcaptcha.yandexcloud.net
 accounts.google.com
 login.microsoftonline.com
 login.windows.net
@@ -32,6 +34,7 @@ mozilla.org
 lava.ru
 mts.ru
 myaccount.google.com
+tinkoff.ru
 nspk.ru
 oauth.vk.com
 oauth.yandex.ru

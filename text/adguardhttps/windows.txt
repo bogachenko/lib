@@ -14,8 +14,11 @@ cloudflare.com
 cloudpayments.ru
 googleapis.com
 googlevideo.com
+kassa.ai
 gstatic.com
 id.vk.com
+smartcaptcha.yandexcloud.net
+tinkoff.ru
 payment-3ds.com
 id.yandex.com
 id.yandex.ru
