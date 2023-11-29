@@ -9,6 +9,9 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 :: Windows Cleaner
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
+rem Clipboard Cleaner
+echo off | clip > nul 2>&1
+
 echo Stop processes > nul 2>&1
 rem Windows Explorer
 taskkill /f > nul 2>&1 /im explorer.exe > nul 2>&1
