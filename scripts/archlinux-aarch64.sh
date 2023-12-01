@@ -24,11 +24,11 @@ sudo cp /tmp/mirrorlist /etc/pacman.d/mirrorlist
 sudo pacman -Syyuu
 
 echo 'Installing the core packages.'
-sudo pacman -S --needed --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm man-db base-devel mesa mesa-demos git openssh zsh python python-pip perl ruby lua php go apache weston whois htop dhcpcd jre-openjdk ppp cmake pacman-contrib dosfstools ntfsprogs e2fsprogs
+sudo pacman -S --needed --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm xautolock xdg-user-dirs man-db base-devel mesa mesa-demos git openssh zsh python python2 python-pip python2-pip perl ruby lua php go apache weston whois htop dhcpcd jre-openjdk-headless ppp cmake pacman-contrib
 echo 'Installing the sub-core packages.'
-sudo pacman -S --needed --noconfirm vim wget alsa-plugins alsa-utils pulseaudio alsa-lib ffmpeg pulseaudio-alsa pulseaudio-bluetooth jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli bluez-utils qt5-base qt6-base gtk3 gtk4 ufw
+sudo pacman -S --needed --noconfirm vim wget alsa-plugins alsa-utils pulseaudio alsa-lib ffmpeg pulseaudio-alsa pulseaudio-bluetooth jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli bluez-utils bluedevil qt5-base qt6-base gtk3 gtk4 ufw gvfs gvfs-mtp cryfs encfs
 echo 'Installing the extra packages.'
-sudo pacman -S --needed --noconfirm chromium firefox thunderbird tor vlc plymouth sddm rofi i3-wm i3status i3lock i3blocks dunst rxvt-unicode ranger zip unrar p7zip unzip libreoffice-fresh gimp qbittorrent
+sudo pacman -S --needed --noconfirm chromium firefox thunderbird tor nyx vlc plymouth plymouth-kcm sddm sddm-kcm plasma-desktop plasma-wayland-session plasma-systemmonitor plasma-vault plasma-firewall plasma-disks kwayland-integration  kwallet-pam ksshaskpass khotkeys kgamma5 kde-gtk-config flatpak flatpak-kcm kde-accessibility-meta colord-kde gwenview kcolorchooser kdegraphics-thumbnailers kolourpaint koko okular spectacle elisa svgpart ffmpegthumbs kmix k3b kget dolphin dolphin-plugins krdc krfb konsole keditbookmarks kleopatra kcron cronie kjournald ksystemlog partitionmanager kdf ark kalk kate kcharselect kclock ktimer kdialog keysmith kgpg kfind krecorder sweeper kalarm kamoso kdeplasma-addons kbackup kompare kde-inotify-survey filelight phonon-qt5-vlc wireplumber rofi i3-wm i3status i3lock i3blocks pcmanfm-qt dunst scrot rxvt-unicode ranger zip unrar p7zip unzip libreoffice-fresh gimp lxqt-archiver qbittorrent transmission-qt transmission-cli cups libcups system-config-printer usb_modeswitch breeze-gtk xdg-desktop-portal-kde xdg-desktop-portal xdg-desktop-portal-gtk cdrtools dvd+rw-tools fatresize exfat-utils dosfstools ntfsprogs e2fsprogs xfsprogs f2fs-tools udftools markdownpart
 
 echo 'Setting preferences for kernel parameters.'
 #sudo sed -i 's/HOOKS=\(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck\)/HOOKS=\(base udev autodetect modconf kms keyboard keymap plymouth consolefont block filesystems fsck\)/g' /etc/mkinitcpio.conf
@@ -44,7 +44,7 @@ cd ..
 cd yaourt/
 makepkg -si
 cd ..
-sudo rm -rf /etc/pacman.d/gnupg
+sudo rm -rf /etc/pacman.d/gnupg/
 sudo pacman-key --init
 sudo pacman-key --populate archlinuxarm
 curl -O https://blackarch.org/strap.sh
@@ -61,6 +61,8 @@ sudo systemctl enable sshd.service
 sudo systemctl enable bluetooth.service
 sudo systemctl enable sddm.service
 sudo systemctl enable tor.service
+sudo systemctl enable ModemManager.service
+sudo systemctl enable NetworkManager.service
 sudo systemctl enable privoxy.service
 sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
 sudo systemctl enable gpm.service
@@ -88,12 +90,13 @@ sudo userdel -rf alarm
 sudo chsh -s /bin/zsh root
 
 echo 'Setting preferences for automatic login to SDDM.'
-cat > /tmp/etc/sddm.conf <<EOF
+touch /tmp/sddm.conf
+cat > /tmp/sddm.conf <<EOF
 [Autologin]
 User=username
 Session=i3.desktop
 EOF
-sudo mv /tmp/etc/sddm.conf /etc/sddm.conf
+sudo mv /tmp/sddm.conf /etc/sddm.conf
 
 echo 'Setting preferences for Privoxy.'
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"
@@ -121,13 +124,15 @@ mkdir -p '/home/username/.config/i3'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 curl -o /home/username/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/firefox-user.js
 curl -o /home/username/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
+sudo cp /home/username/.Xresources /root/.Xresources
 cp /etc/i3status.conf /home/username/.config/i3status/config
 cp /etc/i3/config /home/username/.config/i3/config
 sed -ie 's/Mod1/$mod/g' /home/username/.config/i3/config
-sed -i 's/exec --no-startup-id nm-applet/#exec --no-startup-id nm-applet/g' /home/username/.config/i3/config
-sh -c "echo \"exec_always --no-startup-id xsetroot -solid \"#003760\"\" >> /home/username/.config/i3/config"
-sh -c "echo \"set \$mod Mod4\" >> /home/username/.config/i3/config"
-sh -c "echo \"exec i3\" >> /home/username/.xinitrc"
+#sed -i 's/exec --no-startup-id nm-applet/#exec --no-startup-id nm-applet/g' /home/username/.config/i3/config
+#sh -c "echo \"exec_always --no-startup-id xsetroot -solid \"#003760\"\" >> /home/username/.config/i3/config"
+#sh -c "echo \"set \$mod Mod4\" >> /home/username/.config/i3/config"
+#sh -c "echo \"exec i3\" >> /home/username/.xinitrc"
+xdg-user-dirs-update
 
 echo 'Setting preferences for DNS'
 sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
@@ -161,10 +166,11 @@ alias ls='ls -la'
 alias reboot='sudo reboot -f'
 alias poweroff='sudo poweroff'
 alias ping-cli='ping -c 3 1.1.1.1'
-alias unlockpac='sudo rm -f /var/lib/pacman/db.lck'
+alias unpac='sudo rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
 alias cl='clear'
 alias sysctl='sudo systemctl'
+alias pacmancleaner='sudo pacman -Scc && sudo paccache -r'
 EOF
 cp /tmp/.zshrc /home/username/.zshrc
 sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /tmp/.zshrc
