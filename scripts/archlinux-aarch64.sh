@@ -5,8 +5,6 @@
 
 sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
 sudo sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers
-#USERNAME="$(whoami)"
-#MYDIR="/home/username/"
 
 echo 'Updating the list of repository mirrors.'
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
@@ -26,14 +24,14 @@ sudo cp /tmp/mirrorlist /etc/pacman.d/mirrorlist
 sudo pacman -Syyuu
 
 echo 'Installing the core packages.'
-sudo pacman -S --needed --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm cmake make mesa mesa-demos mesa-libgl python perl net-tools htop netctl linux-firmware dialog wpa_supplicant openssh man-db ruby lua base-devel zsh python-pip php go gpm pacman-contrib whois weston wayland jre-openjdk jdk-openjdk apache rp-pppoe dhcpcd ant dosfstools ntfsprogs e2fsprogs networkmanager 
+sudo pacman -S --needed --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm man-db base-devel mesa mesa-demos git openssh zsh python python-pip perl ruby lua php go apache weston whois htop dhcpcd jre-openjdk ppp cmake pacman-contrib dosfstools ntfsprogs e2fsprogs
 echo 'Installing the sub-core packages.'
-sudo pacman -S --needed --noconfirm git vim wget alsa-plugins alsa-utils pulseaudio alsa-lib ffmpeg jack2 pulseaudio-alsa pulseaudio-bluetooth noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli yajl bluez-utils bluez qt5 qt6 gtk2 gtk3 gtk4 ufw
+sudo pacman -S --needed --noconfirm vim wget alsa-plugins alsa-utils pulseaudio alsa-lib ffmpeg pulseaudio-alsa pulseaudio-bluetooth jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli bluez-utils qt5-base qt6-base gtk3 gtk4 ufw
 echo 'Installing the extra packages.'
-sudo pacman -S --needed --noconfirm chromium firefox tor vlc zip unrar p7zip bzip2 arj lrzip lz4 lzop xz zstd yt-dlp unzip sddm i3-wm i3status i3lock i3blocks dunst rofi dmenu rxvt-unicode plymouth thunderbird ranger plasma-desktop phonon-qt5-vlc wireplumber sddm-kcm plasma-pa plasma-nm bluedevil usb_modeswitch breeze-gtk breeze-plymouth xdg-desktop-portal-kde xdg-desktop-portal plymouth plymouth-kcm plasma-vault plasma-systemmonitor plasma-firewall plasma-disks kwayland-integration kwallet-pam ksshaskpass khotkeys kgamma5 kde-gtk-config flatpak-kcm kde-accessibility-meta colord-kde gwenview kcolorchooser kdegraphics-thumbnailers koko kolourpaint okular spectacle svgpart elisa ffmpegthumbs k3b kmix kget dolphin krdc krfb ktorrent konsole kalendar kleopatra kcron cronie kjournald ksystemlog partitionmanager ntfs-3g fatresize xfsprogs e2fsprogs f2fs-tools exfat-utils udftools kdf ark kalk kate kcharselect kclock kdialog keysmith kfind kgpg krecorder ktimer kwalletmanager markdownpart sweeper akonadi-calendar-tools akonadi-import-wizard akonadiconsole dolphin-plugins filelight kalarm kamoso kbackup kde-inotify-survey kdepim-addons drkonqi encfs cryfs plasma-workspace-wallpapers kdeplasma-addons kwrited kompare cups libcups system-config-printer libreoffice-fresh libappindicator-gtk2 libappindicator-gtk3 qt6-multimedia-ffmpeg plasma-wayland-session archlinux-appstream-data gimp modemmanager
+sudo pacman -S --needed --noconfirm chromium firefox thunderbird tor vlc plymouth sddm rofi i3-wm i3status i3lock i3blocks dunst rxvt-unicode ranger zip unrar p7zip unzip libreoffice-fresh gimp qbittorrent
 
 echo 'Setting preferences for kernel parameters.'
-sudo sed -i 's/HOOKS=\(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck\)/HOOKS=\(base udev autodetect modconf kms keyboard keymap plymouth consolefont block filesystems fsck\)/g' /etc/mkinitcpio.conf
+#sudo sed -i 's/HOOKS=\(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck\)/HOOKS=\(base udev autodetect modconf kms keyboard keymap plymouth consolefont block filesystems fsck\)/g' /etc/mkinitcpio.conf
 sudo mkinitcpio -p linux-aarch64
 
 echo 'Installing additional repositories.'
@@ -54,7 +52,7 @@ chmod +x strap.sh
 sudo ./strap.sh
 
 echo 'Installing the extra packages from AUR'
-yaourt -S --needed --noconfirm ttf-ms-fonts
+yaourt -S --needed --noconfirm ttf-ms-fonts mkinitcpio-firmware
 
 echo 'Enabling and running services...'
 sudo systemctl enable sshd.service
@@ -68,7 +66,6 @@ sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
 sudo systemctl enable gpm.service
 sudo systemctl enable ufw.service
 sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
-sudo systemctl enable NetworkManager.service && sudo systemctl start NetworkManager.service
 sudo systemctl enable systemd-resolved
 
 echo 'Changing the system time.'
@@ -106,9 +103,9 @@ sudo systemctl restart privoxy.service
 
 echo 'Setting preferences for the language.'
 sudo localectl set-keymap en
-sudo setfont cyr-sun16
+sudo setfont ter-k16n
 sudo localectl set-locale LANG="en_US.UTF-8"
-sudo sh -c "FONT=cyr-sun16 >> /etc/vconsole.conf"
+sudo sh -c "FONT=ter-k16n >> /etc/vconsole.conf"
 sudo cp /etc/locale.gen /etc/locale.gen.backup
 cat > /tmp/locale.gen <<EOF
 en_US.UTF-8 UTF-8
@@ -137,7 +134,7 @@ sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
 sudo sed -i 's/#FallbackDNS=1.1.1.1#cloudflare-dns.com 9.9.9.9#dns.quad9.net 8.8.8.8#dns.google 2606:4700:4700::1111#cloudflare-dns.com 2620:fe::9#dns.quad9.net 2001:4860:4860::8888#dns.google/FallbackDNS=8.8.8.8#dns.google 8.8.4.4#dns.google 2001:4860:4860::8844#dns.google 2001:4860:4860::8888#dns.google/g' /etc/systemd/resolved.conf
 sudo sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
 sudo ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-sudo systemctl restart systemd-resolved
+sudo systemctl restart systemd-resolved.service
 
 #cat > ~/.config/dnsmasq.conf <<EOF
 #interface=wlan0
