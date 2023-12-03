@@ -133,7 +133,6 @@ cp /etc/i3status.conf /home/username/.config/i3status/config
 cp /etc/i3/config /home/username/.config/i3/config
 cp /etc/dunst/dunstrc /home/username/.config/dunst/dunstrc
 sed -ie 's/Mod1/$mod/g' /home/username/.config/i3/config
-sed -i 's/exec --no-startup-id nm-applet/#exec --no-startup-id nm-applet/g' /home/username/.config/i3/config
 sh -c "echo \"exec_always --no-startup-id xsetroot -solid \"#003760\"\" >> /home/username/.config/i3/config"
 sh -c "echo \"set \$mod Mod4\" >> /home/username/.config/i3/config"
 sh -c "echo \"exec i3\" >> /home/username/.xinitrc"
