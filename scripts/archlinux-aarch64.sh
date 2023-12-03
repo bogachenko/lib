@@ -128,10 +128,10 @@ mkdir '/home/username/.config'
 mkdir -p '/home/username/.config/{i3,i3status,dunst}'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 curl -o /home/username/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/linux/.Xresources
-cp /etc/i3status.conf /home/username/.config/i3status/config
+#curl -o /home/username/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/linux/i3status
 curl -o /home/username/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/linux/i3config
 cp /etc/dunst/dunstrc /home/username/.config/dunst/dunstrc
-sh -c "echo \"exec i3\" >> /home/username/.xinitrc"
+#curl -o /home/username/.xinitrc https://raw.githubusercontent.com/bogachenko/lib/master/config/linux/.xinitrc
 sudo cp /home/username/.Xresources /root/.Xresources
 xdg-user-dirs-update
 
