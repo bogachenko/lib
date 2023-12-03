@@ -3,6 +3,10 @@
 # Arch Linux aarch64
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
+pacman -Sy sudo openssh
+exit
+
+sudo systemctl enable sshd.service
 sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
 sudo sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers
 
@@ -10,29 +14,29 @@ echo 'Updating the list of repository mirrors.'
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 cat > /tmp/mirrorlist <<EOF
 Server = http://mirror.yandex.ru/archlinux-arm/$arch/$repo
-Server = http://mirror.yandex.ru/mirrors/blackarch/$repo/os/$arch
-Server = http://mirror.truenetwork.ru/blackarch/$repo/os/$arch
-Server = http://mirror.surf/blackarch/$repo/os/$arch
 Server = http://mirror.premi.st/archlinux-arm/$arch/$repo
 Server = https://mirror.yandex.ru/archlinux-arm/$arch/$repo
-Server = https://mirror.yandex.ru/mirrors/blackarch/$repo/os/$arch
-Server = https://mirror.truenetwork.ru/blackarch/$repo/os/$arch
-Server = https://mirror.surf/blackarch/$repo/os/$arch
 Server = https://mirror.premi.st/archlinux-arm/$arch/$repo
 EOF
 sudo cp /tmp/mirrorlist /etc/pacman.d/mirrorlist
 sudo pacman -Syyuu
 
 echo 'Installing the core packages.'
-sudo pacman -S --needed --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm xautolock xdg-user-dirs man-db base-devel mesa mesa-demos git openssh zsh python python2 python-pip python2-pip perl ruby lua php go apache weston whois htop dhcpcd jre-openjdk-headless ppp cmake pacman-contrib
+sudo pacman -S --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm xautolock xdg-user-dirs man-db base-devel mesa git zsh python python-pip perl ruby lua php go apache whois htop jre-openjdk-headless ppp cmake apparmor
 echo 'Installing the sub-core packages.'
-sudo pacman -S --needed --noconfirm vim wget alsa-plugins alsa-utils pulseaudio alsa-lib ffmpeg pulseaudio-alsa pulseaudio-bluetooth jack2 noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli bluez-utils bluedevil qt5-base qt6-base gtk3 gtk4 ufw gvfs gvfs-mtp cryfs encfs
+sudo pacman -S --noconfirm vim wget pipewire pipewire-jack wireplumber alsa-utils alsa-firmware alsa-card-profiles alsa-plugins pipewire-alsa pipewire-pulse ffmpeg noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli qt5-base qt6-base gtk3 gtk4 ufw gvfs gvfs-mtp dosfstools bluez bluez-utils
 echo 'Installing the extra packages.'
-sudo pacman -S --needed --noconfirm chromium firefox thunderbird tor nyx vlc plymouth sddm sddm-kcm xfce4 xfce4-xkb-plugin xfce4-pulseaudio-plugin xfce4-battery-plugin ristretto rofi i3-wm i3status i3lock i3blocks pcmanfm-qt dunst scrot mpd rxvt-unicode ranger zip unrar p7zip unzip libreoffice-fresh gimp lxqt-archiver qbittorrent transmission-cli cups libcups system-config-printer usb_modeswitch breeze-gtk xdg-desktop-portal-kde xdg-desktop-portal xdg-desktop-portal-gtk cdrtools dvd+rw-tools fatresize exfat-utils dosfstools ntfsprogs e2fsprogs xfsprogs f2fs-tools udftools markdownpart
+sudo pacman -S --noconfirm chromium tor nyx vlc plymouth sddm rofi i3-wm i3status i3lock i3blocks dunst scrot mpd rxvt-unicode ranger gimp cups system-config-printer transmission-cli zip unrar p7zip unzip xdg-desktop-portal
+
+
+ #  pcmanfm-qt     lxqt-archiver qbittorrent   usb_modeswitch breeze-gtk xdg-desktop-portal-kde xdg-desktop-portal-gtk cdrtools dvd+rw-tools fatresize exfat-utils  ntfsprogs e2fsprogs xfsprogs f2fs-tools udftools
 
 echo 'Setting preferences for kernel parameters.'
-#sudo sed -i 's/HOOKS=\(base udev autodetect modconf kms keyboard keymap consolefont block filesystems fsck\)/HOOKS=\(base udev autodetect modconf kms keyboard keymap plymouth consolefont block filesystems fsck\)/g' /etc/mkinitcpio.conf
+sudo sed -i 's/base udev autodetect/base udev plymouth autodetect/g' /etc/mkinitcpio.conf
 sudo mkinitcpio -p linux-aarch64
+#cat > /boot/cmdline.txt <<EOF
+#quiet splash logo.nologo plymouth.ignore-serial-consoles
+#EOF
 
 echo 'Installing additional repositories.'
 cd /tmp
@@ -43,32 +47,25 @@ makepkg -si
 cd ..
 cd yaourt/
 makepkg -si
-cd ..
-sudo rm -rf /etc/pacman.d/gnupg/
-sudo pacman-key --init
-sudo pacman-key --populate archlinuxarm
-curl -O https://blackarch.org/strap.sh
-chmod +x strap.sh
-sudo ./strap.sh
+cd /tmp
 
 echo 'Installing the extra packages from AUR'
 yaourt -S --needed --noconfirm ttf-ms-fonts mkinitcpio-firmware
 
 echo 'Enabling and running services...'
-sudo systemctl enable sshd.service
 #sudo systemctl enable dnsmasq.service
 #sudo systemctl enable hostapd.service
+#sudo systemctl enable apparmor.service
 sudo systemctl enable bluetooth.service
 sudo systemctl enable sddm.service
 sudo systemctl enable tor.service
-sudo systemctl enable ModemManager.service
-sudo systemctl enable NetworkManager.service
+sudo systemctl enable mpd.service
 sudo systemctl enable privoxy.service
 sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
 sudo systemctl enable gpm.service
-sudo systemctl enable ufw.service
-sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
-sudo systemctl enable systemd-resolved
+#sudo systemctl enable ufw.service
+#sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
+sudo systemctl --user enable --now pipewire.service pipewire.socket pipewire-pulse.service wireplumber.service
 
 echo 'Changing the system time.'
 echo 'Starting system time synchronization.'
@@ -108,7 +105,7 @@ echo 'Setting preferences for the language.'
 sudo localectl set-keymap en
 sudo setfont ter-k16n
 sudo localectl set-locale LANG="en_US.UTF-8"
-sudo sh -c "FONT=ter-k16n >> /etc/vconsole.conf"
+sudo sh -c "echo \"FONT=ter-k16n\" >> /etc/vconsole.conf"
 sudo cp /etc/locale.gen /etc/locale.gen.backup
 cat > /tmp/locale.gen <<EOF
 en_US.UTF-8 UTF-8
@@ -118,27 +115,33 @@ sudo locale-gen
 
 echo 'Setting preferences for working directories.'
 mkdir '/home/username/.config'
-mkdir -p '/home/username/.mozilla/firefox/username'
 mkdir -p '/home/username/.config/i3status'
 mkdir -p '/home/username/.config/i3'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-curl -o /home/username/.mozilla/firefox/username/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/firefox-user.js
 curl -o /home/username/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
 sudo cp /home/username/.Xresources /root/.Xresources
 cp /etc/i3status.conf /home/username/.config/i3status/config
 cp /etc/i3/config /home/username/.config/i3/config
 sed -ie 's/Mod1/$mod/g' /home/username/.config/i3/config
-#sed -i 's/exec --no-startup-id nm-applet/#exec --no-startup-id nm-applet/g' /home/username/.config/i3/config
-#sh -c "echo \"exec_always --no-startup-id xsetroot -solid \"#003760\"\" >> /home/username/.config/i3/config"
-#sh -c "echo \"set \$mod Mod4\" >> /home/username/.config/i3/config"
-#sh -c "echo \"exec i3\" >> /home/username/.xinitrc"
+sed -i 's/exec --no-startup-id nm-applet/#exec --no-startup-id nm-applet/g' /home/username/.config/i3/config
+sh -c "echo \"exec_always --no-startup-id xsetroot -solid \"#003760\"\" >> /home/username/.config/i3/config"
+sh -c "echo \"set \$mod Mod4\" >> /home/username/.config/i3/config"
+sh -c "echo \"exec i3\" >> /home/username/.xinitrc"
 xdg-user-dirs-update
 
 echo 'Setting preferences for DNS'
 sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
 sudo sed -i 's/#FallbackDNS=1.1.1.1#cloudflare-dns.com 9.9.9.9#dns.quad9.net 8.8.8.8#dns.google 2606:4700:4700::1111#cloudflare-dns.com 2620:fe::9#dns.quad9.net 2001:4860:4860::8888#dns.google/FallbackDNS=8.8.8.8#dns.google 8.8.4.4#dns.google 2001:4860:4860::8844#dns.google 2001:4860:4860::8888#dns.google/g' /etc/systemd/resolved.conf
 sudo sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
+sudo mkdir -p /etc/systemd/resolved.conf.d
+cat > /etc/systemd/resolved.conf.d/adguardhome.conf <<EOF
+[Resolve]
+DNS=127.0.0.1
+DNSStubListener=no
+EOF
+sudo mv /etc/resolv.conf /etc/resolv.conf.backup
 sudo ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 sudo systemctl restart systemd-resolved.service
 
 #cat > ~/.config/dnsmasq.conf <<EOF
@@ -170,7 +173,7 @@ alias unpac='sudo rm -f /var/lib/pacman/db.lck'
 alias vi='vim'
 alias cl='clear'
 alias sysctl='sudo systemctl'
-alias pacmancleaner='sudo pacman -Scc && sudo paccache -r'
+alias paccl='sudo pacman -Scc && sudo paccache -r'
 EOF
 cp /tmp/.zshrc /home/username/.zshrc
 sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /tmp/.zshrc
