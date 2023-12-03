@@ -1,6 +1,7 @@
 general {
   colors = true
   interval = 1
+  separator = "|"
 }
 
 order += "wireless _first_"
@@ -8,8 +9,8 @@ order += "ethernet _first_"
 order += "tztime local"
 
 wireless _first_ {
-  format_up = "WIL"
-  format_down = "WIL"
+  format_up = "WLS"
+  format_down = "WLS"
 }
 
 ethernet _first_ {
@@ -18,5 +19,5 @@ ethernet _first_ {
 }
 
 tztime local {
-  format = "%d %m %Y / %H:%M"
+  format = "%I:%M / %h %d, %Y "
 }
