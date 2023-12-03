@@ -18,10 +18,10 @@ URxvt.scrollTtyOutput: false
 URxvt.cursorBlink: true
 URxvt.title: Terminal
 URxvt.cursorColor: #ffffff
-URxvt.font: xft:Inconsolata:size=9
-URxvt.boldFont: xft:inconsolata:pixelsize=9
+URxvt.font: xft:Noto Sans Mono:size=8
+URxvt.boldFont: xft:Noto Sans Mono:size=8
 URxvt.allow_bold: false
 URxvt.matcher.button: 1
-URxvt.urlLauncher: firefox
+URxvt.urlLauncher: chromium
 URxvt.colorUL: #3246a8
 URxvt.geometry: 100x40

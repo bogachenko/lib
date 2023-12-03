@@ -22,7 +22,7 @@ sudo cp /tmp/mirrorlist /etc/pacman.d/mirrorlist
 sudo pacman -Syyuu
 
 echo 'Installing the core packages.'
-sudo pacman -S --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm xautolock xdg-user-dirs man-db base-devel mesa git zsh python python-pip perl ruby lua php go apache whois htop jre-openjdk-headless ppp cmake apparmor
+sudo pacman -S --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm xautolock xdg-user-dirs xss-lock man-db base-devel mesa git zsh python python-pip perl ruby lua php go apache whois htop jre-openjdk-headless ppp cmake apparmor
 echo 'Installing the sub-core packages.'
 sudo pacman -S --noconfirm vim wget pipewire pipewire-jack wireplumber alsa-utils alsa-firmware alsa-card-profiles alsa-plugins pipewire-alsa pipewire-pulse ffmpeg noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli qt5-base qt6-base gtk3 gtk4 ufw gvfs gvfs-mtp dosfstools bluez bluez-utils
 echo 'Installing the extra packages.'
@@ -127,12 +127,12 @@ echo 'Setting preferences for working directories.'
 mkdir '/home/username/.config'
 mkdir -p '/home/username/.config/{i3,i3status,dunst}'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-curl -o /home/username/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/.Xresources
-curl -o /home/username/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/i3status
-curl -o /home/username/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/i3config
+curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/.Xresources
+curl -o ~/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/i3status
+curl -o ~/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/i3config
 cp /etc/dunst/dunstrc /home/username/.config/dunst/dunstrc
-curl -o /home/username/.xinitrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/.xinitrc
-sudo cp /home/username/.Xresources /root/.Xresources
+curl -o ~/.xinitrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/.xinitrc
+sudo cp ~/.Xresources /root/.Xresources
 xdg-user-dirs-update
 
 echo 'Setting preferences for DNS'
@@ -169,7 +169,7 @@ sudo systemctl restart systemd-resolved.service
 echo 'Setting preferences for Z shell'
 cat > /tmp/.zshrc <<EOF
 PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
-export BROWSER="firefox"
+export BROWSER="chromium"
 export EDITOR="vim"
 alias ls='ls -la'
 alias reboot='sudo reboot -f'
