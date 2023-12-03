@@ -28,47 +28,59 @@ tiling_drag modifier titlebar
 bindsym $mod+Return exec urxvt
  
 # Settings to close the focused window.
-    # Usage: Closing the selected window is done by pressing the keys - "Main key + Shift + Q".
+    # Usage: Closing the focused window is done by pressing the keys - "Main key + Shift + Q".
 bindsym $mod+Shift+q kill
  
 # Start menu.
     # Usage: rofi is opened by pressing - "Main key + D".
 bindsym $mod+d exec "rofi -modi drun,run -show drun"
  
-# Setting for changing focus.
+# Settings for changing the focus of windows.
+    # Usage:
+        # Select the window on the left - "Main key + J" or "Main key + ←".
+        # Select the window on the down - "Main key + K" or "Main key + ↓".
+        # Select the window on the up - "Main key + L" or "Main key + ↑".
+        # Select the window on the right - "Main key + ;" or "Main key + →".
 bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
- 
-# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
+bindsym $mod+k focus down
 bindsym $mod+Down focus down
+bindsym $mod+l focus up
 bindsym $mod+Up focus up
+bindsym $mod+semicolon focus right
 bindsym $mod+Right focus right
- 
-# move focused window
+
+# Settings for the position of the focused window.
+    # Usage:
+        # Select the window on the left - "Main key + J" or "Main key + ←".
+        # Select the window on the down - "Main key + K" or "Main key + ↓".
+        # Select the window on the up - "Main key + L" or "Main key + ↑".
+        # Select the window on the right - "Main key + ;" or "Main key + →".
 bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
- 
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+k move down
 bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+l move up
 bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+semicolon move right
 bindsym $mod+Shift+Right move right
- 
-# split in horizontal orientation
+
+# Settings for splitting windows.
+    # Usage:
+        # Splitting windows horizontally - "Main key + H".
+        # Splitting windows vertically - "Main key + V".
 bindsym $mod+h split h
- 
-# split in vertical orientation
 bindsym $mod+v split v
- 
-# enter fullscreen mode for the focused container
+
+# Setting for fullscreen mode.
+    # Usage: Entry to the fullscreen mode is performed by selecting the window and pressing the key combination - "Main key + F".
 bindsym $mod+f fullscreen toggle
  
-# change container layout (stacked, tabbed, toggle split)
+# Settings for changing the container layout.
+    # Usage:
+        # To select the layout of the container - stacked, use the keyboard shortcut - "Main key + S".
+        # To select the layout of the container - tabbed , use the keyboard shortcut - "Main key + W".
+        # To select the layout of the container - splitted use the keyboard shortcut - "Main key + E".
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
