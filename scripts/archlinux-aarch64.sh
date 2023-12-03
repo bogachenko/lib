@@ -26,7 +26,7 @@ sudo pacman -S --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-serv
 echo 'Installing the sub-core packages.'
 sudo pacman -S --noconfirm vim wget pipewire pipewire-jack wireplumber alsa-utils alsa-firmware alsa-card-profiles alsa-plugins pipewire-alsa pipewire-pulse ffmpeg noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli qt5-base qt6-base gtk3 gtk4 ufw gvfs gvfs-mtp dosfstools bluez bluez-utils
 echo 'Installing the extra packages.'
-sudo pacman -S --noconfirm chromium tor nyx vlc plymouth sddm rofi i3-wm i3status i3lock i3blocks dunst scrot mpd rxvt-unicode ranger gimp cups system-config-printer transmission-cli zip unrar p7zip unzip xdg-desktop-portal
+sudo pacman -S --noconfirm chromium tor nyx vlc plymouth sddm rofi i3-wm i3status i3lock i3blocks dunst scrot mpd rxvt-unicode ranger gimp cups system-config-printer transmission-cli zip unrar p7zip unzip xdg-desktop-portal tigervnc
 
 
  #  pcmanfm-qt     lxqt-archiver qbittorrent   usb_modeswitch breeze-gtk xdg-desktop-portal-kde xdg-desktop-portal-gtk cdrtools dvd+rw-tools fatresize exfat-utils  ntfsprogs e2fsprogs xfsprogs f2fs-tools udftools
@@ -63,9 +63,19 @@ sudo systemctl enable mpd.service
 sudo systemctl enable privoxy.service
 sudo systemctl enable ntpd.service && sudo systemctl start ntpd.service
 sudo systemctl enable gpm.service
-#sudo systemctl enable ufw.service
+sudo systemctl enable ufw.service
 #sudo systemctl enable dhcpcd.service && sudo systemctl start dhcpcd.service
 sudo systemctl --user enable --now pipewire.service pipewire.socket pipewire-pulse.service wireplumber.service
+
+echo 'Uncomplicated Firewall Rules'
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp
+sudo ufw allow 21/tcp
+sudo ufw allow 5900/tcp
+sudo ufw allow 443
+sudo ufw allow 80
+sudo ufw enable
 
 echo 'Changing the system time.'
 echo 'Starting system time synchronization.'
@@ -115,13 +125,13 @@ sudo locale-gen
 
 echo 'Setting preferences for working directories.'
 mkdir '/home/username/.config'
-mkdir -p '/home/username/.config/i3status'
-mkdir -p '/home/username/.config/i3'
+mkdir -p '/home/username/.config/{i3,i3status,dunst}'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 curl -o /home/username/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
 sudo cp /home/username/.Xresources /root/.Xresources
 cp /etc/i3status.conf /home/username/.config/i3status/config
 cp /etc/i3/config /home/username/.config/i3/config
+cp /etc/dunst/dunstrc /home/username/.config/dunst/dunstrc
 sed -ie 's/Mod1/$mod/g' /home/username/.config/i3/config
 sed -i 's/exec --no-startup-id nm-applet/#exec --no-startup-id nm-applet/g' /home/username/.config/i3/config
 sh -c "echo \"exec_always --no-startup-id xsetroot -solid \"#003760\"\" >> /home/username/.config/i3/config"
