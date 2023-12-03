@@ -127,11 +127,11 @@ echo 'Setting preferences for working directories.'
 mkdir '/home/username/.config'
 mkdir -p '/home/username/.config/{i3,i3status,dunst}'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-curl -o /home/username/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/linux/.Xresources
-#curl -o /home/username/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/linux/i3status
-curl -o /home/username/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/linux/i3config
+curl -o /home/username/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/.Xresources
+curl -o /home/username/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/i3status
+curl -o /home/username/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/i3config
 cp /etc/dunst/dunstrc /home/username/.config/dunst/dunstrc
-#curl -o /home/username/.xinitrc https://raw.githubusercontent.com/bogachenko/lib/master/config/linux/.xinitrc
+curl -o /home/username/.xinitrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/.xinitrc
 sudo cp /home/username/.Xresources /root/.Xresources
 xdg-user-dirs-update
 
