@@ -127,14 +127,11 @@ echo 'Setting preferences for working directories.'
 mkdir '/home/username/.config'
 mkdir -p '/home/username/.config/{i3,i3status,dunst}'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-curl -o /home/username/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/text/.Xresources
+curl -o /home/username/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/linux/.Xresources
 sudo cp /home/username/.Xresources /root/.Xresources
 cp /etc/i3status.conf /home/username/.config/i3status/config
-cp /etc/i3/config /home/username/.config/i3/config
+curl -o /home/username/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/linux/i3config
 cp /etc/dunst/dunstrc /home/username/.config/dunst/dunstrc
-sed -ie 's/Mod1/$mod/g' /home/username/.config/i3/config
-sh -c "echo \"exec_always --no-startup-id xsetroot -solid \"#003760\"\" >> /home/username/.config/i3/config"
-sh -c "echo \"set \$mod Mod4\" >> /home/username/.config/i3/config"
 sh -c "echo \"exec i3\" >> /home/username/.xinitrc"
 xdg-user-dirs-update
 
