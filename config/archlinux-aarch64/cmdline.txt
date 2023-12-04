@@ -1,0 +1,1 @@
+quiet splash plymouth.ignore-serial-consoles

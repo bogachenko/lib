@@ -3,12 +3,10 @@
 # Arch Linux aarch64
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
-pacman -Sy sudo openssh
-exit
-
-sudo systemctl enable sshd.service
-sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
-sudo sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers
+echo 'Initializing the pacman keyring and populating Arch Linux ARM package signing keys\nUpdating keys and package list.'
+pacman-key --init
+pacman-key --populate archlinuxarm
+pacman -Sy sudo
 
 echo 'Updating the list of repository mirrors.'
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
@@ -20,23 +18,19 @@ Server = https://mirror.premi.st/archlinux-arm/$arch/$repo
 EOF
 sudo cp /tmp/mirrorlist /etc/pacman.d/mirrorlist
 sudo pacman -Syyuu
+sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
+sudo sed -i 's/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/g' /etc/sudoers
 
 echo 'Installing the core packages.'
-sudo pacman -S --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm xautolock xdg-user-dirs xss-lock man-db base-devel mesa git zsh python python-pip perl ruby lua php go apache whois htop jre-openjdk-headless ppp cmake
+sudo pacman -S --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm xautolock xdg-user-dirs xss-lock man-db base-devel mesa git zsh python python-pip perl ruby lua php go apache whois htop jre-openjdk-headless ppp cmake openssh bash-completion linux-aarch64-headers busybox rpi4-eeprom
 echo 'Installing the sub-core packages.'
 sudo pacman -S --noconfirm vim wget pipewire pipewire-jack wireplumber alsa-utils alsa-firmware alsa-card-profiles alsa-plugins pipewire-alsa pipewire-pulse ffmpeg noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli qt5-base qt6-base gtk2 gtk3 gtk4 ufw gvfs gvfs-mtp dosfstools bluez bluez-utils lshw apparmor
 echo 'Installing the extra packages.'
 sudo pacman -S --noconfirm chromium tor nyx vlc plymouth sddm rofi i3-wm i3status i3lock i3blocks dunst scrot mpd rxvt-unicode ranger gimp cups system-config-printer transmission-cli zip unrar p7zip unzip xdg-desktop-portal tigervnc
 
-
- #  pcmanfm-qt     lxqt-archiver qbittorrent   usb_modeswitch breeze-gtk xdg-desktop-portal-kde xdg-desktop-portal-gtk cdrtools dvd+rw-tools fatresize exfat-utils  ntfsprogs e2fsprogs xfsprogs f2fs-tools udftools
-
 echo 'Setting preferences for kernel parameters.'
 sudo sed -i 's/base udev autodetect/base udev plymouth autodetect/g' /etc/mkinitcpio.conf
 sudo mkinitcpio -p linux-aarch64
-#cat > /boot/cmdline.txt <<EOF
-#quiet splash logo.nologo plymouth.ignore-serial-consoles
-#EOF
 
 echo 'Installing additional repositories.'
 cd /tmp
@@ -52,7 +46,8 @@ cd /tmp
 echo 'Installing the extra packages from AUR'
 yaourt -S --needed --noconfirm ttf-ms-fonts mkinitcpio-firmware
 
-echo 'Enabling and running services...'
+echo 'Enabling and running services.'
+sudo systemctl enable sshd.service
 #sudo systemctl enable dnsmasq.service
 #sudo systemctl enable hostapd.service
 #sudo systemctl enable apparmor.service
@@ -92,9 +87,9 @@ sudo sed -i 's/#export FREETYPE_PROPERTIES/export FREETYPE_PROPERTIES/g' /etc/pr
 echo ''
 sudo hostnamectl set-hostname raspberry
 sudo useradd -m -g users -G wheel -s /bin/zsh username
+sudo chsh -s /bin/zsh root
 sudo passwd username
 sudo userdel -rf alarm
-sudo chsh -s /bin/zsh root
 
 echo 'Setting preferences for automatic login to SDDM.'
 touch /tmp/sddm.conf
@@ -107,6 +102,7 @@ sudo mv /tmp/sddm.conf /etc/sddm.conf
 
 echo 'Configuring configuration files for GTK themes.'
 mkdir -p ~/.config/gtk-{3.0,4.0}/
+sudo mkdir -p /etc/gtk-4.0/
 curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc2
 curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc3
 curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc4
