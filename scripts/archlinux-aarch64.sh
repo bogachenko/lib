@@ -110,9 +110,9 @@ mkdir -p ~/.config/gtk-{3.0,4.0}/
 curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc2
 curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc3
 curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc4
-sudo cp ~/.gtkrc-2.0 /usr/share/gtk-2.0/gtkrc
-sudo cp ~/.config/gtk-3.0/settings.ini /usr/share/gtk-3.0/settings.ini
-sudo cp ~/.config/gtk-4.0/settings.ini /usr/share/gtk-4.0/settings.ini
+sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc
+sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
+sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
 
 echo 'Setting preferences for Privoxy.'
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"
