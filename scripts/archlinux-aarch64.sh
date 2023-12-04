@@ -100,16 +100,6 @@ Session=i3.desktop
 EOF
 sudo mv /tmp/sddm.conf /etc/sddm.conf
 
-echo 'Configuring configuration files for GTK themes.'
-mkdir -p ~/.config/gtk-{3.0,4.0}/
-sudo mkdir -p /etc/gtk-4.0/
-curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc2
-curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc3
-curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc4
-sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc
-sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
-sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
-
 echo 'Setting preferences for Privoxy.'
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config"
@@ -132,12 +122,23 @@ echo 'Setting preferences for working directories.'
 mkdir '/home/username/.config'
 mkdir -p '/home/username/.config/{i3,i3status,dunst}'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/.Xresources
+curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/Xresources
 curl -o ~/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/i3status
 curl -o ~/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/i3config
-cp /etc/dunst/dunstrc /home/username/.config/dunst/dunstrc
-curl -o ~/.xinitrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/.xinitrc
+curl -o ~/.xinitrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/xinitrc
+curl -o ~/.vimrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/vimrc
+curl -o ~/.zshrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/zshrc
+sudo cp ~/.vimrc /root/.vimrc
 sudo cp ~/.Xresources /root/.Xresources
+cp /etc/dunst/dunstrc /home/username/.config/dunst/dunstrc
+mkdir -p ~/.config/gtk-{3.0,4.0}/
+sudo mkdir -p /etc/gtk-4.0/
+curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc2
+curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc3
+curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc4
+sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc
+sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
+sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
 xdg-user-dirs-update
 
 echo 'Setting preferences for DNS'
@@ -172,32 +173,7 @@ sudo systemctl restart systemd-resolved.service
 #EOF
 
 echo 'Setting preferences for Z shell'
-cat > /tmp/.zshrc <<EOF
-PROMPT="%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ "
-export BROWSER="chromium"
-export EDITOR="vim"
-alias ls='ls -la'
-alias reboot='sudo reboot -f'
-alias poweroff='sudo poweroff'
-alias ping-cli='ping -c 3 1.1.1.1'
-alias unpac='sudo rm -f /var/lib/pacman/db.lck'
-alias vi='vim'
-alias cl='clear'
-alias sysctl='sudo systemctl'
-alias paccl='sudo pacman -Scc && sudo paccache -r'
-EOF
+
 cp /tmp/.zshrc /home/username/.zshrc
 sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /tmp/.zshrc
 sudo mv /tmp/.zshrc /root/.zshrc
-
-echo 'Setting preferences for Vim'
-cat > /tmp/.vimrc <<EOF
-set number
-syntax on
-set noswapfile
-set wrap
-set ttyfast
-set encoding=utf8
-EOF
-sudo cp /tmp/.vimrc /root/.vimrc
-mv /tmp/.vimrc /home/username/.vimrc
