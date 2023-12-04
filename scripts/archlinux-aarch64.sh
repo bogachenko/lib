@@ -22,9 +22,9 @@ sudo cp /tmp/mirrorlist /etc/pacman.d/mirrorlist
 sudo pacman -Syyuu
 
 echo 'Installing the core packages.'
-sudo pacman -S --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm xautolock xdg-user-dirs xss-lock man-db base-devel mesa git zsh python python-pip perl ruby lua php go apache whois htop jre-openjdk-headless ppp cmake apparmor
+sudo pacman -S --noconfirm xorg xorg-xclock xorg-xmodmap xorg-xsetroot xorg-server xorg-xinit xorg-xrdb xorg-fonts-misc xorg-xlsfonts xorg-apps xorg-drivers xorg-fonts-cyrillic xterm xautolock xdg-user-dirs xss-lock man-db base-devel mesa git zsh python python-pip perl ruby lua php go apache whois htop jre-openjdk-headless ppp cmake
 echo 'Installing the sub-core packages.'
-sudo pacman -S --noconfirm vim wget pipewire pipewire-jack wireplumber alsa-utils alsa-firmware alsa-card-profiles alsa-plugins pipewire-alsa pipewire-pulse ffmpeg noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli qt5-base qt6-base gtk3 gtk4 ufw gvfs gvfs-mtp dosfstools bluez bluez-utils
+sudo pacman -S --noconfirm vim wget pipewire pipewire-jack wireplumber alsa-utils alsa-firmware alsa-card-profiles alsa-plugins pipewire-alsa pipewire-pulse ffmpeg noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ttf-ubuntu-font-family terminus-font mathjax privoxy dnsmasq hostapd pwgen ntp speedtest-cli qt5-base qt6-base gtk2 gtk3 gtk4 ufw gvfs gvfs-mtp dosfstools bluez bluez-utils lshw apparmor
 echo 'Installing the extra packages.'
 sudo pacman -S --noconfirm chromium tor nyx vlc plymouth sddm rofi i3-wm i3status i3lock i3blocks dunst scrot mpd rxvt-unicode ranger gimp cups system-config-printer transmission-cli zip unrar p7zip unzip xdg-desktop-portal tigervnc
 
@@ -104,6 +104,13 @@ User=username
 Session=i3.desktop
 EOF
 sudo mv /tmp/sddm.conf /etc/sddm.conf
+
+echo 'Configuring configuration files for GTK themes.'
+mkdir -p ~/.config/gtk-{3.0,4.0}/
+chown $USERNAME:$USERNAME ~/.config/gtk-{3.0,4.0}/
+cp /usr/share/gtk-2.0/gtkrc ~/.gtkrc-2.0
+cp /usr/share/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
+cp /usr/share/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini
 
 echo 'Setting preferences for Privoxy.'
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"

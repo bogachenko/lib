@@ -182,6 +182,7 @@ status_command i3status
 # Setting for automatic program start
     # Setting the background color for the desktop.
 exec_always --no-startup-id xsetroot -solid '#003760'
-
     # Settings to switch languages - English/Russian.
 exec_always setxkbmap -layout us,ru -option 'grp:alt_shift_toggle'
+    # Start program
+exec_always urxvt
