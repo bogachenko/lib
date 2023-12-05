@@ -13,9 +13,9 @@ echo 'Installing the core packages.'
 sudo apt install --no-install-recommends --no-install-suggests openssh-server xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock systemd-resolved
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo 'Installing the sub-core packages.'
-sudo apt install --no-install-recommends --no-install-suggests vim git pwgen wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils ffmpeg mpd ranger zip unrar p7zip unzip wget lshw dnsmasq hostapd tor nyx privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation2 fonts-dejavu
+sudo apt install --no-install-recommends --no-install-suggests vim git pwgen wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils ffmpeg mpd ranger zip unrar p7zip unzip wget lshw dnsmasq hostapd tor nyx torsocks obfs4proxy privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 echo 'Installing the extra packages.'
-sudo apt install --no-install-recommends --no-install-suggests firefox plymouth vlc rofi i3 i3lock gvfs lightdm dunst scrot rxvt-unicode gimp libgtk-3-0 libgtk-4-1 libgtk2.0-0 speedtest-cli cups bluez-cups
+sudo apt install --no-install-recommends --no-install-suggests firefox chromium plymouth vlc rofi i3 i3lock gvfs lightdm dunst scrot rxvt-unicode gimp libgtk-3-0 libgtk-4-1 libgtk2.0-0 speedtest-cli cups bluez-cups system-config-printer
 
 echo ''
 sudo mkdir -p /etc/systemd/resolved.conf.d
@@ -55,16 +55,16 @@ sudo ufw default allow outgoing
 sudo ufw allow 22/tcp
 sudo ufw allow 21/tcp
 sudo ufw allow 631/tcp
-sudo ufw allow 9050/tcp
 sudo ufw allow 3000/tcp
+sudo ufw allow 67/udp
+sudo ufw allow 68/udp
+sudo ufw allow 9050
 sudo ufw allow 5355
 sudo ufw allow 853
 sudo ufw allow 443
 sudo ufw allow 80
 sudo ufw allow 53
 sudo ufw allow 8118
-sudo ufw allow 67/udp
-sudo ufw allow 68/udp
 sudo ufw enable
 
 echo ''
