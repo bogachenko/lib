@@ -2,6 +2,7 @@
 
 # Raspberry Pi aarch64
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
+# https://raw.githubusercontent.com/bogachenko/lib/master/scripts/raspberrypi-aarch64.sh
 
 echo 'Updating the package list.'
 sudo apt update; sudo apt upgrade
@@ -11,11 +12,11 @@ sudo apt autoremove
 
 echo 'Installing the core packages.'
 sudo apt install --no-install-recommends --no-install-suggests openssh-server xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock systemd-resolved
-curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo 'Installing the sub-core packages.'
 sudo apt install --no-install-recommends --no-install-suggests vim git pwgen wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils ffmpeg mpd ranger zip unrar p7zip unzip wget curl lshw dnsmasq hostapd tor nyx torsocks obfs4proxy privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
+curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo 'Installing the extra packages.'
-sudo apt install --no-install-recommends --no-install-suggests firefox chromium plymouth vlc rofi i3 i3lock gvfs lightdm dunst scrot rxvt-unicode gimp libgtk-3-0 libgtk-4-1 libgtk2.0-0 speedtest-cli cups bluez-cups system-config-printer
+sudo apt install --no-install-recommends --no-install-suggests firefox chromium plymouth vlc rofi i3 i3lock gvfs lightdm dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups system-config-printer
 
 echo 'Settings for Internet parameters.'
 sudo mkdir -p /etc/systemd/resolved.conf.d
@@ -43,6 +44,7 @@ sudo systemctl enable bluetooth.service
 sudo systemctl enable lightdm.service
 sudo systemctl enable ifplugd.service
 sudo systemctl enable apache2
+sudo systemctl --user enable --now pipewire.service pipewire.socket pipewire-pulse.service wireplumber.service
 sudo raspi-config
 
 echo 'Enabling the Z shell by default.'
