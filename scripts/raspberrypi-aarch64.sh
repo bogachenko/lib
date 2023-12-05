@@ -17,7 +17,7 @@ sudo apt install --no-install-recommends --no-install-suggests vim git pwgen wir
 echo 'Installing the extra packages.'
 sudo apt install --no-install-recommends --no-install-suggests firefox chromium plymouth vlc rofi i3 i3lock gvfs lightdm dunst scrot rxvt-unicode gimp libgtk-3-0 libgtk-4-1 libgtk2.0-0 speedtest-cli cups bluez-cups system-config-printer
 
-echo ''
+echo 'Settings for Internet parameters.'
 sudo mkdir -p /etc/systemd/resolved.conf.d
 cat > /etc/systemd/resolved.conf.d/adguardhome.conf <<EOF
 [Resolve]
@@ -67,10 +67,29 @@ sudo ufw allow 53
 sudo ufw allow 8118
 sudo ufw enable
 
-echo ''
+echo 'Settings for configuration files.'
+sudo cp /etc/tor/torrc{,.backup}
+mkdir -p '~/.config/{i3,i3status,dunst}'
+mkdir -p '~/.config/gtk-{3.0,4.0}'
+curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/Xresources
+curl -o ~/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i3status
+curl -o ~/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i3config
+curl -o ~/.xinitrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/xinitrc
+curl -o ~/.vimrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/vimrc
+curl -o ~/.zshrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/zshrc
+curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc2
+curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc3
+curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/gtkrc4
+curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/torrc
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config"
-sudo systemctl restart privoxy.service
-
-curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-aarch64/Xresources
+sudo cp ~/.Xresources /root/.Xresources
+sudo cp ~/.zshrc /root/.zshrc
+sudo cp ~/.vimrc /root/.vimrc
+sudo cp ~.torrc /etc/tor/torrc
+sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc
+sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
+sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
+sudo sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /root/.zshrc
+sudo cp /etc/locale.gen /etc/locale.gen.backup;sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";sudo locale-gen
