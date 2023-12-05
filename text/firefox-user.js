@@ -36,6 +36,7 @@ user_pref("browser.newtabpage.pinned", "");
 user_pref("browser.newtabpage.enabled", false);
 user_pref("browser.newtab.preload", false);
 user_pref("browser.newtabpage.activity-stream.default.sites", "");
+user_pref("browser.newtabpage.activity-stream.system.showSponsored", false);
 user_pref("browser.newtabpage.activity-stream.feeds.topsites", false);
 user_pref("browser.newtabpage.activity-stream.section.highlights.includeBookmarks", false);
 user_pref("browser.newtabpage.activity-stream.section.highlights.includeDownloads", false);
@@ -61,6 +62,9 @@ user_pref("browser.newtabpage.activity-stream.discoverystream.personalization.mo
 user_pref("browser.newtabpage.activity-stream.discoverystream.spocs.personalized", false);
 user_pref("browser.newtabpage.activity-stream.feeds.aboutpreferences", false);
 user_pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false);
+user_pref("browser.newtabpage.activity-stream.discoverystream.spocTopsitesPlacement.enabled", false);
+user_pref("browser.newtabpage.activity-stream.discoverystream.sendToPocket.enabled", false);
+user_pref("browser.newtabpage.activity-stream.discoverystream.saveToPocketCard.enabled", false);
 user_pref("browser.newtabpage.activity-stream.feeds.favicon", false);
 user_pref("browser.newtabpage.activity-stream.feeds.newtabinit", false);
 user_pref("browser.newtabpage.activity-stream.feeds.places", false);
@@ -202,7 +206,9 @@ user_pref("privacy.trackingprotection.enabled", false);
 user_pref("privacy.trackingprotection.annotate_channels", false);
 user_pref("privacy.trackingprotection.cryptomining.enabled", false);
 user_pref("privacy.trackingprotection.fingerprinting.enabled", false);
+user_pref("privacy.fingerprintingProtection.pbmode", false);
 user_pref("privacy.trackingprotection.pbmode.enabled", false);
+user_pref("privacy.antitracking.enableWebcompat", false);
 
 // Automatically play sound in non-active tabs
 //      TRUE = Do not play
@@ -231,6 +237,7 @@ user_pref("toolkit.telemetry.shutdownPingSender.enabled", false);
 user_pref("toolkit.telemetry.shutdownPingSender.enabledFirstSession", false);
 user_pref("toolkit.telemetry.unified", false);
 user_pref("toolkit.telemetry.updatePing.enabled", false);
+user_pref("browser.search.serpEventTelemetry.enabled", false);
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion.endpoint", "data:,");
