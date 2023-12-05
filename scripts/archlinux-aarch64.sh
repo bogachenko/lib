@@ -139,6 +139,9 @@ curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogache
 sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc
 sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
 sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
+cp ~/.zshrc /tmp/.zshrc 
+sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /tmp/.zshrc
+sudo mv /tmp/.zshrc /root/.zshrc
 xdg-user-dirs-update
 
 echo 'Setting preferences for DNS'
@@ -171,9 +174,3 @@ sudo systemctl restart systemd-resolved.service
 #channel=1
 #driver=nl80211
 #EOF
-
-echo 'Setting preferences for Z shell'
-
-cp /tmp/.zshrc /home/username/.zshrc
-sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /tmp/.zshrc
-sudo mv /tmp/.zshrc /root/.zshrc
