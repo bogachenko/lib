@@ -58,12 +58,16 @@ sudo ufw allow 631/tcp
 sudo ufw allow 3000/tcp
 sudo ufw allow 67/udp
 sudo ufw allow 68/udp
+sudo ufw allow 546/udp
+sudo ufw allow 547/udp
+sudo ufw allow 123/udp
 sudo ufw allow 9050
 sudo ufw allow 5355
 sudo ufw allow 853
 sudo ufw allow 443
 sudo ufw allow 80
 sudo ufw allow 53
+sudo ufw allow 5353
 sudo ufw allow 8118
 sudo ufw enable
 
