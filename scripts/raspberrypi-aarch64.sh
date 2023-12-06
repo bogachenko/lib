@@ -70,32 +70,26 @@ sudo ufw allow 443
 sudo ufw allow 80
 sudo ufw allow 53
 sudo ufw allow 5353
+sudo ufw allow 5443
 sudo ufw allow 8118
 sudo ufw enable
 
 echo 'Settings for configuration files.'
-sudo cp /etc/tor/torrc{,.backup}
-mkdir -p '/home/username/.config/{i3,i3status,dunst}'
-mkdir -p '/home/username/.config/gtk-{3.0,4.0}'
-curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/Xresources
-curl -o ~/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i3status
-curl -o ~/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i3config
+sudo cp /etc/tor/torrc /etc/tor/torrc.backup
+mkdir -p '~/.config/dunst'
+mkdir -p '~/.config/i3status';curl -o ~/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i3status
+mkdir -p '~/.config/i3';curl -o ~/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i3config
 curl -o ~/.xinitrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/xinitrc
-curl -o ~/.vimrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/vimrc
-curl -o ~/.zshrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/zshrc
+curl -o ~/.vimrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/vimrc;sudo cp ~/.vimrc /root/.vimrc
+curl -o ~/.zshrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/zshrc;sudo cp ~/.zshrc /root/.zshrc
+sudo sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /root/.zshrc
+curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/Xresources;sudo cp ~/.Xresources /root/.Xresources
 curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc2
-curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc3
-curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc4
-curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/torrc
+mkdir -p '~/.config/gtk-3.0';curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc3
+mkdir -p '~/.config/gtk-4.0';curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc4
+curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/torrc;sudo cp ~.torrc /etc/tor/torrc
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config"
-sudo cp ~/.Xresources /root/.Xresources
-sudo cp ~/.zshrc /root/.zshrc
-sudo cp ~/.vimrc /root/.vimrc
-sudo cp ~.torrc /etc/tor/torrc
-sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc
-sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
-sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
-sudo sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /root/.zshrc
+sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc;sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini;sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
 sudo cp /etc/locale.gen /etc/locale.gen.backup;sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";sudo locale-gen
