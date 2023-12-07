@@ -2,6 +2,7 @@
 
 # Arch Linux x86_64
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
+# https://raw.githubusercontent.com/bogachenko/lib/master/scripts/archlinux-x86-64.sh
 
 USERNAME="$(whoami)"
 
@@ -9,13 +10,12 @@ USERNAME="$(whoami)"
 clear
 
 # Checking and installing updates.
-sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
+sed -i 's/#Color/Color/g' /etc/pacman.conf
+#sed -i 's/#[multilib]/multilib/g' /etc/pacman.conf
 sudo pacman -Syyuu
 
-# Installing main packages.
-sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit xorg-apps mesa-libgl xterm xorg-drivers cmake make mesa mesa-demos lib32-mesa python perl net-tools htop netctl openresolv linux-firmware dialog wpa_supplicant openssh xorg-fonts-cyrillic man-db gparted ruby lua php
-sudo pacman -S --needed --noconfirm git sddm vim dbus-broker jack2-dbus wget weston wayland ffmpeg alsa-plugins alsa-utils pulseaudio alsa-lib lib32-alsa-lib lib32-alsa-plugins libjpeg-turbo lib32-libjpeg-turbo pulseaudio-bluetooth bluez-utils libpng lib32-libpng hwinfo jre-openjdk jdk-openjdk noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans ntp pwgen i3 dmenu xdg-user-dirs rxvt-unicode gvfs realtime-privileges cpupower ranger
-# Installing drivers.
+echo 'Installing the core packages.'
+sudo pacman -S --needed --noconfirm linux-firmware zsh ufw xorg xorg-server xorg-xinit man-db mesa mesa-libgl lib32-mesa xterm xorg-drivers xorg-fonts-cyrillic cmake python python-pip ruby lua perl go php netctl net-tools dialog wpa_supplicant ifplugd libnotify xss-lock openssh systemd-resolvconf htop gpm apache apparmor weston
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
 intel=$(lspci | grep -e VGA -e 3D | grep 'Intel' 2> /dev/null || echo '')
 vmware=$(lspci | grep -e VGA -e 3D | grep 'VMware' 2> /dev/null || echo '')
@@ -70,7 +70,10 @@ sudo sed -i -e "s/GRUB_TIMEOUT=5\"/GRUB_TIMEOUT=0\"/g" /etc/default/grub
 sudo sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumblebee/xorg.conf.nvidia
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
-sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru vlc code thunderbird thunderbird-i18n-ru chromium youtube-dl telegram-desktop discord steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko nyx speedtest-cli tor privoxy
+echo 'Installing the sub-core packages.'
+sudo pacman -S --needed --noconfirm vim git wget curl pwgen wireplumber pipewire lib32-pipewire pipewire-jack lib32-pipewire-jack pipewire-alsa pipewire-pulse alsa-utils alsa-plugins lib32-alsa-plugins ffmpeg mpd ranger vlc gtk2 gtk3 gtk4 qt5-base qt5-tools qt6-base qt6-tools lshw zip unrar p7zip unzip jre-openjdk-headless ntp noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans tor torsocks privoxy nyx
+echo 'Installing the extra packages.'
+sudo pacman -S --needed --noconfirm chromium firefox firefox-i18n-ru thunderbird thunderbird-i18n-ru hunspell hunspell-ru hunspell-en_US steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko gvfs i3 rxvt-unicode rofi scrot sddm sddm-kcm plasma-desktop plasma-wayland-session plasma-pa plasma-nm usb_modeswitch konsole speedtest-cli xdg-user-dirs bluedevil bluez bluez-utils bluez-cups code discord telegram-desktop yt-dlp gimp cups phonon-qt5-vlc phonon-qt5 phonon-qt6-vlc phonon-qt6 breeze-gtk plymouth plymouth-kcm breeze-plymouth qbittorrent
 
 # Installing the Arch User Repository.
 cd /tmp
