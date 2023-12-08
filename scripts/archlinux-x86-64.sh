@@ -15,7 +15,7 @@ sed -i 's/#Color/Color/g' /etc/pacman.conf
 sudo pacman -Syyuu
 
 echo 'Installing the core packages.'
-sudo pacman -S --needed --noconfirm linux-firmware zsh ufw xorg xorg-server xorg-xinit man-db mesa mesa-libgl lib32-mesa xterm xorg-drivers xorg-fonts-cyrillic cmake python python-pip ruby lua perl go php netctl net-tools dialog wpa_supplicant ifplugd libnotify xss-lock openssh systemd-resolvconf htop gpm apache apparmor weston
+sudo pacman -S --needed --noconfirm linux-firmware zsh ufw xorg xorg-server xorg-xinit man-db mesa lib32-mesa mesa-utils lib32-mesa-utils mesa-libgl xterm xorg-drivers xorg-fonts-cyrillic cmake python python-pip ruby lua perl go php netctl net-tools dialog wpa_supplicant ifplugd libnotify xss-lock openssh systemd-resolvconf htop gpm apache apparmor weston encfs cryfs xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dotfstools udftools f2fs-tools exfat-utils ntfs-3g nilfs-utils jfsutils
 nvidia=$(lspci | grep -e VGA -e 3D | grep 'NVIDIA' 2> /dev/null || echo '')
 intel=$(lspci | grep -e VGA -e 3D | grep 'Intel' 2> /dev/null || echo '')
 vmware=$(lspci | grep -e VGA -e 3D | grep 'VMware' 2> /dev/null || echo '')
@@ -71,9 +71,9 @@ sudo sed -i -e "s/#   BusID \"PCI:01:00:0\"/BusID \"PCI:01:00:0\"/g" /etc/bumble
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 echo 'Installing the sub-core packages.'
-sudo pacman -S --needed --noconfirm vim git wget curl pwgen wireplumber pipewire lib32-pipewire pipewire-jack lib32-pipewire-jack pipewire-alsa pipewire-pulse alsa-utils alsa-plugins lib32-alsa-plugins ffmpeg mpd ranger vlc gtk2 gtk3 gtk4 qt5-base qt5-tools qt6-base qt6-tools lshw zip unrar p7zip unzip jre-openjdk-headless ntp noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans tor torsocks privoxy nyx
+sudo pacman -S --needed --noconfirm vim git wget curl pwgen wireplumber pipewire lib32-pipewire pipewire-jack lib32-pipewire-jack pipewire-alsa pipewire-pulse alsa-utils alsa-plugins lib32-alsa-plugins ffmpeg mpd ranger vlc gtk2 gtk3 gtk4 qt5-base qt5-tools qt6-base qt6-tools qt5-muktimedia qt6-muktimedia lshw zip unrar p7zip unzip bzip2 arj lrzip lz4 lzop xz zstd jre-openjdk-headless ntp noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-opensans tor torsocks privoxy nyx plymouth speedtest-cli
 echo 'Installing the extra packages.'
-sudo pacman -S --needed --noconfirm chromium firefox firefox-i18n-ru thunderbird thunderbird-i18n-ru hunspell hunspell-ru hunspell-en_US steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko gvfs i3 rxvt-unicode rofi scrot sddm sddm-kcm plasma-desktop plasma-wayland-session plasma-pa plasma-nm usb_modeswitch konsole speedtest-cli xdg-user-dirs bluedevil bluez bluez-utils bluez-cups code discord telegram-desktop yt-dlp gimp cups phonon-qt5-vlc phonon-qt5 phonon-qt6-vlc phonon-qt6 breeze-gtk plymouth plymouth-kcm breeze-plymouth qbittorrent
+sudo pacman -S --needed --noconfirm chromium firefox firefox-i18n-ru thunderbird thunderbird-i18n-ru hunspell hunspell-ru hunspell-en_US steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko gvfs usb_modeswitch i3 rxvt-unicode rofi scrot sddm sddm-kcm plasma-desktop plasma-wayland-session plasma-pa plasma-nm xdg-desktop-portal-kde plasma-vault plasma-systemmonitor plasma-firewall ffmpegthumbs dolphin-plugins dolphin konsole breeze-gtk plymouth-kcm breeze-plymouth kget kfind kdeplasma-addons gwenview kalarm kalk ksystemlog kompare kdialog colord-kde kde-gtk-config khotkeys krecorder ktimer kclock kgpg ark kdf kcharselect okular spectacle kjournald kcolorchooser kgamma partitionmanager filelight sweeper ksshaskpass kwalletmanager kwallet-pam kleopatra elisa kbackup bluedevil bluez bluez-utils bluez-cups code discord telegram-desktop yt-dlp gimp cups system-config-printer phonon-qt5-vlc phonon-qt5 phonon-qt6-vlc phonon-qt6 qbittorrent libreoffice-fresh
 
 # Installing the Arch User Repository.
 cd /tmp
