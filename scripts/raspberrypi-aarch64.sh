@@ -11,12 +11,12 @@ echo 'Removing garbage packages after updating packages.'
 sudo apt autoremove
 
 echo 'Installing the core packages.'
-sudo apt install --no-install-recommends --no-install-suggests openssh-server xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin systemd-resolved cmake
+sudo apt install --no-install-recommends --no-install-suggests openssh-server xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin systemd-resolved cmake plymouth xdg-desktop-portal xdg-user-dirs
 echo 'Installing the sub-core packages.'
 sudo apt install --no-install-recommends --no-install-suggests vim git pwgen wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip wget curl lshw dnsmasq hostapd nyx tor torsocks obfs4proxy proxychains privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo 'Installing the extra packages.'
-sudo apt install --no-install-recommends --no-install-suggests firefox chromium plymouth vlc rofi i3 i3lock gvfs lightdm dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch
+sudo apt install --no-install-recommends --no-install-suggests firefox chromium vlc rofi i3 i3lock gvfs lightdm dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch
 
 echo 'Settings for Internet parameters.'
 sudo mkdir -p /etc/systemd/resolved.conf.d
