@@ -5,18 +5,18 @@
 # https://raw.githubusercontent.com/bogachenko/lib/master/scripts/raspberrypi-aarch64.sh
 
 echo 'Updating the package list.'
-sudo apt update; sudo apt upgrade
+sudo apt update;sudo apt upgrade
 
 echo 'Removing garbage packages after updating packages.'
 sudo apt autoremove
 
 echo 'Installing the core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin systemd-resolved cmake plymouth xdg-desktop-portal xdg-user-dirs
+sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin systemd-resolved cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g
 echo 'Installing the sub-core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes vim git pwgen wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip wget curl lshw dnsmasq hostapd nyx tor torsocks obfs4proxy proxychains privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
+sudo apt install --no-install-recommends --no-install-suggests --yes vim git pwgen wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils wget curl lshw dnsmasq hostapd nyx tor torsocks obfs4proxy proxychains privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo 'Installing the extra packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes firefox chromium vlc rofi i3 i3lock gvfs lightdm dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch hunspell hunspell-ru hyphen-en-us libreoffice
+sudo apt install --no-install-recommends --no-install-suggests --yes firefox chromium vlc rofi i3 i3lock gvfs lightdm dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch hunspell hunspell-ru hyphen-en-us libreoffice yt-dlp code qbittorrent
 
 echo 'Settings for Internet parameters.'
 sudo mkdir -p /etc/systemd/resolved.conf.d
@@ -69,6 +69,7 @@ sudo ufw allow 853
 sudo ufw allow 443
 sudo ufw allow 80
 sudo ufw allow 8080
+sudo ufw allow 8081
 sudo ufw allow 53
 sudo ufw allow 5353
 sudo ufw allow 5443
@@ -91,7 +92,7 @@ curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/con
 mkdir -p ~/.config/gtk-3.0;curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc3;sudo cp /etc/gtk-3.0/settings.ini ~/.config/gtk-3.0
 mkdir -p ~/.config/gtk-4.0;curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc4;sudo cp /etc/gtk-4.0/settings.ini ~/.config/gtk-4.0
 curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/torrc;sudo cp ~/.torrc /etc/tor/torrc
-curl -o ~/00apt-conf https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/00apt-conf;sudo cp ~/00apt-conf /etc/apt/apt.conf.d/00apt-conf
+curl -o ~/00-apt-conf https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/00-apt-conf;sudo cp ~/00-apt-conf /etc/apt/apt.conf.d/00-apt-conf
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config"
