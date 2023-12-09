@@ -54,26 +54,27 @@ sudo chsh -s /bin/zsh username
 echo 'Enabling firewall rules.'
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw allow 22/tcp
+sudo ufw allow 123/udp
 sudo ufw allow 21/tcp
-sudo ufw allow 631/tcp
-sudo ufw allow 3000/tcp
-sudo ufw allow 67/udp
-sudo ufw allow 68/udp
+sudo ufw allow 22/tcp
+sudo ufw allow 443
+sudo ufw allow 465
+sudo ufw allow 53
+sudo ufw allow 5353
+sudo ufw allow 5355
+sudo ufw allow 5443
 sudo ufw allow 546/udp
 sudo ufw allow 547/udp
-sudo ufw allow 123/udp
-sudo ufw allow 9050
-sudo ufw allow 5355
-sudo ufw allow 853
-sudo ufw allow 443
+sudo ufw allow 631/tcp
+sudo ufw allow 67/udp
+sudo ufw allow 68/udp
 sudo ufw allow 80
 sudo ufw allow 8080
 sudo ufw allow 8081
-sudo ufw allow 53
-sudo ufw allow 5353
-sudo ufw allow 5443
-sudo ufw allow 8118
+sudo ufw allow 8118/tcp
+sudo ufw allow 853
+sudo ufw allow 9050/tcp
+sudo ufw allow 993
 sudo ufw enable
 
 echo 'Settings for configuration files.'
@@ -87,6 +88,7 @@ curl -o ~/.xinitrc https://raw.githubusercontent.com/bogachenko/lib/master/confi
 curl -o ~/.vimrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/vimrc;sudo cp ~/.vimrc /root/.vimrc
 curl -o ~/.zshrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/zshrc;sudo cp ~/.zshrc /root/.zshrc
 sudo sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /root/.zshrc
+sudo sed -i 's/Listen 80/Listen 8081/g' /etc/apache2/ports.conf
 curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/Xresources;sudo cp ~/.Xresources /root/.Xresources
 curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc2;sudo cp /etc/gtk-2.0/gtkrc ~/.gtkrc-2.0
 mkdir -p ~/.config/gtk-3.0;curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc3;sudo cp /etc/gtk-3.0/settings.ini ~/.config/gtk-3.0
@@ -98,3 +100,6 @@ sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config"
 sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc;sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini;sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
 sudo cp /etc/locale.gen /etc/locale.gen.backup;sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";sudo locale-gen
+
+echo 'Reboot the system'
+sudo reboot -f
