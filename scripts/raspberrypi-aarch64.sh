@@ -96,8 +96,8 @@ curl -o ~/.vimrc https://raw.githubusercontent.com/bogachenko/lib/master/config/
 curl -o ~/.zshrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/zshrc;sudo cp ~/.zshrc /root/.zshrc
 sudo sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /root/.zshrc
 sudo sed -i 's/Listen 80/Listen 8081/g' /etc/apache2/ports.conf
-sudo sh -c "echo \"1\" > /proc/sys/net/ipv4/ip_forward"
-sudo sh -c "echo \"1\" > /proc/sys/net/ipv6/conf/all/forwarding"
+sudo sh -c "echo \"1\" > /proc/sys/net/ipv4/ip_forward";sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
+sudo sh -c "echo \"1\" > /proc/sys/net/ipv6/conf/all/forwarding";sudo sed -i 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/g' /etc/sysctl.conf
 curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/Xresources;sudo cp ~/.Xresources /root/.Xresources
 curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc2;sudo cp /etc/gtk-2.0/gtkrc ~/.gtkrc-2.0
 mkdir -p ~/.config/gtk-3.0;curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc3;sudo cp /etc/gtk-3.0/settings.ini ~/.config/gtk-3.0
