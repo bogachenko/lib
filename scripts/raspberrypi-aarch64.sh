@@ -11,12 +11,11 @@ echo 'Removing garbage packages after updating packages.'
 sudo apt autoremove
 
 echo 'Installing the core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin systemd-resolved cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g
+sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin systemd-resolved cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates
 echo 'Installing the sub-core packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes vim git pwgen wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils wget curl lshw dnsmasq hostapd nyx tor torsocks obfs4proxy proxychains privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
-curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo 'Installing the extra packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes firefox chromium vlc rofi i3 i3lock gvfs lightdm dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch hunspell hunspell-ru hyphen-en-us libreoffice yt-dlp code qbittorrent
+sudo apt install --no-install-recommends --no-install-suggests --yes firefox chromium vlc rofi i3 i3lock gvfs sddm dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch hunspell hunspell-ru hyphen-en-us libreoffice yt-dlp code qbittorrent
 
 echo 'Settings for Internet parameters.'
 sudo mkdir -p /etc/systemd/resolved.conf.d
@@ -41,11 +40,10 @@ sudo systemctl enable privoxy.service
 sudo systemctl enable mpd.service
 sudo systemctl enable gpm.service
 sudo systemctl enable bluetooth.service
-sudo systemctl enable lightdm.service
+sudo systemctl enable sddm.service
 sudo systemctl enable ifplugd.service
 sudo systemctl enable apache2
 sudo systemctl --user enable --now pipewire.service pipewire.socket pipewire-pulse.service wireplumber.service
-sudo raspi-config
 
 echo 'Enabling the Z shell by default.'
 sudo chsh -s /bin/zsh root
@@ -77,10 +75,15 @@ sudo ufw allow 9050/tcp
 sudo ufw allow 993
 sudo ufw enable
 
+echo 'Installing AdguardHome'
+curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
+
 echo 'Settings for configuration files.'
-sudo mv /etc/lightdm/lightdm.conf{,.backup}
 sudo mv /etc/tor/torrc{,.backup};sudo mv /etc/tor/torsocks{,.backup}
-curl -o ~/lightdm.conf https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/lightdm.conf;sudo mv ~/lightdm.conf /etc/lightdm/lightdm.conf
+sudo mv /etc/locale.gen{,.backup};sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";sudo locale-gen
+mkdir -p ~/.mozilla/firefox/username;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js;mv ~/user.js ~/.mozilla/firefox/username/user.js
+mkdir -p ~/.thunderbird/username;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/thunderbird-user.js;mv ~/user.js ~/.thunderbird/username/user.js
+curl -o ~/sddm.conf https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/sddm.conf;sudo mv ~/sddm.conf /etc/sddm.conf
 mkdir -p ~/.config/dunst;curl -o ~/.config/dunst/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/dunst
 mkdir -p ~/.config/i3status;curl -o ~/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i3status
 mkdir -p ~/.config/i3;curl -o ~/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i3config
@@ -99,7 +102,7 @@ sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config"
 sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config"
 sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc;sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini;sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
-sudo cp /etc/locale.gen /etc/locale.gen.backup;sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";sudo locale-gen
+xdg-user-dirs-update
 
 echo 'Reboot the system'
 sudo reboot -f
