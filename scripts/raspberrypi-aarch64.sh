@@ -10,6 +10,8 @@ sudo apt update;sudo apt upgrade
 echo 'Removing garbage packages after updating packages.'
 sudo apt autoremove
 
+echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
+
 echo 'Installing the core packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin systemd-resolved cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates
 echo 'Installing the sub-core packages.'
@@ -42,7 +44,7 @@ sudo systemctl enable gpm.service
 sudo systemctl enable bluetooth.service
 sudo systemctl enable sddm.service
 sudo systemctl enable ifplugd.service
-sudo systemctl enable apache2
+sudo systemctl enable apache2.service
 sudo systemctl --user enable --now pipewire.service pipewire.socket pipewire-pulse.service wireplumber.service
 
 echo 'Enabling the Z shell by default.'
@@ -81,8 +83,8 @@ curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/s
 echo 'Settings for configuration files.'
 sudo mv /etc/tor/torrc{,.backup};sudo mv /etc/tor/torsocks{,.backup}
 sudo mv /etc/locale.gen{,.backup};sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";sudo locale-gen
-mkdir -p ~/.mozilla/firefox/username;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/firefox-user.js;mv ~/user.js ~/.mozilla/firefox/username/user.js
-mkdir -p ~/.thunderbird/username;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/mozilla/thunderbird-user.js;mv ~/user.js ~/.thunderbird/username/user.js
+mkdir -p ~/.mozilla/firefox/username;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/firefox-user.js;mv ~/user.js ~/.mozilla/firefox/username/user.js
+mkdir -p ~/.thunderbird/username;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/thunderbird-user.js;mv ~/user.js ~/.thunderbird/username/user.js
 curl -o ~/sddm.conf https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/sddm.conf;sudo mv ~/sddm.conf /etc/sddm.conf
 mkdir -p ~/.config/dunst;curl -o ~/.config/dunst/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/dunst
 mkdir -p ~/.config/i3status;curl -o ~/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i3status
