@@ -16,9 +16,9 @@ echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
 echo 'Installing the core packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xorg xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin systemd-resolved cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates iptables
 echo 'Installing the sub-core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes vim git pwgen wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils wget curl lshw dnsmasq hostapd nyx tor torsocks obfs4proxy proxychains privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
+sudo apt install --no-install-recommends --no-install-suggests --yes ntp vim git pwgen wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils wget curl lshw bind9 dnsmasq hostapd i2pd nyx tor torsocks obfs4proxy proxychains privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 echo 'Installing the extra packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes firefox thunderbird chromium vlc mousepad libxfce4ui-utils thunar xfce4-appfinder xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop4 xfwm4 xfce4-power-manager xfce4-screenshooter xfce4-taskmanager xfce4-xkb-plugin dmz-cursor-theme i3 i3lock gvfs sddm rofi dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch hunspell hunspell-ru hyphen-en-us libreoffice yt-dlp code qbittorrent
+sudo apt install --no-install-recommends --no-install-suggests --yes firefox thunderbird chromium vlc mousepad libxfce4ui-utils thunar xfce4-appfinder xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop4 xfwm4 xfce4-power-manager xfce4-screenshooter xfce4-taskmanager xfce4-xkb-plugin dmz-cursor-theme i3 i3lock gvfs sddm rofi dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch hunspell hunspell-ru hyphen-en-us libreoffice yt-dlp code qbittorrent transmission-cli
 
 echo 'Settings for Internet parameters.'
 sudo mkdir -p /etc/systemd/resolved.conf.d
@@ -35,7 +35,8 @@ sudo systemctl restart systemd-resolved.service
 echo 'Enabling and running services.'
 #sudo systemctl enable dnsmasq.service
 #sudo systemctl enable hostapd.service
-#sudo systemctl enable apparmor.service
+sudo systemctl enable apparmor.service
+sudo systemctl enable i2pd.service
 sudo systemctl enable ssh.service
 sudo systemctl enable ufw.service
 sudo systemctl enable tor.service
@@ -76,10 +77,16 @@ sudo ufw allow 8118/tcp
 sudo ufw allow 853
 sudo ufw allow 9050/tcp
 sudo ufw allow 993
+sudo ufw allow 51820/udp
+sudo ufw allow 4445/tcp
+sudo ufw allow 4444/tcp
 sudo ufw enable
 
-echo 'Installing AdguardHome'
+echo 'Installing AdguardHome.'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
+
+echo 'Installing PiVPN.'
+curl -L https://install.pivpn.io | bash
 
 echo 'Settings for configuration files.'
 sudo mkdir -p /etc/gtk-{2.0,3.0,4.0}
@@ -104,9 +111,7 @@ mkdir -p ~/.config/gtk-3.0;curl -o ~/.config/gtk-3.0/settings.ini https://raw.gi
 mkdir -p ~/.config/gtk-4.0;curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc4;sudo cp /etc/gtk-4.0/settings.ini ~/.config/gtk-4.0
 curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/torrc;sudo cp ~/.torrc /etc/tor/torrc
 curl -o ~/00-apt-conf https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/00-apt-conf;sudo mv ~/00-apt-conf /etc/apt/apt.conf.d/00-apt-conf
-sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config"
-sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config"
-sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config"
+sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward .i2p localhost:4444\" >> /etc/privoxy/config"
 sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc;sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini;sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
 xdg-user-dirs-update
 
