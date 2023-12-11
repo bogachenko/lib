@@ -24,13 +24,13 @@ sudo bash -c 'cat > /etc/systemd/resolved.conf.d/adguardhome.conf <<EOF
 DNS=127.0.0.1
 DNSStubListener=no
 EOF'
-sudo mv /etc/resolv.conf /etc/resolv.conf.backup
+sudo mv /etc/resolv.conf{,.backup}
 echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
 sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-sudo systemctl restart systemd-resolved.service
 
 echo 'Enabling and running services.'
+sudo systemctl restart systemd-resolved.service
 sudo systemctl disable dnsmasq.service
 sudo systemctl disable hostapd.service
 sudo systemctl enable apparmor.service
@@ -39,7 +39,7 @@ sudo systemctl enable ssh.service
 sudo systemctl enable ufw.service
 sudo systemctl enable tor.service
 sudo systemctl enable privoxy.service
-sudo systemctl enable mpd.service
+sudo systemctl disable mpd.service
 sudo systemctl enable gpm.service
 sudo systemctl enable bluetooth.service
 sudo systemctl enable sddm.service
@@ -87,8 +87,8 @@ echo 'Installing PiVPN.'
 curl -L https://install.pivpn.io | bash
 
 echo 'Settings for configuration files.'
-sudo mkdir -p /etc/gtk-{2.0,3.0,4.0}
-sudo mv /etc/tor/torrc{,.backup};sudo mv /etc/tor/torsocks{,.backup}
+sudo mkdir -p /etc/gtk-{2.0,3.0,4.0};mkdir -p ~/.config/gtk-{3.0,4.0}
+sudo mv /etc/tor/torrc{,.backup};sudo mv /etc/tor/torsocks.conf{,.backup}
 sudo mv /etc/locale.gen{,.backup};sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";sudo locale-gen
 mkdir -p ~/.mozilla/firefox/username;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/firefox-user.js;mv ~/user.js ~/.mozilla/firefox/username/user.js
 mkdir -p ~/.thunderbird/username;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/thunderbird-user.js;mv ~/user.js ~/.thunderbird/username/user.js
@@ -104,9 +104,9 @@ sudo sed -i 's/Listen 80/Listen 8081/g' /etc/apache2/ports.conf
 sudo sh -c "echo \"1\" > /proc/sys/net/ipv4/ip_forward";sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 sudo sh -c "echo \"1\" > /proc/sys/net/ipv6/conf/all/forwarding";sudo sed -i 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/g' /etc/sysctl.conf
 curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/Xresources;sudo cp ~/.Xresources /root/.Xresources
-curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc2;sudo cp /etc/gtk-2.0/gtkrc ~/.gtkrc-2.0
-mkdir -p ~/.config/gtk-3.0;curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc3;sudo cp /etc/gtk-3.0/settings.ini ~/.config/gtk-3.0
-mkdir -p ~/.config/gtk-4.0;curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc4;sudo cp /etc/gtk-4.0/settings.ini ~/.config/gtk-4.0
+curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc2;sudo cp ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc
+curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc3;sudo cp ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
+curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc4;sudo cp ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
 curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/torrc;sudo cp ~/.torrc /etc/tor/torrc
 curl -o ~/00-apt-conf https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/00-apt-conf;sudo mv ~/00-apt-conf /etc/apt/apt.conf.d/00-apt-conf
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward .i2p localhost:4444\" >> /etc/privoxy/config"
