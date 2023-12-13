@@ -82,5 +82,20 @@ sudo mkdir -p /etc/gtk-{2.0,3.0,4.0};mkdir -p ~/.config/gtk-{3.0,4.0}
 sudo mv /etc/tor/torrc{,.backup};sudo mv /etc/tor/torsocks.conf{,.backup}
 mkdir -p ~/.mozilla/firefox/bogachenko;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/firefox-user.js;mv ~/user.js ~/.mozilla/firefox/bogachenko/user.js
 mkdir -p ~/.thunderbird/bogachenko;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/thunderbird-user.js;mv ~/user.js ~/.thunderbird/bogachenko/user.js
-
+mkdir -p ~/.config/dunst;curl -o ~/.config/dunst/config https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-x86_64/dunst
+mkdir -p ~/.config/i3status;curl -o ~/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-x86_64/i3status
+mkdir -p ~/.config/i3;curl -o ~/.config/i3/config https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-x86_64/i3config
+#curl -o ~/.xinitrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-x86_64/xinitrc
+curl -o ~/.vimrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-x86_64/vimrc;sudo cp ~/.vimrc /root/.vimrc
+curl -o ~/.zshrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-x86_64/zshrc;sudo cp ~/.zshrc /root/.zshrc
+sudo sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /root/.zshrc
+#sudo sed -i 's/Listen 80/Listen 8081/g' /etc/apache2/ports.conf
+#sudo sh -c "echo \"1\" > /proc/sys/net/ipv4/ip_forward";sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf;sudo sh -c "echo \"1\" > /proc/sys/net/ipv6/conf/all/forwarding";sudo sed -i 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/g' /etc/sysctl.conf
+curl -o ~/.Xresources https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-x86_64/Xresources;sudo cp ~/.Xresources /root/.Xresources
+curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-x86_64/gtkrc2;sudo cp ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc
+curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-x86_64/gtkrc3;sudo cp ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
+curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-x86_64/gtkrc4;sudo cp ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
+curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/archlinux-x86_64/torrc;sudo mv ~/.torrc /etc/tor/torrc
+sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward .i2p localhost:4444\" >> /etc/privoxy/config"
+sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc;sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini;sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
 sudo rm -rf /etc/ufw/applications.d/
