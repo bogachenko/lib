@@ -15,17 +15,17 @@ sudo apt install --no-install-recommends --no-install-suggests --yes ntp vim git
 echo 'Installing the extra packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes firefox thunderbird chromium vlc mousepad libxfce4ui-utils thunar xfce4-appfinder xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop4 xfwm4 xfce4-power-manager xfce4-screenshooter xfce4-taskmanager xfce4-xkb-plugin dmz-cursor-theme i3 i3lock gvfs sddm rofi dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch hunspell hunspell-ru hunspell-en_US libreoffice yt-dlp code qbittorrent transmission-cli
 
-echo 'Settings for Internet parameters.'
-sudo mkdir -p /etc/systemd/resolved.conf.d
-sudo bash -c 'cat > /etc/systemd/resolved.conf.d/adguardhome.conf <<EOF
-[Resolve]
-DNS=127.0.0.1
-DNSStubListener=no
-EOF'
-sudo mv /etc/resolv.conf{,.backup}
-echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
-sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
-sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+#echo 'Settings for Internet parameters.'
+#sudo mkdir -p /etc/systemd/resolved.conf.d
+#sudo bash -c 'cat > /etc/systemd/resolved.conf.d/adguardhome.conf <<EOF
+#[Resolve]
+#DNS=127.0.0.1
+#DNSStubListener=no
+#EOF'
+#sudo mv /etc/resolv.conf{,.backup}
+#echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
+#sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
+#sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 echo 'Enabling services.'
 sudo systemctl restart systemd-resolved.service
