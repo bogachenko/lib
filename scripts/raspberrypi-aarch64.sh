@@ -43,7 +43,7 @@ sudo systemctl enable bluetooth.service
 sudo systemctl enable sddm.service
 sudo systemctl enable ifplugd.service
 sudo systemctl enable apache2.service
-sudo systemctl --user enable --now pipewire.service pipewire.socket pipewire-pulse.service wireplumber.service
+systemctl --user enable --now pipewire.socket;systemctl --user enable --now pipewire-pulse.socket;systemctl --user enable --now wireplumber.service
 
 echo 'Enabling the Z shell by default.'
 sudo chsh -s /bin/zsh root
