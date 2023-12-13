@@ -12,7 +12,7 @@ sudo pacman -S --needed --noconfirm linux-firmware base-devel openssh xorg xorg-
 echo 'Installing the sub-core packages.'
 sudo pacman -S --needed --noconfirm ntp vim git pwgen wireplumber pipewire lib32-pipewire pipewire-jack lib32-pipewire-jack pipewire-alsa pipewire-pulse alsa-utils alsa-plugins lib32-alsa-plugins ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz wget curl lshw bind dnsmasq hostapd i2pd nyx tor torsocks proxychains privoxy ttf-ubuntu-font-family noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-dejavu gtk2 gtk3 gtk4 qt5 qt6
 echo 'Installing the extra packages.'
-sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru thunderbird thunderbird-i18n-ru chromium vlc xcursor-vanilla-dmz i3 gvfs sddm rofi dunst scrot rxvt-unicode gimp speedtest-cli steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko hunspell hunspell-ru hyphen-en hunspell-en_US libreoffice-fresh yt-dlp telegram-desktop code qbittorrent transmission-cli bluez cups bluez-cups cups-pdf cups-filters networkmanager modemmanager usb_modeswitch
+sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru thunderbird thunderbird-i18n-ru chromium vlc xcursor-vanilla-dmz i3 gvfs sddm rofi dunst scrot rxvt-unicode gimp speedtest-cli steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko hunspell hunspell-ru hyphen-en hunspell-en_US libreoffice-fresh yt-dlp telegram-desktop code qbittorrent transmission-cli bluez cups bluez-cups cups-pdf cups-filters networkmanager modemmanager usb_modeswitch obs-studio
 
 echo 'Installing the Arch User Repository.'
 cd /tmp;git clone https://aur.archlinux.org/package-query.git;git clone https://aur.archlinux.org/yaourt.git;cd package-query/;makepkg -si;cd ..;cd yaourt/;makepkg -si
@@ -44,4 +44,43 @@ sudo systemctl enable sddm.service
 sudo systemctl enable NetworkManager.service
 sudo systemctl enable ModemManager.service
 sudo systemctl enable httpd.service
-sudo systemctl --user enable --now pipewire.service pipewire.socket pipewire-pulse.service wireplumber.service
+systemctl --user enable --now pipewire.socket;systemctl --user enable --now pipewire-pulse.socket;systemctl --user enable --now wireplumber.service
+
+echo 'Enabling firewall rules.'
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 123/udp
+sudo ufw allow 21/tcp
+sudo ufw allow 22/tcp
+sudo ufw allow 443
+sudo ufw allow 465
+sudo ufw allow 53
+sudo ufw allow 5353
+sudo ufw allow 5355
+sudo ufw allow 5443
+sudo ufw allow 546/udp
+sudo ufw allow 547/udp
+sudo ufw allow 631/tcp
+sudo ufw allow 67/udp
+sudo ufw allow 68/udp
+sudo ufw allow 80
+sudo ufw allow 8080
+sudo ufw allow 8081
+sudo ufw allow 8118/tcp
+sudo ufw allow 853
+sudo ufw allow 9050/tcp
+sudo ufw allow 993
+sudo ufw allow 51820/udp
+sudo ufw allow 4445/tcp
+sudo ufw allow 4444/tcp
+sudo ufw allow 6881/tcp
+sudo ufw allow 51413/tcp
+sudo ufw enable
+
+echo 'Settings for configuration files.'
+sudo mkdir -p /etc/gtk-{2.0,3.0,4.0};mkdir -p ~/.config/gtk-{3.0,4.0}
+sudo mv /etc/tor/torrc{,.backup};sudo mv /etc/tor/torsocks.conf{,.backup}
+mkdir -p ~/.mozilla/firefox/bogachenko;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/firefox-user.js;mv ~/user.js ~/.mozilla/firefox/bogachenko/user.js
+mkdir -p ~/.thunderbird/bogachenko;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/thunderbird-user.js;mv ~/user.js ~/.thunderbird/bogachenko/user.js
+
+sudo rm -rf /etc/ufw/applications.d/
