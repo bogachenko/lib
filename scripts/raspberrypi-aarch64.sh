@@ -8,27 +8,24 @@ echo 'Updating the package list.'
 sudo apt update;sudo apt upgrade
 
 echo 'Installing the core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xorg xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates iptables systemd-resolved iw usb-modeswitch modemmanager networkmanager ppp
+sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xorg xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates iptables systemd-resolved iw usb-modeswitch modemmanager network-manager ppp vim git pwgen wget curl lshw bind9 dnsmasq hostapd
 
 if !(ping -c 1 '1.1.1.1' | grep -o "Unreachable" > /dev/null)
 then echo "1111"
+
 else echo "0000"
 fi
 
 
 echo 'Installing the sub-core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes ntp vim git pwgen wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils wget curl lshw bind9 dnsmasq hostapd i2pd nyx tor torsocks obfs4proxy proxychains privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
+sudo apt install --no-install-recommends --no-install-suggests --yes ntp wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils i2pd nyx tor privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 echo 'Installing the extra packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes lynx firefox thunderbird chromium vlc mousepad libxfce4ui-utils thunar xfce4-appfinder xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop4 xfwm4 xfce4-power-manager xfce4-screenshooter xfce4-taskmanager xfce4-xkb-plugin dmz-cursor-theme i3 i3lock gvfs sddm rofi dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch hunspell hunspell-ru hunspell-en-us libreoffice yt-dlp code qbittorrent transmission-cli
+sudo apt install --no-install-recommends --no-install-suggests --yes lynx chromium vlc dmz-cursor-theme i3 i3lock gvfs rofi dunst scrot rxvt-unicode speedtest-cli retroarch yt-dlp code qbittorrent transmission-cli
 
 echo 'Installing AdguardHome.'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 
-echo 'Installing PiVPN.'
-curl -L https://install.pivpn.io | bash
-
 echo 'Settings for Internet parameters.'
-sudo mv /etc/resolv.conf{,.backup}
 echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
 sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
 sudo sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf
@@ -58,7 +55,6 @@ sudo systemctl enable privoxy.service
 sudo systemctl disable mpd.service
 sudo systemctl enable gpm.service
 sudo systemctl enable bluetooth.service
-sudo systemctl enable sddm.service
 sudo systemctl enable ifplugd.service
 sudo systemctl enable apache2.service
 systemctl --user enable --now pipewire.socket;systemctl --user enable --now pipewire-pulse.socket;systemctl --user enable --now wireplumber.service
@@ -102,8 +98,6 @@ echo 'Settings for configuration files.'
 sudo mkdir -p /etc/gtk-{2.0,3.0,4.0};mkdir -p ~/.config/gtk-{3.0,4.0}
 sudo mv /etc/tor/torrc{,.backup};sudo mv /etc/tor/torsocks.conf{,.backup}
 sudo mv /etc/locale.gen{,.backup};sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";sudo locale-gen
-mkdir -p ~/.mozilla/firefox/username;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/firefox-user.js;mv ~/user.js ~/.mozilla/firefox/username/user.js
-mkdir -p ~/.thunderbird/username;curl -o ~/user.js https://raw.githubusercontent.com/bogachenko/lib/master/text/thunderbird-user.js;mv ~/user.js ~/.thunderbird/username/user.js
 mkdir -p ~/.icons/default;curl -o ~/.icons/default/index.theme https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/cursortheme;sudo cp ~/.icons/default/index.theme /usr/share/icons/default/index.theme
 mkdir -p ~/.config/dunst;curl -o ~/.config/dunst/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/dunst
 mkdir -p ~/.config/i3status;curl -o ~/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i3status
