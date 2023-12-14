@@ -8,27 +8,45 @@ echo 'Updating the package list.'
 sudo apt update;sudo apt upgrade
 
 echo 'Installing the core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xorg xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates iptables systemd-resolved iw
-# issue systemd-resolver choise
+sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xorg xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates iptables systemd-resolved iw usb-modeswitch modemmanager networkmanager ppp
+
+if !(ping -c 1 '1.1.1.1' | grep -o "Unreachable" > /dev/null)
+then echo "1111"
+else echo "0000"
+fi
+
+
 echo 'Installing the sub-core packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes ntp vim git pwgen wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils wget curl lshw bind9 dnsmasq hostapd i2pd nyx tor torsocks obfs4proxy proxychains privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 echo 'Installing the extra packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes firefox thunderbird chromium vlc mousepad libxfce4ui-utils thunar xfce4-appfinder xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop4 xfwm4 xfce4-power-manager xfce4-screenshooter xfce4-taskmanager xfce4-xkb-plugin dmz-cursor-theme i3 i3lock gvfs sddm rofi dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch hunspell hunspell-ru hunspell-en_US libreoffice yt-dlp code qbittorrent transmission-cli
+sudo apt install --no-install-recommends --no-install-suggests --yes lynx firefox thunderbird chromium vlc mousepad libxfce4ui-utils thunar xfce4-appfinder xfce4-panel xfce4-session xfce4-settings xfconf xfdesktop4 xfwm4 xfce4-power-manager xfce4-screenshooter xfce4-taskmanager xfce4-xkb-plugin dmz-cursor-theme i3 i3lock gvfs sddm rofi dunst scrot rxvt-unicode gimp speedtest-cli cups bluez-cups cups-pdf cups-filters system-config-printer retroarch hunspell hunspell-ru hunspell-en-us libreoffice yt-dlp code qbittorrent transmission-cli
 
-#echo 'Settings for Internet parameters.'
-#sudo mkdir -p /etc/systemd/resolved.conf.d
-#sudo bash -c 'cat > /etc/systemd/resolved.conf.d/adguardhome.conf <<EOF
-#[Resolve]
-#DNS=127.0.0.1
-#DNSStubListener=no
-#EOF'
-#sudo mv /etc/resolv.conf{,.backup}
-#echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
-#sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
-#sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+echo 'Installing AdguardHome.'
+curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
+
+echo 'Installing PiVPN.'
+curl -L https://install.pivpn.io | bash
+
+echo 'Settings for Internet parameters.'
+sudo mv /etc/resolv.conf{,.backup}
+echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
+sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#MulticastDNS=yes/MulticastDNS=yes/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#LLMNR=yes/LLMNR=yes/g' /etc/systemd/resolved.conf
+sudo mkdir -p /etc/systemd/resolved.conf.d
+sudo bash -c 'cat > /etc/systemd/resolved.conf.d/adguardhome.conf <<EOF
+[Resolve]
+DNS=127.0.0.1
+DNSStubListener=no
+EOF'
+sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 echo 'Enabling services.'
 sudo systemctl restart systemd-resolved.service
+sudo systemctl enable NetworkManager.service
+sudo systemctl enable ModemManager.service
 sudo systemctl disable dnsmasq.service
 sudo systemctl disable hostapd.service
 sudo systemctl enable apparmor.service
@@ -80,12 +98,6 @@ sudo ufw allow 6881/tcp
 sudo ufw allow 51413/tcp
 sudo ufw enable
 
-echo 'Installing AdguardHome.'
-curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-
-echo 'Installing PiVPN.'
-curl -L https://install.pivpn.io | bash
-
 echo 'Settings for configuration files.'
 sudo mkdir -p /etc/gtk-{2.0,3.0,4.0};mkdir -p ~/.config/gtk-{3.0,4.0}
 sudo mv /etc/tor/torrc{,.backup};sudo mv /etc/tor/torsocks.conf{,.backup}
@@ -110,7 +122,7 @@ curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/
 curl -o ~/00-apt-conf https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/00-apt-conf;sudo mv ~/00-apt-conf /etc/apt/apt.conf.d/00-apt-conf
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward .i2p localhost:4444\" >> /etc/privoxy/config"
 sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc;sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini;sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
-sudo rm -rf /etc/ufw/applications.d/
+sudo rm -r /etc/ufw/applications.d/
 xdg-user-dirs-update
 
 echo 'Reboot the system'

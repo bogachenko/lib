@@ -12,16 +12,27 @@ sudo pacman -S --needed --noconfirm linux-firmware base-devel openssh xorg xorg-
 echo 'Installing the sub-core packages.'
 sudo pacman -S --needed --noconfirm ntp vim git pwgen wireplumber pipewire lib32-pipewire pipewire-jack lib32-pipewire-jack pipewire-alsa pipewire-pulse alsa-utils alsa-plugins lib32-alsa-plugins ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz wget curl lshw bind dnsmasq hostapd i2pd nyx tor torsocks proxychains privoxy ttf-ubuntu-font-family noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-liberation ttf-dejavu gtk2 gtk3 gtk4 qt5 qt6
 echo 'Installing the extra packages.'
-sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru thunderbird thunderbird-i18n-ru chromium vlc phonon-qt5-vlc phonon-qt5 phonon-qt6-vlc phonon-qt6 xcursor-vanilla-dmz plasma-desktop xdg-desktop-portal-kde plasma-vault plasma-systemmonitor plasma-firewall ffmpegthumbs dolphin-plugins dolphin breeze-gtk plymouth-kcm breeze-plymouth kget kfind kdeplasma-addons gwenview kalarm kalk ksystemlog kompare kdialog colord-kde kde-gtk-config khotkeys krecorder ktimer kclock kgpg ark kdf kcharselect okular spectacle kjournald kcolorchooser kgamma partitionmanager filelight sweeper ksshaskpass kwalletmanager kwallet-pam kleopatra elisa kbackup kde-inotify-survey libappindicator-gtk2 libappindicator-gtk3 lib32-libappindicator-gtk2 lib32-libappindicator-gtk3 bluedevil konsole kcron cronie plasma-wayland-session plasma-pa plasma-nm i3 gvfs sddm rofi dunst scrot rxvt-unicode gimp speedtest-cli steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko hunspell hunspell-ru hyphen-en hunspell-en_US libreoffice-fresh yt-dlp discord telegram-desktop code qbittorrent transmission-cli bluez cups bluez-cups cups-pdf cups-filters networkmanager modemmanager usb_modeswitch obs-studio
+sudo pacman -S --needed --noconfirm firefox firefox-i18n-ru thunderbird thunderbird-i18n-ru chromium vlc phonon-qt5-vlc phonon-qt5 phonon-qt6-vlc phonon-qt6 xcursor-vanilla-dmz plasma-desktop xdg-desktop-portal-kde xdg-desktop-portal-gtk plasma-vault plasma-systemmonitor plasma-firewall ffmpegthumbs dolphin-plugins dolphin breeze-gtk plymouth-kcm breeze-plymouth kget kfind kdeplasma-addons gwenview kalarm kalk ksystemlog kompare kdialog colord-kde kde-gtk-config khotkeys krecorder ktimer kclock kgpg ark kdf kcharselect okular spectacle kjournald kcolorchooser kgamma partitionmanager filelight sweeper ksshaskpass kwalletmanager kwallet-pam kleopatra elisa kbackup kde-inotify-survey libappindicator-gtk2 libappindicator-gtk3 lib32-libappindicator-gtk2 lib32-libappindicator-gtk3 bluedevil konsole kcron cronie plasma-wayland-session plasma-pa plasma-nm i3 gvfs sddm rofi dunst scrot rxvt-unicode gimp speedtest-cli steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko hunspell hunspell-ru hyphen-en hunspell-en_US libreoffice-fresh yt-dlp discord telegram-desktop code qbittorrent transmission-cli bluez cups bluez-cups cups-pdf cups-filters networkmanager modemmanager usb_modeswitch obs-studio
+
+echo 'Settings for Internet parameters.'
+sudo mv /etc/resolv.conf{,.backup}
+echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
+sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#MulticastDNS=yes/MulticastDNS=yes/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#LLMNR=yes/LLMNR=yes/g' /etc/systemd/resolved.conf
+sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 echo 'Installing the Arch User Repository.'
 cd /tmp;git clone https://aur.archlinux.org/package-query.git;git clone https://aur.archlinux.org/yaourt.git;cd package-query/;makepkg -si;cd ..;cd yaourt/;makepkg -si
 
 echo 'Adding a keys'
 gpg --auto-key-locate nodefault,wkd --locate-keys torbrowser@torproject.org
+curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | gpg --import -
 
 echo 'Installing main packages.'
-yaourt -S --needed --noconfirm ttf-ms-fonts tor-browser mkinitcpio-firmware
+yaourt -S --needed --noconfirm mkinitcpio-firmware ttf-ms-fonts tor-browser spotify
 
 echo 'Settings the time and date.'
 sudo timedatectl set-timezone Europe/Moscow
