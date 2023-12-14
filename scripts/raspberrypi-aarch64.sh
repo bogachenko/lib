@@ -9,21 +9,15 @@ sudo apt update;sudo apt upgrade
 
 echo 'Installing the core packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xorg xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates iptables iw vim git pwgen wget curl lshw bind9 dnsmasq hostapd
+curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo 'Installing the sub-core packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils i2pd nyx tor privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 echo 'Installing the extra packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes lynx chromium vlc dmz-cursor-theme i3 i3lock gvfs rofi dunst scrot rxvt-unicode speedtest-cli retroarch yt-dlp code qbittorrent transmission-cli systemd-resolved usb-modeswitch modemmanager network-manager ppp
 
-echo 'Installing AdguardHome.'
-curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
-
 echo 'Settings for Internet parameters.'
 echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
-sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf
-sudo sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf
-sudo sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf
-sudo sed -i 's/#MulticastDNS=yes/MulticastDNS=yes/g' /etc/systemd/resolved.conf
-sudo sed -i 's/#LLMNR=yes/LLMNR=yes/g' /etc/systemd/resolved.conf
+sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf;sudo sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf;sudo sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf;sudo sed -i 's/#MulticastDNS=yes/MulticastDNS=yes/g' /etc/systemd/resolved.conf;sudo sed -i 's/#LLMNR=yes/LLMNR=yes/g' /etc/systemd/resolved.conf
 sudo mkdir -p /etc/systemd/resolved.conf.d
 sudo bash -c 'cat > /etc/systemd/resolved.conf.d/adguardhome.conf <<EOF
 [Resolve]
@@ -56,6 +50,7 @@ sudo chsh -s /bin/zsh root
 sudo chsh -s /bin/zsh username
 
 echo 'Enabling firewall rules.'
+sudo rm -r /etc/ufw/applications.d/*
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow 22/tcp           # SSH
@@ -83,8 +78,8 @@ sudo ufw enable
 
 echo 'Settings for configuration files.'
 sudo mkdir -p /etc/gtk-{2.0,3.0,4.0};mkdir -p ~/.config/gtk-{3.0,4.0}
-sudo mv /etc/tor/torrc{,.backup};sudo mv /etc/tor/torsocks.conf{,.backup}
-sudo mv /etc/locale.gen{,.backup};sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";sudo locale-gen
+sudo mv /etc/tor/torrc{,.backup}
+sudo mv /etc/locale.gen{,.backup};sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";sudo locale-gen >> /dev/null;sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/default/locale"
 mkdir -p ~/.icons/default;curl -o ~/.icons/default/index.theme https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/cursortheme;sudo cp ~/.icons/default/index.theme /usr/share/icons/default/index.theme
 mkdir -p ~/.config/dunst;curl -o ~/.config/dunst/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/dunst
 mkdir -p ~/.config/i3status;curl -o ~/.config/i3status/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i3status
@@ -103,7 +98,6 @@ curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/
 curl -o ~/00-apt-conf https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/00-apt-conf;sudo mv ~/00-apt-conf /etc/apt/apt.conf.d/00-apt-conf
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward .i2p localhost:4444\" >> /etc/privoxy/config"
 sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc;sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini;sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
-sudo rm -r /etc/ufw/applications.d/
 xdg-user-dirs-update
 
 echo 'Reboot the system'
