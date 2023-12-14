@@ -8,19 +8,11 @@ echo 'Updating the package list.'
 sudo apt update;sudo apt upgrade
 
 echo 'Installing the core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xorg xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates iptables systemd-resolved iw usb-modeswitch modemmanager network-manager ppp vim git pwgen wget curl lshw bind9 dnsmasq hostapd
-
-if !(ping -c 1 '1.1.1.1' | grep -o "Unreachable" > /dev/null)
-then echo "1111"
-
-else echo "0000"
-fi
-
-
+sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xorg xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates iptables iw vim git pwgen wget curl lshw bind9 dnsmasq hostapd
 echo 'Installing the sub-core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes ntp wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils i2pd nyx tor privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
+sudo apt install --no-install-recommends --no-install-suggests --yes wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils i2pd nyx tor privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 echo 'Installing the extra packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes lynx chromium vlc dmz-cursor-theme i3 i3lock gvfs rofi dunst scrot rxvt-unicode speedtest-cli retroarch yt-dlp code qbittorrent transmission-cli
+sudo apt install --no-install-recommends --no-install-suggests --yes lynx chromium vlc dmz-cursor-theme i3 i3lock gvfs rofi dunst scrot rxvt-unicode speedtest-cli retroarch yt-dlp code qbittorrent transmission-cli systemd-resolved usb-modeswitch modemmanager network-manager ppp
 
 echo 'Installing AdguardHome.'
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
@@ -66,32 +58,27 @@ sudo chsh -s /bin/zsh username
 echo 'Enabling firewall rules.'
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw allow 123/udp
-sudo ufw allow 21/tcp
-sudo ufw allow 22/tcp
-sudo ufw allow 443
-sudo ufw allow 465
-sudo ufw allow 53
-sudo ufw allow 5353
-sudo ufw allow 5355
-sudo ufw allow 5443
-sudo ufw allow 546/udp
-sudo ufw allow 547/udp
-sudo ufw allow 631/tcp
-sudo ufw allow 67/udp
-sudo ufw allow 68/udp
-sudo ufw allow 80
-sudo ufw allow 8080
-sudo ufw allow 8081
-sudo ufw allow 8118/tcp
-sudo ufw allow 853
-sudo ufw allow 9050/tcp
-sudo ufw allow 993
-sudo ufw allow 51820/udp
-sudo ufw allow 4445/tcp
-sudo ufw allow 4444/tcp
-sudo ufw allow 6881/tcp
-sudo ufw allow 51413/tcp
+sudo ufw allow 22/tcp           # SSH
+sudo ufw allow 443              # HTTPS/DNSCrypt
+sudo ufw allow 465              # SMTP
+sudo ufw allow 53               # DNS
+sudo ufw allow 5353             # mDNS
+sudo ufw allow 5355             # LLMNR
+sudo ufw allow 5443             # DNSCrypt old
+sudo ufw allow 631/tcp          # Internet Printing Protocol
+sudo ufw allow 67/udp           # DHCP server v4
+sudo ufw allow 68/udp           # DHCP client v4
+sudo ufw allow 546/udp          # DHCP client v6
+sudo ufw allow 547/udp          # DHCP server v6
+sudo ufw allow 80               # HTTP
+sudo ufw allow 8080             # HTTP alternative
+sudo ufw allow 8081             # HTTP alternative
+sudo ufw allow 8118/tcp         # Privoxy
+sudo ufw allow 853              # DoT/DoQ
+sudo ufw allow 9050/tcp         # TOR
+sudo ufw allow 993              # IMAPS
+sudo ufw allow 4444/tcp         # i2p HTTP Proxy
+sudo ufw allow 4445/tcp         # i2p HTTPS Proxy
 sudo ufw enable
 
 echo 'Settings for configuration files.'
