@@ -13,7 +13,7 @@ curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/s
 echo 'Installing the sub-core packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils i2pd nyx tor privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 echo 'Installing the extra packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes lynx chromium vlc dmz-cursor-theme i3 i3lock gvfs rofi dunst scrot rxvt-unicode speedtest-cli retroarch yt-dlp code qbittorrent transmission-cli systemd-resolved usb-modeswitch modemmanager network-manager ppp
+sudo apt install --no-install-recommends --no-install-suggests --yes lynx chromium vlc dmz-cursor-theme sddm i3 i3lock gvfs rofi dunst scrot rxvt-unicode speedtest-cli retroarch yt-dlp code qbittorrent transmission-cli systemd-resolved usb-modeswitch modemmanager network-manager ppp
 
 echo 'Settings for Internet parameters.'
 echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
@@ -32,6 +32,8 @@ sudo systemctl enable NetworkManager.service
 sudo systemctl enable ModemManager.service
 sudo systemctl disable dnsmasq.service
 sudo systemctl disable hostapd.service
+sudo systemctl disable bind9.service
+sudo systemctl disable named.service
 sudo systemctl enable apparmor.service
 sudo systemctl enable i2pd.service
 sudo systemctl enable ssh.service
@@ -43,6 +45,8 @@ sudo systemctl enable gpm.service
 sudo systemctl enable bluetooth.service
 sudo systemctl enable ifplugd.service
 sudo systemctl enable apache2.service
+sudo systemctl enable sddm.service
+sudo /opt/AdGuardHome/AdGuardHome -s start
 systemctl --user enable --now pipewire.socket;systemctl --user enable --now pipewire-pulse.socket;systemctl --user enable --now wireplumber.service
 
 echo 'Enabling the Z shell by default.'
