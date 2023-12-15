@@ -11,3 +11,6 @@ alias sysctl='sudo systemctl'
 alias aptcl='sudo apt autoremove'
 alias whatismyip='wget -qO - https://api.ipify.org; echo'
 alias checkports='ss -tulpn'
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000

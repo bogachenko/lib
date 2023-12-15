@@ -8,10 +8,10 @@ echo 'Updating the package list.'
 sudo apt update;sudo apt upgrade
 
 echo 'Installing the core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xorg xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates iptables iw vim git pwgen wget curl lshw bind9 dnsmasq hostapd
+sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xorg xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic htop python3 python3-pip xinit mesa-utils zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock libnotify-bin cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates iptables iw vim git pwgen wget curl lshw bind9 dnsmasq hostapd encfs cryfs whois dnsutils
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo 'Installing the sub-core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils i2pd nyx tor privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
+sudo apt install --no-install-recommends --no-install-suggests --yes wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils i2pd nyx tor obfs4proxy privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 echo 'Installing the extra packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes lynx chromium vlc dmz-cursor-theme sddm i3 i3lock gvfs rofi dunst scrot rxvt-unicode speedtest-cli retroarch yt-dlp code qbittorrent transmission-cli systemd-resolved usb-modeswitch modemmanager network-manager ppp
 
@@ -45,7 +45,7 @@ sudo systemctl enable gpm.service
 sudo systemctl enable bluetooth.service
 sudo systemctl enable ifplugd.service
 sudo systemctl enable apache2.service
-sudo systemctl enable sddm.service
+sudo systemctl enable sddm.service;sudo dpkg-reconfigure sddm
 sudo /opt/AdGuardHome/AdGuardHome -s start
 systemctl --user enable --now pipewire.socket;systemctl --user enable --now pipewire-pulse.socket;systemctl --user enable --now wireplumber.service
 
@@ -62,6 +62,7 @@ sudo ufw allow 443              # HTTPS/DNSCrypt
 sudo ufw allow 465              # SMTP
 sudo ufw allow 53               # DNS
 sudo ufw allow 5353             # mDNS
+sudo ufw allow 5354             # DNSMaskq
 sudo ufw allow 5355             # LLMNR
 sudo ufw allow 5443             # DNSCrypt old
 sudo ufw allow 631/tcp          # Internet Printing Protocol
