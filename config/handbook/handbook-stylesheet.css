@@ -1,0 +1,146 @@
+* {
+	margin: 0;
+	padding: 0
+}
+
+body,
+html {
+	padding: 3px;
+	background-color: #d8dbe2;
+	font-family: Verdana, sans-serif;
+	font-size: 11pt;
+	text-align: center
+}
+
+div.main_page {
+	position: relative;
+	display: table;
+	width: 1500px;
+	margin-bottom: 3px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+	border: 2px solid #212738;
+	background-color: #fff;
+	text-align: center
+}
+
+div.page_header {
+	height: 99px;
+	width: 100%;
+	background-color: #f5f6f7
+}
+
+div.content_section,
+div.table_of_contents,
+div.table_of_contents_item {
+	background-color: #fff;
+	text-align: left
+}
+
+div.page_header span {
+	margin: 30px 0 0 30px;
+	font-size: 180%;
+	font-weight: 700
+}
+
+div.table_of_contents {
+	clear: left;
+	min-width: 200px;
+	margin: 3px
+}
+
+div.table_of_contents_item {
+	clear: left;
+	width: 100%;
+	margin: 4px 0 0;
+	color: #000
+}
+
+div.table_of_contents_item a {
+	margin: 6px 0 0 6px
+}
+
+div.content_section {
+	margin: 3px
+}
+
+div.content_section_text {
+	padding: 4px 8px;
+	color: #000;
+	font-size: 100%
+}
+
+div.content_section_text pre {
+	margin: 8px 0;
+	padding: 8px;
+	border: 1px dotted #000;
+	background-color: #f5f6f7;
+	font-style: italic
+}
+
+div.content_section_text p {
+	margin-bottom: 6px
+}
+
+div.content_section_text li,
+div.content_section_text ul {
+	padding: 4px 8px 4px 16px
+}
+
+div.section_header {
+	padding: 3px 6px;
+	background-color: #8e9cb2;
+	color: #fff;
+	font-weight: 700;
+	font-size: 112%;
+	text-align: center
+}
+
+div.section_header_red {
+	background-color: #cd214f
+}
+
+div.section_header_grey {
+	background-color: #9f9386
+}
+
+.floating_element {
+	position: relative;
+	float: left
+}
+
+div.content_section_text a,
+div.table_of_contents_item a {
+	text-decoration: none;
+	font-weight: 700
+}
+
+div.table_of_contents_item a:active,
+div.table_of_contents_item a:link,
+div.table_of_contents_item a:visited {
+	color: #000
+}
+
+div.table_of_contents_item a:hover {
+	background-color: #000;
+	color: #fff
+}
+
+div.content_section_text a:active,
+div.content_section_text a:link,
+div.content_section_text a:visited {
+	background-color: #dcdfe6;
+	color: #000
+}
+
+div.content_section_text a:hover {
+	background-color: #000;
+	color: #dcdfe6
+}
+
+p.сopyright {
+	font-size: .6em;
+	line-height: 14px;
+	text-align: center
+}
