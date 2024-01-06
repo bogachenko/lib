@@ -26,7 +26,7 @@ div.main_page {
 }
 
 div.page_header {
-	height: 99px;
+	height: 100px;
 	width: 100%;
 	background-color: #f5f6f7
 }
@@ -99,10 +99,6 @@ div.section_header {
 
 div.section_header_red {
 	background-color: #cd214f
-}
-
-div.section_header_grey {
-	background-color: #9f9386
 }
 
 .floating_element {
