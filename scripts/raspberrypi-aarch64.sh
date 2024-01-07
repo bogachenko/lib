@@ -82,7 +82,7 @@ curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/
 # Configuring Privoxy files
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward .i2p localhost:4444\" >> /etc/privoxy/config"
 # Configuring i2pd files
-# /etc/i2pd/i2pd.conf
+curl -o ~/i2pdconf https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/i2pdconf;sudo mv ~/i2pdconf /etc/i2pd/i2pd.conf
 # Configuring hostname
 sudo hostnamectl set-hostname 'localhost'
 # Configuring GTK files
