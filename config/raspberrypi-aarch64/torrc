@@ -1,7 +1,5 @@
 SocksPort 9050
-SocksPolicy accept 192.168.0.0/24
-#SocksPolicy reject *
 RunAsDaemon 1
 DataDirectory /var/lib/tor
 Nickname username
-BridgeRelay 1
+#BridgeRelay 1

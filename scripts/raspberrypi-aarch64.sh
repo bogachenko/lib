@@ -76,6 +76,13 @@ sudo sh -c "echo \"1\" > /proc/sys/net/ipv4/ip_forward";sudo sed -i 's/#net.ipv4
 # Configuring Local DNS Server files
 curl -o ~/adguardhome.cfg https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/adguardhome;sudo mv ~/adguardhome.cfg /opt/AdGuardHome/AdGuardHome.yaml
 curl -o ~/bindnamedconfoptions https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/bindnamedconfoptions;sudo mv ~/bindnamedconfoptions /etc/bind/named.conf.options
+# Configuring TOR files
+sudo mv /etc/tor/torrc{,.backup}
+curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/torrc;sudo mv ~/.torrc /etc/tor/torrc
+# Configuring Privoxy files
+sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward .i2p localhost:4444\" >> /etc/privoxy/config"
+# Configuring i2pd files
+# /etc/i2pd/i2pd.conf
 # Configuring hostname
 sudo hostnamectl set-hostname 'localhost'
 # Configuring GTK files
@@ -84,9 +91,6 @@ curl -o ~/.gtkrc-2.0 https://raw.githubusercontent.com/bogachenko/lib/master/con
 curl -o ~/.config/gtk-3.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc3;sudo cp ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
 curl -o ~/.config/gtk-4.0/settings.ini https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/gtkrc4;sudo cp ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
 sudo ln -sf ~/.gtkrc-2.0 /etc/gtk-2.0/gtkrc;sudo ln -sf ~/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini;sudo ln -sf ~/.config/gtk-4.0/settings.ini /etc/gtk-4.0/settings.ini
-# Configuring TOR files
-sudo mv /etc/tor/torrc{,.backup}
-curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/torrc;sudo mv ~/.torrc /etc/tor/torrc
 # Configuring localization files
 sudo mv /etc/locale.gen{,.backup};sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/locale.gen";sudo locale-gen >> /dev/null;sudo sh -c "echo \"en_US.UTF-8 UTF-8\" > /etc/default/locale"
 # Configuring i3wm files
@@ -100,8 +104,6 @@ xdg-user-dirs-update;sudo xdg-user-dirs-update
 curl -o ~/.vimrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/vimrc;sudo cp ~/.vimrc /root/.vimrc
 # Configuring Zsh files
 sudo chsh -s /bin/zsh root;sudo chsh -s /bin/zsh username;curl -o ~/.zshrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/zshrc;sudo cp ~/.zshrc /root/.zshrc;sudo sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /root/.zshrc
-# Configuring Privoxy files
-sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward .i2p localhost:4444\" >> /etc/privoxy/config"
 # Configuring Dunst files
 mkdir -p ~/.config/dunst;curl -o ~/.config/dunst/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/dunst
 # Configuring theme files
