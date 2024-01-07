@@ -15,17 +15,6 @@ sudo apt install --no-install-recommends --no-install-suggests --yes wireplumber
 echo 'Installing the extra packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes lynx chromium vlc dmz-cursor-theme sddm i3 i3lock gvfs rofi dunst scrot rxvt-unicode speedtest-cli retroarch yt-dlp code qbittorrent transmission-cli systemd-resolved usb-modeswitch modemmanager network-manager ppp wireshark
 
-echo 'Settings for Internet parameters.'
-echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf
-sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf;sudo sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf;sudo sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf;sudo sed -i 's/#MulticastDNS=yes/MulticastDNS=yes/g' /etc/systemd/resolved.conf;sudo sed -i 's/#LLMNR=yes/LLMNR=yes/g' /etc/systemd/resolved.conf
-sudo mkdir -p /etc/systemd/resolved.conf.d
-sudo bash -c 'cat > /etc/systemd/resolved.conf.d/adguardhome.conf <<EOF
-[Resolve]
-DNS=127.0.0.1
-DNSStubListener=no
-EOF'
-sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
-
 echo 'Enabling services.'
 sudo systemctl restart systemd-resolved.service
 sudo systemctl enable NetworkManager.service
@@ -58,7 +47,6 @@ sudo ufw allow 22/tcp           # SSH
 sudo ufw allow 443              # HTTPS/DNSCrypt
 sudo ufw allow 465              # SMTP
 sudo ufw allow 53               # DNS
-sudo ufw allow 54               # DNSMaskq
 sudo ufw allow 5353             # mDNS
 sudo ufw allow 5355             # LLMNR
 sudo ufw allow 5443             # DNSCrypt old
@@ -77,9 +65,17 @@ sudo ufw allow 9050/tcp         # TOR
 sudo ufw allow 993              # IMAPS
 sudo ufw allow 4444/tcp         # i2p HTTP Proxy
 sudo ufw allow 4445/tcp         # i2p HTTPS Proxy
+sudo ufw allow 4447/tcp         # i2p Socks Proxy
 sudo ufw enable
 
 echo 'Settings for configuration files.'
+# Configuring Internet files
+echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee -a /etc/resolv.conf;sudo sed -i 's/#DNS=/DNS=1.1.1.1 1.0.0.1/g' /etc/systemd/resolved.conf;sudo sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf;sudo sed -i 's/#DNSOverTLS=no/DNSOverTLS=yes/g' /etc/systemd/resolved.conf;sudo sed -i 's/#MulticastDNS=yes/MulticastDNS=yes/g' /etc/systemd/resolved.conf;sudo sed -i 's/#LLMNR=yes/LLMNR=yes/g' /etc/systemd/resolved.conf
+sudo mkdir -p /etc/systemd/resolved.conf.d;curl -o ~/adguardhome-resolved https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/adguardhome-resolved;sudo mv ~/adguardhome-resolved /etc/systemd/resolved.conf.d/adguardhome.conf;sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+sudo sh -c "echo \"1\" > /proc/sys/net/ipv4/ip_forward";sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf;sudo sh -c "echo \"1\" > /proc/sys/net/ipv6/conf/all/forwarding";sudo sed -i 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/g' /etc/sysctl.conf
+# Configuring Local DNS Server files
+curl -o ~/adguardhome.cfg https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/adguardhome;sudo mv ~/adguardhome.cfg /opt/AdGuardHome/AdGuardHome.yaml
+curl -o ~/bindnamedconfoptions https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/bindnamedconfoptions;sudo mv ~/bindnamedconfoptions /etc/bind/named.conf.options
 # Configuring hostname
 sudo hostnamectl set-hostname 'localhost'
 # Configuring GTK files
@@ -106,11 +102,6 @@ curl -o ~/.vimrc https://raw.githubusercontent.com/bogachenko/lib/master/config/
 sudo chsh -s /bin/zsh root;sudo chsh -s /bin/zsh username;curl -o ~/.zshrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/zshrc;sudo cp ~/.zshrc /root/.zshrc;sudo sed -i 's/PROMPT=\"%F{34}%n%f%F{34}@%f%F{34}%m%f:%F{21}%~%f$ \"/PROMPT=\"%F{9}%n%f%F{9}@%f%F{9}%m%f:%F{21}%~%f# \"/g' /root/.zshrc
 # Configuring Privoxy files
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward .i2p localhost:4444\" >> /etc/privoxy/config"
-# Configuring Internet files
-sudo sh -c "echo \"1\" > /proc/sys/net/ipv4/ip_forward";sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf;sudo sh -c "echo \"1\" > /proc/sys/net/ipv6/conf/all/forwarding";sudo sed -i 's/#net.ipv6.conf.all.forwarding=1/net.ipv6.conf.all.forwarding=1/g' /etc/sysctl.conf
-# Configuring Local DNS Server files
-curl -o ~/adguardhome.cfg https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/adguardhome;sudo mv ~/adguardhome.cfg /opt/AdGuardHome/AdGuardHome.yaml
-curl -o ~/bindnamedconfoptions https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/bindnamedconfoptions;sudo mv ~/bindnamedconfoptions /etc/bind/named.conf.options
 # Configuring Dunst files
 mkdir -p ~/.config/dunst;curl -o ~/.config/dunst/config https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/dunst
 # Configuring theme files
