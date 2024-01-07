@@ -185,5 +185,6 @@ exec_always --no-startup-id xsetroot -solid '#003760'
     # Settings to switch languages - English/Russian.
 exec_always setxkbmap -layout us,ru -option 'grp:alt_shift_toggle'
     # Starting programs
-exec_always urxvt
-#exec_always xrandr --output Virtual1 --mode 1440x900
+# exec_always urxvt
+# exec_always "chromium --proxy-server=\"http://127.0.0.1:8118;https://127.0.0.1:8118\" --proxy-bypass-list=\"127.0.0.1;localhost\""
+# exec_always xrandr --output Virtual1 --mode 1440x900
