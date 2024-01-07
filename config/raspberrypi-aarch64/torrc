@@ -1,6 +1,7 @@
+SocksPort 9050
+SocksPolicy accept 192.168.0.0/24
+#SocksPolicy reject *
 RunAsDaemon 1
-ControlPort 9051
-CookieAuthenticcation 1
-ORPort 443
+DataDirectory /var/lib/tor
 Nickname username
 BridgeRelay 1
