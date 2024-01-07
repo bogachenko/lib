@@ -1,9 +1,6 @@
-SocksPort 192.168.0.104:9050
-SocksPolicy accept 192.168.0.104/24
 RunAsDaemon 1
-ORPort 9001
+ControlPort 9051
+CookieAuthenticcation 1
+ORPort 443
 Nickname username
-ContactInfo Random Person <nobody AT example dot com>
 BridgeRelay 1
-ServerTransportPlugin obfs4 exec /usr/bin/obfs4proxy
-ExtORPort auto
