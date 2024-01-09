@@ -10,6 +10,7 @@ cardlink.link
 cdn.whatsapp.net
 cloudflare.com
 cloudpayments.ru
+3gppnetwork.org
 kassa.ai
 googleapis.com
 googlevideo.com
