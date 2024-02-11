@@ -37,7 +37,10 @@ function FindProxyForURL(url, host) {
         "hdkinoteatr.com": 1,
         "myzuka.club": 1,
         "archive.is": 1,
-        "t.co": 1
+        "t.co": 1,
+        "fbcdn.net": 1,
+        "facebook.net": 1,
+        "x.com": 1
     };
     if (dnsDomainIs(host, ".onion"))
         return "SOCKS5 localhost:9050";
