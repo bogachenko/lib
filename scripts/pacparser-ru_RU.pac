@@ -30,7 +30,14 @@ function FindProxyForURL(url, host) {
         "thepiratebay.org": 1,
         "1337x.to": 1,
         "btdig.com": 1,
-        "myrotvorets.center": 1
+        "myrotvorets.center": 1,
+        "intel.com": 1,
+        "spotify.com": 1,
+        "prostovpn.org": 1,
+        "hdkinoteatr.com": 1,
+        "myzuka.club": 1,
+        "archive.is": 1,
+        "t.co": 1
     };
     if (dnsDomainIs(host, ".onion"))
         return "SOCKS5 localhost:9050";
