@@ -67,6 +67,8 @@ sudo ufw allow 993              # IMAPS
 sudo ufw allow 4444/tcp         # i2p HTTP Proxy
 sudo ufw allow 4445/tcp         # i2p HTTPS Proxy
 sudo ufw allow 4447/tcp         # i2p Socks Proxy
+sudo ufw allow 7659/tcp         # i2p SMTP Proxy
+sudo ufw allow 7660/tcp         # i2p POP3 Proxy
 sudo ufw enable
 
 echo 'Settings for configuration files.'
