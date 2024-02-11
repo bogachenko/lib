@@ -1,43 +1,35 @@
 var proxy = 'SOCKS 127.0.0.1:9050; DIRECT;';
-var rules = [
-    [
-        [
-            "ggpht.com", // 
-            "instagram.com",
-            "cdninstagram.com",
-            "twitter.com",
-            "twimg.com",
-            "facebook.com"
-        ]
-    ]
-];
-var lastRule = '';
+
+var domains = {
+  "torproject.org": 1,
+  "facebook.com": 1,
+  "twimg.com": 1,
+  "twitter.com": 1,
+  "cdninstagram.com": 1,
+  "instagram.com": 1,
+  "ggpht.com": 1
+};
+
+var direct = 'DIRECT;';
+
+var hasOwnProperty = Object.hasOwnProperty;
+
 function FindProxyForURL(url, host) {
-    for (var i = 0; i < rules.length; i++) {
-        ret = testHost(host, i);
-        if (ret != undefined)
-            return ret;
-    }
-    return 'DIRECT';
-}
-function testHost(host, index) {
-    for (var i = 0; i < rules[index].length; i++) {
-        for (var j = 0; j < rules[index][i].length; j++) {
-            lastRule = rules[index][i][j];
-            if (host == lastRule || host.endsWith('.' + lastRule))
-                return i % 2 == 0 ? 'DIRECT' : proxy;
+    var suffix;
+    var pos = host.lastIndexOf('.');
+    pos = host.lastIndexOf('.', pos - 1);
+    while(1) {
+        if (pos <= 0) {
+            if (hasOwnProperty.call(domains, host)) {
+                return proxy;
+            } else {
+                return direct;
+            }
         }
-    }
-    lastRule = '';
-}
-if (!String.prototype.endsWith) {
-    String.prototype.endsWith = function(searchString, position) {
-        var subjectString = this.toString();
-        if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
-            position = subjectString.length;
+        suffix = host.substring(pos + 1);
+        if (hasOwnProperty.call(domains, suffix)) {
+            return proxy;
         }
-        position -= searchString.length;
-        var lastIndex = subjectString.indexOf(searchString, position);
-        return lastIndex !== -1 && lastIndex === position;
-  };
+        pos = host.lastIndexOf('.', pos - 1);
+    }
 }
