@@ -80,6 +80,7 @@ curl -o ~/bindnamedconfoptions https://raw.githubusercontent.com/bogachenko/lib/
 # Configuring TOR files
 sudo mv /etc/tor/torrc{,.backup}
 curl -o ~/.torrc https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/torrc;sudo mv ~/.torrc /etc/tor/torrc
+sudo chown username:debian-tor /run/tor/control.authcookie;sudo chown username:debian-tor /var/run/tor/control.authcookie
 # Configuring Privoxy files
 sudo sh -c "echo \"forward-socks5 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4 / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward-socks4a / localhost:9050 .\" >> /etc/privoxy/config";sudo sh -c "echo \"forward .i2p localhost:4444\" >> /etc/privoxy/config"
 # Configuring i2pd files

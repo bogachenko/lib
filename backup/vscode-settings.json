@@ -6,7 +6,7 @@
     "typescript.surveys.enabled": false,
     "typescript.suggestionActions.enabled": false,
     "editor.fontSize": 13,
-    "editor.cursorSmoothCaretAnimation": true,
+    "editor.cursorSmoothCaretAnimation": "on",
     "editor.minimap.enabled": false,
     "workbench.welcomePage.walkthroughs.openOnInstall": false,
     "workbench.tips.enabled": false,
