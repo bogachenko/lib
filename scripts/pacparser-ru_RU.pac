@@ -1,5 +1,8 @@
-var hasOwnProperty = Object.hasOwnProperty;
+// Proxy Auto-Configuration Parser ru_RU
+// Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
+// https://raw.githubusercontent.com/bogachenko/lib/master/scripts/pacparser-ru_RU.pac
 
+var hasOwnProperty = Object.hasOwnProperty;
 function FindProxyForURL(url, host) {
     var proxy = 'SOCKS 127.0.0.1:9050; DIRECT;';
     var domains = {
@@ -40,7 +43,10 @@ function FindProxyForURL(url, host) {
         "t.co": 1,
         "fbcdn.net": 1,
         "facebook.net": 1,
-        "x.com": 1
+        "x.com": 1,
+        "adguard.com": 1,
+        "adguard-vpn.com": 1,
+        "sakh.com": 1
     };
     if (dnsDomainIs(host, ".onion"))
         return "SOCKS5 localhost:9050";
