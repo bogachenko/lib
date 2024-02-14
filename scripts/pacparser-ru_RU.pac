@@ -46,7 +46,10 @@ function FindProxyForURL(url, host) {
         "x.com": 1,
         "adguard.com": 1,
         "adguard-vpn.com": 1,
-        "sakh.com": 1
+        "sakh.com": 1,
+        "fb.com": 1,
+        "ubisoft.com": 1,
+        "eneba.com": 1
     };
     if (dnsDomainIs(host, ".onion"))
         return "SOCKS5 localhost:9050";
