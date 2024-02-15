@@ -1,12 +1,12 @@
 @echo off
 
-title Windows Cleaner
+title Windows 10 Enterprise LTSC Cleaner
 
 rem Getting superuser rights
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
-:: Windows Cleaner
+:: Windows 10 Enterprise LTSC Cleaner
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 
 rem Clipboard Cleaner
@@ -17,19 +17,13 @@ rem Windows Explorer
 taskkill /f > nul 2>&1 /im explorer.exe > nul 2>&1
 rem Firefox
 taskkill /f > nul 2>&1 /im firefox.exe > nul 2>&1
-rem Adobe Acrobat DC
-taskkill /f > nul 2>&1 /im acrobat.exe > nul 2>&1
 rem Discord
 taskkill /f > nul 2>&1 /im discord.exe > nul 2>&1
 rem Steam
 taskkill /f > nul 2>&1 /im steam.exe > nul 2>&1
 rem Spotify
 taskkill /f > nul 2>&1 /im spotify.exe > nul 2>&1
-rem Skype
-taskkill /f > nul 2>&1 /im skype.exe > nul 2>&1
-rem Edge
-taskkill /f > nul 2>&1 /im msedge.exe > nul 2>&1
-rem Google Chrome
+rem Chromium
 taskkill /f > nul 2>&1 /im chrome.exe > nul 2>&1
 rem AdGuard
 taskkill /f > nul 2>&1 /im adguard.exe > nul 2>&1
@@ -37,8 +31,6 @@ rem AdGuard VPN
 taskkill /f > nul 2>&1 /im adguardvpn.exe > nul 2>&1
 rem Telegram
 taskkill /f > nul 2>&1 /im telegram.exe > nul 2>&1
-rem Notepad++
-taskkill /f > nul 2>&1 /im notepad++.exe > nul 2>&1
 rem Thunderbird
 taskkill /f > nul 2>&1 /im thunderbird.exe > nul 2>&1
 rem Windows Security Health Service
@@ -51,10 +43,13 @@ taskkill /f > nul 2>&1 /im smartscreen.exe > nul 2>&1
 
 echo Stop services > nul 2>&1
 rem Windows Update Center
-net stop wuauserv
+net stop wuauserv > nul 2>&1
 
 echo Flush DNS Cache > nul 2>&1
 ipconfig /flushdns > nul 2>&1
+
+echo Deleting Recovery points > nul 2>&1
+vssadmin delete shadows /all /quiet > nul 2>&1
 
 echo Tor Browser > nul 2>&1
 del "%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\cookies.sqlite" /s /q > nul 2>&1
@@ -281,11 +276,11 @@ timeout 5 > nul 2>&1
 
 echo Start process > nul 2>&1
 rem Windows Explorer
-start explorer.exe
+start explorer.exe > nul 2>&1
 
 echo Start services > nul 2>&1
 rem Windows Update Center
-net start wuauserv
+net start wuauserv > nul 2>&1
 
 echo Shutdown > nul 2>&1
 exit
