@@ -114,11 +114,6 @@ rd "%APPDATA%\Thunderbird\Profiles\%USERNAME%\minidumps" /s /q > nul 2>&1
 rd "%APPDATA%\Thunderbird\Profiles\%USERNAME%\datareporting" /s /q > nul 2>&1
 del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\formhistory.sqlite" /s /q > nul 2>&1
 
-echo Adobe > nul 2>&1
-rd "%USERPROFILE%\AppData\LocalLow\Adobe" /s /q > nul 2>&1
-rd "%PROGRAMDATA%\Adobe\Temp" /s /q > nul 2>&1
-rd "%APPDATA%\com.adobe.dunamis" /s /q > nul 2>&1
-
 echo DirectX > nul 2>&1
 rd "%LOCALAPPDATA%\D3DSCache" /s /q > nul 2>&1
 
@@ -142,150 +137,6 @@ del "%PROGRAMFILES(x86)%\Steam\*.log" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Steam\htmlcache" /s /q > nul 2>&1
 rd "%PROGRAMFILES(x86)%\Steam\dumps" /s /q > nul 2>&1
 rd "%PROGRAMFILES(x86)%\Steam\logs" /s /q > nul 2>&1
-
-echo Skype > nul 2>&1
-rd "%APPDATA%\Microsoft\Skype for Desktop\GPUCache" /s /q > nul 2>&1
-
-echo Opera Browser > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\*.log" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Cookies-journal" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Cookies" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\default_partner_content.json" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Extension Cookies-journal" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Extension Cookies" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Favicons-journal" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Favicons" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\History Provider Cache" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\History-journal" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\History" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Media History-journal" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Media History" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Network Action Predictor-journal" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Network Action Predictor" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Network Persistent State.backup" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Network Persistent State" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\PartnerRules" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\QuotaManager-journal" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\QuotaManager" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Reporting and NEL-journal" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Reporting and NEL" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Shortcuts-journal" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Shortcuts" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Visited Links" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Web Data-journal" /s /q > nul 2>&1
-del "%APPDATA%\Opera Software\Opera Stable\Web Data" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\Crash Reports" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\databases" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\Extension Rules" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\Extension State" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\File System" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\GPUCache" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\GrShaderCache" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\IndexedDB" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\Jump List Icons" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\Jump List IconsOld" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\Local Storage" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\SafetyTips" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\Service Worker" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\Session Storage" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\Sessions" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\ShaderCache" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\shared_proto_db" /s /q > nul 2>&1
-rd "%APPDATA%\Opera Software\Opera Stable\StatsSessions" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Opera Software\Opera Stable" /s /q > nul 2>&1
-
-echo Edge Browser > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\BrowserMetrics-*" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\CrashpadMetrics-active.pma" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Favicons-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Favicons" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\heavy_ad_intervention_opt_out.db-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\heavy_ad_intervention_opt_out.db" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\History Provider Cache" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\History-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\History" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\load_statistics.db" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network Action Predictor-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Shortcuts-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Shortcuts" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Storage" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Top Sites" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Visited Links" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\BrowserMetrics" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Cache" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Code Cache" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Collections" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\databases" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\EdgeCoupons" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\EdgePushStorageWithConnectTokenAndKey" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Extension Rules" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Extension State" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Feedback Reports" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\GPUCache" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\IndexedDB" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Local Storage" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\optimization_guide_hint_cache_store" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\optimization_guide_model_and_features_store" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Platform Notifications" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Safe Browsing Network" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Service Worker" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Session Storage" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Sessions" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\shared_proto_db" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Site Characteristics Database" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\VideoDecodeStats" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\GrShaderCache" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\ShaderCache" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\File System" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\ExtensionActivityComp-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\ExtensionActivityComp" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\ExtensionActivityEdge-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\ExtensionActivityEdge" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network\Cookies-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network\Cookies" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network\Reporting and NEL-journal" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Network\Reporting and NEL" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Web Data-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Web Data" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\WebAssistDatabase-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\WebAssistDatabase" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\JumpListIconsRecentClosed" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\WebStorage" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\DashTrackerDatabase" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\DashTrackerDatabase-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Extension Cookies" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Extension Cookies-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\HubApps Icons-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\HubApps Icons" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Top Sites-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Top Sites" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Vpn Tokens-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Vpn Tokens" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\AssistanceHome" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Microsoft\Edge\User Data\Default\Nurturing" /s /q > nul 2>&1
-
-echo Google Chrome Browser > nul 2>&1
-rd "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Favicons-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Favicons" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\heavy_ad_intervention_opt_out.db-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\heavy_ad_intervention_opt_out.db" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\History-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\History" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Shortcuts-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Shortcuts" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Top Sites-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Top Sites" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Web Data-journal" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Web Data" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\GPUCache" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Code Cache" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Service Worker" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\Storage" /s /q > nul 2>&1
-rd "%LOCALAPPDATA%\Google\Chrome\User Data\Default\BrowserMetrics" /s /q > nul 2>&1
-del "%LOCALAPPDATA%\Google\Chrome\User Data\Default\BrowserMetrics-*" /s /q > nul 2>&1
-rd "%PROGRAMFILES%\Google\Chrome\Application\SetupMetrics" /s /q > nul 2>&1
 
 echo Chromium Browser > nul 2>&1
 del "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics-*" /s /q > nul 2>&1
@@ -389,9 +240,6 @@ echo Microsoft Office > nul 2>&1
 rd "%APPDATA%\Microsoft\Office" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Microsoft\Office" /s /q > nul 2>&1
 
-echo Notepad++ > nul 2>&1
-del "%APPDATA%\notepad++\session.xml" /s /q > nul 2>&1
-
 echo Internet Explorer > nul 2>&1
 rd "%USERPROFILE%\AppData\LocalLow\Microsoft\Internet Explorer" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Internet Explorer\Recovery" /s /q > nul 2>&1
@@ -408,9 +256,6 @@ rd "%PROGRAMDATA%\NVIDIA Corporation\Installer2" /s /q > nul 2>&1
 echo Intel > nul 2>&1
 rd "%PROGRAMDATA%\Intel" /s /q > nul 2>&1
 rd "%USERPROFILE%\AppData\LocalLow\Intel\ShaderCache" /s /q > nul 2>&1
-
-echo IObit Driver Booster > nul 2>&1
-rd "%APPDATA%\IObit\Driver Booster\Logs" /s /q > nul 2>&1
 
 echo Telegram > nul 2>&1
 del "%APPDATA%\Telegram Desktop\log.txt" /s /q > nul 2>&1
