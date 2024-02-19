@@ -4,7 +4,7 @@
 
 var hasOwnProperty = Object.hasOwnProperty;
 function FindProxyForURL(url, host) {
-    var proxy = 'SOCKS 127.0.0.1:9050; DIRECT;';
+    var proxy = 'PROXY proxy-nossl.antizapret.prostovpn.org:29976; DIRECT;';
     var domains = {
         "torproject.org": 1,
         "facebook.com": 1,
@@ -50,8 +50,7 @@ function FindProxyForURL(url, host) {
         "fb.com": 1,
         "ubisoft.com": 1,
         "eneba.com": 1,
-        "4pda.ru": 1,
-        "prostovpn.org": 1
+        "4pda.ru": 1
     };
     if (dnsDomainIs(host, ".onion"))
         return "SOCKS5 localhost:9050";
