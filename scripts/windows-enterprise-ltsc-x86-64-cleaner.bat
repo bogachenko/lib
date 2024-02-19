@@ -190,13 +190,14 @@ echo Rockstar Games Launcher > nul 2>&1
 del "%PROGRAMDATA%\Rockstar Games\Launcher\*.log" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\Rockstar Games\Launcher\CrashLogs" /s /q > nul 2>&1
 
-echo Squirrel > nul 2>&1
+echo SquirrelTemp > nul 2>&1
 rd "%LOCALAPPDATA%\SquirrelTemp" /s /q > nul 2>&1
 
 echo GitHub Desktop > nul 2>&1
 rd "%LOCALAPPDATA%\GitHubDesktop\*.log" /s /q > nul 2>&1
 
 echo Windows > nul 2>&1
+cleanmgr /sagerun:1 /s /q > nul 2>&1
 rd "%WINDIR%\Panther" /s /q > nul 2>&1
 rd "%WINDIR%\softwareDistribution" /s /q > nul 2>&1
 rd "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization" /s /q > nul 2>&1

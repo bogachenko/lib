@@ -49,7 +49,9 @@ function FindProxyForURL(url, host) {
         "sakh.com": 1,
         "fb.com": 1,
         "ubisoft.com": 1,
-        "eneba.com": 1
+        "eneba.com": 1,
+        "4pda.ru": 1,
+        "prostovpn.org": 1
     };
     if (dnsDomainIs(host, ".onion"))
         return "SOCKS5 localhost:9050";
