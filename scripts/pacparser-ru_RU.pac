@@ -50,7 +50,11 @@ function FindProxyForURL(url, host) {
         "fb.com": 1,
         "ubisoft.com": 1,
         "eneba.com": 1,
-        "4pda.ru": 1
+        "4pda.ru": 1,
+        "nexta.tv": 1,
+        "linkedin.com": 1,
+        "licdn.com": 1,
+        "badoo.com": 1
     };
     if (dnsDomainIs(host, ".onion"))
         return "SOCKS5 localhost:9050";
