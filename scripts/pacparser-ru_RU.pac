@@ -54,7 +54,9 @@ function FindProxyForURL(url, host) {
         "nexta.tv": 1,
         "linkedin.com": 1,
         "licdn.com": 1,
-        "badoo.com": 1
+        "badoo.com": 1,
+        "bitcoin.org": 1,
+        "microsoft.com": 1
     };
     if (dnsDomainIs(host, ".onion"))
         return "SOCKS5 localhost:9050";
