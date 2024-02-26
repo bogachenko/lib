@@ -219,7 +219,7 @@ rd "%PROGRAMDATA%\Microsoft\Windows Defender\" /s /q > nul 2>&1
 rd "%SYSTEMDRIVE%\$Recycle.bin" /s /q > nul 2>&1
 rd "%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache" /s /q > nul 2>&1
 rd "%WINDIR%\DiagTrack" /s /q > nul 2>&1
-rd "%WINDIR%\Installer\$PatchCache$\Managed" /s /q > nul 2>&1
+rd "%WINDIR%\Installer" /s /q > nul 2>&1
 rd "%WINDIR%\Logs" /s /q > nul 2>&1
 del "%WINDIR%\Logs\waasmedic\*.etl" /s /q > nul 2>&1
 rd "%WINDIR%\Prefetch" /s /q > nul 2>&1
@@ -231,6 +231,9 @@ rd "%WINDIR%\Offline Web Pages" /s /q > nul 2>&1
 rd "%PROGRAMDATA%\Microsoft\Windows\WER" /s /q > nul 2>&1
 del "%LOCALAPPDATA%\IconCache.db" /s /q > nul 2>&1
 rd "%LOCALAPPDATA%\cache" /s /q > nul 2>&1
+rd "%WINDIR%\LiveKernelReports" /s /q > nul 2>&1
+Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase > nul 2>&1
+Dism.exe /online /Cleanup-Image /StartComponentCleanup > nul 2>&1
 
 echo Microsoft Office > nul 2>&1
 rd "%APPDATA%\Microsoft\Office" /s /q > nul 2>&1
