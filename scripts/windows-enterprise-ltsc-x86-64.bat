@@ -69,9 +69,6 @@ schtasks /change /tn "\Microsoft\Windows\Device Information\Device" /disable > n
 schtasks /change /tn "\Microsoft\Windows\Device Information\Device User" /disable > nul 2>&1
 rem Microsoft Office Tasks
 schtasks /change /tn "\Microsoft\Office\Office ClickToRun Service Monitor" /disable > nul 2>&1
-schtasks /change /tn "\Microsoft\Office\Office Performance Monitor" /disable > nul 2>&1
-schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentFallBack2016" /disable > nul 2>&1
-schtasks /change /tn "\Microsoft\Office\OfficeTelemetryAgentLogOn2016" /disable > nul 2>&1
 rem Boot Optimization Task
 schtasks /change /tn "\Microsoft\Windows\Sysmain\ResPriStaticDbSync" /disable > nul 2>&1
 schtasks /change /tn "\Microsoft\Windows\Sysmain\WsSwapAssessmentTask" /disable > nul 2>&1
@@ -587,8 +584,6 @@ rem Lock the Taskbar
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "LockTaskbar" /t "REG_DWORD" /d "1" /f > nul 2>&1
 rem Clearing the pagefile.sys page file when shutting down Windows
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\ClearPageFileAtShutdown" /v "ClearPageFileAtShutdown" /t "REG_DWORD" /d "1" /f > nul 2>&1
-::rem
-::reg add "HKCR\.reg" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f > nul 2>&1
 
 rem Hibernation
 powercfg /hibernate off > nul 2>&1
