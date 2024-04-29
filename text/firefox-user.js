@@ -42,7 +42,7 @@ user_pref("browser.newtabpage.activity-stream.section.highlights.includeBookmark
 user_pref("browser.newtabpage.activity-stream.section.highlights.includeDownloads", false);
 user_pref("browser.newtabpage.activity-stream.section.highlights.includeVisited", false);
 user_pref("browser.newtabpage.activity-stream.showSearch", false);
-user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
+user_pref("browser.newtabpage.activity-stream.feeds.snippets", false); // to delete
 user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
 user_pref("browser.newtabpage.activity-stream.asrouter.providers.cfr", "");
 user_pref("browser.newtabpage.activity-stream.asrouter.providers.message-groups", "");
@@ -633,6 +633,7 @@ user_pref("browser.fixup.alternate.enabled", false);
 user_pref("browser.urlbar.trimURLs", false);
 
 // Reader View
+// Вид для чтения
 user_pref("reader.parse-on-load.enabled", false);
 
 // Geolocation
@@ -678,6 +679,7 @@ user_pref("browser.preferences.moreFromMozilla", false);
 
 // Firefox Default Browser Agent
 // [ЗАМЕТКА] Задача Агента браузера по умолчанию проверяет, не изменилось ли значение по умолчанию с Firefox на другой браузер.
+// Браузерный агент Firefox по умолчанию
 // [NOTE] The Default Browser Agent task checks to see if the default value has changed from Firefox to another browser.
 user_pref("default-browser-agent.enabled", false);
 
@@ -697,3 +699,7 @@ user_pref("dom.targetBlankNoOpener.enabled", false);
 //      TRUE = Скрывать этот диалог
 //      FALSE = Показывать этот диалог
 user_pref("dom.disable_beforeunload", true);
+
+// First Party Isolation
+user_pref("privacy.firstparty.isolate", true);
+user_pref("privacy.firstparty.isolate.use_site", true);
