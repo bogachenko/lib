@@ -703,3 +703,9 @@ user_pref("dom.disable_beforeunload", true);
 // First Party Isolation
 user_pref("privacy.firstparty.isolate", true);
 user_pref("privacy.firstparty.isolate.use_site", true);
+
+// Automatic page translation in Firefox
+// Автоматический страниц перевод в Firefox
+user_pref("browser.translations.automaticallyPopup", true);
+user_pref("browser.translations.enable", true);
+user_pref("browser.translations.panelShown
