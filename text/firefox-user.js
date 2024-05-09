@@ -42,7 +42,6 @@ user_pref("browser.newtabpage.activity-stream.section.highlights.includeBookmark
 user_pref("browser.newtabpage.activity-stream.section.highlights.includeDownloads", false);
 user_pref("browser.newtabpage.activity-stream.section.highlights.includeVisited", false);
 user_pref("browser.newtabpage.activity-stream.showSearch", false);
-user_pref("browser.newtabpage.activity-stream.feeds.snippets", false); // to delete
 user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
 user_pref("browser.newtabpage.activity-stream.asrouter.providers.cfr", "");
 user_pref("browser.newtabpage.activity-stream.asrouter.providers.message-groups", "");
