@@ -371,7 +371,7 @@ user_pref("toolkit.winRegisterApplicationRestart", false);
 //      3 = Блокировать куки с не посещенных сайтов
 //      4 = Блокировать межсайтовые отслеживающие куки
 //      5 = Блокировать межсайтовые отслеживающие куки, а также изолировать другие межсайтовые отслеживающие куки
-user_pref("network.cookie.cookieBehavior", 0);
+user_pref("network.cookie.cookieBehavior", 4);
 
 // Storage API
 // [NOTE] Disables another way for sites to store their data on the users personal computer.
@@ -703,6 +703,10 @@ user_pref("dom.disable_beforeunload", true);
 // First Party Isolation
 user_pref("privacy.firstparty.isolate", true);
 user_pref("privacy.firstparty.isolate.use_site", true);
+
+// DNS over HTTPS
+// DNS поверх HTTPS
+user_pref("doh-rollout.clearModeOnShutdown", false);
 
 // Automatic page translation in Firefox
 // Автоматический страниц перевод в Firefox
