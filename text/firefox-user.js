@@ -142,7 +142,7 @@ user_pref("privacy.clearOnShutdown.offlineApps", true);
 user_pref("privacy.clearOnShutdown.sessions", true);
 user_pref("privacy.clearOnShutdown.siteSettings", true);
 user_pref("privacy.clearOnShutdown.openWindows", true);
-user_pref("privacy.clearOnShutdown.cookies", false);
+user_pref("privacy.clearOnShutdown.cookies", true);
 
 // Browser cleanup wizard
 // [NOTE] This dialog window is invoked by hotkeys - Ctrl + Shift + Del.
