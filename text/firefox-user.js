@@ -684,6 +684,7 @@ user_pref("default-browser-agent.enabled", false);
 
 // WebRTC
 user_pref("media.peerconnection.enabled", false);
+user_pref("media.peerconnection.ice.proxy_only", true);
 user_pref("media.peerconnection.ice.proxy_only_if_behind_proxy", true);
 user_pref("media.peerconnection.ice.default_address_only", true);
 
