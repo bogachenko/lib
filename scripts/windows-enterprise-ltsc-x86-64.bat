@@ -263,7 +263,6 @@ reg add "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\AdvertisingI
 reg add "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f > nul 2>&1
 rem Let Websites Show Me Locally Relevant Content By Accessing My Language List
 reg add "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f > nul 2>&1
-reg add "HKLM\Software\Microsoft\PolicyManager\default\Settings\AllowLanguage" /v "value" /t REG_DWORD /d "0" /f > nul 2>&1
 rem Let Windows Improve Start And Search Results By Tracking App Launches
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /t REG_DWORD /d "0" /f > nul 2>&1
 rem Activity Feed
