@@ -38,6 +38,7 @@ octocaptcha.com
 passport.twitch.tv
 passport.yandex.com
 passport.yandex.ru
+raiffeisen.ru
 pay.google.com
 pay.st65.ru
 pay.yandex.ru
@@ -51,12 +52,14 @@ sberbank.ru
 sbrf.ru
 okx.com
 bitget.com
+rosbank.ru
 smtp.gmail.com
 smtp.yandex.ru
 static.adtidy.org
 userapi.com
 vkuseraudio.net
 vtb.ru
+vtb.com
 wallet.google.com
 yookassa.ru
 yoomoney.ru
