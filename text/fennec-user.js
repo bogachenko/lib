@@ -145,12 +145,6 @@ user_pref("network.cookie.cookieBehavior", 0);
 // [ЗАМЕТКА] Отключает еще один способ для сайтов хранить свои данные на персональном компьютере пользователя.
 user_pref("dom.storageManager.enabled", false);
 
-// Additional analytics sent to the web server
-// [NOTE] HTTP-data leaking from UserAgent to the server, especially when leaving the page.
-// Дополнительная аналитика, отправленная на веб-сервер
-// [ЗАМЕТКА] HTTP-данные утекающих от UserAgent на сервер, особенно при покидании страницы.
-user_pref("beacon.enabled", false);
-
 // Collecting HTML video statistics
 // Сбор HTML-видеостатистики
 user_pref("media.video_stats.enabled", false);

@@ -65,7 +65,6 @@ rem Windows Diagnostic Infrastructure Resolution Host Task
 schtasks /change /tn "\Microsoft\Windows\WDI\ResolutionHost" /disable
 rem Xbox Tasks
 schtasks /change /tn "\Microsoft\XblGameSave\XblGameSaveTask" /disable
-schtasks /change /tn "\Microsoft\XblGameSave\XblGameSaveTaskLogon" /disable
 rem RetailDemo Offline Content Automatic Cleanup Task
 schtasks /change /tn "\Microsoft\Windows\RetailDemo\CleanupOfflineContent" /disable
 rem Send Error Reporting Task
@@ -89,10 +88,6 @@ rem Send Diagnostic Task
 schtasks /change /tn "\Microsoft\Windows\Flighting\OneSettings\RefreshCache" /disable
 rem Update Center Telemetry Task
 schtasks /change /tn "\Microsoft\Windows\UNP\RunUpdateNotificationMgr" /disable
-rem Adobe Acrobat Update Task
-schtasks /change /tn "\Adobe Acrobat Update Task" /disable
-rem Firefox Default Browser Agent Task
-schtasks /change /tn "\Mozilla\Firefox Default Browser Agent 308046B0AF4A39CB" /disable
 
 rem Windows Media Components
 dism /Online /Disable-Feature /FeatureName:"MediaPlayback" /NoRestart
