@@ -832,8 +832,10 @@ setx DOTNET_CLI_TELEMETRY_OPTOUT 1
 rem Windows Tips
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableSoftLanding" /t REG_DWORD /d "1" /f
 rem Wi-Fi sense
-reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" /v "value" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" /v "value" /t REG_DWORD /d "0" /f
+for %%S in (
+    "AllowWiFiHotSpotReporting"
+    "AllowAutoConnectToWiFiSenseHotspots"
+) do reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi" /v %%~S /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\WcmSvc\wifinetworkmanager\config" /v "AutoConnectAllowedOEM" /t REG_DWORD /d "0" /f
 rem Windows Sensors
 reg add "HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableSensors" /t REG_DWORD /d "1" /f
@@ -841,32 +843,34 @@ rem Windows Biometrics
 reg add "HKLM\Software\Policies\Microsoft\Biometrics\Credential Provider" /v "Enabled" /t "REG_DWORD" /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Biometrics" /v "Enabled" /t REG_DWORD /d "0" /f
 rem Let Apps Show Me Personalized Ads By Using My Advertising ID
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo" /v "DisabledByGroupPolicy" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Id" /t REG_SZ /d "null" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Id" /t REG_SZ /d "null" /f
-reg add "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Id" /t REG_SZ /d "null" /f
-reg add "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\AdvertisingInfo" /v "DisabledByGroupPolicy" /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Id" /t REG_SZ /d "null" /f
 rem Let Websites Show Me Locally Relevant Content By Accessing My Language List
-reg add "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f
 rem Let Windows Improve Start And Search Results By Tracking App Launches
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /t REG_DWORD /d "1" /f
 rem Activity Feed
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableActivityFeed" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "UploadUserActivities" /t REG_DWORD /d "0" /f
+for %%S in (
+    "PublishUserActivities"
+    "EnableActivityFeed"
+    "UploadUserActivities"
+) do reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v %%~S /t REG_DWORD /d "1" /f
 rem Suggested Content
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SlideshowEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenOverlayEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+    "SystemPaneSuggestionsEnabled"
+    "SoftLandingEnabled"
+    "SlideshowEnabled"
+    "SilentInstalledAppsEnabled"
+    "RotatingLockScreenOverlayEnabled"
+    "RotatingLockScreenEnabled"
+    "PreInstalledAppsEverEnabled"
+    "PreInstalledAppsEnabled"
+    "OemPreInstalledAppsEnabled"
+    "ContentDeliveryAllowed"
+    ) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v %%S /t REG_DWORD /d "0" /f
+)
 rem Online Speech Recognition
 reg add "HKCU\Software\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy" /v "HasAccepted" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Privacy\AllowInputPersonalization" /v "value" /t REG_DWORD /d "0" /f
@@ -1199,7 +1203,7 @@ timeout /t "1" /nobreak >nul
 
 echo CHECKING SETTINGS FOR ACTIVATION IN WINDOWS OS.
 setlocal
-echo Checking the activation status of your Windows OS...
+echo Checking the activation status...
 rem Query the registry for ProductId and RegisteredOwner
 set regPath="HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion"
 for %%V in ("ProductId" "RegisteredOwner") do (
