@@ -15,32 +15,58 @@ cd /d "%~dp0" && (
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 :: Last update: May 2024
 
-echo Stopping the Windows Explorer process...
+echo Stopping the "Windows Explorer" process...
 tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
     taskkill /f /im explorer.exe
 ) || (
     echo The Windows Explorer process was not found.
 )
 
-echo Restoring the Downloads folder name
+echo Restoring the "Downloads" folder name.
 timeout /t 2 /nobreak >nul
 set "DownloadsFolder=%USERPROFILE%\Downloads"
 if not exist "%DownloadsFolder%" mkdir "%DownloadsFolder%"
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "C:\Users\%USERNAME%\Downloads" /f
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{7D83EE9B-2244-4E70-B1F5-5393042AF1E4}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "C:\Users\%USERNAME%\Downloads" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{7D83EE9B-2244-4E70-B1F5-5393042AF1E4}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
 attrib +r -s -h "%DownloadsFolder%" /s /d
 timeout /t 1 /nobreak >nul
 
 echo Windows Task Scheduler
 rem Windows Defender Tasks
+setlocal enabledelayedexpansion
+rem Loop through each task in the list
 for %%T in (
     "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance"
     "Microsoft\Windows\Windows Defender\Windows Defender Cleanup"
     "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan"
     "Microsoft\Windows\Windows Defender\Windows Defender Verification"
-) do schtasks /change /tn "\%%~T" /disable
+) do (
+    rem Check if the task exists
+    schtasks /query /tn "%%~T" >nul 2>&1
+    if !errorlevel! equ 0 (
+        rem Check if the task is already disabled
+        schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
+        if !errorlevel! equ 0 (
+            echo Task %%~T is already disabled.
+        ) else (
+            echo Disabling task: %%~T
+            schtasks /change /tn "%%~T" /disable
+            if !errorlevel! equ 0 (
+                echo Task %%~T successfully disabled.
+            ) else (
+                echo Failed to disable task %%~T.
+            )
+        )
+    ) else (
+        echo Task %%~T not found.
+    )
+)
+endlocal
+timeout /t 1 /nobreak >nul
 rem Diagnostics and troubleshooting tasks
+setlocal enabledelayedexpansion
+rem Loop through each task in the list
 for %%T in (
     "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
     "Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner"
@@ -48,7 +74,30 @@ for %%T in (
     "Microsoft\Windows\Shell\IndexerAutomaticMaintenance"
     "Microsoft\Windows\WDI\ResolutionHost"
     "Microsoft\Windows\Flighting\OneSettings\RefreshCache"
-) do schtasks /change /tn "\%%~T" /disable
+) do (
+    rem Check if the task exists
+    schtasks /query /tn "%%~T" >nul 2>&1
+    if !errorlevel! equ 0 (
+        rem Check if the task is already disabled
+        schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
+        if !errorlevel! equ 0 (
+            echo Task %%~T is already disabled.
+        ) else (
+            echo Disabling task: %%~T
+            schtasks /change /tn "%%~T" /disable
+            if !errorlevel! equ 0 (
+                echo Task %%~T successfully disabled.
+            ) else (
+                echo Failed to disable task %%~T.
+            )
+        )
+    ) else (
+        echo Task %%~T not found.
+    )
+)
+endlocal
+timeout /t 1 /nobreak >nul
+
 rem Customer Experience Improvement Program tasks
 for %%T in (
     "Microsoft\Windows\Autochk\Proxy"
@@ -59,19 +108,24 @@ for %%T in (
     "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver"
     "Microsoft\Windows\PI\Sqm-Tasks"
 ) do schtasks /change /tn "\%%~T" /disable
-
 rem Microsoft Compatibility Telemetry Tasks
-schtasks /change /tn "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
-schtasks /change /tn "\Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable
-schtasks /change /tn "\Microsoft\Windows\Application Experience\StartupAppTask" /disable
+for %%T in (
+    "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
+    "Microsoft\Windows\Application Experience\ProgramDataUpdater"
+    "Microsoft\Windows\Application Experience\StartupAppTask"
+) do schtasks /change /tn "\%%~T" /disable
 rem Windows Exploit Guard Defender Task
 schtasks /change /tn "\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable
 rem Disk Fingerprint Tasks
-schtasks /change /tn "\Microsoft\Windows\DiskFootprint\Diagnostics" /disable
-schtasks /change /tn "\Microsoft\Windows\DiskFootprint\StorageSense" /disable
+for %%T in (
+    "Microsoft\Windows\DiskFootprint\Diagnostics"
+    "Microsoft\Windows\DiskFootprint\StorageSense"
+) do schtasks /change /tn "\%%~T" /disable
 rem Family Safety Tasks
-schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyMonitor" /disable
-schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefreshTask" /disable
+for %%T in (
+    "Microsoft\Windows\Shell\FamilySafetyMonitor"
+    "Microsoft\Windows\Shell\FamilySafetyRefreshTask"
+) do schtasks /change /tn "\%%~T" /disable
 rem System Performance Diagnostics Task
 schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable
 rem File Usage Statistics Collection Task
@@ -85,16 +139,22 @@ schtasks /change /tn "\Microsoft\Windows\RetailDemo\CleanupOfflineContent" /disa
 rem Send Error Reporting Task
 schtasks /change /tn "\Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable
 rem Location Notification Tasks
-schtasks /change /tn "\Microsoft\Windows\Location\Notifications" /disable
-schtasks /change /tn "\Microsoft\Windows\Location\WindowsActionDialog" /disable
+for %%T in (
+    "Microsoft\Windows\Location\Notifications"
+    "Microsoft\Windows\Location\WindowsActionDialog"
+) do schtasks /change /tn "\%%~T" /disable
 rem Device Data Collection and Sending Tasks
-schtasks /change /tn "\Microsoft\Windows\Device Information\Device" /disable
-schtasks /change /tn "\Microsoft\Windows\Device Information\Device User" /disable
+for %%T in (
+    "Microsoft\Windows\Device Information\Device" /disable
+    "Microsoft\Windows\Device Information\Device User" /disable
+) do schtasks /change /tn "\%%~T" /disable
 rem Microsoft Office Tasks
 schtasks /change /tn "\Microsoft\Office\Office ClickToRun Service Monitor" /disable
 rem Boot Optimization Task
-schtasks /change /tn "\Microsoft\Windows\Sysmain\ResPriStaticDbSync" /disable
-schtasks /change /tn "\Microsoft\Windows\Sysmain\WsSwapAssessmentTask" /disable
+for %%T in (
+    "Microsoft\Windows\Sysmain\ResPriStaticDbSync"
+    "Microsoft\Windows\Sysmain\WsSwapAssessmentTask"
+) do schtasks /change /tn "\%%~T" /disable
 rem Mobile Network Metadata Analysis Task
 schtasks /change /tn "\Microsoft\Windows\Mobile Broadband Accounts\MNO Metadata Parser" /disable
 rem Data Usage Subscription Management Task
@@ -298,9 +358,9 @@ echo Update And Security Settings
 rem Delivery Optimization
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DoDownLoadMode" /t REG_DWORD /d "0" /f
 rem Windows Defender
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableScanningMappedNetworkDrivesForFullScan /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableScanningNetworkFiles /t REG_DWORD /d 1 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v PUADetection /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v DisableScanningMappedNetworkDrivesForFullScan /t REG_DWORD /d 1 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v DisableScanningNetworkFiles /t REG_DWORD /d 1 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v PUADetection /t REG_DWORD /d 0 /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoNTSecurity" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiVirus" /t REG_DWORD /d "1" /f
@@ -375,13 +435,13 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 rem Online Speech Recognition
 reg add "HKCU\Software\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy" /v "HasAccepted" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Privacy\AllowInputPersonalization" /v "value" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d "0" /f
 rem Inking And Typing Personalization
 reg add "HKCU\Software\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPolicy" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Microsoft\InputPersonalization\TrainedDataStore" /v "HarvestContacts" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\TabletPC" /v "PreventHandwritingDataSharing" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Policies\Microsoft\Windows\TabletPC" /v "PreventHandwritingDataSharing" /t REG_DWORD /d "1" /f
@@ -403,8 +463,8 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\AppCompat" /v "DisableUAR" /t 
 reg add "HKLM\Software\Policies\Microsoft\Windows\AppCompat" /v "DisableInventory" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\TelemetryController" /v "RunsBlocked" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\current\device\System" /v "AllowExperimentation" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PreviewBuilds" /v "EnableExperimentation" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PreviewBuilds" /v "EnableConfigFlighting" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\PreviewBuilds" /v "EnableExperimentation" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\PreviewBuilds" /v "EnableConfigFlighting" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\System\AllowTelemetry" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\current\device\Bluetooth" /v "AllowAdvertising" /t REG_DWORD /d "0" /f
 ::reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "DisableWerReporting" /t REG_DWORD /d "1" /f
@@ -433,9 +493,9 @@ rem Tailored Experiences
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
 rem Feedback Frequency
 reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
-reg delete "HKCU\SOFTWARE\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
+reg delete "HKCU\Software\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
 rem Windows Search
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsAADCloudSearchEnabled" /t REG_DWORD /d "0" /f
@@ -567,8 +627,8 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "EnableBackupF
 
 echo Windows Fine-Tuning
 rem Windows Maps
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Maps" /v "AllowUntriggeredNetworkTrafficOnSettingsPage" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Maps" /v "AutoDownloadAndUpdateMapData" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Maps" /v "AllowUntriggeredNetworkTrafficOnSettingsPage" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Maps" /v "AutoDownloadAndUpdateMapData" /t REG_DWORD /d "0" /f
 rem Online Tips
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Settings\AllowOnlineTips" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "AllowOnlineTips" /t REG_DWORD /d "0" /f
@@ -702,7 +762,7 @@ if %ERRORLEVEL% EQU 0 (
 ) else (
     echo An error occurred when changing the value of the Start parameter for the Windows Firewall service.
 )
-timeout 5
+timeout /t 1 /nobreak >nul
 
 echo Windows Activation
 rem Checking Internet connection.
@@ -729,7 +789,7 @@ start /B "" cmd /c "slmgr /ato >nul 2>&1" && (
 ) || (
     echo An error occurred when activating Windows.
 )
-timeout 5
+timeout /t 1 /nobreak >nul
 
 echo Reboot the system.
 shutdown /r /f /t 0
