@@ -1,7 +1,7 @@
 @echo off
 title Windows 10 Enterprise LTSC
 
-rem Getting superuser rights
+echo GETTING SUPERUSER RIGHTS.
 cd /d "%~dp0" && (
     if not "%1"=="am_admin" (
         echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 am_admin", "", "runas", 1 >> "%temp%\getadmin.vbs"
@@ -15,24 +15,14 @@ cd /d "%~dp0" && (
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 :: Last update: May 2024
 
-echo Stopping the "Windows Explorer" process...
+echo STOPPING THE "WINDOWS EXPLORER" PROCESS...
 tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
     taskkill /f /im explorer.exe
 ) || (
     echo The Windows Explorer process was not found.
 )
 
-echo Restoring the "Downloads" folder name.
-timeout /t 2 /nobreak >nul
-set "DownloadsFolder=%USERPROFILE%\Downloads"
-if not exist "%DownloadsFolder%" mkdir "%DownloadsFolder%"
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "C:\Users\%USERNAME%\Downloads" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{7D83EE9B-2244-4E70-B1F5-5393042AF1E4}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
-attrib +r -s -h "%DownloadsFolder%" /s /d
-timeout /t 1 /nobreak >nul
-
-echo Windows Task Scheduler
+echo CHECKING THE PROCESS LIST IN WINDOWS TASK SCHEDULER.
 rem Windows Defender Tasks
 setlocal enabledelayedexpansion
 for %%T in (
@@ -555,7 +545,7 @@ for %%T in (
 endlocal
 timeout /t 1 /nobreak >nul
 
-echo Components of Windows OS.
+echo CHECKING THE LIST OF COMPONENTS IN WINDOWS OS.
 rem Checking the status of Windows Media components
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback','WindowsMediaPlayer').State | Out-File -FilePath MediaComponentsState.txt -Encoding UTF8"
 rem Checking the status of Internet Explorer 11 components
@@ -646,27 +636,30 @@ del "%StepsRecorderStateFile%"
 del "%QuickAssistStateFile%"
 del "%HelloFaceStateFile%"
 
-echo Stopping Tracking Services
+echo CHECKING THE LIST OF SERVICES IN WINDOWS OS.
 rem Diagnostics Tracking Service
-reg add "HKLM\System\CurrentControlSet\Services\DiagTrack" /v "Start" /t REG_DWORD /d "4" /f
-rem Diagnostic Execution Service
-reg add "HKLM\System\CurrentControlSet\Services\diagsvc" /v "Start" /t REG_DWORD /d "4" /f
-rem WAP Push Message Routing Service
-reg add "HKLM\System\CurrentControlSet\Services\dmwappushservice" /v "Start" /t REG_DWORD /d "4" /f
-rem Standard Diagnostic Center Collector Service
-reg add "HKLM\System\CurrentControlSet\Services\diagnosticshub.standardcollector.service" /v "Start" /t REG_DWORD /d "4" /f
+for %%S in (
+    DiagTrack
+    diagsvc
+    dmwappushservice
+    diagnosticshub.standardcollector.service
+) do reg add "HKLM\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
 rem Xbox Services
-reg add "HKLM\System\CurrentControlSet\Services\XblAuthManager" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\System\CurrentControlSet\Services\XblGameSave" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\System\CurrentControlSet\Services\XboxGipSvc" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\System\CurrentControlSet\Services\XboxNetApiSvc" /v "Start" /t REG_DWORD /d "4" /f
+for %%S in (
+    XblAuthManager
+    XblGameSave
+    XboxGipSvc
+    XboxNetApiSvc
+) do reg add "HKLM\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
 rem Store Demonstration Service
 reg add "HKLM\System\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f
 rem Windows Search Service
 reg add "HKLM\System\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
 rem Windows Error Logging Services
-reg add "HKLM\System\CurrentControlSet\Services\WerSvc" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\System\CurrentControlSet\Services\wercplsupport" /v "Start" /t REG_DWORD /d "4" /f
+for %%S in (
+    WerSvc
+    wercplsupport
+) do reg add "HKLM\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
 rem Data Usage Service
 reg add "HKLM\System\CurrentControlSet\Services\DusmSvc" /v "Start" /t REG_DWORD /d "4" /f
 rem SSDP Discovery Service
@@ -686,12 +679,12 @@ reg add "HKLM\System\CurrentControlSet\Services\WbioSrvc" /v "Start" /t REG_DWOR
 rem Windows Insider Service
 reg add "HKLM\System\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /fч
 rem Smart Card
-reg add "HKLM\System\CurrentControlSet\Services\SCardSvr" /t REG_DWORD /d "4" /f
-reg add "HKLM\System\CurrentControlSet\Services\CertPropSvc" /t REG_DWORD /d "4" /f
-rem Chemtable Startup Checking
-reg add "HKLM\System\CurrentControlSet\Services\Chemtable Startup Checking" /t REG_DWORD /d "4" /f
+for %%S in (
+    SCardSvr
+    CertPropSvc
+) do reg add "HKLM\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
 
-echo Time And Language Setting
+echo CHECKING THE TIME AND LANGUAGE IN WINDOWS OS.
 rem Show Text Suggestions When Typing On The Physical Keyboard
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "EnableHwkbTextPrediction" /t REG_DWORD /d "0" /f
 rem Multilingual Text Suggestions
@@ -699,26 +692,27 @@ reg add "HKCU\Software\Microsoft\Input\Settings" /v "MultilingualEnabled" /t REG
 rem Voice Typing
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
 rem Collecting And Transmitting The Texts You Type
-reg add "HKCU\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
 rem Spelling And Correction Of Misspelled Words
-reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableAutocorrection" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableDoubleTapSpace" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnablePredictionSpaceInsertion" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableSpellchecking" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableTextPrediction" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Policies\Microsoft\Control Panel\International" /v "TurnOffAutocorrectMisspelledWords" /t REG_DWORD /d "1" /f
-reg add "HKCU\Software\Policies\Microsoft\Control Panel\International" /v "TurnOffHighlightMisspelledWords" /t REG_DWORD /d "1" /f
-reg add "HKCU\Software\Policies\Microsoft\Control Panel\International" /v "TurnOffOfferTextPredictions" /t REG_DWORD /d "1" /f
-reg add "HKCU\Software\Policies\Microsoft\TabletTip\1.7" /v "DisablePrediction" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\TabletTip\1.7" /v "DisablePrediction" /t REG_DWORD /d "1" /f
+for %%S in (
+    "EnableAutocorrection"
+    "EnableDoubleTapSpace"
+    "EnablePredictionSpaceInsertion"
+    "EnableSpellchecking"
+    "EnableTextPrediction"
+) do reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v %%S /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\TabletTip\1.7" /v "DisablePrediction" /t REG_DWORD /d "1" /f
+for %%S in (
+    "TurnOffAutocorrectMisspelledWords"
+    "TurnOffHighlightMisspelledWords"
+    "TurnOffOfferTextPredictions"
+) do reg add "HKCU\Software\Policies\Microsoft\Control Panel\International" /v %%S /t REG_DWORD /d "1" /f
 rem Improve Inking And Typing Recognition
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\TextInput" /v "AllowLinguisticDataCollection" /t REG_DWORD /d "0" /f
 rem Input Analysis
-reg add "HKCU\Software\Microsoft\Input\Settings" /v "InsightsEnabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Input\Settings" /v "HarvestContacts" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Input\Settings" /v "InsightsEnabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Input\Settings" /v "LMDataLoggerEnabled" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "InsightsEnabled" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "HarvestContacts" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "LMDataLoggerEnabled" /t REG_DWORD /d "0" /f
 
 echo Games Settings
 rem Xbox
@@ -1128,6 +1122,15 @@ rem Lock the Taskbar
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "LockTaskbar" /t "REG_DWORD" /d "1" /f
 rem Clearing the pagefile.sys page file when shutting down Windows
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\ClearPageFileAtShutdown" /v "ClearPageFileAtShutdown" /t "REG_DWORD" /d "1" /f
+rem Restoring the "Downloads" folder name.
+timeout /t 2 /nobreak >nul
+set "DownloadsFolder=%USERPROFILE%\Downloads"
+if not exist "%DownloadsFolder%" mkdir "%DownloadsFolder%"
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "C:\Users\%USERNAME%\Downloads" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{7D83EE9B-2244-4E70-B1F5-5393042AF1E4}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
+attrib +r -s -h "%DownloadsFolder%" /s /d
+timeout /t 1 /nobreak >nul
 
 rem Hibernation
 powercfg /hibernate off
