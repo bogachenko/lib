@@ -637,35 +637,6 @@ del "%QuickAssistStateFile%"
 del "%HelloFaceStateFile%"
 
 echo CHECKING THE LIST OF SERVICES IN WINDOWS OS.
-rem Diagnostics Tracking Service
-for %%H in (HKCU HKLM) do (
-    for %%S in (
-        DiagTrack
-        diagsvc
-        dmwappushservice
-        diagnosticshub.standardcollector.service
-    ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
-)
-rem Xbox Services
-for %%H in (HKCU HKLM) do (
-    for %%S in (
-        XblAuthManager
-        XblGameSave
-        XboxGipSvc
-        XboxNetApiSvc
-    ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
-)
-rem Store Demonstration Service
-for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f
-rem Windows Search Service
-for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
-rem Windows Error Logging Services
-for %%H in (HKCU HKLM) do (
-    for %%S in (
-        WerSvc
-        wercplsupport
-    ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
-)
 rem Data Usage Service
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\DusmSvc" /v "Start" /t REG_DWORD /d "4" /f
 rem SSDP Discovery Service
@@ -684,6 +655,35 @@ rem Windows Biometric Service
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\WbioSrvc" /v "Start" /t REG_DWORD /d "4" /f
 rem Windows Insider Service
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /f
+rem Store Demonstration Service
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f
+rem Windows Search Service
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
+rem Diagnostics Tracking Service
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+        DiagTrack
+        diagsvc
+        dmwappushservice
+        diagnosticshub.standardcollector.service
+    ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+)
+rem Xbox Services
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+        XblAuthManager
+        XblGameSave
+        XboxGipSvc
+        XboxNetApiSvc
+    ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+)
+rem Windows Error Logging Services
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+        WerSvc
+        wercplsupport
+    ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+)
 rem Smart Card
 for %%H in (HKCU HKLM) do (
     for %%S in (
@@ -693,34 +693,38 @@ for %%H in (HKCU HKLM) do (
 )
 
 echo CHECKING THE TIME AND LANGUAGE IN WINDOWS OS.
-rem Show Text Suggestions When Typing On The Physical Keyboard
-reg add "HKCU\Software\Microsoft\Input\Settings" /v "EnableHwkbTextPrediction" /t REG_DWORD /d "0" /f
-rem Multilingual Text Suggestions
-reg add "HKCU\Software\Microsoft\Input\Settings" /v "MultilingualEnabled" /t REG_DWORD /d "0" /f
-rem Voice Typing
-reg add "HKCU\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
-rem Collecting And Transmitting The Texts You Type
-for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
-rem Spelling And Correction Of Misspelled Words
-for %%S in (
-    "EnableAutocorrection"
-    "EnableDoubleTapSpace"
-    "EnablePredictionSpaceInsertion"
-    "EnableSpellchecking"
-    "EnableTextPrediction"
-) do reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v %%S /t REG_DWORD /d "0" /f
-for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\TabletTip\1.7" /v "DisablePrediction" /t REG_DWORD /d "1" /f
-for %%S in (
-    "TurnOffAutocorrectMisspelledWords"
-    "TurnOffHighlightMisspelledWords"
-    "TurnOffOfferTextPredictions"
-) do reg add "HKCU\Software\Policies\Microsoft\Control Panel\International" /v %%S /t REG_DWORD /d "1" /f
 rem Improve Inking And Typing Recognition
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\TextInput" /v "AllowLinguisticDataCollection" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Policies\TextInput" /v "AllowLinguisticDataCollection" /t REG_DWORD /d "0" /f
 rem Input Analysis
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "InsightsEnabled" /t REG_DWORD /d "0" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "HarvestContacts" /t REG_DWORD /d "0" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "LMDataLoggerEnabled" /t REG_DWORD /d "0" /f
+rem Show Text Suggestions When Typing On The Physical Keyboard
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "EnableHwkbTextPrediction" /t REG_DWORD /d "0" /f
+rem Multilingual Text Suggestions
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "MultilingualEnabled" /t REG_DWORD /d "0" /f
+rem Voice Typing
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
+rem Collecting And Transmitting The Texts You Type
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
+rem Spelling And Correction Of Misspelled Words
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\TabletTip\1.7" /v "DisablePrediction" /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+        "EnableAutocorrection"
+        "EnableDoubleTapSpace"
+        "EnablePredictionSpaceInsertion"
+        "EnableSpellchecking"
+        "EnableTextPrediction"
+    ) do reg add "%%H\Software\Microsoft\TabletTip\1.7" /v %%~S /t REG_DWORD /d "0" /f
+)
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+        "TurnOffAutocorrectMisspelledWords"
+        "TurnOffHighlightMisspelledWords"
+        "TurnOffOfferTextPredictions"
+    ) do reg add "%%H\Software\Policies\Microsoft\Control Panel\International" /v %%~S /t REG_DWORD /d 1 /f
+)
 
 echo CHECKING THE SETTINGS FOR GAMES IN WINDOWS OS.
 rem Xbox
