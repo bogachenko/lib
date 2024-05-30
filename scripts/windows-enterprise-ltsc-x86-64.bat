@@ -638,51 +638,59 @@ del "%HelloFaceStateFile%"
 
 echo CHECKING THE LIST OF SERVICES IN WINDOWS OS.
 rem Diagnostics Tracking Service
-for %%S in (
-    DiagTrack
-    diagsvc
-    dmwappushservice
-    diagnosticshub.standardcollector.service
-) do reg add "HKLM\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+        DiagTrack
+        diagsvc
+        dmwappushservice
+        diagnosticshub.standardcollector.service
+    ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+)
 rem Xbox Services
-for %%S in (
-    XblAuthManager
-    XblGameSave
-    XboxGipSvc
-    XboxNetApiSvc
-) do reg add "HKLM\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+        XblAuthManager
+        XblGameSave
+        XboxGipSvc
+        XboxNetApiSvc
+    ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+)
 rem Store Demonstration Service
-reg add "HKLM\System\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f
 rem Windows Search Service
-reg add "HKLM\System\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
 rem Windows Error Logging Services
-for %%S in (
-    WerSvc
-    wercplsupport
-) do reg add "HKLM\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+        WerSvc
+        wercplsupport
+    ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+)
 rem Data Usage Service
-reg add "HKLM\System\CurrentControlSet\Services\DusmSvc" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\DusmSvc" /v "Start" /t REG_DWORD /d "4" /f
 rem SSDP Discovery Service
-reg add "HKLM\System\CurrentControlSet\Services\SSDPSRV" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\SSDPSRV" /v "Start" /t REG_DWORD /d "4" /f
 rem Geolocation Service
-reg add "HKLM\System\CurrentControlSet\Services\lfsvc" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\lfsvc" /v "Start" /t REG_DWORD /d "4" /f
 rem Downloaded Maps Manager Service
-reg add "HKLM\System\CurrentControlSet\Services\MapsBroker" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\MapsBroker" /v "Start" /t REG_DWORD /d "4" /f
 rem Delivery Optimization Service
-reg add "HKLM\System\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d "4" /f
 rem System Performance Improvement Service
-reg add "HKLM\System\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
 rem Broadcast DVR User Service
-reg add "HKLM\System\CurrentControlSet\Services\BcastDVRUserService" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\BcastDVRUserService" /v "Start" /t REG_DWORD /d "4" /f
 rem Windows Biometric Service
-reg add "HKLM\System\CurrentControlSet\Services\WbioSrvc" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\WbioSrvc" /v "Start" /t REG_DWORD /d "4" /f
 rem Windows Insider Service
-reg add "HKLM\System\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /fч
+for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /f
 rem Smart Card
-for %%S in (
-    SCardSvr
-    CertPropSvc
-) do reg add "HKLM\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+        SCardSvr
+        CertPropSvc
+    ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+)
 
 echo CHECKING THE TIME AND LANGUAGE IN WINDOWS OS.
 rem Show Text Suggestions When Typing On The Physical Keyboard
@@ -714,26 +722,39 @@ for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "In
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "HarvestContacts" /t REG_DWORD /d "0" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "LMDataLoggerEnabled" /t REG_DWORD /d "0" /f
 
-echo Games Settings
+echo CHECKING THE SETTINGS FOR GAMES IN WINDOWS OS.
 rem Xbox
-reg add "HKCU\Software\Microsoft\GameBar" /v "AllowAutoGameMode" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\GameBar" /v "ShowStartupPanel" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AudioCaptureEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "CursorCaptureEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "HistoricalCaptureEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehavior" /t REG_DWORD /d "2" /f
-reg add "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "2" /f
-reg add "HKLM\Software\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Gaming.GameBar.PresenceServer.Internal.PresenceWriter" /v "ActivationType" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\GameDVR" /v "AllowgameDVR" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\GameUX" /v "DownloadGameInfo" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\GameUX" /v "GameUpdateOptions" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\GameUX" /v "ListRecentlyPlayed" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\WOW6432Nade\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Gaming.GameBar.PresenceServer.Internal.PresenceWriter" /v "ActivationType" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\GameDVR" /v "AllowgameDVR" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+        "GameDVR_FSEBehavior"
+        "GameDVR_FSEBehaviorMode"
+        "GameDVR_Enabled"
+    ) do reg add "%%H\System\GameConfigStore" /v %%S /t REG_DWORD /d "0" /f
+)
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+    "AllowAutoGameMode"
+    "AutoGameModeEnabled"
+    "ShowStartupPanel"
+    "UseNexusForGameBarEnabled"
+    ) do reg add "%%H\Software\Microsoft\GameBar" /v %%S /t REG_DWORD /d "0" /f
+)
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+    "AppCaptureEnabled"
+    "AudioCaptureEnabled"
+    "CursorCaptureEnabled"
+    "HistoricalCaptureEnabled"
+    ) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v %%S /t REG_DWORD /d "0" /f
+)
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+    "DownloadGameInfo"
+    "GameUpdateOptions"
+    "ListRecentlyPlayed"
+    ) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v %%S /t REG_DWORD /d "0" /f
+)
 
 echo Bluetooth And Devices Settings
 rem Suggestions For Using My Android Phone With Windows
