@@ -1,44 +1,75 @@
 @echo off
-
 title Windows 10 Enterprise LTSC
 
 rem Getting superuser rights
-set "params=%*"
-cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
+cd /d "%~dp0" && (
+    if not "%1"=="am_admin" (
+        echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 am_admin", "", "runas", 1 >> "%temp%\getadmin.vbs"
+        "%temp%\getadmin.vbs"
+        exit /B
+    )
+    del "%temp%\getadmin.vbs" >nul 2>&1
+)
 
-:: Windows 10 Enterprise LTSC build 19044.2546 x86_64
+:: Windows 10 Enterprise LTSC build 19044.4412 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
+:: Last update: May 2024
 
-echo Stop processes
-rem Windows Explorer
-taskkill /f /im explorer.exe
+echo Stopping the Windows Explorer process...
+tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
+    taskkill /f /im explorer.exe
+) || (
+    echo The Windows Explorer process was not found.
+)
 
 echo Restoring the Downloads folder name
 timeout /t 2 /nobreak >nul
-if not exist "%UserProfile%\Downloads" mkdir "%UserProfile%\Downloads"
+set "DownloadsFolder=%USERPROFILE%\Downloads"
+if not exist "%DownloadsFolder%" mkdir "%DownloadsFolder%"
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "C:\Users\%USERNAME%\Downloads" /f
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_EXPAND_SZ /d %%USERPROFILE%%"\Downloads" /f
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{7D83EE9B-2244-4E70-B1F5-5393042AF1E4}" /t REG_EXPAND_SZ /d %%USERPROFILE%%"\Downloads" /f
-attrib +r -s -h "%USERPROFILE%\Downloads" /S /D
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{7D83EE9B-2244-4E70-B1F5-5393042AF1E4}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
+attrib +r -s -h "%DownloadsFolder%" /s /d
 timeout /t 1 /nobreak >nul
 
 echo Windows Task Scheduler
+rem Windows Defender Tasks
+for %%T in (
+    "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance"
+    "Microsoft\Windows\Windows Defender\Windows Defender Cleanup"
+    "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan"
+    "Microsoft\Windows\Windows Defender\Windows Defender Verification"
+) do schtasks /change /tn "\%%~T" /disable
+rem Diagnostics and troubleshooting tasks
+for %%T in (
+    "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
+    "Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner"
+    "Microsoft\Windows\Diagnosis\Scheduled"
+    "Microsoft\Windows\Shell\IndexerAutomaticMaintenance"
+    "Microsoft\Windows\WDI\ResolutionHost"
+    "Microsoft\Windows\Flighting\OneSettings\RefreshCache"
+) do schtasks /change /tn "\%%~T" /disable
+rem Customer Experience Improvement Program tasks
+for %%T in (
+    "Microsoft\Windows\Autochk\Proxy"
+    "Microsoft\Windows\Customer Experience Improvement Program\Consolidator"
+    "Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask"
+    "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip"
+    "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector"
+    "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver"
+    "Microsoft\Windows\PI\Sqm-Tasks"
+) do schtasks /change /tn "\%%~T" /disable
+
+
 rem Microsoft Compatibility Telemetry Tasks
 schtasks /change /tn "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
 schtasks /change /tn "\Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable
 schtasks /change /tn "\Microsoft\Windows\Application Experience\StartupAppTask" /disable
-rem Windows Defender Tasks
-schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /disable
-schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /disable
-schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /disable
-schtasks /change /tn "\Microsoft\Windows\Windows Defender\Windows Defender Verification" /disable
 rem Windows Exploit Guard Defender Task
 schtasks /change /tn "\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /disable
 rem Disk Fingerprint Tasks
 schtasks /change /tn "\Microsoft\Windows\DiskFootprint\Diagnostics" /disable
 schtasks /change /tn "\Microsoft\Windows\DiskFootprint\StorageSense" /disable
-rem System Analysis and Diagnostics Task
-schtasks /change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable
 rem Family Safety Tasks
 schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyMonitor" /disable
 schtasks /change /tn "\Microsoft\Windows\Shell\FamilySafetyRefreshTask" /disable
@@ -46,23 +77,8 @@ rem System Performance Diagnostics Task
 schtasks /change /tn "\Microsoft\Windows\Maintenance\WinSAT" /disable
 rem File Usage Statistics Collection Task
 schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)" /disable
-rem Customer Experience Improvement Program Task
-schtasks /change /tn "\Microsoft\Windows\Autochk\Proxy" /disable
-schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
-schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask" /disable
-schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /disable
-schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable
-schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver" /disable
-schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable
 rem Network Information Collector Task
 schtasks /change /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
-rem Automatic Scanning And Troubleshooting Tasks
-schtasks /change /tn "\Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /disable
-schtasks /change /tn "\Microsoft\Windows\Diagnosis\Scheduled" /disable
-rem Updating Search Indexes Task
-schtasks /change /tn "\Microsoft\Windows\Shell\IndexerAutomaticMaintenance" /disable
-rem Windows Diagnostic Infrastructure Resolution Host Task
-schtasks /change /tn "\Microsoft\Windows\WDI\ResolutionHost" /disable
 rem Xbox Tasks
 schtasks /change /tn "\Microsoft\XblGameSave\XblGameSaveTask" /disable
 rem RetailDemo Offline Content Automatic Cleanup Task
@@ -84,23 +100,69 @@ rem Mobile Network Metadata Analysis Task
 schtasks /change /tn "\Microsoft\Windows\Mobile Broadband Accounts\MNO Metadata Parser" /disable
 rem Data Usage Subscription Management Task
 schtasks /change /tn "\Microsoft\Windows\DUSM\dusmtask" /disable
-rem Send Diagnostic Task
-schtasks /change /tn "\Microsoft\Windows\Flighting\OneSettings\RefreshCache" /disable
 rem Update Center Telemetry Task
 schtasks /change /tn "\Microsoft\Windows\UNP\RunUpdateNotificationMgr" /disable
 
+echo Components of Windows 10.
+rem Checking the status of Windows Media components
+PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback','WindowsMediaPlayer').State | Out-File -FilePath MediaComponentsState.txt -Encoding UTF8"
+rem Checking the status of Internet Explorer 11 components
+PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*').State | Out-File -FilePath IEComponentsState.txt -Encoding UTF8"
+rem Checking the status of the Steps Recorder components
+PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'App.StepsRecorder*').State | Out-File -FilePath StepsRecorderState.txt -Encoding UTF8"
+rem Checking the status of Quick Assist components
+PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*').State | Out-File -FilePath QuickAssistState.txt -Encoding UTF8"
+rem Checking the status of Hello Face components
+PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'Hello.Face*').State | Out-File -FilePath HelloFaceState.txt -Encoding UTF8"
+rem Defining the component status file
+set "MediaComponentsStateFile=MediaComponentsState.txt"
+set "IEComponentsStateFile=IEComponentsState.txt"
+set "StepsRecorderStateFile=StepsRecorderState.txt"
+set "QuickAssistStateFile=QuickAssistState.txt"
+set "HelloFaceStateFile=HelloFaceState.txt"
+rem Checking the status of each position before executing the code
+findstr /C:"Enabled" "%MediaComponentsStateFile%" >nul || (
+    echo Windows Media Components are not disabled.
+    goto :ExecuteCode
+)
+findstr /C:"Disabled" "%IEComponentsStateFile%" >nul || (
+    echo Internet Explorer 11 Components are not disabled.
+    goto :ExecuteCode
+)
+findstr /C:"Disabled" "%StepsRecorderStateFile%" >nul || (
+    echo Steps Recorder Components are not disabled.
+    goto :ExecuteCode
+)
+findstr /C:"Disabled" "%QuickAssistStateFile%" >nul || (
+    echo Quick Assist Components are not disabled.
+    goto :ExecuteCode
+)
+findstr /C:"Disabled" "%HelloFaceStateFile%" >nul || (
+    echo Hello Face Components are not disabled.
+    goto :ExecuteCode
+)
+echo All components are already disabled.
+goto :EndScript
+:ExecuteCode
+echo Disabling components...
 rem Windows Media Components
-dism /Online /Disable-Feature /FeatureName:"MediaPlayback" /NoRestart
-dism /Online /Disable-Feature /FeatureName:"WindowsMediaPlayer" /NoRestart
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Media.WindowsMediaPlayer*' | Remove-WindowsCapability -Online"
+PowerShell -ExecutionPolicy Unrestricted -Command "Disable-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback','WindowsMediaPlayer' -NoRestart"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Media.WindowsMediaPlayer*' | Remove-WindowsCapability -Online -NoRestart"
 rem Internet Explorer 11 Components
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*' | Remove-WindowsCapability -Online"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*' | Remove-WindowsCapability -Online -NoRestart"
 rem Steps Recorder Components
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.StepsRecorder*' | Remove-WindowsCapability -Online"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.StepsRecorder*' | Remove-WindowsCapability -Online -NoRestart"
 rem Quick Assist Components
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*' | Remove-WindowsCapability -Online"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*' | Remove-WindowsCapability -Online -NoRestart"
 rem Hello Face Components
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Hello.Face*' | Remove-WindowsCapability -Online"
+PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Hello.Face*' | Remove-WindowsCapability -Online -NoRestart"
+:EndScript
+rem Deleting temporary component status files
+del "%MediaComponentsStateFile%"
+del "%IEComponentsStateFile%"
+del "%StepsRecorderStateFile%"
+del "%QuickAssistStateFile%"
+del "%HelloFaceStateFile%"
 
 echo Stopping Tracking Services
 rem Diagnostics Tracking Service
@@ -140,9 +202,7 @@ reg add "HKLM\System\CurrentControlSet\Services\BcastDVRUserService" /v "Start" 
 rem Windows Biometric Service
 reg add "HKLM\System\CurrentControlSet\Services\WbioSrvc" /v "Start" /t REG_DWORD /d "4" /f
 rem Windows Insider Service
-reg add "HKLM\System\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /f
-rem Adobe Service
-reg add "HKLM\System\CurrentControlSet\Services\AdobeARMservice" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\System\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /fч
 rem Smart Card
 reg add "HKLM\System\CurrentControlSet\Services\SCardSvr" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\CertPropSvc" /t REG_DWORD /d "4" /f
@@ -605,14 +665,43 @@ reg add "HKLM\System\CurrentControlSet\Control\WMI\AutoLogger\ReadyBoot" /v "Sta
 
 rem Firewall
 netsh advfirewall set allprofiles state off
-
-rem Windows Activation
-slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
-slmgr /skms kms.digiboy.ir
-slmgr /ato
-
-rem Countdown
+set KEY_NAME="HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MpsSvc"
+set VALUE_NAME=Start
+set VALUE_DATA=4
+reg.exe add %KEY_NAME% /v %VALUE_NAME% /t REG_DWORD /d %VALUE_DATA% /f
+if %ERRORLEVEL% EQU 0 (
+    echo The value of the Start parameter for the Windows Firewall service has been successfully changed.
+) else (
+    echo An error occurred when changing the value of the Start parameter for the Windows Firewall service.
+)
 timeout 5
 
-rem Reboot
+echo Windows Activation
+rem Checking Internet connection.
+ping -n 1 "1.1.1.1" >nul
+if errorlevel 1 (
+    echo There is no internet connection.
+    exit /b
+) else (
+    echo There is an Internet connection.
+)
+rem Process of activating Windows OS.
+start /B "" cmd /c "slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>&1" && (
+    echo Activation was completed successfully.
+) || (
+    echo An error occurred during activation.
+)
+start /B "" cmd /c "slmgr /skms kms.digiboy.ir >nul 2>&1" && (
+    echo A new KMS key has been installed.
+) || (
+    echo Error installing the KMS key.
+)
+start /B "" cmd /c "slmgr /ato >nul 2>&1" && (
+    echo Windows activation was successful.
+) || (
+    echo An error occurred when activating Windows.
+)
+timeout 5
+
+echo Reboot the system.
 shutdown /r /f /t 0
