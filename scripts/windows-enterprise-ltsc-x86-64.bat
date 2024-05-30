@@ -22,7 +22,7 @@ tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
     echo The Windows Explorer process was not found.
 )
 
-echo CHECKING THE PROCESS LIST IN WINDOWS TASK SCHEDULER.
+echo CHECKING THE SETTINGS FOR THE LIST IN WINDOWS TASK SCHEDULER.
 rem Windows Defender Tasks
 setlocal enabledelayedexpansion
 for %%T in (
@@ -545,7 +545,7 @@ for %%T in (
 endlocal
 timeout /t 1 /nobreak >nul
 
-echo CHECKING THE LIST OF COMPONENTS IN WINDOWS OS.
+echo CHECKING THE SETTINGS FOR THE LIST OF COMPONENTS IN WINDOWS OS.
 rem Checking the status of Windows Media components
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback','WindowsMediaPlayer').State | Out-File -FilePath MediaComponentsState.txt -Encoding UTF8"
 rem Checking the status of Internet Explorer 11 components
@@ -636,7 +636,7 @@ del "%StepsRecorderStateFile%"
 del "%QuickAssistStateFile%"
 del "%HelloFaceStateFile%"
 
-echo CHECKING THE LIST OF SERVICES IN WINDOWS OS.
+echo CHECKING THE SETTINGS FOR THE LIST OF SERVICES IN WINDOWS OS.
 rem Data Usage Service
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\DusmSvc" /v "Start" /t REG_DWORD /d "4" /f
 rem SSDP Discovery Service
@@ -659,6 +659,13 @@ rem Store Demonstration Service
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f
 rem Windows Search Service
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
+rem Windows Defender
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+        SecurityHealthService
+        wscsvc
+    ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
+)
 rem Diagnostics Tracking Service
 for %%H in (HKCU HKLM) do (
     for %%S in (
@@ -692,7 +699,7 @@ for %%H in (HKCU HKLM) do (
     ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
 )
 
-echo CHECKING THE TIME AND LANGUAGE IN WINDOWS OS.
+echo CHECKING THE SETTINGS FOR TIME AND LANGUAGE IN WINDOWS OS.
 rem Improve Inking And Typing Recognition
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Policies\TextInput" /v "AllowLinguisticDataCollection" /t REG_DWORD /d "0" /f
 rem Input Analysis
@@ -723,7 +730,7 @@ for %%H in (HKCU HKLM) do (
         "TurnOffAutocorrectMisspelledWords"
         "TurnOffHighlightMisspelledWords"
         "TurnOffOfferTextPredictions"
-    ) do reg add "%%H\Software\Policies\Microsoft\Control Panel\International" /v %%~S /t REG_DWORD /d 1 /f
+    ) do reg add "%%H\Software\Policies\Microsoft\Control Panel\International" /v %%~S /t REG_DWORD /d "1" /f
 )
 
 echo CHECKING THE SETTINGS FOR GAMES IN WINDOWS OS.
@@ -760,46 +767,52 @@ for %%H in (HKCU HKLM) do (
     ) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v %%S /t REG_DWORD /d "0" /f
 )
 
-echo Bluetooth And Devices Settings
+echo CHECKING THE SETTINGS FOR MEDIA AND BLUETOOTH IN WINDOWS OS.
 rem Suggestions For Using My Android Phone With Windows
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
 rem Autoplay for all media and devices
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers" /v "DisableAutoplay" /t REG_DWORD /d "1" /f
 
-echo Update And Security Settings
+echo CHECKING THE SETTINGS FOR UPDATES AND SECURITY IN WINDOWS OS.
 rem Delivery Optimization
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DoDownLoadMode" /t REG_DWORD /d "0" /f
 rem Windows Defender
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v DisableScanningMappedNetworkDrivesForFullScan /t REG_DWORD /d 1 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v DisableScanningNetworkFiles /t REG_DWORD /d 1 /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v PUADetection /t REG_DWORD /d 0 /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoNTSecurity" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiVirus" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\App and Browser protection" /v "DisallowExploitProtectionOverride" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\App and Browser protection" /v "UILockdown" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Family options" /v "UILockdown" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection" /v "UILockdown" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\MpEngine" /v "MpEnablePus" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableBehaviorMonitoring" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableIOAVProtection" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableOnAccessProtection" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRoutinelyTakingAction" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableScanOnRealtimeEnable" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "DisableBlockAtFirstSeen" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "SpynetReporting" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "SubmitSamplesConsent" /t REG_DWORD /d "2" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\System\CurrentControlSet\Services\wscsvc" /v "Start" /t REG_DWORD /d "4" /f
 reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /f
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "SecurityHealth" /f
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
 reg delete "HKLM\Software\Policies\Microsoft\Windows\System" /v "ShellSmartScreenLevel" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoNTSecurity" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "PUADetection" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Family options" /v "UILockdown" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection" /v "UILockdown" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\MpEngine" /v "MpEnablePus" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "DisableBlockAtFirstSeen" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
+for %%S in (
+    "DisableBehaviorMonitoring"
+    "DisableIOAVProtection"
+    "DisableOnAccessProtection"
+    "DisableRealtimeMonitoring"
+    "DisableRoutinelyTakingAction"
+    "DisableScanOnRealtimeEnable"
+) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v %%~S /t REG_DWORD /d "1" /f
+for %%S in (
+    "DisableScanningMappedNetworkDrivesForFullScan"
+    "DisableScanningNetworkFiles"
+    "DisableAntiSpyware"
+    "DisableAntiVirus"
+) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v %%~S /t REG_DWORD /d "1" /f
+for %%S in (
+    "DisallowExploitProtectionOverride"
+    "UILockdown"
+) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\App and Browser protection" /v %%~S /t REG_DWORD /d "1" /f
+for %%S in (
+    "SpynetReporting"
+    "SubmitSamplesConsent"
+) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v %%~S /t REG_DWORD /d "1" /f
 
 echo Privacy Settings
 rem Windows PowerShell Telemetry
@@ -1157,20 +1170,9 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Fold
 attrib +r -s -h "%DownloadsFolder%" /s /d
 timeout /t 1 /nobreak >nul
 
-rem Hibernation
-powercfg /hibernate off
-
 rem Sleep Settings
 powercfg -x standby-timeout-dc 0
 powercfg -x standby-timeout-ac 0
-
-rem Fast Startup
-reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f
-
-rem Boot Optimization
-reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Control\WMI\AutoLogger\ReadyBoot" /v "Start" /t REG_DWORD /d "0" /f
 
 rem Firewall
 netsh advfirewall set allprofiles state off
@@ -1190,6 +1192,7 @@ rem Checking Internet connection.
 ping -n 1 "1.1.1.1" >nul
 if errorlevel 1 (
     echo There is no internet connection.
+    shutdown /r /f /t 0
     exit /b
 ) else (
     echo There is an Internet connection.
