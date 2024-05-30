@@ -60,7 +60,6 @@ for %%T in (
     "Microsoft\Windows\PI\Sqm-Tasks"
 ) do schtasks /change /tn "\%%~T" /disable
 
-
 rem Microsoft Compatibility Telemetry Tasks
 schtasks /change /tn "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /disable
 schtasks /change /tn "\Microsoft\Windows\Application Experience\ProgramDataUpdater" /disable
@@ -103,7 +102,7 @@ schtasks /change /tn "\Microsoft\Windows\DUSM\dusmtask" /disable
 rem Update Center Telemetry Task
 schtasks /change /tn "\Microsoft\Windows\UNP\RunUpdateNotificationMgr" /disable
 
-echo Components of Windows 10.
+echo Components of Windows OS.
 rem Checking the status of Windows Media components
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback','WindowsMediaPlayer').State | Out-File -FilePath MediaComponentsState.txt -Encoding UTF8"
 rem Checking the status of Internet Explorer 11 components
@@ -147,15 +146,45 @@ goto :EndScript
 echo Disabling components...
 rem Windows Media Components
 PowerShell -ExecutionPolicy Unrestricted -Command "Disable-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback','WindowsMediaPlayer' -NoRestart"
+if %errorlevel% equ 0 (
+    echo Windows Media Components disabled successfully.
+) else (
+    echo Failed to disable Windows Media Components.
+)
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Media.WindowsMediaPlayer*' | Remove-WindowsCapability -Online -NoRestart"
+if %errorlevel% equ 0 (
+    echo Windows Media Player capability removed successfully.
+) else (
+    echo Failed to remove Windows Media Player capability.
+)
 rem Internet Explorer 11 Components
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*' | Remove-WindowsCapability -Online -NoRestart"
+if %errorlevel% equ 0 (
+    echo Internet Explorer 11 Components removed successfully.
+) else (
+    echo Failed to remove Internet Explorer 11 Components.
+)
 rem Steps Recorder Components
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.StepsRecorder*' | Remove-WindowsCapability -Online -NoRestart"
+if %errorlevel% equ 0 (
+    echo Steps Recorder Components removed successfully.
+) else (
+    echo Failed to remove Steps Recorder Components.
+)
 rem Quick Assist Components
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*' | Remove-WindowsCapability -Online -NoRestart"
+if %errorlevel% equ 0 (
+    echo Quick Assist Components removed successfully.
+) else (
+    echo Failed to remove Quick Assist Components.
+)
 rem Hello Face Components
 PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Hello.Face*' | Remove-WindowsCapability -Online -NoRestart"
+if %errorlevel% equ 0 (
+    echo Hello Face Components removed successfully.
+) else (
+    echo Failed to remove Hello Face Components.
+)
 :EndScript
 rem Deleting temporary component status files
 del "%MediaComponentsStateFile%"
@@ -269,10 +298,9 @@ echo Update And Security Settings
 rem Delivery Optimization
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DoDownLoadMode" /t REG_DWORD /d "0" /f
 rem Windows Defender
-powershell.exe -command "Set-MpPreference -DisableRealtimeMonitoring 1"
-powershell.exe -command "Set-MpPreference -DisableScanningMappedNetworkDrivesForFullScan 1"
-powershell.exe -command "Set-MpPreference -DisableScanningNetworkFiles 1"
-powershell.exe -command "Set-MpPreference -PUAProtection 0"
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableScanningMappedNetworkDrivesForFullScan /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableScanningNetworkFiles /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v PUADetection /t REG_DWORD /d 0 /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoNTSecurity" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiVirus" /t REG_DWORD /d "1" /f
