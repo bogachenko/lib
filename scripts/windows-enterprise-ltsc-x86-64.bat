@@ -6,7 +6,7 @@ cd /d "%~dp0" && (
     if not "%1"=="am_admin" (
         echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 am_admin", "", "runas", 1 >> "%temp%\getadmin.vbs"
         "%temp%\getadmin.vbs"
-        exit /B
+        exit /b
     )
     del "%temp%\getadmin.vbs" >nul 2>&1
 )
@@ -1060,7 +1060,7 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "DisableSettin
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "DisableSettingSyncUserOverride" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "EnableBackupForWin8Apps" /t REG_DWORD /d "0" /f
 
-echo Windows Fine-Tuning
+echo CHECKING OTHER SETTINGS IN WINDOWS OS.
 rem Windows Maps
 reg add "HKLM\Software\Policies\Microsoft\Windows\Maps" /v "AllowUntriggeredNetworkTrafficOnSettingsPage" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\Maps" /v "AutoDownloadAndUpdateMapData" /t REG_DWORD /d "0" /f
@@ -1171,7 +1171,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "L
 rem Clearing the pagefile.sys page file when shutting down Windows
 reg add "HKLM\SystemCurrentControlSet\Control\Session Manager\Memory Management\ClearPageFileAtShutdown" /v "ClearPageFileAtShutdown" /t "REG_DWORD" /d "1" /f
 rem Restoring the "Downloads" folder name.
-timeout /t 2 /nobreak >nul
+timeout /t "2" /nobreak >nul
 set "DownloadsFolder=%USERPROFILE%\Downloads"
 if not exist "%DownloadsFolder%" mkdir "%DownloadsFolder%"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "C:\Users\%USERNAME%\Downloads" /f
@@ -1199,7 +1199,7 @@ timeout /t "1" /nobreak >nul
 
 echo CHECKING SETTINGS FOR ACTIVATION IN WINDOWS OS.
 setlocal
-echo Checking Windows 10 activation status...
+echo Checking the activation status of your Windows OS...
 rem Query the registry for ProductId and RegisteredOwner
 set regPath="HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion"
 for %%V in ("ProductId" "RegisteredOwner") do (
