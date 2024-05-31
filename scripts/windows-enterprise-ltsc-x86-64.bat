@@ -839,7 +839,10 @@ for %%S in (
 ) do reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi" /v %%~S /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\WcmSvc\wifinetworkmanager\config" /v "AutoConnectAllowedOEM" /t REG_DWORD /d "0" /f
 rem Windows Sensors
-reg add "HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableSensors" /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableSensors" /t REG_DWORD /d "1" /f
+rem Windows Location
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\DisableLocation" /v "DisableSensors" /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\DisableLocationScripting" /v "DisableSensors" /t REG_DWORD /d "1" /f
 rem Windows Biometrics
 reg add "HKLM\Software\Policies\Microsoft\Biometrics\Credential Provider" /v "Enabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Biometrics" /v "Enabled" /t REG_DWORD /d "0" /f
@@ -1144,6 +1147,11 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "DisableSettin
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "EnableBackupForWin8Apps" /t REG_DWORD /d "0" /f
 
 echo CHECKING OTHER SETTINGS IN WINDOWS OS.
+rem Requiring a password when resuming from sleep or hibernation mode
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\System\Power" /v "PromptPasswordOnResume" /t REG_DWORD /d "1" /f
+rem Changing mouse pointers
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\Personalization" /v "NoChangingMousePointers" /t REG_DWORD /d "1" /f
+
 rem Windows Maps
 for %%H in (HKCU HKLM) do (
     for %%S in (
@@ -1178,6 +1186,8 @@ reg add "HKCU\Software\Microsoft\Windows\Shell\Bags\1\Desktop" /v "Mode" /t REG_
 reg add "HKCU\Software\Microsoft\Windows\Shell\Bags\1\Desktop" /v "LogicalViewMode" /t REG_DWORD /d "3" /f
 rem Sign-in Screen Background Image
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "DisableLogonBackgroundImage" /t REG_DWORD /d "1" /f
+rem Blocking desktop wallpaper changes
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Policies\ActiveDesktop" /v "NoChangingWallPaper" /t REG_DWORD /d "1" /f
 rem History Of Recently Opened Documents
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /t REG_DWORD /d "0" /f
 rem List Of Frequently Used Programs
@@ -1185,7 +1195,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "N
 rem Sign-in Welcome Screen
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoWelcomeScreen" /t REG_DWORD /d "0" /f
 rem Recently Added Applications
-reg add "HKLM\Software\Policies\Microsoft\Windows\Explorer" /v "HideRecentlyAddedApps" /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\Explorer" /v "HideRecentlyAddedApps" /t REG_DWORD /d "1" /f
 rem OneDrive Advertising
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d "1" /f
 rem Thumbnail Caching In Hidden Files
@@ -1199,12 +1209,12 @@ for %%H in (HKCU HKLM) do (
     for %%S in (
     "NoImplicitFeedback"
     "NoExplicitFeedback"
+    "NoOnlineAssist"
     "NoActiveHelp"
     ) do reg add "%%H\Software\Policies\Microsoft\Assistance\Client\1.0" /v %%S /t REG_DWORD /d "1" /f
 )
 rem Publication Wizard
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoPublishingWizard" /t REG_DWORD /d "1" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoPublishingWizard" /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoPublishingWizard" /t REG_DWORD /d "1" /f
 rem Search Companion Files Update
 reg add "HKLM\Software\Policies\Microsoft\SearchCompanion" /v "DisableContentFileUpdates" /t REG_DWORD /d "1" /f
 rem Background Image Quality
@@ -1229,7 +1239,7 @@ for %%i in (batfile cmdfile) do (
 rem Opening "My Computer" in Explorer
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d "1" /f
 rem People icon on taskbar
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "HidePeopleBar" /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "HidePeopleBar" /t REG_DWORD /d "1" /f
 rem Unnecessary Items In Windows Settings
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:gaming-broadcasting;gaming-gamebar;gaming-gamedvr;gaming-gamemode;gaming-trueplay;gaming-xboxnetworking;windowsdefender;mobile-devices;mobile-devices-addphone;mobile-devices-addphone-direct" /f
 rem Windows Spotlight
@@ -1260,7 +1270,7 @@ set KEY_NAME="HKLM\SystemCurrentControlSet\Services\MpsSvc"
 set VALUE_NAME="Start"
 set VALUE_DATA="4"
 reg.exe add %KEY_NAME% /v %VALUE_NAME% /t REG_DWORD /d %VALUE_DATA% /f
-if %ERRORLEVEL% equ "0" (
+if %errorlevel% equ "0" (
     echo The value of the Start parameter for the Windows Firewall service has been successfully changed.
 ) else (
     echo An error occurred when changing the value of the Start parameter for the Windows Firewall service.
@@ -1284,7 +1294,7 @@ goto end
 :activate
 echo Checking for Internet connection...
 ping -n "1" "1.1.1.1" >nul
-if errorlevel 1 (
+if errorlevel "1" (
     echo There is no internet connection.
     shutdown /r /f /t "0"
     exit /b
