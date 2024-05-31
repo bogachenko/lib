@@ -921,6 +921,17 @@ for %%i in (
 ) do (
     reg add "%regPath%\%%~i" /v "Enabled" /t REG_DWORD /d "0" /f
 )
+set "regPath=HKLM\SOFTWARE\Microsoft\PolicyManager\default\System"
+for %%i in (
+    "AllowTelemetry"
+    "AllowLocation"
+    "AllowDesktopAnalyticsProcessing"
+    "AllowDeviceNameInDiagnosticData"
+    "AllowExperimentation"
+    "AllowCommercialDataPipeline"
+) do (
+    reg add "%regPath%\%%~i" /v "value" /t REG_DWORD /d "0" /f
+)
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "EnableExperimentation"
@@ -960,7 +971,6 @@ for %%H in (HKCU HKLM) do (
 reg add "HKLM\Software\Policies\Microsoft\Windows\AppCompat" /v "AITEnable" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\TelemetryController" /v "RunsBlocked" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\current\device\System" /v "AllowExperimentation" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\PolicyManager\default\System\AllowTelemetry" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\current\device\Bluetooth" /v "AllowAdvertising" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\ScheduledDiagnostics" /v "EnabledExecution" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\ScheduledDiagnostics" /v "EnabledExecution" /t REG_DWORD /d "0" /f
@@ -1066,9 +1076,10 @@ for %%H in (HKCU HKLM) do (
     "UploadPermissionReceived"
     ) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v %%S /t REG_DWORD /d "0" /f
 )
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\EventTranscriptKey" /v "EnableEventTranscript" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\TraceManager" /v "MiniTraceSlotEnabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\TestHooks" /v "DisableAsimovUpLoad" /t REG_DWORD /d "1" /f
+set "regPath=HKLM\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack"
+reg add "%regPath%\EventTranscriptKey" /v "EnableEventTranscript" /t REG_DWORD /d "0" /f
+reg add "%regPath%\TraceManager" /v "MiniTraceSlotEnabled" /t REG_DWORD /d "0" /f
+reg add "%regPath%\TestHooks" /v "DisableAsimovUpLoad" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Diagnostics\PerfTrack" /v "Disabled" /t REG_DWORD /d "1" /f
 rem Logging
 set "regPath=HKLM\System\CurrentControlSet\Control\WMI\Autologger"
@@ -1122,6 +1133,7 @@ reg add "HKLM\Software\Policies\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t 
 rem Windows Insider Program
 reg add "HKLM\Software\Microsoft\WindowsSelfHost\UI\Visibility" /v "HideInsiderPage" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\PreviewBuilds" /v "AllowBuildPreview" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\System\AllowBuildPreview" /v "value" /t REG_DWORD /d "0" /f
 rem Developer Mode
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock" /v "AllowDevelopmentWithoutDevLicense" /t REG_DWORD /d "1" /f
 rem FindMyDevice
@@ -1198,43 +1210,22 @@ reg add "HKLM\Software\Policies\Microsoft\SearchCompanion" /v "DisableContentFil
 rem Background Image Quality
 reg add "HKCU\Control Panel\Desktop" /v "JPEGImportQuality" /t REG_DWORD /d "100" /f
 rem Cleaning The Context Menu
-reg add "HKLM\Software\Classes\batfile\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\cmdfile\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\Drive\shell\change-passphrase" /v "LegacyDisable" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\Drive\shell\change-pin" /v "LegacyDisable" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\Drive\shell\encrypt-bde" /v "LegacyDisable" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\Drive\shell\encrypt-bde-elev" /v "LegacyDisable" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\Drive\shell\manage-bde" /v "LegacyDisable" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\Drive\shell\resume-bde" /v "LegacyDisable" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\Drive\shell\resume-bde-elev" /v "LegacyDisable" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\Drive\shell\unlock-bde" /v "LegacyDisable" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.3ds\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.3mf\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.3mf\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.bmp\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.dae\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.dxf\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.fbx\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.gif\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.glb\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.jfif\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.jpeg\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.jpe\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.jpg\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.obj\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.obj\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.ply\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.ply\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.png\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.stl\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.stl\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.tiff\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.tif\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Classes\SystemFileAssociations\.wrl\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
-reg delete "HKLM\Software\Classes\.bmp\ShellNew" /f
-reg delete "HKLM\Software\Classes\.contact\ShellNew" /f
-reg delete "HKLM\Software\Classes\.rtf\ShellNew" /f
 reg delete "HKLM\Software\Classes\.zip\CompressedFolder\ShellNew" /f
+for %%i in (.bmp .contact .rtf) do (
+    reg delete "HKLM\Software\Classes\%%i\ShellNew" /f
+)
+set "regPath=HKLM\Software\Classes\SystemFileAssociations"
+for %%i in (.3ds .3mf .bmp .dae .dxf .fbx .gif .glb .jfif .jpeg .jpe .jpg .obj .ply .png .stl .tiff .tif .wrl) do (
+    reg add "%regPath%\%%i\Shell\3D Edit" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
+    reg add "%regPath%\%%i\Shell\3D Print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
+)
+set "regPath=HKLM\Software\Classes\Drive\shell"
+for %%i in (change-passphrase change-pin encrypt-bde encrypt-bde-elev manage-bde resume-bde resume-bde-elev unlock-bde) do (
+    reg add "%regPath%\%%i" /v "LegacyDisable" /t REG_SZ /d "" /f
+)
+for %%i in (batfile cmdfile) do (
+    reg add "HKLM\Software\Classes\%%i\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
+)
 rem Opening "My Computer" in Explorer
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d "1" /f
 rem People icon on taskbar
