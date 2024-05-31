@@ -850,13 +850,13 @@ for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion
 rem Let Websites Show Me Locally Relevant Content By Accessing My Language List
 for %%H in (HKCU HKLM) do reg add "%%H\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f
 rem Let Windows Improve Start And Search Results By Tracking App Launches
-for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /t REG_DWORD /d "0" /f
 rem Activity Feed
 for %%S in (
     "PublishUserActivities"
     "EnableActivityFeed"
     "UploadUserActivities"
-) do reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v %%~S /t REG_DWORD /d "1" /f
+) do reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v %%~S /t REG_DWORD /d "0" /f
 rem Suggested Content
 for %%H in (HKCU HKLM) do (
     for %%S in (
@@ -1169,7 +1169,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTas
 rem Transparency Effects
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d "0" /f
 rem Recently Opened Items
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d "0" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d "0" /f
 rem Taskbar Buttons Size
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSmallIcons" /t REG_DWORD /d "1" /f
 rem Desktop Icons Size
