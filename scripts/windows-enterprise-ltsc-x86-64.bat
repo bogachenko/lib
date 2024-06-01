@@ -787,6 +787,8 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandler
 echo CHECKING THE SETTINGS FOR UPDATES AND SECURITY IN WINDOWS OS.
 rem Delivery Optimization
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DoDownLoadMode" /t REG_DWORD /d "0" /f
+rem Enabling font providers
+reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableFontProviders" /t REG_DWORD /d "1" /f
 rem Windows Defender
 reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /f
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "SecurityHealth" /f
@@ -841,8 +843,13 @@ reg add "HKLM\Software\Microsoft\WcmSvc\wifinetworkmanager\config" /v "AutoConne
 rem Windows Sensors
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableSensors" /t REG_DWORD /d "1" /f
 rem Windows Location
-for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\DisableLocation" /v "DisableSensors" /t REG_DWORD /d "1" /f
-for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\DisableLocationScripting" /v "DisableSensors" /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+    "DisableLocationScripting"
+    "DisableLocation"
+    "DisableWindowsLocationProvider"
+    ) do reg add "%%H\Software\Policies\Microsoft\Windows\LocationAndSensors" /v %%S /t REG_DWORD /d "1" /f
+)
 rem Windows Biometrics
 reg add "HKLM\Software\Policies\Microsoft\Biometrics\Credential Provider" /v "Enabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Biometrics" /v "Enabled" /t REG_DWORD /d "0" /f
@@ -1014,8 +1021,11 @@ for %%H in (HKCU HKLM) do (
     "ConnectedSearchUseWeb"
     "AllowCortana"
     "AllowCortanaAboveLock"
+    "ConnectedSearchUseWebOverMeteredConnections"
     "AlwaysUseAutoLangDetection"
     "AllowSearchToUseLocation"
+    "AllowCloudSearch"
+    "BingSearchEnabled"
     ) do reg add "%%H\Software\Policies\Microsoft\Windows\Windows Search" /v %%S /t REG_DWORD /d "0" /f
 )
 for %%H in (HKCU HKLM) do (
@@ -1025,8 +1035,14 @@ for %%H in (HKCU HKLM) do (
     "VoiceActivationEnableAboveLockscreen"
     ) do reg add "%%H\Software\Microsoft\Speech_OneCore\Preferences" /v %%S /t REG_DWORD /d "0" /f
 )
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+    "ConnectedSearchPrivacy"
+    "ConnectedSearchSafeSearch"
+    ) do reg add "%%H\Software\Policies\Microsoft\Windows\Windows Search" /v %%S /t REG_DWORD /d "3" /f
+)
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OOBE" /v "DisableVoice" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Search\AllowCloudSearch" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Experience\AllowCortana" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCortanaButton" /t REG_DWORD /d "0" /f
@@ -1243,7 +1259,17 @@ for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion
 rem Unnecessary Items In Windows Settings
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:gaming-broadcasting;gaming-gamebar;gaming-gamedvr;gaming-gamemode;gaming-trueplay;gaming-xboxnetworking;windowsdefender;mobile-devices;mobile-devices-addphone;mobile-devices-addphone-direct" /f
 rem Windows Spotlight
-reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsSpotlightFeatures" /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+    "DisableWindowsSpotlightWindowsWelcomeExperience"
+    "DisableSpotlightCollectionOnDesktop"
+    "DisableThirdPartySuggestions"
+    "DisableTailoredExperiencesWithDiagnosticData"
+    "DisableWindowsSpotlightOnSettings"
+    "DisableWindowsSpotlightOnActionCenter"
+    "DisableWindowsSpotlightFeatures"
+    ) do reg add "%%H\Software\Policies\Microsoft\Windows\CloudContent" /v %%S /t REG_DWORD /d "1" /f
+)
 rem Microsoft Consumer Experiences
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d "1" /f
 rem Lock the Taskbar
