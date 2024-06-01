@@ -25,7 +25,7 @@ cd /d "%~dp0" && (
 ::          Binance Coin (BNB) uses the ETH address.
 ::          Tether (USDT) or USD Coin (USDC) uses ETH, TRX or TON addresses, depending on the type of chain chosen.
 
-echo STOPPING THE "WINDOWS EXPLORER" PROCESS...
+echo STOPPING THE WINDOWS EXPLORER PROCESS...
 tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
     taskkill /f /im explorer.exe
 ) || (
@@ -33,13 +33,16 @@ tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
 )
 
 echo CHECKING THE SETTINGS FOR THE LIST IN WINDOWS TASK SCHEDULER.
-rem Windows Defender Tasks
+echo Windows Defender Tasks.
+echo Running a script to disable Windows Defender in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance"
     "Microsoft\Windows\Windows Defender\Windows Defender Cleanup"
     "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan"
     "Microsoft\Windows\Windows Defender\Windows Defender Verification"
+    "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
     if !errorlevel! equ "0" (
@@ -61,7 +64,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Diagnostics and troubleshooting tasks
+echo Diagnostics and troubleshooting Tasks.
+echo Running a script to disable diagnostics in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
@@ -70,6 +75,7 @@ for %%T in (
     "Microsoft\Windows\Shell\IndexerAutomaticMaintenance"
     "Microsoft\Windows\WDI\ResolutionHost"
     "Microsoft\Windows\Flighting\OneSettings\RefreshCache"
+    "Microsoft\Windows\Maintenance\WinSAT"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
     if !errorlevel! equ "0" (
@@ -91,7 +97,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Customer Experience Improvement Program tasks
+echo Customer Experience Improvement Program Tasks.
+echo Running a script to disable Customer Experience Improvement in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Autochk\Proxy"
@@ -122,7 +130,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Microsoft Compatibility Telemetry Tasks
+echo Microsoft Compatibility Telemetry Tasks
+echo Running a script to disable telemetry in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
@@ -149,32 +159,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Windows Exploit Guard Defender Task
-setlocal enabledelayedexpansion
-for %%T in (
-    "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh"
-) do (
-    schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
-        schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
-            echo Task %%~T is already disabled.
-        ) else (
-            echo Disabling task: %%~T
-            schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
-                echo Task %%~T successfully disabled.
-            ) else (
-                echo Failed to disable task %%~T.
-            )
-        )
-    ) else (
-        echo Task %%~T not found.
-    )
-)
-endlocal
-timeout /t "1" /nobreak >nul
-rem Disk Fingerprint Tasks
+echo Disk Fingerprint Tasks
+echo Running a script to disable the creation of digital fingerprints of the disk in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\DiskFootprint\Diagnostics"
@@ -200,7 +187,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Family Safety Tasks
+echo Family Safety Tasks
+echo Running a script to disable Family Safety Mode in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Shell\FamilySafetyMonitor"
@@ -226,32 +215,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem System Performance Diagnostics Task
-setlocal enabledelayedexpansion
-for %%T in (
-    "Microsoft\Windows\Maintenance\WinSAT"
-) do (
-    schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
-        schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
-            echo Task %%~T is already disabled.
-        ) else (
-            echo Disabling task: %%~T
-            schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
-                echo Task %%~T successfully disabled.
-            ) else (
-                echo Failed to disable task %%~T.
-            )
-        )
-    ) else (
-        echo Task %%~T not found.
-    )
-)
-endlocal
-timeout /t "1" /nobreak >nul
-rem File Usage Statistics Collection Task
+echo File Usage Statistics Collection Task
+echo Running a script to disable maintenance and management of backup using the File History feature in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\FileHistory\File History (maintenance mode)"
@@ -276,7 +242,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Network Information Collector Task
+echo Network Information Collector Task
+echo Running a script to disable network diagnostic tools and network information gathering in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\NetTrace\GatherNetworkInfo"
@@ -301,7 +269,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Xbox Tasks
+echo Xbox Tasks
+echo 
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\XblGameSave\XblGameSaveTask"
@@ -1291,23 +1261,14 @@ powercfg -x standby-timeout-dc "0"
 powercfg -x standby-timeout-ac "0"
 
 echo CHECKING THE SETTINGS FOR FIREWALL IN WINDOWS OS.
+echo Running a script to disable the default Windows Firewall.
 netsh advfirewall set allprofiles state off
-set KEY_NAME="HKLM\SystemCurrentControlSet\Services\MpsSvc"
-set VALUE_NAME="Start"
-set VALUE_DATA="4"
-reg.exe add %KEY_NAME% /v %VALUE_NAME% /t REG_DWORD /d %VALUE_DATA% /f
-if %errorlevel% equ "0" (
-    echo The value of the Start parameter for the Windows Firewall service has been successfully changed.
-) else (
-    echo An error occurred when changing the value of the Start parameter for the Windows Firewall service.
-)
-timeout /t "1" /nobreak >nul
 
 echo CHECKING SETTINGS FOR ACTIVATION IN WINDOWS OS.
 setlocal
 echo Checking the activation status...
 rem Query the registry for ProductId and RegisteredOwner
-set regPath="HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion"
+set regPath="HKLM\Software\Microsoft\Windows NT\CurrentVersion"
 for %%V in ("ProductId" "RegisteredOwner") do (
     reg query %regPath% /v %%V >nul 2>&1
     if %errorlevel% neq "0" (
