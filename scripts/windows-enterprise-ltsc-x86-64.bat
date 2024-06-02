@@ -14,7 +14,7 @@ cd /d "%~dp0" && (
 :: Windows 10 Enterprise LTSC build 19044.4412 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
 :: License: MIT license
-:: Last update: May 2024
+:: Last update: June 2024
 :: Donate:
 ::          Bitcoin (BTC) - 3JfwK6ULJ1xY8xjpu6uzpBKLm4ghkdSBzG
 ::          Ethereum (ETH) - 0xb08eE5bC90C2fCAFE453b7d536f158215Cca979A
@@ -33,7 +33,7 @@ tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
 )
 
 echo CHECKING THE SETTINGS FOR THE LIST IN WINDOWS TASK SCHEDULER.
-echo Windows Defender Tasks.
+echo Windows Defender Tasks
 echo Running a script to disable Windows Defender in the Task Scheduler.
 timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
@@ -64,7 +64,7 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-echo Diagnostics and troubleshooting Tasks.
+echo Diagnostics and troubleshooting Tasks
 echo Running a script to disable diagnostics in the Task Scheduler.
 timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
@@ -97,7 +97,7 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-echo Customer Experience Improvement Program Tasks.
+echo Customer Experience Improvement Program Tasks
 echo Running a script to disable Customer Experience Improvement in the Task Scheduler.
 timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
@@ -138,6 +138,7 @@ for %%T in (
     "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
     "Microsoft\Windows\Application Experience\ProgramDataUpdater"
     "Microsoft\Windows\Application Experience\StartupAppTask"
+    "Microsoft\Windows\UNP\RunUpdateNotificationMgr"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
     if !errorlevel! equ "0" (
@@ -270,7 +271,7 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Xbox Tasks
-echo 
+echo Running a script to disable Xbox in the Task Scheduler.
 timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
@@ -296,7 +297,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem RetailDemo Offline Content Automatic Cleanup Task
+echo RetailDemo Offline Content Automatic Cleanup Task
+echo Running a script to disable the automatic cleanup of content related to Retail Demo mode in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\RetailDemo\CleanupOfflineContent"
@@ -321,7 +324,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Send Error Reporting Task
+echo Send Error Reporting Task
+echo Running a script to disable error reporting in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Windows Error Reporting\QueueReporting"
@@ -346,7 +351,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Location Notification Tasks
+echo Location Notification Tasks
+echo Running a script to disable location notifications and the Windows action dialog in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Location\Notifications"
@@ -372,7 +379,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Device Data Collection and Sending Tasks
+echo Device Data Collection and Sending Tasks
+echo Running a script to disable device information in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Device Information\Device"
@@ -398,7 +407,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Microsoft Office Tasks
+echo Microsoft Office Tasks
+echo Running a script to disable the Office ClickToRun Service Monitor in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Office\Office ClickToRun Service Monitor"
@@ -423,7 +434,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Boot Optimization Task
+echo Boot Optimization Task
+echo Running a script to disable Sysmain tasks in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Sysmain\ResPriStaticDbSync"
@@ -449,7 +462,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Mobile Network Metadata Analysis Task
+echo Mobile Network Metadata Analysis Task
+echo Running a script to disable the Mobile Broadband Accounts task in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Mobile Broadband Accounts\MNO Metadata Parser"
@@ -474,7 +489,9 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Data Usage Subscription Management Task
+echo Data Usage Subscription Management Task
+echo Running a script to disable the DUSM in the Task Scheduler.
+timeout /t "3" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\DUSM\dusmtask"
@@ -499,50 +516,24 @@ for %%T in (
 )
 endlocal
 timeout /t "1" /nobreak >nul
-rem Update Center Telemetry Task
-setlocal enabledelayedexpansion
-for %%T in (
-    "Microsoft\Windows\UNP\RunUpdateNotificationMgr"
-) do (
-    schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
-        schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
-            echo Task %%~T is already disabled.
-        ) else (
-            echo Disabling task: %%~T
-            schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
-                echo Task %%~T successfully disabled.
-            ) else (
-                echo Failed to disable task %%~T.
-            )
-        )
-    ) else (
-        echo Task %%~T not found.
-    )
-)
-endlocal
-timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR THE LIST OF COMPONENTS IN WINDOWS OS.
-rem Checking the status of Windows Media components
+echo Checking the status of Windows Media components
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback','WindowsMediaPlayer').State | Out-File -FilePath MediaComponentsState.txt -Encoding UTF8"
-rem Checking the status of Internet Explorer 11 components
+echo Checking the status of Internet Explorer 11 components
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*').State | Out-File -FilePath IEComponentsState.txt -Encoding UTF8"
-rem Checking the status of the Steps Recorder components
+echo Checking the status of the Steps Recorder components
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'App.StepsRecorder*').State | Out-File -FilePath StepsRecorderState.txt -Encoding UTF8"
-rem Checking the status of Quick Assist components
+echo Checking the status of Quick Assist components
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*').State | Out-File -FilePath QuickAssistState.txt -Encoding UTF8"
-rem Checking the status of Hello Face components
+echo Checking the status of Hello Face components
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'Hello.Face*').State | Out-File -FilePath HelloFaceState.txt -Encoding UTF8"
-rem Defining the component status file
+echo Defining the components status file
 set "MediaComponentsStateFile=MediaComponentsState.txt"
 set "IEComponentsStateFile=IEComponentsState.txt"
 set "StepsRecorderStateFile=StepsRecorderState.txt"
 set "QuickAssistStateFile=QuickAssistState.txt"
 set "HelloFaceStateFile=HelloFaceState.txt"
-rem Checking the status of each position before executing the code
 findstr /C:"Enabled" "%MediaComponentsStateFile%" >nul || (
     echo Windows Media Components are not disabled.
     goto :ExecuteCode
@@ -609,7 +600,6 @@ if %errorlevel% equ "0" (
     echo Failed to remove Hello Face Components.
 )
 :EndScript
-rem Deleting temporary component status files
 del "%MediaComponentsStateFile%"
 del "%IEComponentsStateFile%"
 del "%StepsRecorderStateFile%"
