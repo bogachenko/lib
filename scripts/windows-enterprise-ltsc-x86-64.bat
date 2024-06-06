@@ -520,17 +520,17 @@ timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR THE LIST OF COMPONENTS IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
-echo Checking the status of Windows Media components
+echo Checking the status of Windows Media components...
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback','WindowsMediaPlayer').State | Out-File -FilePath MediaComponentsState.txt -Encoding UTF8"
-echo Checking the status of Internet Explorer 11 components
+echo Checking the status of Internet Explorer 11 components...
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*').State | Out-File -FilePath IEComponentsState.txt -Encoding UTF8"
-echo Checking the status of the Steps Recorder components
+echo Checking the status of the Steps Recorder components...
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'App.StepsRecorder*').State | Out-File -FilePath StepsRecorderState.txt -Encoding UTF8"
-echo Checking the status of Quick Assist components
+echo Checking the status of Quick Assist components...
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*').State | Out-File -FilePath QuickAssistState.txt -Encoding UTF8"
-echo Checking the status of Hello Face components
+echo Checking the status of Hello Face components...
 PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'Hello.Face*').State | Out-File -FilePath HelloFaceState.txt -Encoding UTF8"
-echo Defining the components status file
+echo Defining the components status file.
 set "MediaComponentsStateFile=MediaComponentsState.txt"
 set "IEComponentsStateFile=IEComponentsState.txt"
 set "StepsRecorderStateFile=StepsRecorderState.txt"
@@ -611,36 +611,36 @@ del "%HelloFaceStateFile%"
 
 echo CHECKING THE SETTINGS FOR THE LIST OF SERVICES IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
-echo Running a script to disable Data Usage Service
+echo Running a script to disable Data Usage Service.
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\DusmSvc" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable SSDP Discovery Service
+echo Running a script to disable SSDP Discovery Service.
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\SSDPSRV" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Geolocation Service
+echo Running a script to disable Geolocation Service.
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\lfsvc" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Downloaded Maps Manager Service
+echo Running a script to disable Downloaded Maps Manager Service.
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\MapsBroker" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Delivery Optimization Service
+echo Running a script to disable Delivery Optimization Service.
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable System Performance Improvement Service
+echo Running a script to disable System Performance Improvement Service.
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Broadcast DVR User Service
+echo Running a script to disable Broadcast DVR User Service.
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\BcastDVRUserService" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Windows Biometric Service
+echo Running a script to disable Windows Biometric Service.
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\WbioSrvc" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Windows Insider Service
+echo Running a script to disable Windows Insider Service.
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Store Demonstration Service
+echo Running a script to disable Store Demonstration Service.
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Windows Search Service
+echo Running a script to disable Windows Search Service.
 for %%H in (HKCU HKLM) do reg add "%%H\System\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Windows Defender
+echo Running a script to disable Windows Defender Service.
 for %%H in (HKCU HKLM) do (
     for %%S in (
         SecurityHealthService
         wscsvc
     ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
 )
-echo Running a script to disable Diagnostics Tracking Service
+echo Running a script to disable Diagnostics Tracking Service.
 for %%H in (HKCU HKLM) do (
     for %%S in (
         DiagTrack
@@ -649,7 +649,7 @@ for %%H in (HKCU HKLM) do (
         diagnosticshub.standardcollector.service
     ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
 )
-echo Running a script to disable Xbox Services
+echo Running a script to disable Xbox Services.
 for %%H in (HKCU HKLM) do (
     for %%S in (
         XblAuthManager
@@ -658,14 +658,14 @@ for %%H in (HKCU HKLM) do (
         XboxNetApiSvc
     ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
 )
-echo Running a script to disable Windows Error Logging Services
+echo Running a script to disable Windows Error Logging Services.
 for %%H in (HKCU HKLM) do (
     for %%S in (
         WerSvc
         wercplsupport
     ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
 )
-echo Running a script to disable Smart Card
+echo Running a script to disable Smart Card.
 for %%H in (HKCU HKLM) do (
     for %%S in (
         SCardSvr
@@ -675,21 +675,21 @@ for %%H in (HKCU HKLM) do (
 
 echo CHECKING THE SETTINGS FOR TIME AND LANGUAGE IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
-echo Running a script to disable Improve Inking and Typing Recognition
+echo Running a script to disable Improve Inking and Typing Recognition.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Policies\TextInput" /v "AllowLinguisticDataCollection" /t REG_DWORD /d "0" /f
-echo Running a script to disable input data analysis
+echo Running a script to disable input data analysis.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "InsightsEnabled" /t REG_DWORD /d "0" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "HarvestContacts" /t REG_DWORD /d "0" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "LMDataLoggerEnabled" /t REG_DWORD /d "0" /f
-echo Running a script to disable text suggestions while typing on a physical keyboard
+echo Running a script to disable text suggestions while typing on a physical keyboard.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "EnableHwkbTextPrediction" /t REG_DWORD /d "0" /f
-echo Running a script to disable multilingual text suggestions
+echo Running a script to disable multilingual text suggestions.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "MultilingualEnabled" /t REG_DWORD /d "0" /f
-echo Running a script to disable voice typing
+echo Running a script to disable voice typing.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
-echo Running a script to disable collection and sending of user typed text
+echo Running a script to disable collection and sending of user typed text.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
-echo Running script to disable prediction and correction of misspelled words in user-typed text
+echo Running script to disable prediction and correction of misspelled words in user-typed text.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\TabletTip\1.7" /v "DisablePrediction" /t REG_DWORD /d "1" /f
 for %%H in (HKCU HKLM) do (
     for %%S in (
@@ -710,7 +710,7 @@ for %%H in (HKCU HKLM) do (
 
 echo CHECKING THE SETTINGS FOR GAMES IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
-echo Running a script to disable Xbox support in the operating system
+echo Running a script to disable Xbox support in the operating system.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\GameDVR" /v "AllowgameDVR" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /v "value" /t REG_DWORD /d "0" /f
 for %%H in (HKCU HKLM) do (
@@ -746,17 +746,18 @@ for %%H in (HKCU HKLM) do (
 
 echo CHECKING THE SETTINGS FOR MEDIA AND BLUETOOTH IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
-rem Suggestions For Using My Android Phone With Windows
+echo Running script to disable user tips for using an Android phone with Windows.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
-rem Autoplay for all media and devices
+echo Running a script to disable autoplay for all media and devices.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers" /v "DisableAutoplay" /t REG_DWORD /d "1" /f
 
 echo CHECKING THE SETTINGS FOR UPDATES AND SECURITY IN WINDOWS OS.
-rem Delivery Optimization
+timeout /t "5" /nobreak >nul
+echo Running a script to disable delivery otimization.
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DoDownLoadMode" /t REG_DWORD /d "0" /f
-rem Enabling font providers
+echo Running a script to enable font provider updates
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableFontProviders" /t REG_DWORD /d "1" /f
-rem Windows Defender
+echo Running a script to disable Windows Defender.
 reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /f
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "SecurityHealth" /f
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
@@ -795,21 +796,22 @@ for %%S in (
 ) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v %%~S /t REG_DWORD /d "1" /f
 
 echo CHECKING THE SETTINGS FOR PRIVACY IN WINDOWS OS.
-rem Windows PowerShell Telemetry
+timeout /t "5" /nobreak >nul
+echo Running a script to disable telemetry in Windows PowerShell.
 setx POWERSHELL_TELEMETRY_OPTOUT 1
-rem DOTNET cli Telemetry
+echo Running a script to disable telemetry in DOTNET cli.
 setx DOTNET_CLI_TELEMETRY_OPTOUT 1
-rem Windows Tips
+echo Running a script to disable Windows Tips.
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableSoftLanding" /t REG_DWORD /d "1" /f
-rem Wi-Fi sense
+echo Running a script to disable insecure Wi-Fi hotspot features.
 for %%S in (
     "AllowWiFiHotSpotReporting"
     "AllowAutoConnectToWiFiSenseHotspots"
 ) do reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi" /v %%~S /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\WcmSvc\wifinetworkmanager\config" /v "AutoConnectAllowedOEM" /t REG_DWORD /d "0" /f
-rem Windows Sensors
+echo Running a script to disable sensors in the operating system.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableSensors" /t REG_DWORD /d "1" /f
-rem Windows Location
+echo Running a script to disable location in the operating system.
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "DisableLocationScripting"
@@ -817,24 +819,24 @@ for %%H in (HKCU HKLM) do (
     "DisableWindowsLocationProvider"
     ) do reg add "%%H\Software\Policies\Microsoft\Windows\LocationAndSensors" /v %%S /t REG_DWORD /d "1" /f
 )
-rem Windows Biometrics
+echo Running a script to disable biometrics in the operating system.
 reg add "HKLM\Software\Policies\Microsoft\Biometrics\Credential Provider" /v "Enabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Biometrics" /v "Enabled" /t REG_DWORD /d "0" /f
-rem Let Apps Show Me Personalized Ads By Using My Advertising ID
+echo Running a script to disable personalized advertising based on user advertising identifier.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\AdvertisingInfo" /v "DisabledByGroupPolicy" /t REG_DWORD /d "1" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Id" /t REG_SZ /d "null" /f
-rem Let Websites Show Me Locally Relevant Content By Accessing My Language List
+echo Running a script to disable locally relevant content by using the user's language list.
 for %%H in (HKCU HKLM) do reg add "%%H\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f
-rem Let Windows Improve Start And Search Results By Tracking App Launches
+echo Running a script to disable enhancing search results in the Start menu by tracking app launches.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /t REG_DWORD /d "0" /f
-rem Activity Feed
+echo Running a script to disable activity feed.
 for %%S in (
     "PublishUserActivities"
     "EnableActivityFeed"
     "UploadUserActivities"
 ) do reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v %%~S /t REG_DWORD /d "0" /f
-rem Suggested Content
+echo Running a script to disable suggested content.
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "SystemPaneSuggestionsEnabled"
@@ -849,11 +851,11 @@ for %%H in (HKCU HKLM) do (
     "ContentDeliveryAllowed"
     ) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v %%S /t REG_DWORD /d "0" /f
 )
-rem Online Speech Recognition
+echo Running a script to disable online speech recognition.
 reg add "HKCU\Software\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy" /v "HasAccepted" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Privacy\AllowInputPersonalization" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d "0" /f
-rem Inking And Typing Personalization
+echo Running a script to disable inking and typing personalization.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\HandwritingErrorReports" /v "PreventHandwritingErrorReports" /t REG_DWORD /d "1" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\TabletPC" /v "PreventHandwritingDataSharing" /t REG_DWORD /d "1" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "1" /f
@@ -863,7 +865,7 @@ for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\InputPersonalization" 
 reg add "HKCU\Software\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPolicy" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\InputPersonalization\TrainedDataStore" /v "HarvestContacts" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Speech_OneCore\Preferences" /v "ModelDownloadAllowed" /t REG_DWORD /d "0" /f
-rem Send Optional Dianostgic Data
+echo Running a script to disable sending additional diagnostic data.
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "AllowTelemetry"
@@ -882,8 +884,8 @@ for %%H in (HKCU HKLM) do (
     "DisableDiagnosticDataViewer"
     ) do reg add "%%H\Software\Policies\Microsoft\Windows\DataCollection" /v %%S /t REG_DWORD /d "1" /f
 )
-rem Telemetry
-::reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "DisableWerReporting" /t REG_DWORD /d "1" /f
+echo Running a script to disable telemetry.
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "DisableWerReporting" /t REG_DWORD /d "1" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Messenger\Client" /v "CEIP" /t REG_DWORD /d "2" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Messenger\Client" /v "PreventRun" /t REG_DWORD /d "1" /f
 set "regPath=HKLM\Software\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Application-Experience"
@@ -954,14 +956,14 @@ reg add "HKLM\Software\Microsoft\Windows\ScheduledDiagnostics" /v "EnabledExecut
 reg add "HKLM\Software\Policies\Microsoft\PCHealth\ErrorReporting" /v "DoReport" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\ScriptedDiagnosticsProvider\Policy" /v "DisableQueryRemoteServer" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform" /v "NoGenTicket" /t REG_DWORD /d "1" /f
-rem Tailored Experiences
+echo Running a script to disable tailored experiences.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
-rem Feedback Frequency
+echo Running a script to disable feedback frequency.
 reg delete "HKCU\Software\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /f
 reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
-rem Windows Search
+echo Running a script to disable Windows Search.
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "BackgroundAppGlobalToggle"
@@ -1013,40 +1015,40 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OOBE" /v "DisableVoice" 
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Search\AllowCloudSearch" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Experience\AllowCortana" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCortanaButton" /t REG_DWORD /d "0" /f
-rem Location access
+echo Running a script to disable location access.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\System\AllowLocation" /v "value" /t REG_DWORD /d "0" /f
-rem Voice activation access
+echo Running a script to disable voice activation access.
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "AgentActivationEnabled"
     "AgentActivationOnLockScreenEnabled"
     ) do reg add "%%H\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps" /v %%S /t REG_DWORD /d "0" /f
 )
-rem Background apps access
+echo Running a script to disable access to background apps.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /t REG_DWORD /d "2" /f
-rem Account info access
+echo Running a script to disable access to account information.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation" /v "Value" /t REG_SZ /d "Deny" /f
-rem Contacts access
+echo Running a script to disable access to contacts.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts" /v "Value" /t REG_SZ /d "Deny" /f
-rem Calendar access
+echo Running a script to disable access to calendar.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments" /v "Value" /t REG_SZ /d "Deny" /f
-rem Phone calls access
+echo Phone calls access
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCall" /v "Value" /t REG_SZ /d "Deny" /f
-rem Call history access
+echo Call history access
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory" /v "Value" /t REG_SZ /d "Deny" /f
-rem Task access
+echo Task access
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks" /v "Value" /t REG_SZ /d "Deny" /f
-rem Email access
+echo Email access
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email" /v "Value" /t REG_SZ /d "Deny" /f
-rem Messaging access
+echo Messaging access
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat" /v "Value" /t REG_SZ /d "Deny" /f
-rem Radio control access
+echo Radio control access
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios" /v "Value" /t REG_SZ /d "Deny" /f
-rem App diagnostic access
+echo App diagnostic access
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f
-rem Microsoft Diagnostics Standard Collector
+echo Microsoft Diagnostics Standard Collector
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "ShowedToastAtLevel"
