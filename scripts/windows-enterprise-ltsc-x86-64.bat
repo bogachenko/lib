@@ -1034,21 +1034,21 @@ echo Running a script to disable access to contacts.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts" /v "Value" /t REG_SZ /d "Deny" /f
 echo Running a script to disable access to calendar.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments" /v "Value" /t REG_SZ /d "Deny" /f
-echo Phone calls access
+echo Running a script to disable access to phone calls.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCall" /v "Value" /t REG_SZ /d "Deny" /f
-echo Call history access
+echo Running a script to disable access to call history.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory" /v "Value" /t REG_SZ /d "Deny" /f
-echo Task access
+echo Running a script to disable access to tasks.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks" /v "Value" /t REG_SZ /d "Deny" /f
-echo Email access
+echo Running a script to disable access to email.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email" /v "Value" /t REG_SZ /d "Deny" /f
-echo Messaging access
+echoRunning a script to disable access to messages.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat" /v "Value" /t REG_SZ /d "Deny" /f
-echo Radio control access
+echo Running a script to disable access to radio control.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios" /v "Value" /t REG_SZ /d "Deny" /f
-echo App diagnostic access
+echo Running a script to disable diagnostic access to applications.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f
-echo Microsoft Diagnostics Standard Collector
+echo Running a script to disable the Standard Microsoft Diagnostic Data Collector.
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "ShowedToastAtLevel"
@@ -1069,7 +1069,7 @@ reg add "%regPath%\EventTranscriptKey" /v "EnableEventTranscript" /t REG_DWORD /
 reg add "%regPath%\TraceManager" /v "MiniTraceSlotEnabled" /t REG_DWORD /d "0" /f
 reg add "%regPath%\TestHooks" /v "DisableAsimovUpLoad" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Diagnostics\PerfTrack" /v "Disabled" /t REG_DWORD /d "1" /f
-rem Logging
+echo Running a script to disable logging in the operating system.
 set "regPath=HKLM\System\CurrentControlSet\Control\WMI\Autologger"
 for %%i in (
     "AutoLogger-Diagtrack-Listener"
@@ -1082,9 +1082,9 @@ for %%i in (
 ) do (
     reg add "%regPath%\%%~i" /v "Start" /t REG_DWORD /d "0" /f
 )
-rem System Debugger
+echo Running a script to disable the system debugger in the operating system.
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\AeDebug" /v "Auto" /t REG_SZ /d "0" /f
-rem Windows Error Reports
+echo Running a script to disable error reporting in the operating system.
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "Disabled"
@@ -1115,28 +1115,28 @@ for %%H in (HKCU HKLM) do (
 )
 reg add "HKLM\Software\Microsoft\Windows\Windows Error Reporting" /v "MachineID" /t REG_SZ /d "{00000000-0000-0000-0000-000000000000}" /f
 reg add "HKLM\Software\Microsoft\Windows\Windows Error Reporting\WMR" /v "Disabled" /t REG_DWORD /d "1" /f
-rem Windows Customer Experience Improvement Program
+echo Running a script to disable the Customer Experience Improvement Program in the operating system.
 reg add "HKLM\Software\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t REG_DWORD /d "0" /f
-rem Windows Insider Program
+echo Running a script to disable the Insider Program in the operating system.
 reg add "HKLM\Software\Microsoft\WindowsSelfHost\UI\Visibility" /v "HideInsiderPage" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\PreviewBuilds" /v "AllowBuildPreview" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\System\AllowBuildPreview" /v "value" /t REG_DWORD /d "0" /f
-rem Developer Mode
+echo Running a script to enable developer mode in the operating system.
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock" /v "AllowDevelopmentWithoutDevLicense" /t REG_DWORD /d "1" /f
-rem FindMyDevice
+echo Running a script to disable the user device finding function in the operating system.
 reg add "HKLM\Software\Policies\Microsoft\FindMyDevice" /v "AllowFindMyDevice" /t REG_DWORD /d "0" /f
-rem Sync of Settings
+echo Running a script to disable synchronization in the operating system.
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "DisableSettingSync" /t REG_DWORD /d "2" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "DisableSettingSyncUserOverride" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "EnableBackupForWin8Apps" /t REG_DWORD /d "0" /f
 
 echo CHECKING OTHER SETTINGS IN WINDOWS OS.
+timeout /t "5" /nobreak >nul
 rem Requiring a password when resuming from sleep or hibernation mode
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\System\Power" /v "PromptPasswordOnResume" /t REG_DWORD /d "1" /f
 rem Changing mouse pointers
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\Personalization" /v "NoChangingMousePointers" /t REG_DWORD /d "1" /f
-
 rem Windows Maps
 for %%H in (HKCU HKLM) do (
     for %%S in (
@@ -1255,18 +1255,20 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Fold
 attrib +r -s -h "%DownloadsFolder%" /s /d
 timeout /t "1" /nobreak >nul
 
-rem Sleep Settings
+echo Running a script to configure power and sleep settings.
+timeout /t "5" /nobreak >nul
 powercfg -x standby-timeout-dc "0"
 powercfg -x standby-timeout-ac "0"
 
 echo CHECKING THE SETTINGS FOR FIREWALL IN WINDOWS OS.
+timeout /t "5" /nobreak >nul
 echo Running a script to disable the default Windows Firewall.
 netsh advfirewall set allprofiles state off
 
 echo CHECKING SETTINGS FOR ACTIVATION IN WINDOWS OS.
+timeout /t "5" /nobreak >nul
 setlocal
 echo Checking the activation status...
-rem Query the registry for ProductId and RegisteredOwner
 set regPath="HKLM\Software\Microsoft\Windows NT\CurrentVersion"
 for %%V in ("ProductId" "RegisteredOwner") do (
     reg query %regPath% /v %%V >nul 2>&1
@@ -1308,5 +1310,6 @@ timeout /t "1" /nobreak >nul
 endlocal
 timeout /t "3" /nobreak >nul
 
-echo Reboot the system.
+echo Reboot the operating system.
+timeout /t "5" /nobreak >nul
 shutdown /r /f /t "0"
