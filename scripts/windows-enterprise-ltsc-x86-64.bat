@@ -25,23 +25,36 @@ cd /d "%~dp0" && (
 ::          Binance Coin (BNB) uses the ETH address.
 ::          Tether (USDT) or USD Coin (USDC) uses ETH, TRX or TON addresses, depending on the type of chain chosen.
 
-echo STOPPING THE WINDOWS EXPLORER PROCESS...
+echo STOPPING THE WINDOWS EXPLORER PROCESS.
+timeout /t "5" /nobreak >nul
 tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
     taskkill /f /im explorer.exe
 ) || (
     echo The Windows Explorer process was not found.
 )
+timeout /t "1" /nobreak >nul
 
 echo RENAME THE COMPUTER.
 timeout /t "5" /nobreak >nul
 set /p newName="Enter a new computer name: "
 wmic computersystem where caption='%computername%' rename "%newName%"
+timeout /t "1" /nobreak >nul
+
+echo DISABLING SYSTEM RESTORE PROTECTION.
+timeout /t "5" /nobreak >nul
+wmic /Namespace:\\root\default Path SystemRestore Call Disable "%SystemDrive%"
+if %errorlevel% equ "0" (
+    echo System Restore Protection successfully disabled.
+) else (
+    echo Error disabling System Restore Protection.
+)
+timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR THE LIST IN WINDOWS TASK SCHEDULER.
 timeout /t "5" /nobreak >nul
 echo Windows Defender Tasks
 echo Running a script to disable Windows Defender in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance"
@@ -72,7 +85,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Diagnostics and troubleshooting Tasks
 echo Running a script to disable diagnostics in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
@@ -105,7 +118,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Customer Experience Improvement Program Tasks
 echo Running a script to disable Customer Experience Improvement in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Autochk\Proxy"
@@ -138,7 +151,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Microsoft Compatibility Telemetry Tasks
 echo Running a script to disable telemetry in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
@@ -168,7 +181,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Disk Fingerprint Tasks
 echo Running a script to disable the creation of digital fingerprints of the disk in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\DiskFootprint\Diagnostics"
@@ -196,7 +209,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Family Safety Tasks
 echo Running a script to disable Family Safety Mode in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Shell\FamilySafetyMonitor"
@@ -224,7 +237,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo File Usage Statistics Collection Task
 echo Running a script to disable maintenance and management of backup using the File History feature in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\FileHistory\File History (maintenance mode)"
@@ -251,7 +264,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Network Information Collector Task
 echo Running a script to disable network diagnostic tools and network information gathering in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\NetTrace\GatherNetworkInfo"
@@ -278,7 +291,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Xbox Tasks
 echo Running a script to disable Xbox in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\XblGameSave\XblGameSaveTask"
@@ -305,7 +318,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo RetailDemo Offline Content Automatic Cleanup Task
 echo Running a script to disable the automatic cleanup of content related to Retail Demo mode in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\RetailDemo\CleanupOfflineContent"
@@ -332,7 +345,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Send Error Reporting Task
 echo Running a script to disable error reporting in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Windows Error Reporting\QueueReporting"
@@ -359,7 +372,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Location Notification Tasks
 echo Running a script to disable location notifications and the Windows action dialog in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Location\Notifications"
@@ -387,7 +400,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Device Data Collection and Sending Tasks
 echo Running a script to disable device information in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Device Information\Device"
@@ -415,7 +428,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Microsoft Office Tasks
 echo Running a script to disable the Office ClickToRun Service Monitor in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Office\Office ClickToRun Service Monitor"
@@ -442,7 +455,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Boot Optimization Task
 echo Running a script to disable Sysmain tasks in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Sysmain\ResPriStaticDbSync"
@@ -470,7 +483,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Mobile Network Metadata Analysis Task
 echo Running a script to disable the Mobile Broadband Accounts task in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Mobile Broadband Accounts\MNO Metadata Parser"
@@ -497,7 +510,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 echo Data Usage Subscription Management Task
 echo Running a script to disable the DUSM in the Task Scheduler.
-timeout /t "3" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\DUSM\dusmtask"
@@ -565,7 +578,6 @@ echo All components are already disabled.
 goto :EndScript
 :ExecuteCode
 echo Disabling components...
-timeout /t "3" /nobreak >nul
 echo Running a script to disable Windows Media Components.
 PowerShell -ExecutionPolicy Unrestricted -Command "Disable-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback','WindowsMediaPlayer' -NoRestart"
 if %errorlevel% equ "0" (
@@ -613,6 +625,7 @@ del "%IEComponentsStateFile%"
 del "%StepsRecorderStateFile%"
 del "%QuickAssistStateFile%"
 del "%HelloFaceStateFile%"
+timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR THE LIST OF SERVICES IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
@@ -677,6 +690,7 @@ for %%H in (HKCU HKLM) do (
         CertPropSvc
     ) do reg add "%%H\System\CurrentControlSet\Services\%%S" /v "Start" /t REG_DWORD /d "4" /f
 )
+timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR TIME AND LANGUAGE IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
@@ -748,6 +762,7 @@ for %%H in (HKCU HKLM) do (
     "ListRecentlyPlayed"
     ) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v %%S /t REG_DWORD /d "0" /f
 )
+timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR MEDIA AND BLUETOOTH IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
@@ -755,6 +770,7 @@ echo Running script to disable user tips for using an Android phone with Windows
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
 echo Running a script to disable autoplay for all media and devices.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers" /v "DisableAutoplay" /t REG_DWORD /d "1" /f
+timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR UPDATES AND SECURITY IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
@@ -799,6 +815,7 @@ for %%S in (
     "SpynetReporting"
     "SubmitSamplesConsent"
 ) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v %%~S /t REG_DWORD /d "1" /f
+timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR PRIVACY IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
@@ -1137,6 +1154,7 @@ echo Running a script to disable synchronization in the operating system.
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "DisableSettingSync" /t REG_DWORD /d "2" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "DisableSettingSyncUserOverride" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "EnableBackupForWin8Apps" /t REG_DWORD /d "0" /f
+timeout /t "1" /nobreak >nul
 
 echo CHECKING OTHER SETTINGS IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
@@ -1266,16 +1284,19 @@ for %%S in (
     "{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}"
     "{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}"
 ) do reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace" /f
+timeout /t "1" /nobreak >nul
 
 echo Running a script to configure power and sleep settings.
 timeout /t "5" /nobreak >nul
 powercfg -x standby-timeout-dc "0"
 powercfg -x standby-timeout-ac "0"
+timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR FIREWALL IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
 echo Running a script to disable the default Windows Firewall.
 netsh advfirewall set allprofiles state off
+timeout /t "1" /nobreak >nul
 
 echo CHECKING SETTINGS FOR ACTIVATION IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
