@@ -32,6 +32,11 @@ tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
     echo The Windows Explorer process was not found.
 )
 
+echo RENAME THE COMPUTER.
+timeout /t "5" /nobreak >nul
+set /p newName="Enter a new computer name: "
+wmic computersystem where caption='%computername%' rename "%newName%"
+
 echo CHECKING THE SETTINGS FOR THE LIST IN WINDOWS TASK SCHEDULER.
 timeout /t "5" /nobreak >nul
 echo Windows Defender Tasks
@@ -1176,17 +1181,17 @@ echo Running a script to disable storing information about recently opened docum
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /t REG_DWORD /d "0" /f
 echo Running a script to disable the list of frequently used programs in the Start menu in the operating system.
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoStartMenuMFUprogramsList" /t REG_DWORD /d "0" /f
-echo Sign-in Welcome Screen
+echo Running a script to disable the welcome screen in the operating system.
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoWelcomeScreen" /t REG_DWORD /d "0" /f
-echo Recently Added Applications
+echo Running a script to disable recent applications to the Start menu in the operating system.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\Explorer" /v "HideRecentlyAddedApps" /t REG_DWORD /d "1" /f
-echo OneDrive Advertising
+echo Running a script to disable advertisements in OneDrive.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d "1" /f
-echo Thumbnail Caching In Hidden Files
+echo Running a script to disable thumbnail caching in hidden files in the operating system.
 reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableThumbsDBOnNetworkFolders" /t REG_DWORD /d "1" /f
-echo Colors Of Elements In Window Titles
+echo Running a script to disable window title and border colors in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\DWM" /v "ColorPrevalence" /t REG_DWORD /d "0" /f
-echo Active Help
+echo Running a script to disable active help in the operating system.
 reg delete "HKCU\Software\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}" /f
 reg add "HKCU\Software\Classes\AppID\{8cec58ae-07a1-11d9-b15e-000d56bfe6ee}" /v "RunAs" /t REG_SZ /d "" /f
 for %%H in (HKCU HKLM) do (
@@ -1197,13 +1202,13 @@ for %%H in (HKCU HKLM) do (
     "NoActiveHelp"
     ) do reg add "%%H\Software\Policies\Microsoft\Assistance\Client\1.0" /v %%S /t REG_DWORD /d "1" /f
 )
-rem Publication Wizard
+echo Running a script to disable web publishing in the task list for files and folders in the operating system.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoPublishingWizard" /t REG_DWORD /d "1" /f
-rem Search Companion Files Update
+echo Running a script to disable the update of content files for the search assistant in the operating system.
 reg add "HKLM\Software\Policies\Microsoft\SearchCompanion" /v "DisableContentFileUpdates" /t REG_DWORD /d "1" /f
-rem Background Image Quality
+echo Running a script to configure the quality percentage of the desktop wallpaper in the operating system.
 reg add "HKCU\Control Panel\Desktop" /v "JPEGImportQuality" /t REG_DWORD /d "100" /f
-rem Cleaning The Context Menu
+echo Running a script to clean up the context menu by removing unnecessary items in the operating system.
 reg delete "HKLM\Software\Classes\.zip\CompressedFolder\ShellNew" /f
 for %%i in (.bmp .contact .rtf) do (
     reg delete "HKLM\Software\Classes\%%i\ShellNew" /f
@@ -1220,13 +1225,13 @@ for %%i in (change-passphrase change-pin encrypt-bde encrypt-bde-elev manage-bde
 for %%i in (batfile cmdfile) do (
     reg add "HKLM\Software\Classes\%%i\shell\print" /v "ProgrammaticAccessOnly" /t REG_SZ /d "" /f
 )
-rem Opening "My Computer" in Explorer
+echo Running a script to configure the opening of My computer in Explorer in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d "1" /f
-rem People icon on taskbar
+echo Running a script to disable the People icon on the taskbar in the operating system.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "HidePeopleBar" /t REG_DWORD /d "1" /f
-rem Unnecessary Items In Windows Settings
+echo Running a script to clean up unnecessary items in Settings in the operating system.
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:gaming-broadcasting;gaming-gamebar;gaming-gamedvr;gaming-gamemode;gaming-trueplay;gaming-xboxnetworking;windowsdefender;mobile-devices;mobile-devices-addphone;mobile-devices-addphone-direct" /f
-rem Windows Spotlight
+echo Running a script to configure the Windows Spotlight.
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "DisableWindowsSpotlightWindowsWelcomeExperience"
@@ -1238,21 +1243,29 @@ for %%H in (HKCU HKLM) do (
     "DisableWindowsSpotlightFeatures"
     ) do reg add "%%H\Software\Policies\Microsoft\Windows\CloudContent" /v %%S /t REG_DWORD /d "1" /f
 )
-rem Microsoft Consumer Experiences
+echo Running a script to disable Microsoft Consumer Experiences in the operating system.
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d "1" /f
-rem Lock the Taskbar
+echo Running a script to configure taskbar locking in the operating system.
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "LockTaskbar" /t REG_DWORD /d "1" /f
-rem Clearing the pagefile.sys page file when shutting down Windows
+echo Running a script to configure clearing the pagefile.sys swap file upon Windows shutdown.
 reg add "HKLM\SystemCurrentControlSet\Control\Session Manager\Memory Management\ClearPageFileAtShutdown" /v "ClearPageFileAtShutdown" /t REG_DWORD /d "1" /f
-rem Restoring the "Downloads" folder name.
-timeout /t "2" /nobreak >nul
+echo Running a script to configure the Downloads folder in the operating system.
 set "DownloadsFolder=%USERPROFILE%\Downloads"
 if not exist "%DownloadsFolder%" mkdir "%DownloadsFolder%"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "C:\Users\%USERNAME%\Downloads" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{7D83EE9B-2244-4E70-B1F5-5393042AF1E4}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Downloads" /f
 attrib +r -s -h "%DownloadsFolder%" /s /d
-timeout /t "1" /nobreak >nul
+echo Running a script to delete folders from My Computer in the operating system.
+for %%S in (
+    "{088e3905-0323-4b02-9826-5d99428e115f}"
+    "{24ad3ad4-a569-4530-98e1-ab02f9417aa8}"
+    "{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}"
+    "{d3162b92-9365-467a-956b-92703aca08af}"
+    "{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}"
+    "{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}"
+    "{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}"
+) do reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace" /f
 
 echo Running a script to configure power and sleep settings.
 timeout /t "5" /nobreak >nul
@@ -1307,7 +1320,6 @@ start /b "" cmd /c "slmgr /ato >nul 2>&1" && (
 timeout /t "1" /nobreak >nul
 :end
 endlocal
-timeout /t "3" /nobreak >nul
 
 echo Reboot the operating system.
 timeout /t "5" /nobreak >nul
