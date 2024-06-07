@@ -803,6 +803,8 @@ echo Running a script to disable telemetry in DOTNET cli.
 setx DOTNET_CLI_TELEMETRY_OPTOUT 1
 echo Running a script to disable Windows Tips.
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableSoftLanding" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Microsoft\PolicyManager\default\Settings\AllowOnlineTips" /v "value" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "AllowOnlineTips" /t REG_DWORD /d "0" /f
 echo Running a script to disable insecure Wi-Fi hotspot features.
 for %%S in (
     "AllowWiFiHotSpotReporting"
@@ -1133,61 +1135,58 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "EnableBackupF
 
 echo CHECKING OTHER SETTINGS IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
-rem Requiring a password when resuming from sleep or hibernation mode
+echo Running a script to enable a password request when exiting sleep or hibernation mode.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\System\Power" /v "PromptPasswordOnResume" /t REG_DWORD /d "1" /f
-rem Changing mouse pointers
+echo Running a script to disable changing the mouse pointer.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\Personalization" /v "NoChangingMousePointers" /t REG_DWORD /d "1" /f
-rem Windows Maps
+echo Running a script to disable Windows Maps.
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "AllowUntriggeredNetworkTrafficOnSettingsPage"
     "AutoDownloadAndUpdateMapData"
     ) do reg add "%%H\Software\Policies\Microsoft\Windows\Maps" /v %%S /t REG_DWORD /d "0" /f
 )
-rem Online Tips
-reg add "HKLM\Software\Microsoft\PolicyManager\default\Settings\AllowOnlineTips" /v "value" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "AllowOnlineTips" /t REG_DWORD /d "0" /f
-rem Hidden Explorer Elements
+echo Running a script to enable hidden folders and files in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Hidden" /t REG_DWORD /d "1" /f
-rem File Name Extensions
+echo Running a script to enable file name extensions in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d "0" /f
-rem Separate process for Windows folders
+echo Running a script to enable separate processes for folders in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "SeparateProcess" /t REG_DWORD /d "1" /f
-rem Item Selection checkboxes
+echo Running a script to enable checkboxes for folder items in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "AutoCheckSelect" /t REG_DWORD /d "1" /f
-rem Task View
+echo Running a script to disable task view on the taskbar in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f
-rem Search Icon
+echo Running a script to disable the search icon on the taskbar in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
-rem Transparency Effects
+echo Running a script to disable transparency effects in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d "0" /f
-rem Recently Opened Items
+echo Running a script to disable recent items in jump lists.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d "0" /f
-rem Taskbar Buttons Size
+echo Running a script to enable small taskbar button size in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSmallIcons" /t REG_DWORD /d "1" /f
-rem Desktop Icons Size
+echo Running a script to enable small icon size on the desktop in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\Shell\Bags\1\Desktop" /v "IconSize" /t REG_DWORD /d "32" /f
 reg add "HKCU\Software\Microsoft\Windows\Shell\Bags\1\Desktop" /v "Mode" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Microsoft\Windows\Shell\Bags\1\Desktop" /v "LogicalViewMode" /t REG_DWORD /d "3" /f
-rem Sign-in Screen Background Image
+echo Running a script to disable the background image on the login screen in the operating system.
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "DisableLogonBackgroundImage" /t REG_DWORD /d "1" /f
-rem Blocking desktop wallpaper changes
+echo Running a script to enable blocking desktop wallpaper changes in the operating system.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Policies\ActiveDesktop" /v "NoChangingWallPaper" /t REG_DWORD /d "1" /f
-rem History Of Recently Opened Documents
+echo Running a script to disable storing information about recently opened documents in the operating system.
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /t REG_DWORD /d "0" /f
-rem List Of Frequently Used Programs
+echo Running a script to disable the list of frequently used programs in the Start menu in the operating system.
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoStartMenuMFUprogramsList" /t REG_DWORD /d "0" /f
-rem Sign-in Welcome Screen
+echo Sign-in Welcome Screen
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoWelcomeScreen" /t REG_DWORD /d "0" /f
-rem Recently Added Applications
+echo Recently Added Applications
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\Explorer" /v "HideRecentlyAddedApps" /t REG_DWORD /d "1" /f
-rem OneDrive Advertising
+echo OneDrive Advertising
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d "1" /f
-rem Thumbnail Caching In Hidden Files
+echo Thumbnail Caching In Hidden Files
 reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableThumbsDBOnNetworkFolders" /t REG_DWORD /d "1" /f
-rem Colors Of Elements In Window Titles
+echo Colors Of Elements In Window Titles
 reg add "HKCU\Software\Microsoft\Windows\DWM" /v "ColorPrevalence" /t REG_DWORD /d "0" /f
-rem Active Help
+echo Active Help
 reg delete "HKCU\Software\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}" /f
 reg add "HKCU\Software\Classes\AppID\{8cec58ae-07a1-11d9-b15e-000d56bfe6ee}" /v "RunAs" /t REG_SZ /d "" /f
 for %%H in (HKCU HKLM) do (
