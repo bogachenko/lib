@@ -1169,7 +1169,7 @@ for %%S in (
 ) do reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\%%~S" /f
 timeout /t "1" /nobreak >nul
 
-echo Running a script to enable IPv6.
+echo CHECKING SETTINGS FOR IPv6.
 timeout /t "5" /nobreak >nul
 netsh int ipv6 isatap set state enabled
 netsh int teredo set state enterpriseclient
@@ -1177,19 +1177,19 @@ netsh interface ipv6 6to4 set state state=default
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "0" /f
 timeout /t "1" /nobreak >nul
 
-echo Running a script to configure power and sleep settings.
+echo CHECKING THE POWER AND SLEEP SETTINGS.
 timeout /t "5" /nobreak >nul
 powercfg -x standby-timeout-dc "0"
 powercfg -x standby-timeout-ac "0"
 timeout /t "1" /nobreak >nul
 
-echo CHECKING THE SETTINGS FOR FIREWALL IN WINDOWS OS.
+echo CHECKING THE SETTINGS FOR FIREWALL.
 timeout /t "5" /nobreak >nul
 echo Running a script to disable the default Windows Firewall.
 netsh advfirewall set allprofiles state off
 timeout /t "1" /nobreak >nul
 
-echo CHECKING SETTINGS FOR ACTIVATION IN WINDOWS OS.
+echo CHECKING SETTINGS FOR ACTIVATION.
 set "regPath=HKLM\Software\Microsoft\Windows NT\CurrentVersion"
 for %%V in ("ProductId" "RegisteredOwner") do (
     reg query "%regPath%" /v %%~V >nul 2>&1
@@ -1211,23 +1211,34 @@ if errorlevel "1" (
     echo There is an Internet connection.
 )
 echo Starting Windows activation process...
-start /b "" cmd /c "slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>&1" && (
+start /b "" cmd /c "cscript //nologo //e:vbscript "slmgr.vbs" /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>&1" && (
     echo Activation was completed successfully.
 ) || (
     echo An error occurred during activation.
 )
-start /b "" cmd /c "slmgr /skms kms.digiboy.ir >nul 2>&1" && (
+start /b "" cmd /c "cscript //nologo //e:vbscript "slmgr.vbs" /skms kms.digiboy.ir >nul 2>&1" && (
     echo A new KMS key has been installed.
 ) || (
     echo Error installing the KMS key.
 )
-start /b "" cmd /c "slmgr /ato >nul 2>&1" && (
+start /b "" cmd /c "cscript //nologo //e:vbscript "slmgr.vbs" /ato >nul 2>&1" && (
     echo Windows activation was successful.
 ) || (
     echo An error occurred when activating Windows.
 )
 :end
 timeout /t "1" /nobreak >nul
+
+echo CHECKING SETTINGS FOR THE FILE hosts.txt.
+set "url=https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoBL.hosts"
+set "hostsFile=%SystemRoot%\System32\drivers\etc\hosts"
+powershell -Command "(New-Object System.Net.WebClient).DownloadFile('%url%', '%hostsFile%')"
+if exist "%hostsFile%" (
+    echo The hosts file has been successfully downloaded and installed in %hostsFile%.
+) else (
+    echo Failed to download the hosts file.
+)
+exit /b
 
 echo Reboot the operating system.
 timeout /t "5" /nobreak >nul
