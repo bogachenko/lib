@@ -2,13 +2,11 @@
 title Windows 10 Enterprise LTSC
 
 echo GETTING SUPERUSER RIGHTS.
-cd /d "%~dp0" && (
-    if not "%1"=="am_admin" (
-        echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 am_admin", "", "runas", 1 >> "%temp%\getadmin.vbs"
-        "%temp%\getadmin.vbs"
-        exit /b
-    )
-    del "%temp%\getadmin.vbs" >nul 2>&1
+net session >nul 2>&1
+if %errorlevel% neq "0" (
+    echo Please run this script as an administrator.
+    pause
+    exit /b
 )
 
 :: Windows 10 Enterprise LTSC build 19044.4412 x86_64
@@ -39,6 +37,12 @@ timeout /t "5" /nobreak >nul
 set /p newName="Enter a new computer name: "
 wmic computersystem where caption='%computername%' rename "%newName%" >nul 2>&1
 timeout /t "1" /nobreak >nul
+
+echo DISABLING SYSTEM RESTORE PROTECTION.
+for %%S in (
+    "DisableSR"
+    "DisableConfig"
+) do reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v %%S /t REG_DWORD /d "1" /f
 
 echo CHECKING THE SETTINGS FOR THE LIST IN WINDOWS TASK SCHEDULER.
 timeout /t "5" /nobreak >nul
@@ -1193,50 +1197,6 @@ echo CHECKING THE SETTINGS FOR FIREWALL IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
 echo Running a script to disable the default Windows Firewall.
 netsh advfirewall set allprofiles state off
-timeout /t "1" /nobreak >nul
-
-echo CHECKING SETTINGS FOR ACTIVATION IN WINDOWS OS.
-timeout /t "5" /nobreak >nul
-setlocal
-echo Checking the activation status...
-set regPath="HKLM\Software\Microsoft\Windows NT\CurrentVersion"
-for %%V in ("ProductId" "RegisteredOwner") do (
-    reg query %regPath% /v %%V >nul 2>&1
-    if %errorlevel% neq "0" (
-        echo Your copy of Windows is NOT activated.
-        goto activate
-    )
-)
-echo Your copy of Windows is activated.
-goto end
-:activate
-echo Checking for Internet connection...
-ping -n "1" "1.1.1.1" >nul
-if errorlevel "1" (
-    echo There is no internet connection.
-    shutdown /r /f /t "0"
-    exit /b
-) else (
-    echo There is an Internet connection.
-)
-echo Starting Windows activation process...
-start /b "" cmd /c "slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>&1" && (
-    echo Activation was completed successfully.
-) || (
-    echo An error occurred during activation.
-)
-start /b "" cmd /c "slmgr /skms kms.digiboy.ir >nul 2>&1" && (
-    echo A new KMS key has been installed.
-) || (
-    echo Error installing the KMS key.
-)
-start /b "" cmd /c "slmgr /ato >nul 2>&1" && (
-    echo Windows activation was successful.
-) || (
-    echo An error occurred when activating Windows.
-)
-:end
-endlocal
 timeout /t "1" /nobreak >nul
 
 echo Reboot the operating system.
