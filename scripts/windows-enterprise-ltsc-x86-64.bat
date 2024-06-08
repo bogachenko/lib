@@ -37,17 +37,7 @@ timeout /t "1" /nobreak >nul
 echo RENAME THE COMPUTER.
 timeout /t "5" /nobreak >nul
 set /p newName="Enter a new computer name: "
-wmic computersystem where caption='%computername%' rename "%newName%"
-timeout /t "1" /nobreak >nul
-
-echo DISABLING SYSTEM RESTORE PROTECTION.
-timeout /t "5" /nobreak >nul
-wmic /Namespace:\\root\default Path SystemRestore Call Disable "%SystemDrive%"
-if %errorlevel% equ "0" (
-    echo System Restore Protection successfully disabled.
-) else (
-    echo Error disabling System Restore Protection.
-)
+wmic computersystem where caption='%computername%' rename "%newName%" >nul 2>&1
 timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR THE LIST IN WINDOWS TASK SCHEDULER.
@@ -519,97 +509,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 
-echo CHECKING THE SETTINGS FOR THE LIST OF COMPONENTS IN WINDOWS OS.
-timeout /t "5" /nobreak >nul
-echo Checking the status of Windows Media components...
-PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback','WindowsMediaPlayer').State | Out-File -FilePath MediaComponentsState.txt -Encoding UTF8"
-echo Checking the status of Internet Explorer 11 components...
-PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*').State | Out-File -FilePath IEComponentsState.txt -Encoding UTF8"
-echo Checking the status of the Steps Recorder components...
-PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'App.StepsRecorder*').State | Out-File -FilePath StepsRecorderState.txt -Encoding UTF8"
-echo Checking the status of Quick Assist components...
-PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*').State | Out-File -FilePath QuickAssistState.txt -Encoding UTF8"
-echo Checking the status of Hello Face components...
-PowerShell -ExecutionPolicy Unrestricted -Command "(Get-WindowsCapability -Online -Name 'Hello.Face*').State | Out-File -FilePath HelloFaceState.txt -Encoding UTF8"
-echo Defining the components status file.
-set "MediaComponentsStateFile=MediaComponentsState.txt"
-set "IEComponentsStateFile=IEComponentsState.txt"
-set "StepsRecorderStateFile=StepsRecorderState.txt"
-set "QuickAssistStateFile=QuickAssistState.txt"
-set "HelloFaceStateFile=HelloFaceState.txt"
-findstr /C:"Enabled" "%MediaComponentsStateFile%" >nul || (
-    echo Windows Media Components are not disabled.
-    goto :ExecuteCode
-)
-findstr /C:"Disabled" "%IEComponentsStateFile%" >nul || (
-    echo Internet Explorer 11 Components are not disabled.
-    goto :ExecuteCode
-)
-findstr /C:"Disabled" "%StepsRecorderStateFile%" >nul || (
-    echo Steps Recorder Components are not disabled.
-    goto :ExecuteCode
-)
-findstr /C:"Disabled" "%QuickAssistStateFile%" >nul || (
-    echo Quick Assist Components are not disabled.
-    goto :ExecuteCode
-)
-findstr /C:"Disabled" "%HelloFaceStateFile%" >nul || (
-    echo Hello Face Components are not disabled.
-    goto :ExecuteCode
-)
-echo All components are already disabled.
-goto :EndScript
-:ExecuteCode
-echo Disabling components...
-echo Running a script to disable Windows Media Components.
-PowerShell -ExecutionPolicy Unrestricted -Command "Disable-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback','WindowsMediaPlayer' -NoRestart"
-if %errorlevel% equ "0" (
-    echo Windows Media Components disabled successfully.
-) else (
-    echo Failed to disable Windows Media Components.
-)
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Media.WindowsMediaPlayer*' | Remove-WindowsCapability -Online -NoRestart"
-if %errorlevel% equ "0" (
-    echo Windows Media Player capability removed successfully.
-) else (
-    echo Failed to remove Windows Media Player capability.
-)
-echo Running a script to disable Internet Explorer 11 Components.
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*' | Remove-WindowsCapability -Online -NoRestart"
-if %errorlevel% equ "0" (
-    echo Internet Explorer 11 Components removed successfully.
-) else (
-    echo Failed to remove Internet Explorer 11 Components.
-)
-echo Running a script to disable Steps Recorder Components.
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.StepsRecorder*' | Remove-WindowsCapability -Online -NoRestart"
-if %errorlevel% equ "0" (
-    echo Steps Recorder Components removed successfully.
-) else (
-    echo Failed to remove Steps Recorder Components.
-)
-echo Running a script to disable Quick Assist Components.
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*' | Remove-WindowsCapability -Online -NoRestart"
-if %errorlevel% equ "0" (
-    echo Quick Assist Components removed successfully.
-) else (
-    echo Failed to remove Quick Assist Components.
-)
-echo Running a script to disable Hello Face Components.
-PowerShell -ExecutionPolicy Unrestricted -Command "Get-WindowsCapability -Online -Name 'Hello.Face*' | Remove-WindowsCapability -Online -NoRestart"
-if %errorlevel% equ "0" (
-    echo Hello Face Components removed successfully.
-) else (
-    echo Failed to remove Hello Face Components.
-)
-:EndScript
-del "%MediaComponentsStateFile%"
-del "%IEComponentsStateFile%"
-del "%StepsRecorderStateFile%"
-del "%QuickAssistStateFile%"
-del "%HelloFaceStateFile%"
-timeout /t "1" /nobreak >nul
-
 echo CHECKING THE SETTINGS FOR THE LIST OF SERVICES IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
 echo Running a script to disable Data Usage Service.
@@ -689,9 +588,9 @@ echo Running a script to disable multilingual text suggestions.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "MultilingualEnabled" /t REG_DWORD /d "0" /f
 echo Running a script to disable voice typing.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
-echo Running a script to disable collection and sending of user typed text.
+echo Running a script to disable collection and sending of user-typed text.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
-echo Running script to disable prediction and correction of misspelled words in user-typed text.
+echo Running a script to disable prediction and correction of misspelled words in user-typed text.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\TabletTip\1.7" /v "DisablePrediction" /t REG_DWORD /d "1" /f
 for %%H in (HKCU HKLM) do (
     for %%S in (
@@ -749,7 +648,7 @@ timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR MEDIA AND BLUETOOTH IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
-echo Running script to disable user tips for using an Android phone with Windows.
+echo Running a script to disable user tips for using an Android phone with Windows.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
 echo Running a script to disable autoplay for all media and devices.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers" /v "DisableAutoplay" /t REG_DWORD /d "1" /f
@@ -762,11 +661,7 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DoDo
 echo Running a script to enable font provider updates
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableFontProviders" /t REG_DWORD /d "1" /f
 echo Running a script to disable Windows Defender.
-reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /f
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "SecurityHealth" /f
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
-reg delete "HKLM\Software\Policies\Microsoft\Windows\System" /v "ShellSmartScreenLevel" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoNTSecurity" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Family options" /v "UILockdown" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
@@ -809,9 +704,9 @@ timeout /t "1" /nobreak >nul
 echo CHECKING THE SETTINGS FOR PRIVACY IN WINDOWS OS.
 timeout /t "5" /nobreak >nul
 echo Running a script to disable telemetry in Windows PowerShell.
-setx POWERSHELL_TELEMETRY_OPTOUT 1
+setx POWERSHELL_TELEMETRY_OPTOUT "1"
 echo Running a script to disable telemetry in DOTNET cli.
-setx DOTNET_CLI_TELEMETRY_OPTOUT 1
+setx DOTNET_CLI_TELEMETRY_OPTOUT "1"
 echo Running a script to disable Windows Tips.
 reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableSoftLanding" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Settings\AllowOnlineTips" /v "value" /t REG_DWORD /d "0" /f
@@ -840,7 +735,7 @@ for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\Adver
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Id" /t REG_SZ /d "null" /f
 echo Running a script to disable locally relevant content by using the user's language list.
-for %%H in (HKCU HKLM) do reg add "%%H\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f
+reg add "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f
 echo Running a script to disable enhancing search results in the Start menu by tracking app launches.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /t REG_DWORD /d "0" /f
 echo Running a script to disable activity feed.
@@ -972,7 +867,6 @@ reg add "HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Pro
 echo Running a script to disable tailored experiences.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
 echo Running a script to disable feedback frequency.
-reg delete "HKCU\Software\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /f
 reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
@@ -1032,14 +926,13 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "S
 echo Running a script to disable location access.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\System\AllowLocation" /v "value" /t REG_DWORD /d "0" /f
-reg add "HKLM\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessLocation" /t REG_DWORD /d "2" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessLocation" /t REG_DWORD /d "2" /f
 echo Running a script to disable voice activation access.
-for %%H in (HKCU HKLM) do (
-    for %%S in (
+for %%S in (
     "AgentActivationEnabled"
     "AgentActivationOnLockScreenEnabled"
-    ) do reg add "%%H\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps" /v %%S /t REG_DWORD /d "0" /f
-)
+) do reg add "HKLM\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps" /v %%S /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsActivateWithVoice" /t REG_DWORD /d "2" /f
 echo Running a script to disable access to background apps.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /t REG_DWORD /d "2" /f
@@ -1057,13 +950,13 @@ echo Running a script to disable access to tasks.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks" /v "Value" /t REG_SZ /d "Deny" /f
 echo Running a script to disable access to email.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email" /v "Value" /t REG_SZ /d "Deny" /f
-echoRunning a script to disable access to messages.
+echo Running a script to disable access to messages.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat" /v "Value" /t REG_SZ /d "Deny" /f
 echo Running a script to disable access to radio control.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios" /v "Value" /t REG_SZ /d "Deny" /f
 echo Running a script to disable diagnostic access to applications.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f
-reg add "HKLM\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsGetDiagnosticInfo" /t REG_DWORD /d "2" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsGetDiagnosticInfo" /t REG_DWORD /d "2" /f
 echo Running a script to disable the Standard Microsoft Diagnostic Data Collector.
 for %%H in (HKCU HKLM) do (
     for %%S in (
@@ -1262,7 +1155,7 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindo
 echo Running a script to configure taskbar locking in the operating system.
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "LockTaskbar" /t REG_DWORD /d "1" /f
 echo Running a script to configure clearing the pagefile.sys swap file upon Windows shutdown.
-reg add "HKLM\SystemCurrentControlSet\Control\Session Manager\Memory Management\ClearPageFileAtShutdown" /v "ClearPageFileAtShutdown" /t REG_DWORD /d "1" /f
+reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management" /v "ClearPageFileAtShutdown" /t REG_DWORD /d "1" /f
 echo Running a script to configure the Downloads folder in the operating system.
 set "DownloadsFolder=%USERPROFILE%\Downloads"
 if not exist "%DownloadsFolder%" mkdir "%DownloadsFolder%"
@@ -1279,7 +1172,7 @@ for %%S in (
     "{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}"
     "{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}"
     "{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}"
-) do reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace" /f
+) do reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\%%S" /f
 timeout /t "1" /nobreak >nul
 
 echo Running a script to enable IPv6.
