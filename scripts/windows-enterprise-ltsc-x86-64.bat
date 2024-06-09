@@ -1232,11 +1232,27 @@ timeout /t "1" /nobreak >nul
 echo CHECKING SETTINGS FOR THE FILE hosts.txt.
 set "url=https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoBL.hosts"
 set "hostsFile=%SystemRoot%\System32\drivers\etc\hosts"
-powershell -Command "(New-Object System.Net.WebClient).DownloadFile('%url%', '%hostsFile%')"
-if exist "%hostsFile%" (
-    echo The hosts file has been successfully downloaded and installed in %hostsFile%.
+set "backuphostsFile=%SystemRoot%\System32\drivers\etc\hosts.bkup"
+echo Checking for Internet connection...
+ping -n "1" "1.1.1.1" >nul
+if errorlevel 1 (
+    echo There is no internet connection.
+    shutdown /r /f /t "0"
+    exit /b
 ) else (
-    echo Failed to download the hosts file.
+    echo There is an Internet connection.
+)
+copy "%hostsFile%" "%backuphostsFile%"
+if exist "%backuphostsFile%" (
+    echo Backup created successfully at %backuphostsFile%.
+    powershell -Command "(New-Object System.Net.WebClient).DownloadFile('%url%', '%hostsFile%')"
+    if exist "%hostsFile%" (
+        echo The hosts file has been successfully downloaded and installed in %hostsFile%.
+    ) else (
+        echo Failed to download the hosts file.
+    )
+) else (
+    echo Failed to create backup.
 )
 exit /b
 
