@@ -1074,6 +1074,7 @@ echo Running a script to disable the background image on the login screen in the
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "DisableLogonBackgroundImage" /t REG_DWORD /d "1" /f
 echo Running a script to enable blocking desktop wallpaper changes in the operating system.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Policies\ActiveDesktop" /v "NoChangingWallPaper" /t REG_DWORD /d "1" /f
+reg add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "" /f
 echo Running a script to disable storing information about recently opened documents in the operating system.
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoRecentDocsHistory" /t REG_DWORD /d "0" /f
 echo Running a script to disable the list of frequently used programs in the Start menu in the operating system.
@@ -1230,6 +1231,7 @@ start /b "" cmd /c "cscript //nologo //e:vbscript "slmgr.vbs" /ato >nul 2>&1" &&
 timeout /t "1" /nobreak >nul
 
 echo CHECKING SETTINGS FOR THE FILE hosts.txt.
+timeout /t "5" /nobreak >nul
 set "url=https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoBL.hosts"
 set "hostsFile=%SystemRoot%\System32\drivers\etc\hosts"
 set "backuphostsFile=%SystemRoot%\System32\drivers\etc\hosts.bkup"
@@ -1255,6 +1257,7 @@ if exist "%backuphostsFile%" (
     echo Failed to create backup.
 )
 exit /b
+timeout /t "1" /nobreak >nul
 
 echo Reboot the operating system.
 timeout /t "5" /nobreak >nul
