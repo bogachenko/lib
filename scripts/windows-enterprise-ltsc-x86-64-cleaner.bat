@@ -73,72 +73,104 @@ for %%S in (
     "formhistory.sqlite"
     "places.sqlite"
 ) do (
-    del /s /q "%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\%%~S"
+    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\%%~S' -Force"
 )
 for %%S in (
     "datareporting"
     "shader-cache"
 ) do (
-    rd /s /q "%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\%%~S"
+    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\%%~S' -Recurse -Force"
 )
 
 echo Firefox Browser
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\favicons.sqlite-shm" /s /q
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\favicons.sqlite-wal" /s /q
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\favicons.sqlite" /s /q
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\formhistory.sqlite" /s /q
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\sessionCheckpoints.json" /s /q
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\SiteSecurityServiceState.txt" /s /q
-powershell.exe -command "Remove-item '%PROGRAMDATA%\Mozilla-*'" -Recurse
-rd "%APPDATA%\Mozilla\Extensions" /s /q
-rd "%APPDATA%\Mozilla\Firefox\Background Tasks Profiles" /s /q
-rd "%APPDATA%\Mozilla\Firefox\Crash Reports" /s /q
-rd "%APPDATA%\Mozilla\Firefox\Pending Pings" /s /q
-rd "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\crashes" /s /q
-rd "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\datareporting" /s /q
-rd "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\minidumps" /s /q
-rd "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\personality-provider" /s /q
-rd "%APPDATA%\Mozilla\SystemExtensionsDev" /s /q
-rd "%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%USERNAME%" /s /q
-rd "%USERPROFILE%\AppData\LocalLow\Mozilla" /s /q
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\cookies.sqlite" /s /q
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\cookies.sqlite-shm" /s /q
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\cookies.sqlite-wal" /s /q
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\places.sqlite" /s /q
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\places.sqlite-shm" /s /q
-del "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\places.sqlite-wal" /s /q
-rd "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\shader-cache" /s /q
-rd "%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\sessionstore-backups" /s /q
+for %%S in (
+    "cookies.sqlite"
+    "cookies.sqlite-shm"
+    "cookies.sqlite-wal"
+    "places.sqlite"
+    "places.sqlite-shm"
+    "places.sqlite-wal"
+    "favicons.sqlite-shm"
+    "favicons.sqlite-wal"
+    "favicons.sqlite"
+    "formhistory.sqlite"
+    "sessionCheckpoints.json"
+    "SiteSecurityServiceState.txt"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\%%~S' -Force"
+)
+for %%S in (
+    "shader-cache"
+    "sessionstore-backups"
+    "crashes"
+    "datareporting"
+    "minidumps"
+    "personality-provider"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\%%~S' -Recurse -Force"
+)
+for %%S in (
+    "Background Tasks Profiles"
+    "Crash Reports"
+    "Pending Pings"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Mozilla\Firefox\%%~S' -Recurse -Force"
+)
+for %%S in (
+    "Extensions"
+    "SystemExtensionsDev"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Mozilla\%%~S' -Recurse -Force"
+)
+powershell.exe -Command "Remove-Item -Path '%PROGRAMDATA%\Mozilla-*' -Recurse -Force"
+powershell.exe -Command "Remove-Item -Path '%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%USERNAME%' -Recurse -Force"
+powershell.exe -Command "Remove-Item -Path '%USERPROFILE%\AppData\LocalLow\Mozilla' -Recurse -Force"
 
 echo Thunderbird
+for %%S in (
+    "Crash Reports"
+    "Pending Pings"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Thunderbird\%%~S' -Recurse -Force"
+)
+for %%S in (
+    "crashes"
+    "minidumps"
+    "datareporting"
+    "shader-cache"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Thunderbird\Profiles\%USERNAME%\%%~S' -Recurse -Force"
+)
+for %%S in (
+    "favicons.sqlite"
+    "favicons.sqlite-shm"
+    "favicons.sqlite-wal"
+    "cookies.sqlite"
+    "cookies.sqlite-shm"
+    "cookies.sqlite-wal"
+    "places.sqlite"
+    "places.sqlite-shm"
+    "places.sqlite-wal"
+    "history.sqlite"
+    "history.sqlite-shm"
+    "history.sqlite-wal"
+    "formhistory.sqlite"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Thunderbird\Profiles\%USERNAME%\%%~S' -Force"
+)
 rd "%LOCALAPPDATA%\Thunderbird\Profiles\%USERNAME%" /s /q
-rd "%APPDATA%\Thunderbird\Crash Reports" /s /q
-rd "%APPDATA%\Thunderbird\Pending Pings" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\favicons.sqlite" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\favicons.sqlite-shm" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\favicons.sqlite-wal" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\cookies.sqlite" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\cookies.sqlite-shm" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\cookies.sqlite-wal" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\places.sqlite" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\places.sqlite-shm" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\places.sqlite-wal" /s /q
-rd "%APPDATA%\Thunderbird\Profiles\%USERNAME%\shader-cache" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\history.sqlite" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\history.sqlite-shm" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\history.sqlite-wal" /s /q
-rd "%APPDATA%\Thunderbird\Profiles\%USERNAME%\crashes" /s /q
-rd "%APPDATA%\Thunderbird\Profiles\%USERNAME%\minidumps" /s /q
-rd "%APPDATA%\Thunderbird\Profiles\%USERNAME%\datareporting" /s /q
-del "%APPDATA%\Thunderbird\Profiles\%USERNAME%\formhistory.sqlite" /s /q
 
 echo DirectX
 rd "%LOCALAPPDATA%\D3DSCache" /s /q
 
 echo Discord
-rd "%APPDATA%\discord\Cache" /s /q
-rd "%APPDATA%\discord\Code Cache" /s /q
-rd "%APPDATA%\discord\GPUCache" /s /q
+for %%S in (
+    "GPUCache"
+    "Code Cache"
+    "Cache"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%APPDATA%\discord\%%~S' -Recurse -Force"
+)
 del "%LOCALAPPDATA%\Discord\*.log" /s /q
 
 echo Spotify
