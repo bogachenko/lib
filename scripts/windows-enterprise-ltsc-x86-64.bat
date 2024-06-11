@@ -685,6 +685,7 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DoDo
 echo Running a script to enable font provider updates
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableFontProviders" /t REG_DWORD /d "1" /f
 echo Running a script to disable Windows Defender.
+reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /f
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoNTSecurity" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Family options" /v "UILockdown" /t REG_DWORD /d "1" /f
@@ -817,7 +818,7 @@ for %%H in (HKCU HKLM) do (
     ) do reg add "%%H\Software\Policies\Microsoft\Windows\DataCollection" /v %%~S /t REG_DWORD /d "1" /f
 )
 echo Running a script to disable telemetry.
-%sudo% reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "DisableWerReporting" /t REG_DWORD /d "1" /f
+"%sudo%" reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "DisableWerReporting" /t REG_DWORD /d "1" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Messenger\Client" /v "CEIP" /t REG_DWORD /d "2" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Messenger\Client" /v "PreventRun" /t REG_DWORD /d "1" /f
 set "regPath=HKLM\Software\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Application-Experience"
@@ -955,7 +956,7 @@ echo Running a script to disable voice activation access.
 for %%S in (
     "AgentActivationEnabled"
     "AgentActivationOnLockScreenEnabled"
-) do reg add "HKLM\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps" /v %%~S /t REG_DWORD /d "0" /f
+) do "%sudo%" reg add "HKLM\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps" /v %%~S /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsActivateWithVoice" /t REG_DWORD /d "2" /f
 echo Running a script to disable access to background apps.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /t REG_DWORD /d "1" /f
@@ -1122,7 +1123,6 @@ reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableThumbsDBO
 echo Running a script to disable window title and border colors in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\DWM" /v "ColorPrevalence" /t REG_DWORD /d "0" /f
 echo Running a script to disable active help in the operating system.
-reg delete "HKCU\Software\Classes\Typelib\{8cec5860-07a1-11d9-b15e-000d56bfe6ee}" /f
 reg add "HKCU\Software\Classes\AppID\{8cec58ae-07a1-11d9-b15e-000d56bfe6ee}" /v "RunAs" /t REG_SZ /d "" /f
 for %%H in (HKCU HKLM) do (
     for %%S in (
