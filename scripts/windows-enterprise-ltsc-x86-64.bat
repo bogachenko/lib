@@ -571,7 +571,13 @@ echo Running a script to disable Windows Defender Service.
 for %%S in (
     "SecurityHealthService"
     "wscsvc"
-) do reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+    "WinDefend"
+    "WdNisSvc"
+    "Sense"
+    "WdFilter"
+    "WdBoot"
+    "MsSecFlt"
+) do "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
 echo Running a script to disable Diagnostics Tracking Service.
 for %%S in (
     "DiagTrack"
@@ -685,8 +691,22 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DoDo
 echo Running a script to enable font provider updates
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableFontProviders" /t REG_DWORD /d "1" /f
 echo Running a script to disable Windows Defender.
+:: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard' -Name 'HypervisorEnforcedCodeIntegrity'
+:: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard' -Name 'LsaCfgFlags'
+:: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard' -Name 'RequirePlatformSecurityFeatures'
+:: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard' -Name 'ConfigureSystemGuardLaunch'
+:: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard' -Name 'ConfigureKernelShadowStacksLaunch'
+:: HKLM:\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' -Name 'WasEnabledBy'
+:: HKLM:\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' -Name 'WasEnabledBySysprep'
 reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /f
+reg delete "HKLM\Software\Classes\CLSID\{A463FCB9-6B1C-4E0D-A80B-A2CA7999E25D}" /f
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v "HVCIMATRequired" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "HVCIMATRequired" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Device security" /v "UILockdown" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoNTSecurity" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Family options" /v "UILockdown" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
@@ -695,12 +715,52 @@ reg add "HKLM\Software\Policies\Microsoft\Windows Defender\MpEngine" /v "MpEnabl
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "DisableBlockAtFirstSeen" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_SZ /d "Anywhere" /f
+reg add "HKLM\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
+reg add "HKLM\Microsoft\Windows\CurrentVersion\Explorer" /v "AicEnabled" /t REG_SZ /d "Anywhere" /f
+reg add "HKLM\Software\Microsoft\Internet Explorer\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "PreventOverride" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks" /v "WasEnabledBy" /t REG_DWORD /d "4" /f
+for %%S in (
+    "Enabled"
+    "AuditModeEnabled"
+) do reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks" /v %%~S /t REG_DWORD /d "0" /f
+set "regPath=HKLM\Software\Classes\exefile\shell"
+for %%i in (
+    "open"
+    "runas"
+    "runasuser"
+) do (
+    reg add "%regPath%\%%~i" /v "NoSmartScreen" /t REG_SZ /d "" /f
+)
+for %%S in (
+    "SmartScreenEnabled"
+    "SmartScreenPuaEnabled"
+) do reg add "HKCU\Software\Policies\Microsoft\Edge" /v %%~S /t REG_DWORD /d "0" /f
+for %%S in (
+    "EnabledV9"
+    "PreventOverride"
+) do reg add "HKLM\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" /v %%~S /t REG_DWORD /d "0" /f
+for %%S in (
+    "AppAndBrowser_EdgeSmartScreenOff"
+    "AppAndBrowser_PuaSmartScreenOff"
+    "AppAndBrowser_StoreAppsSmartScreenOff"
+) do reg add "HKLM\Software\Microsoft\Windows Security Health\State" /v %%~S /t REG_DWORD /d "1" /f
 for %%S in (
     "AllowFastServiceStartup"
     "ServiceKeepAlive"
     "PUADetection"
     "PUAProtection"
 ) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v %%~S /t REG_DWORD /d "0" /f
+for %%S in (
+    "Enabled"
+    "Locked"
+) do reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v %%~S /t REG_DWORD /d "0" /f
+for %%S in (
+    "RequirePlatformSecurityFeatures"
+    "Locked"
+) do reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v %%~S /t REG_DWORD /d "0" /f
 for %%S in (
     "DisableBehaviorMonitoring"
     "DisableIOAVProtection"
@@ -724,6 +784,13 @@ for %%S in (
     "SpynetReporting"
     "SubmitSamplesConsent"
 ) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v %%~S /t REG_DWORD /d "1" /f
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+    "EnabledV9"
+    "PreventOverride"
+    "PreventOverrideAppRepUnknown"
+    ) do reg add "%%H\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v %%~S /t REG_DWORD /d "0" /f
+)
 timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR PRIVACY IN WINDOWS OS.
@@ -1224,8 +1291,8 @@ timeout /t "1" /nobreak >nul
 
 echo CHECKING SETTINGS FOR ACTIVATION.
 set "regPath=HKLM\Software\Microsoft\Windows NT\CurrentVersion"
-for %%V in ("ProductId" "RegisteredOwner") do (
-    reg query "%regPath%" /v %%~V >nul 2>&1
+for %%S in ("ProductId" "RegisteredOwner") do (
+    reg query "%regPath%" /v %%~S >nul 2>&1
     if errorlevel 1 (
         goto :not_activated
     )
