@@ -17,12 +17,23 @@ title Windows 10 Enterprise LTSC Cleaner
 ::          Tether (USDT) or USD Coin (USDC) uses ETH, TRX or TON addresses, depending on the type of chain chosen.
 
 echo GETTING SUPERUSER RIGHTS.
-net session >nul 2>&1
-if %errorlevel% neq "0" (
-    echo Please run this script as an administrator.
-    pause
-    exit /b
+timeout /t "5" /nobreak >nul
+setlocal enabledelayedexpansion
+set "params=%*"
+cd /d "%~dp0"
+if exist "%temp%\getadmin.vbs" (
+    del "%temp%\getadmin.vbs"
 )
+fsutil dirty query %systemdrive% 1>nul 2>nul
+if errorlevel 1 (
+    (
+        echo Set UAC = CreateObject^("Shell.Application"^)
+        echo UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 !params!", "", "runas", 1
+    ) >> "%temp%\getadmin.vbs"
+    "%temp%\getadmin.vbs"
+    exit /B
+)
+timeout /t "1" /nobreak >nul
 
 rem Clipboard Cleaner
 echo off | clip

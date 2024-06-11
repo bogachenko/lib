@@ -16,12 +16,23 @@ title Windows 10 Enterprise LTSC
 ::          Tether (USDT) or USD Coin (USDC) uses ETH, TRX or TON addresses, depending on the type of chain chosen.
 
 echo GETTING SUPERUSER RIGHTS.
-net session >nul 2>&1
-if %errorlevel% neq "0" (
-    echo Please run this script as an administrator.
-    pause
-    exit /b
+timeout /t "5" /nobreak >nul
+setlocal enabledelayedexpansion
+set "params=%*"
+cd /d "%~dp0"
+if exist "%temp%\getadmin.vbs" (
+    del "%temp%\getadmin.vbs"
 )
+fsutil dirty query %systemdrive% 1>nul 2>nul
+if errorlevel 1 (
+    (
+        echo Set UAC = CreateObject^("Shell.Application"^)
+        echo UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 !params!", "", "runas", 1
+    ) >> "%temp%\getadmin.vbs"
+    "%temp%\getadmin.vbs"
+    exit /B
+)
+timeout /t "1" /nobreak >nul
 
 echo STOPPING THE WINDOWS EXPLORER PROCESS.
 timeout /t "5" /nobreak >nul
@@ -87,6 +98,7 @@ for %%T in (
     "Microsoft\Windows\WDI\ResolutionHost"
     "Microsoft\Windows\Flighting\OneSettings\RefreshCache"
     "Microsoft\Windows\Maintenance\WinSAT"
+    "Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
     if !errorlevel! equ "0" (
@@ -1230,35 +1242,6 @@ start /b "" cmd /c "cscript //nologo //e:vbscript "slmgr.vbs" /ato >nul 2>&1" &&
     echo An error occurred when activating Windows.
 )
 :end
-timeout /t "1" /nobreak >nul
-
-echo CHECKING SETTINGS FOR THE FILE hosts.txt.
-timeout /t "5" /nobreak >nul
-set "url=https://raw.githubusercontent.com/bogachenko/filterlist/main/bogachenkoBL.hosts"
-set "hostsFile=%SystemRoot%\System32\drivers\etc\hosts"
-set "backuphostsFile=%SystemRoot%\System32\drivers\etc\hosts.bkup"
-echo Checking for Internet connection...
-ping -n "1" "1.1.1.1" >nul
-if errorlevel 1 (
-    echo There is no internet connection.
-    shutdown /r /f /t "0"
-    exit /b
-) else (
-    echo There is an Internet connection.
-)
-copy "%hostsFile%" "%backuphostsFile%"
-if exist "%backuphostsFile%" (
-    echo Backup created successfully at %backuphostsFile%.
-    powershell -Command "(New-Object System.Net.WebClient).DownloadFile('%url%', '%hostsFile%')"
-    if exist "%hostsFile%" (
-        echo The hosts file has been successfully downloaded and installed in %hostsFile%.
-    ) else (
-        echo Failed to download the hosts file.
-    )
-) else (
-    echo Failed to create backup.
-)
-exit /b
 timeout /t "1" /nobreak >nul
 
 echo Reboot the operating system.
