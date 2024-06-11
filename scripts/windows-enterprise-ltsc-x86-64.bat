@@ -1033,6 +1033,8 @@ echo Running a script to disable synchronization in the operating system.
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "DisableSettingSync" /t REG_DWORD /d "2" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "DisableSettingSyncUserOverride" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\SettingSync" /v "EnableBackupForWin8Apps" /t REG_DWORD /d "0" /f
+echo Running a script to disable WMI Reliability Providers.
+reg add "HKLM\Software\Policies\Microsoft\Windows\Reliability Analysis\WMI" /v "WMIEnable" /t REG_DWORD /d "0" /f
 timeout /t "1" /nobreak >nul
 
 echo CHECKING OTHER SETTINGS IN WINDOWS OS.
