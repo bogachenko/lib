@@ -15,7 +15,19 @@ title Windows 10 Enterprise LTSC
 ::          Binance Coin (BNB) uses the ETH address.
 ::          Tether (USDT) or USD Coin (USDC) uses ETH, TRX or TON addresses, depending on the type of chain chosen.
 
-echo GETTING SUPERUSER RIGHTS.
+echo NETWORK INFORMATION RETRIEVAL.
+timeout /t "5" /nobreak >nul
+ping -n 1 "1.1.1.1" >nul 2>&1
+if errorlevel 1 (
+    echo No internet connection detected. Exiting script.
+    timeout /t "5" /nobreak >nul
+    exit /b
+) else (
+    echo Internet connection detected. Proceeding with the script.
+)
+timeout /t "1" /nobreak >nul
+
+echo SUPERUSER RIGHTS RETRIEVAL.
 timeout /t "5" /nobreak >nul
 setlocal enabledelayedexpansion
 set "params=%*"
@@ -32,6 +44,12 @@ if errorlevel 1 (
     "%temp%\getadmin.vbs"
     exit /B
 )
+set "url=https://github.com/M2Team/NanaRun/releases/download/1.0.18.0/NanaRun_1.0_Preview2_1.0.18.0.zip"
+set "zipFile=%temp%\NanaRun_1.0_Preview2_1.0.18.0.zip"
+set "destFolder=%temp%\NanaRun"
+set "sudo="%temp%\NanaRun\x64\MinSudo.exe --TrustedInstaller""
+powershell -Command "Invoke-WebRequest -Uri '%url%' -OutFile '%zipFile%'"
+powershell -Command "Expand-Archive -Path '%zipFile%' -DestinationPath '%destFolder%'"
 timeout /t "1" /nobreak >nul
 
 echo STOPPING THE WINDOWS EXPLORER PROCESS.
@@ -68,14 +86,14 @@ for %%T in (
     "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -101,14 +119,14 @@ for %%T in (
     "Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -133,14 +151,14 @@ for %%T in (
     "Microsoft\Windows\PI\Sqm-Tasks"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -162,14 +180,14 @@ for %%T in (
     "Microsoft\Windows\UNP\RunUpdateNotificationMgr"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -189,14 +207,14 @@ for %%T in (
     "Microsoft\Windows\DiskFootprint\StorageSense"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -216,14 +234,14 @@ for %%T in (
     "Microsoft\Windows\Shell\FamilySafetyRefreshTask"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -242,14 +260,14 @@ for %%T in (
     "Microsoft\Windows\FileHistory\File History (maintenance mode)"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -268,14 +286,14 @@ for %%T in (
     "Microsoft\Windows\NetTrace\GatherNetworkInfo"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -294,14 +312,14 @@ for %%T in (
     "Microsoft\XblGameSave\XblGameSaveTask"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -320,14 +338,14 @@ for %%T in (
     "Microsoft\Windows\RetailDemo\CleanupOfflineContent"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -346,14 +364,14 @@ for %%T in (
     "Microsoft\Windows\Windows Error Reporting\QueueReporting"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -373,14 +391,14 @@ for %%T in (
     "Microsoft\Windows\Location\WindowsActionDialog"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -400,14 +418,14 @@ for %%T in (
     "Microsoft\Windows\Device Information\Device User"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -426,14 +444,14 @@ for %%T in (
     "Microsoft\Office\Office ClickToRun Service Monitor"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -453,14 +471,14 @@ for %%T in (
     "Microsoft\Windows\Sysmain\WsSwapAssessmentTask"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -479,14 +497,14 @@ for %%T in (
     "Microsoft\Windows\Mobile Broadband Accounts\MNO Metadata Parser"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -505,14 +523,14 @@ for %%T in (
     "Microsoft\Windows\DUSM\dusmtask"
 ) do (
     schtasks /query /tn "%%~T" >nul 2>&1
-    if !errorlevel! equ "0" (
+    if !errorlevel! equ 0 (
         schtasks /query /tn "%%~T" /fo LIST /v | findstr /i "Disabled" >nul 2>&1
-        if !errorlevel! equ "0" (
+        if !errorlevel! equ 0 (
             echo Task %%~T is already disabled.
         ) else (
             echo Disabling task: %%~T
             schtasks /change /tn "%%~T" /disable
-            if !errorlevel! equ "0" (
+            if !errorlevel! equ 0 (
                 echo Task %%~T successfully disabled.
             ) else (
                 echo Failed to disable task %%~T.
@@ -799,7 +817,7 @@ for %%H in (HKCU HKLM) do (
     ) do reg add "%%H\Software\Policies\Microsoft\Windows\DataCollection" /v %%~S /t REG_DWORD /d "1" /f
 )
 echo Running a script to disable telemetry.
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "DisableWerReporting" /t REG_DWORD /d "1" /f
+%sudo% reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v "DisableWerReporting" /t REG_DWORD /d "1" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Messenger\Client" /v "CEIP" /t REG_DWORD /d "2" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Messenger\Client" /v "PreventRun" /t REG_DWORD /d "1" /f
 set "regPath=HKLM\Software\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Application-Experience"
@@ -1208,7 +1226,7 @@ echo CHECKING SETTINGS FOR ACTIVATION.
 set "regPath=HKLM\Software\Microsoft\Windows NT\CurrentVersion"
 for %%V in ("ProductId" "RegisteredOwner") do (
     reg query "%regPath%" /v %%~V >nul 2>&1
-    if errorlevel "1" (
+    if errorlevel 1 (
         goto :not_activated
     )
 )
@@ -1216,15 +1234,6 @@ echo Your copy of Windows is activated.
 goto :end
 :not_activated
 echo Your copy of Windows is NOT activated.
-echo Checking for Internet connection...
-ping -n "1" "1.1.1.1" >nul
-if errorlevel "1" (
-    echo There is no internet connection.
-    shutdown /r /f /t "0"
-    exit /b
-) else (
-    echo There is an Internet connection.
-)
 echo Starting Windows activation process...
 start /b "" cmd /c "cscript //nologo //e:vbscript "slmgr.vbs" /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>&1" && (
     echo Activation was completed successfully.
