@@ -733,15 +733,15 @@ reg add "HKLM\Software\Microsoft\Windows Defender Security Center\Virus and thre
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableGenericRePorts" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_SZ /d "Anywhere" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_SZ /d "Anywhere" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{09A47860-11B0-4DA5-AFA5-26D86198A780}" /t REG_SZ /d "" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MpCmdRun.exe" /v "Debugger" /t REG_SZ /d "dllhost.exe" /f
-reg add "HKLM\Software\Microsoft\Windows Defender\Spynet" /v "SpyNetReportingLocation" /t REG_MULTI_SZ /d "http://0.0.0.0" /f
-reg add "HKLM\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
-reg add "HKLM\Microsoft\Windows\CurrentVersion\Explorer" /v "AicEnabled" /t REG_SZ /d "Anywhere" /f
+"%sudo%" reg add "HKLM\Software\Microsoft\Windows Defender\Spynet" /v "SpyNetReportingLocation" /t REG_MULTI_SZ /d "http://0.0.0.0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "AicEnabled" /t REG_SZ /d "Anywhere" /f
 reg add "HKLM\Software\Microsoft\Internet Explorer\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "PreventOverride" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
+"%sudo%" reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks" /v "WasEnabledBy" /t REG_DWORD /d "4" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Spynet" /v "SubmitSamplesConsent" /t REG_DWORD /d "2" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
@@ -749,7 +749,7 @@ for %%S in (
     "SubmitSamplesConsent"
     "SpyNetReporting"
     "MAPSconcurrency"
-) do reg add "HKLM\Software\Microsoft\Windows Defender\Spynet" /v %%~S /t REG_DWORD /d "0" /f
+) do "%sudo%" reg add "HKLM\Software\Microsoft\Windows Defender\Spynet" /v %%~S /t REG_DWORD /d "0" /f
 for %%S in (
     "ScanOnlyIfIdle"
     "DisableScanningNetworkFiles"
@@ -1348,9 +1348,12 @@ timeout /t "1" /nobreak >nul
 
 echo CHECKING SETTINGS FOR ACTIVATION.
 set "regPath=HKLM\Software\Microsoft\Windows NT\CurrentVersion"
-for %%S in ("ProductId" "RegisteredOwner") do (
-    reg query "%regPath%" /v %%~S >nul 2>&1
-    if errorlevel 1 (
+reg query "%regPath%" /v RegisteredOwner >nul 2>&1
+if errorlevel 1 (
+    goto :not_activated
+)
+for /f "tokens=2*" %%A in ('reg query "%regPath%" /v RegisteredOwner 2^>nul') do (
+    if "%%B"=="" (
         goto :not_activated
     )
 )
