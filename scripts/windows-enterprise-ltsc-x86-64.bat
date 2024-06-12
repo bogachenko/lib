@@ -691,17 +691,28 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DoDo
 echo Running a script to enable font provider updates
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableFontProviders" /t REG_DWORD /d "1" /f
 echo Running a script to disable Windows Defender.
-:: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard' -Name 'HypervisorEnforcedCodeIntegrity'
-:: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard' -Name 'LsaCfgFlags'
-:: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard' -Name 'RequirePlatformSecurityFeatures'
-:: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard' -Name 'ConfigureSystemGuardLaunch'
-:: HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard' -Name 'ConfigureKernelShadowStacksLaunch'
-:: HKLM:\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' -Name 'WasEnabledBy'
-:: HKLM:\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' -Name 'WasEnabledBySysprep'
+regsvr32.exe /u "C:\Program Files\Windows Defender\shellext.dll" /s
+for %%S in (
+    "HypervisorEnforcedCodeIntegrity"
+    "LsaCfgFlags"
+    "RequirePlatformSecurityFeatures"
+    "ConfigureSystemGuardLaunch"
+    "ConfigureKernelShadowStacksLaunch"
+) do (
+    reg delete "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v %%~S /f
+)
+for %%S in (
+    "WasEnabledBy"
+    "WasEnabledBySysprep"
+) do (
+    reg delete "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v %%~S /f
+)
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "WindowsDefender" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "WindowsDefender" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run\AutorunsDisabled" /v "WindowsDefender" /f
 reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /f
 reg delete "HKLM\Software\Classes\CLSID\{A463FCB9-6B1C-4E0D-A80B-A2CA7999E25D}" /f
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
-for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v "HVCIMATRequired" /t REG_DWORD /d "0" /f
@@ -712,16 +723,47 @@ reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Famil
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection" /v "UILockdown" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\MpEngine" /v "MpEnablePus" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Windows Defender/Operational" /v "Enabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Windows Defender/WHC" /v "Enabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "DisableBlockAtFirstSeen" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection" /v "UILockdown" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Microsoft\Windows Defender Security Center\Virus and threat protection" /v "UILockdown" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableGenericRePorts" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_SZ /d "Anywhere" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{09A47860-11B0-4DA5-AFA5-26D86198A780}" /t REG_SZ /d "" /f
+reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MpCmdRun.exe" /v "Debugger" /t REG_SZ /d "dllhost.exe" /f
+reg add "HKLM\Software\Microsoft\Windows Defender\Spynet" /v "SpyNetReportingLocation" /t REG_MULTI_SZ /d "http://0.0.0.0" /f
 reg add "HKLM\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
 reg add "HKLM\Microsoft\Windows\CurrentVersion\Explorer" /v "AicEnabled" /t REG_SZ /d "Anywhere" /f
 reg add "HKLM\Software\Microsoft\Internet Explorer\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "PreventOverride" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks" /v "WasEnabledBy" /t REG_DWORD /d "4" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Spynet" /v "SubmitSamplesConsent" /t REG_DWORD /d "2" /f
+for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
+for %%S in (
+    "SubmitSamplesConsent"
+    "SpyNetReporting"
+    "MAPSconcurrency"
+) do reg add "HKLM\Software\Microsoft\Windows Defender\Spynet" /v %%~S /t REG_DWORD /d "0" /f
+for %%S in (
+    "ScanOnlyIfIdle"
+    "DisableScanningNetworkFiles"
+    "DisableScanningMappedNetworkDrivesForFullScan"
+    "DisableRestorePoint"
+    "DisableRemovableDriveScanning"
+    "DisableCatchupQuickScan"
+    "DisableCatchupFullScan"
+    "DisableArchiveScanning"
+) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Scan" /v %%~S /t REG_DWORD /d "1" /f
+for %%S in (
+    "SpynetReporting"
+    "LocalSettingOverrideSpynetReporting"
+) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Spynet" /v %%~S /t REG_DWORD /d "0" /f
 for %%S in (
     "Enabled"
     "AuditModeEnabled"
@@ -766,9 +808,24 @@ for %%S in (
     "DisableIOAVProtection"
     "DisableOnAccessProtection"
     "DisableRealtimeMonitoring"
+    "DpaDisabled"
     "DisableRoutinelyTakingAction"
     "DisableScanOnRealtimeEnable"
+    "DisableScriptScanning"
 ) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v %%~S /t REG_DWORD /d "1" /f
+for %%S in (
+    "LocalSettingOverrideDisableRealtimeMonitoring"
+    "LocalSettingOverrideDisableBehaviorMonitoring"
+    "LocalSettingOverrideDisableIOAVProtection"
+) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v %%~S /t REG_DWORD /d "0" /f
+for %%S in (
+    "RealtimeSignatureDelivery"
+    "UpdateOnStartUp"
+) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Signature Updates" /v %%~S /t REG_DWORD /d "0" /f
+for %%S in (
+    "DisableScanOnUpdate"
+    "DisableUpdateOnStartupWithoutEngine"
+) do reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Signature Updates" /v %%~S /t REG_DWORD /d "1" /f
 for %%S in (
     "DisableScanningMappedNetworkDrivesForFullScan"
     "DisableScanningNetworkFiles"
