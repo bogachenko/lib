@@ -16,7 +16,7 @@ title Windows 10 Enterprise LTSC
 ::          Tether (USDT) or USD Coin (USDC) uses ETH, TRX or TON addresses, depending on the type of chain chosen.
 
 echo NETWORK INFORMATION RETRIEVAL.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 ping -n 1 "1.1.1.1" >nul 2>&1
 if errorlevel 1 (
     echo No internet connection detected. Exiting script.
@@ -28,7 +28,7 @@ if errorlevel 1 (
 timeout /t "1" /nobreak >nul
 
 echo SUPERUSER RIGHTS RETRIEVAL.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 set "params=%*"
 cd /d "%~dp0"
@@ -53,7 +53,7 @@ powershell -Command "Expand-Archive -Path '%zipFile%' -DestinationPath '%destFol
 timeout /t "1" /nobreak >nul
 
 echo STOPPING THE WINDOWS EXPLORER PROCESS.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
     taskkill /f /im explorer.exe
 ) || (
@@ -735,14 +735,14 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen"
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_SZ /d "Anywhere" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{09A47860-11B0-4DA5-AFA5-26D86198A780}" /t REG_SZ /d "" /f
-reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MpCmdRun.exe" /v "Debugger" /t REG_SZ /d "dllhost.exe" /f
+"%sudo%" reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MpCmdRun.exe" /v "Debugger" /t REG_SZ /d "dllhost.exe" /f
 "%sudo%" reg add "HKLM\Software\Microsoft\Windows Defender\Spynet" /v "SpyNetReportingLocation" /t REG_MULTI_SZ /d "http://0.0.0.0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "AicEnabled" /t REG_SZ /d "Anywhere" /f
 reg add "HKLM\Software\Microsoft\Internet Explorer\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "PreventOverride" /t REG_DWORD /d "0" /f
 "%sudo%" reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks" /v "WasEnabledBy" /t REG_DWORD /d "4" /f
+"%sudo%" reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\KernelShadowStacks" /v "WasEnabledBy" /t REG_DWORD /d "4" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Spynet" /v "SubmitSamplesConsent" /t REG_DWORD /d "2" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
 for %%S in (
@@ -1156,7 +1156,7 @@ for %%i in (
     "SetupPlatformTel"
     "WiFiSession"
 ) do (
-    reg add "%regPath%\%%~i" /v "Start" /t REG_DWORD /d "0" /f
+    "%sudo%" reg add "%regPath%\%%~i" /v "Start" /t REG_DWORD /d "0" /f
 )
 echo Running a script to disable the system debugger in the operating system.
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\AeDebug" /v "Auto" /t REG_SZ /d "0" /f
@@ -1363,20 +1363,6 @@ netsh advfirewall set allprofiles state off
 timeout /t "1" /nobreak >nul
 
 echo CHECKING SETTINGS FOR ACTIVATION.
-set "regPath=HKLM\Software\Microsoft\Windows NT\CurrentVersion"
-reg query "%regPath%" /v RegisteredOwner >nul 2>&1
-if errorlevel 1 (
-    goto :not_activated
-)
-for /f "tokens=2*" %%A in ('reg query "%regPath%" /v RegisteredOwner 2^>nul') do (
-    if "%%B"=="" (
-        goto :not_activated
-    )
-)
-echo Your copy of Windows is activated.
-goto :end
-:not_activated
-echo Your copy of Windows is NOT activated.
 echo Starting Windows activation process...
 start /b "" cmd /c "cscript //nologo //e:vbscript "slmgr.vbs" /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>&1" && (
     echo Activation was completed successfully.
@@ -1393,7 +1379,6 @@ start /b "" cmd /c "cscript //nologo //e:vbscript "slmgr.vbs" /ato >nul 2>&1" &&
 ) || (
     echo An error occurred when activating Windows.
 )
-:end
 timeout /t "1" /nobreak >nul
 
 echo Reboot the operating system.
