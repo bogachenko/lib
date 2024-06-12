@@ -1022,6 +1022,16 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowF
 echo Running a script to disable Windows Search.
 for %%H in (HKCU HKLM) do (
     for %%S in (
+    "DisableWebSearch"
+    "DisableRemovableDriveIndexing"
+    "PreventRemoteQueries"
+    "PreventIndexOnBattery"
+    "PreventIndexingEmailAttachments"
+    "PreventIndexingOutlook"
+    ) do reg add "%%H\Software\Policies\Microsoft\Windows\Windows Search" /v %%~S /t REG_DWORD /d "1" /f
+)
+for %%H in (HKCU HKLM) do (
+    for %%S in (
     "BackgroundAppGlobalToggle"
     "VoiceShortcut"
     "CortanaInAmbientMode"
@@ -1031,6 +1041,7 @@ for %%H in (HKCU HKLM) do (
     "CanCortanaBeEnabled"
     "CortanaEnabled"
     "BingSearchEnabled"
+    "AllowSearchToUseLocation"
     ) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Search" /v %%~S /t REG_DWORD /d "0" /f
 )
 for %%H in (HKCU HKLM) do (
@@ -1067,11 +1078,18 @@ for %%H in (HKCU HKLM) do (
     "ConnectedSearchSafeSearch"
     ) do reg add "%%H\Software\Policies\Microsoft\Windows\Windows Search" /v %%~S /t REG_DWORD /d "3" /f
 )
-for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Microsoft\Windows Search" /v "AllowCortana" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OOBE" /v "DisableVoice" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Search\AllowCloudSearch" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Experience\AllowCortana" /v "value" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\PolicyManager\current\device\AboveLock" /v "AllowCortanaAboveLock" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\PolicyManager\current\device\Experience" /v "AllowCortana" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCortanaButton" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Search\Preferences" /v "wholeFileSystem" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:cortana;cortana-language;cortana-moredetails;cortana-notifications;cortana-permissions;cortana-windowssearch;gaming-broadcasting;gaming-gamebar;gaming-gamedvr;gaming-gamemode;gaming-trueplay;gaming-xboxnetworking;mobile-devices;mobile-devices-addphone;mobile-devices-addphone-direct" /f
+reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d "1" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Windows Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
 echo Running a script to disable location access.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\System\AllowLocation" /v "value" /t REG_DWORD /d "0" /f
@@ -1215,8 +1233,6 @@ echo Running a script to enable checkboxes for folder items in the operating sys
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "AutoCheckSelect" /t REG_DWORD /d "1" /f
 echo Running a script to disable task view on the taskbar in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f
-echo Running a script to disable the search icon on the taskbar in the operating system.
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
 echo Running a script to disable transparency effects in the operating system.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d "0" /f
 echo Running a script to disable recent items in jump lists.
