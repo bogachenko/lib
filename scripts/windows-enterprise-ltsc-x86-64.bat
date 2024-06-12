@@ -576,10 +576,13 @@ for %%S in (
     "wscsvc"
     "WinDefend"
     "WdNisSvc"
+    "WdNisDrv"
     "Sense"
     "WdFilter"
     "WdBoot"
     "MsSecFlt"
+    "SgrmBroker"
+    "SgrmAgent"
 ) do "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
 echo Running a script to disable Diagnostics Tracking Service.
 for %%S in (
@@ -695,25 +698,6 @@ echo Running a script to enable font provider updates
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableFontProviders" /t REG_DWORD /d "1" /f
 echo Running a script to disable Windows Defender.
 regsvr32.exe /u "C:\Program Files\Windows Defender\shellext.dll" /s
-for %%S in (
-    "HypervisorEnforcedCodeIntegrity"
-    "LsaCfgFlags"
-    "RequirePlatformSecurityFeatures"
-    "ConfigureSystemGuardLaunch"
-    "ConfigureKernelShadowStacksLaunch"
-) do (
-    reg delete "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v %%~S /f
-)
-for %%S in (
-    "WasEnabledBy"
-    "WasEnabledBySysprep"
-) do (
-    reg delete "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v %%~S /f
-)
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "WindowsDefender" /f
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "WindowsDefender" /f
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run\AutorunsDisabled" /v "WindowsDefender" /f
-reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /f
 "%sudo%" reg delete "HKLM\Software\Classes\CLSID\{A463FCB9-6B1C-4E0D-A80B-A2CA7999E25D}" /f
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
