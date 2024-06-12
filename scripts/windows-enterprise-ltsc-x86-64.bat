@@ -20,7 +20,7 @@ timeout /t "1" /nobreak >nul
 ping -n 1 "1.1.1.1" >nul 2>&1
 if errorlevel 1 (
     echo No internet connection detected. Exiting script.
-    timeout /t "5" /nobreak >nul
+    timeout /t "1" /nobreak >nul
     exit /b
 ) else (
     echo Internet connection detected. Proceeding with the script.
@@ -48,6 +48,9 @@ set "url=https://github.com/M2Team/NanaRun/releases/download/1.0.18.0/NanaRun_1.
 set "zipFile=%temp%\NanaRun_1.0_Preview2_1.0.18.0.zip"
 set "destFolder=%temp%\NanaRun"
 set "sudo="%temp%\NanaRun\x64\MinSudo.exe --TrustedInstaller""
+if exist "%destFolder%" (
+    rmdir /s /q "%destFolder%"
+)
 powershell -Command "Invoke-WebRequest -Uri '%url%' -OutFile '%zipFile%'"
 powershell -Command "Expand-Archive -Path '%zipFile%' -DestinationPath '%destFolder%'"
 timeout /t "1" /nobreak >nul
@@ -62,7 +65,7 @@ tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
 timeout /t "1" /nobreak >nul
 
 echo RENAME THE COMPUTER.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 set /p newName="Enter a new computer name: "
 wmic computersystem where caption='%computername%' rename "%newName%" >nul 2>&1
 timeout /t "1" /nobreak >nul
@@ -74,7 +77,7 @@ for %%S in (
 ) do reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v %%~S /t REG_DWORD /d "1" /f
 
 echo CHECKING THE SETTINGS FOR THE LIST IN WINDOWS TASK SCHEDULER.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 echo Running a script to disable Windows Defender in the Task Scheduler.
 timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
@@ -544,7 +547,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR THE LIST OF SERVICES IN WINDOWS OS.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 echo Running a script to disable Data Usage Service.
 reg add "HKLM\System\CurrentControlSet\Services\DusmSvc" /v "Start" /t REG_DWORD /d "4" /f
 echo Running a script to disable SSDP Discovery Service.
@@ -605,7 +608,7 @@ for %%S in (
 timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR TIME AND LANGUAGE IN WINDOWS OS.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 echo Running a script to disable Improve Inking and Typing Recognition.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Policies\TextInput" /v "AllowLinguisticDataCollection" /t REG_DWORD /d "0" /f
 echo Running a script to disable input data analysis.
@@ -640,7 +643,7 @@ for %%H in (HKCU HKLM) do (
 )
 
 echo CHECKING THE SETTINGS FOR GAMES IN WINDOWS OS.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 echo Running a script to disable Xbox support in the operating system.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\GameDVR" /v "AllowgameDVR" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /v "value" /t REG_DWORD /d "0" /f
@@ -677,7 +680,7 @@ for %%H in (HKCU HKLM) do (
 timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR MEDIA AND BLUETOOTH IN WINDOWS OS.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 echo Running a script to disable user tips for using an Android phone with Windows.
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
 echo Running a script to disable autoplay for all media and devices.
@@ -685,7 +688,7 @@ for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion
 timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR UPDATES AND SECURITY IN WINDOWS OS.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 echo Running a script to disable delivery otimization.
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DoDownLoadMode" /t REG_DWORD /d "0" /f
 echo Running a script to enable font provider updates
@@ -711,7 +714,7 @@ reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "WindowsDefen
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "WindowsDefender" /f
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run\AutorunsDisabled" /v "WindowsDefender" /f
 reg delete "HKCR\CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}" /f
-reg delete "HKLM\Software\Classes\CLSID\{A463FCB9-6B1C-4E0D-A80B-A2CA7999E25D}" /f
+"%sudo%" reg delete "HKLM\Software\Classes\CLSID\{A463FCB9-6B1C-4E0D-A80B-A2CA7999E25D}" /f
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
@@ -851,7 +854,7 @@ for %%H in (HKCU HKLM) do (
 timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR PRIVACY IN WINDOWS OS.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 echo Running a script to disable telemetry in Windows PowerShell.
 setx POWERSHELL_TELEMETRY_OPTOUT "1"
 echo Running a script to disable telemetry in DOTNET cli.
@@ -1211,7 +1214,7 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\Reliability Analysis\WMI" /v "
 timeout /t "1" /nobreak >nul
 
 echo CHECKING OTHER SETTINGS IN WINDOWS OS.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 echo Running a script to enable a password request when exiting sleep or hibernation mode.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\System\Power" /v "PromptPasswordOnResume" /t REG_DWORD /d "1" /f
 echo Running a script to disable changing the mouse pointer.
@@ -1343,7 +1346,7 @@ for %%S in (
 timeout /t "1" /nobreak >nul
 
 echo CHECKING SETTINGS FOR IPv6.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 netsh int ipv6 isatap set state enabled
 netsh int teredo set state enterpriseclient
 netsh interface ipv6 6to4 set state state=default
@@ -1351,36 +1354,23 @@ reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledC
 timeout /t "1" /nobreak >nul
 
 echo CHECKING THE POWER AND SLEEP SETTINGS.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 powercfg -x standby-timeout-dc "0"
 powercfg -x standby-timeout-ac "0"
 timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR FIREWALL.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 echo Running a script to disable the default Windows Firewall.
 netsh advfirewall set allprofiles state off
 timeout /t "1" /nobreak >nul
 
 echo CHECKING SETTINGS FOR ACTIVATION.
-echo Starting Windows activation process...
-start /b "" cmd /c "cscript //nologo //e:vbscript "slmgr.vbs" /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>&1" && (
-    echo Activation was completed successfully.
-) || (
-    echo An error occurred during activation.
-)
-start /b "" cmd /c "cscript //nologo //e:vbscript "slmgr.vbs" /skms kms.digiboy.ir >nul 2>&1" && (
-    echo A new KMS key has been installed.
-) || (
-    echo Error installing the KMS key.
-)
-start /b "" cmd /c "cscript //nologo //e:vbscript "slmgr.vbs" /ato >nul 2>&1" && (
-    echo Windows activation was successful.
-) || (
-    echo An error occurred when activating Windows.
-)
+start /b "" cmd /c "cscript //nologo //e:vbscript slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>&1"
+start /b "" cmd /c "cscript //nologo //e:vbscript slmgr.vbs /skms kms.digiboy.ir >nul 2>&1"
+start /b "" cmd /c "cscript //nologo //e:vbscript slmgr.vbs /ato >nul 2>&1"
 timeout /t "1" /nobreak >nul
 
 echo Reboot the operating system.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 shutdown /r /f /t "0"
