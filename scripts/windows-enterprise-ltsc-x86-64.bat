@@ -558,8 +558,6 @@ echo Running a script to disable Downloaded Maps Manager Service.
 reg add "HKLM\System\CurrentControlSet\Services\MapsBroker" /v "Start" /t REG_DWORD /d "4" /f
 echo Running a script to disable Delivery Optimization Service.
 reg add "HKLM\System\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable System Performance Improvement Service.
-reg add "HKLM\System\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
 echo Running a script to disable Broadcast DVR User Service.
 reg add "HKLM\System\CurrentControlSet\Services\BcastDVRUserService" /v "Start" /t REG_DWORD /d "4" /f
 echo Running a script to disable Windows Biometric Service.
@@ -583,14 +581,20 @@ for %%S in (
     "MsSecFlt"
     "SgrmBroker"
     "SgrmAgent"
-) do "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+) do (
+    "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+    "%sudo%" sc stop "%%~S"
+)
 echo Running a script to disable Diagnostics Tracking Service.
 for %%S in (
     "DiagTrack"
     "diagsvc"
     "dmwappushservice"
     "diagnosticshub.standardcollector.service"
-) do reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+) do (
+    "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+    "%sudo%" sc stop "%%~S"
+)
 echo Running a script to disable Xbox Services.
 for %%S in (
     "XblAuthManager"
@@ -602,7 +606,10 @@ echo Running a script to disable Windows Error Logging Services.
 for %%S in (
     "WerSvc"
     "wercplsupport"
-) do reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+) do (
+    "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+    "%sudo%" sc stop "%%~S"
+)
 echo Running a script to disable Smart Card.
 for %%S in (
     "SCardSvr"
@@ -1350,9 +1357,9 @@ netsh advfirewall set allprofiles state off
 timeout /t "1" /nobreak >nul
 
 echo CHECKING SETTINGS FOR ACTIVATION.
-start /b "" cmd /c "cscript //nologo //e:vbscript slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>&1"
-start /b "" cmd /c "cscript //nologo //e:vbscript slmgr.vbs /skms kms.digiboy.ir >nul 2>&1"
-start /b "" cmd /c "cscript //nologo //e:vbscript slmgr.vbs /ato >nul 2>&1"
+start /b "" cmd /c "cscript //nologo //e:vbscript %SystemRoot%\System32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX >nul 2>&1"
+start /b "" cmd /c "cscript //nologo //e:vbscript %SystemRoot%\System32\slmgr.vbs /skms kms.digiboy.ir >nul 2>&1"
+start /b "" cmd /c "cscript //nologo //e:vbscript %SystemRoot%\System32\slmgr.vbs /ato >nul 2>&1"
 timeout /t "1" /nobreak >nul
 
 echo Reboot the operating system.
