@@ -76,6 +76,80 @@ for %%S in (
     "DisableConfig"
 ) do reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v %%~S /t REG_DWORD /d "1" /f
 
+echo CHECKING THE SETTINGS FOR THE LIST OF SERVICES IN WINDOWS OS.
+timeout /t "1" /nobreak >nul
+echo Running a script to disable Data Usage Service.
+reg add "HKLM\System\CurrentControlSet\Services\DusmSvc" /v "Start" /t REG_DWORD /d "4" /f
+echo Running a script to disable SSDP Discovery Service.
+reg add "HKLM\System\CurrentControlSet\Services\SSDPSRV" /v "Start" /t REG_DWORD /d "4" /f
+echo Running a script to disable Geolocation Service.
+reg add "HKLM\System\CurrentControlSet\Services\lfsvc" /v "Start" /t REG_DWORD /d "4" /f
+echo Running a script to disable Downloaded Maps Manager Service.
+reg add "HKLM\System\CurrentControlSet\Services\MapsBroker" /v "Start" /t REG_DWORD /d "4" /f
+echo Running a script to disable Delivery Optimization Service.
+reg add "HKLM\System\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d "4" /f
+echo Running a script to disable Broadcast DVR User Service.
+reg add "HKLM\System\CurrentControlSet\Services\BcastDVRUserService" /v "Start" /t REG_DWORD /d "4" /f
+echo Running a script to disable Windows Biometric Service.
+reg add "HKLM\System\CurrentControlSet\Services\WbioSrvc" /v "Start" /t REG_DWORD /d "4" /f
+echo Running a script to disable Windows Insider Service.
+reg add "HKLM\System\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /f
+echo Running a script to disable Store Demonstration Service.
+reg add "HKLM\System\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f
+echo Running a script to disable Windows Search Service.
+reg add "HKLM\System\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
+echo Running a script to disable Windows Defender Service.
+for %%S in (
+    "SecurityHealthService"
+    "wscsvc"
+    "WinDefend"
+    "WdNisSvc"
+    "WdNisDrv"
+    "Sense"
+    "WdFilter"
+    "WdBoot"
+    "MsSecFlt"
+    "SgrmBroker"
+    "SgrmAgent"
+) do (
+    "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+    "%sudo%" sc stop "%%~S"
+    "%sudo%" sc config "%%~S" start= disabled
+)
+echo Running a script to disable Diagnostics Tracking Service.
+for %%S in (
+    "DiagTrack"
+    "diagsvc"
+    "dmwappushservice"
+    "diagnosticshub.standardcollector.service"
+) do (
+    "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+    "%sudo%" sc stop "%%~S"
+    "%sudo%" sc config "%%~S" start= disabled
+)
+echo Running a script to disable Xbox Services.
+for %%S in (
+    "XblAuthManager"
+    "XblGameSave"
+    "XboxGipSvc"
+    "XboxNetApiSvc"
+) do reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+echo Running a script to disable Windows Error Logging Services.
+for %%S in (
+    "WerSvc"
+    "wercplsupport"
+) do (
+    "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+    "%sudo%" sc stop "%%~S"
+    "%sudo%" sc config "%%~S" start= disabled
+)
+echo Running a script to disable Smart Card.
+for %%S in (
+    "SCardSvr"
+    "CertPropSvc"
+) do reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
+timeout /t "1" /nobreak >nul
+
 echo CHECKING THE SETTINGS FOR THE LIST IN WINDOWS TASK SCHEDULER.
 timeout /t "1" /nobreak >nul
 echo Running a script to disable Windows Defender in the Task Scheduler.
@@ -546,77 +620,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 
-echo CHECKING THE SETTINGS FOR THE LIST OF SERVICES IN WINDOWS OS.
-timeout /t "1" /nobreak >nul
-echo Running a script to disable Data Usage Service.
-reg add "HKLM\System\CurrentControlSet\Services\DusmSvc" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable SSDP Discovery Service.
-reg add "HKLM\System\CurrentControlSet\Services\SSDPSRV" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Geolocation Service.
-reg add "HKLM\System\CurrentControlSet\Services\lfsvc" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Downloaded Maps Manager Service.
-reg add "HKLM\System\CurrentControlSet\Services\MapsBroker" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Delivery Optimization Service.
-reg add "HKLM\System\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Broadcast DVR User Service.
-reg add "HKLM\System\CurrentControlSet\Services\BcastDVRUserService" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Windows Biometric Service.
-reg add "HKLM\System\CurrentControlSet\Services\WbioSrvc" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Windows Insider Service.
-reg add "HKLM\System\CurrentControlSet\Services\wisvc" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Store Demonstration Service.
-reg add "HKLM\System\CurrentControlSet\Services\RetailDemo" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Windows Search Service.
-reg add "HKLM\System\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Windows Defender Service.
-for %%S in (
-    "SecurityHealthService"
-    "wscsvc"
-    "WinDefend"
-    "WdNisSvc"
-    "WdNisDrv"
-    "Sense"
-    "WdFilter"
-    "WdBoot"
-    "MsSecFlt"
-    "SgrmBroker"
-    "SgrmAgent"
-) do (
-    "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
-    "%sudo%" sc stop "%%~S"
-)
-echo Running a script to disable Diagnostics Tracking Service.
-for %%S in (
-    "DiagTrack"
-    "diagsvc"
-    "dmwappushservice"
-    "diagnosticshub.standardcollector.service"
-) do (
-    "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
-    "%sudo%" sc stop "%%~S"
-)
-echo Running a script to disable Xbox Services.
-for %%S in (
-    "XblAuthManager"
-    "XblGameSave"
-    "XboxGipSvc"
-    "XboxNetApiSvc"
-) do reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
-echo Running a script to disable Windows Error Logging Services.
-for %%S in (
-    "WerSvc"
-    "wercplsupport"
-) do (
-    "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
-    "%sudo%" sc stop "%%~S"
-)
-echo Running a script to disable Smart Card.
-for %%S in (
-    "SCardSvr"
-    "CertPropSvc"
-) do reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
-timeout /t "1" /nobreak >nul
-
 echo CHECKING THE SETTINGS FOR TIME AND LANGUAGE IN WINDOWS OS.
 timeout /t "1" /nobreak >nul
 echo Running a script to disable Improve Inking and Typing Recognition.
@@ -1081,7 +1084,6 @@ reg add "HKLM\Software\Microsoft\PolicyManager\current\device\Experience" /v "Al
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCortanaButton" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Search\Preferences" /v "wholeFileSystem" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:cortana;cortana-language;cortana-moredetails;cortana-notifications;cortana-permissions;cortana-windowssearch;gaming-broadcasting;gaming-gamebar;gaming-gamedvr;gaming-gamemode;gaming-trueplay;gaming-xboxnetworking;mobile-devices;mobile-devices-addphone;mobile-devices-addphone-direct" /f
 reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Windows Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
 echo Running a script to disable location access.
@@ -1296,7 +1298,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "L
 echo Running a script to disable the People icon on the taskbar in the operating system.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "HidePeopleBar" /t REG_DWORD /d "1" /f
 echo Running a script to clean up unnecessary items in Settings in the operating system.
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:gaming-broadcasting;gaming-gamebar;gaming-gamedvr;gaming-gamemode;gaming-trueplay;gaming-xboxnetworking;windowsdefender;mobile-devices;mobile-devices-addphone;mobile-devices-addphone-direct" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:cortana;cortana-language;cortana-moredetails;cortana-notifications;cortana-permissions;cortana-windowssearch;gaming-broadcasting;gaming-gamebar;gaming-gamedvr;gaming-gamemode;gaming-trueplay;gaming-xboxnetworking;mobile-devices;mobile-devices-addphone;mobile-devices-addphone-direct" /f
 echo Running a script to configure the Windows Spotlight.
 for %%H in (HKCU HKLM) do (
     for %%S in (
