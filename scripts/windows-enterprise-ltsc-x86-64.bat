@@ -17,6 +17,7 @@ title Windows 10 Enterprise LTSC
 
 echo NETWORK INFORMATION RETRIEVAL.
 timeout /t "1" /nobreak >nul
+echo Running a script to get information about the network in the operating system.
 ping -n 1 "1.1.1.1" >nul 2>&1
 if errorlevel 1 (
     echo No internet connection detected. Exiting script.
@@ -29,6 +30,7 @@ timeout /t "1" /nobreak >nul
 
 echo SUPERUSER RIGHTS RETRIEVAL.
 timeout /t "1" /nobreak >nul
+echo Running a script to obtain superuser rights in the operating system.
 setlocal enabledelayedexpansion
 set "params=%*"
 cd /d "%~dp0"
@@ -58,6 +60,7 @@ timeout /t "1" /nobreak >nul
 
 echo STOPPING THE WINDOWS EXPLORER PROCESS.
 timeout /t "1" /nobreak >nul
+echo Running a script to stop the process The Windows Explorer.exe in the operating system.
 tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
     taskkill /f /im explorer.exe
 ) || (
@@ -67,15 +70,19 @@ timeout /t "1" /nobreak >nul
 
 echo RENAME THE COMPUTER.
 timeout /t "1" /nobreak >nul
+echo Running a script to edit the computer name in the operating system.
 set /p newName="Enter a new computer name: "
 wmic computersystem where caption='%computername%' rename "%newName%" >nul 2>&1
 timeout /t "1" /nobreak >nul
 
 echo DISABLING SYSTEM RESTORE PROTECTION.
+timeout /t "1" /nobreak >nul
+echo Running a script to disable the protection of the computer's disk in the operating system.
 for %%S in (
     "DisableSR"
     "DisableConfig"
 ) do reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore" /v %%~S /t REG_DWORD /d "1" /f
+timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR THE LIST OF SERVICES IN WINDOWS OS.
 timeout /t "1" /nobreak >nul
@@ -1411,7 +1418,7 @@ set "extractedFolder=%destFolder%\notofonts.github.io-main"
 set "sourceFontsFolder=%extractedFolder%\fonts"
 set "targetFontsFolder=%temp%\NotoFonts\Fonts"
 set "fontsFolder=%windir%\Fonts"
-set /p "userChoice=Do you want to download Google Fonts Noto? (Y/N): "
+set /p "userChoice=Do you want to download Google Fonts Noto? ([Y]es/[N]o): "
 if /I "%userChoice%"=="Y" (
     echo Downloading Google Fonts Noto...
 if exist "%destFolder%" (
