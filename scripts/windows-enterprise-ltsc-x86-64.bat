@@ -50,6 +50,7 @@ set "destFolder=%temp%\NanaRun"
 set "sudo="%temp%\NanaRun\x64\MinSudo.exe --TrustedInstaller""
 if exist "%destFolder%" (
     rmdir /s /q "%destFolder%"
+    mkdir "%destFolder%"
 )
 powershell -Command "Invoke-WebRequest -Uri '%url%' -OutFile '%zipFile%'"
 powershell -Command "Expand-Archive -Path '%zipFile%' -DestinationPath '%destFolder%'"
@@ -621,6 +622,7 @@ endlocal
 timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR ADDITIONAL COMPONENTS.
+timeout /t "1" /nobreak >nul
 echo Running a script to disable the Windows Media Player component.
 setlocal
 powershell -Command "if ((Get-WindowsCapability -Online -Name 'Media.WindowsMediaPlayer*').State -eq 'Installed') { Remove-WindowsCapability -Online -Name 'Media.WindowsMediaPlayer'; exit 0 } else { exit 1 }" > nul 2>&1
@@ -672,6 +674,7 @@ if %errorlevel% equ 0 (
     echo The Steps Recorder capability is not installed, cannot be found, or an error occurred.
 )
 endlocal
+timeout /t "1" /nobreak >nul
 
 echo CHECKING THE SETTINGS FOR TIME AND LANGUAGE IN WINDOWS OS.
 timeout /t "1" /nobreak >nul
@@ -1397,6 +1400,28 @@ netsh int ipv6 isatap set state enabled
 netsh int teredo set state enterpriseclient
 netsh interface ipv6 6to4 set state state=default
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "0" /f
+timeout /t "1" /nobreak >nul
+
+echo FONTS.
+set "url=https://github.com/notofonts/notofonts.github.io/archive/main.zip"
+set "zipFile=%temp%\Noto_Fonts.zip"
+set "destFolder=%temp%\NotoFonts"
+set "extractedFolder=%destFolder%\notofonts.github.io-main"
+set "sourceFontsFolder=%extractedFolder%\fonts"
+set "targetFontsFolder=%temp%\NotoFonts\Fonts"
+if exist "%destFolder%" (
+    rmdir /s /q "%destFolder%"
+    mkdir "%destFolder%"
+)
+if exist "%targetFontsFolder%" (
+    rmdir /s /q "%targetFontsFolder%"
+    mkdir "%targetFontsFolder%"
+)
+powershell -Command "Invoke-WebRequest -Uri '%url%' -OutFile '%zipFile%'"
+powershell -Command "Expand-Archive -Path '%zipFile%' -DestinationPath '%destFolder%'"
+for /r "%sourceFontsFolder%" %%f in (*.otf *.ttf) do (
+    move "%%f" "%targetFontsFolder%"
+)
 timeout /t "1" /nobreak >nul
 
 echo CHECKING THE POWER AND SLEEP SETTINGS.
