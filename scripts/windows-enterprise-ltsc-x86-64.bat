@@ -620,6 +620,59 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 
+echo CHECKING THE SETTINGS FOR ADDITIONAL COMPONENTS.
+echo Running a script to disable the Windows Media Player component.
+setlocal
+powershell -Command "if ((Get-WindowsCapability -Online -Name 'Media.WindowsMediaPlayer*').State -eq 'Installed') { Remove-WindowsCapability -Online -Name 'Media.WindowsMediaPlayer'; exit 0 } else { exit 1 }" > nul 2>&1
+if %errorlevel% equ 0 (
+    echo The Windows Media Player capability has been successfully removed.
+) else (
+    echo The Windows Media Player capability is not installed, cannot be found, or an error occurred.
+)
+endlocal
+setlocal
+powershell -Command "if ((Get-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback').State -eq 'Enabled') { Disable-WindowsOptionalFeature -Online -FeatureName 'MediaPlayback' -NoRestart; exit 0 } else { exit 1 }" > nul 2>&1
+if %errorlevel% equ 0 (
+    echo The MediaPlayback feature has been successfully disabled.
+) else (
+    echo The MediaPlayback feature is not enabled, cannot be found, or an error occurred.
+)
+endlocal
+echo Running a script to disable the Internet Explorer component.
+setlocal
+powershell -Command "if ((Get-WindowsCapability -Online -Name 'Browser.InternetExplorer*').State -eq 'Installed') { Remove-WindowsCapability -Online -Name 'Browser.InternetExplorer'; exit 0 } else { exit 1 }" > nul 2>&1
+if %errorlevel% equ 0 (
+    echo The Internet Explorer capability has been successfully removed.
+) else (
+    echo The Internet Explorer capability is not installed, cannot be found, or an error occurred.
+)
+endlocal
+echo Running a script to disable the Hello Face component.
+setlocal
+powershell -Command "if ((Get-WindowsCapability -Online -Name 'Hello.Face*').State -eq 'Installed') { Remove-WindowsCapability -Online -Name 'Hello.Face'; exit 0 } else { exit 1 }" > nul 2>&1
+if %errorlevel% equ 0 (
+    echo The Windows Hello Face capability has been successfully removed.
+) else (
+    echo The Windows Hello Face capability is not installed, cannot be found, or an error occurred.
+)
+endlocal
+echo Running a script to disable the Quick Assist component.
+powershell -Command "if ((Get-WindowsCapability -Online -Name 'App.Support.QuickAssist*').State -eq 'Installed') { Remove-WindowsCapability -Online -Name 'App.Support.QuickAssist'; exit 0 } else { exit 1 }" > nul 2>&1
+if %errorlevel% equ 0 (
+    echo The Quick Assist capability has been successfully removed.
+) else (
+    echo The Quick Assist capability is not installed, cannot be found, or an error occurred.
+)
+endlocal
+echo Running a script to disable the Steps Recorder component.
+powershell -Command "if ((Get-WindowsCapability -Online -Name 'App.StepsRecorder*').State -eq 'Installed') { Remove-WindowsCapability -Online -Name 'App.StepsRecorder'; exit 0 } else { exit 1 }" > nul 2>&1
+if %errorlevel% equ 0 (
+    echo The Steps Recorder capability has been successfully removed.
+) else (
+    echo The Steps Recorder capability is not installed, cannot be found, or an error occurred.
+)
+endlocal
+
 echo CHECKING THE SETTINGS FOR TIME AND LANGUAGE IN WINDOWS OS.
 timeout /t "1" /nobreak >nul
 echo Running a script to disable Improve Inking and Typing Recognition.
