@@ -1402,13 +1402,17 @@ netsh interface ipv6 6to4 set state state=default
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "0" /f
 timeout /t "1" /nobreak >nul
 
-echo FONTS.
+echo CHECKING FONTS SETTINGS FOR THE OPERATING SYSTEM.
+timeout /t "1" /nobreak >nul
 set "url=https://github.com/notofonts/notofonts.github.io/archive/main.zip"
 set "zipFile=%temp%\Noto_Fonts.zip"
 set "destFolder=%temp%\NotoFonts"
 set "extractedFolder=%destFolder%\notofonts.github.io-main"
 set "sourceFontsFolder=%extractedFolder%\fonts"
 set "targetFontsFolder=%temp%\NotoFonts\Fonts"
+set /p "userChoice=Do you want to download Google Fonts Noto? (Y/N): "
+if /I "%userChoice%"=="Y" (
+    echo Downloading Google Fonts Noto...
 if exist "%destFolder%" (
     rmdir /s /q "%destFolder%"
     mkdir "%destFolder%"
@@ -1421,6 +1425,14 @@ powershell -Command "Invoke-WebRequest -Uri '%url%' -OutFile '%zipFile%'"
 powershell -Command "Expand-Archive -Path '%zipFile%' -DestinationPath '%destFolder%'"
 for /r "%sourceFontsFolder%" %%f in (*.otf *.ttf) do (
     move "%%f" "%targetFontsFolder%"
+    )
+for %%f in ("%targetFontsFolder%\*.otf" "%targetFontsFolder%\*.ttf") do (
+        echo Installing %%~nxf
+        copy "%%f" "%fontsFolder%"
+        reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" /v "%%~nxf" /t REG_SZ /d "%%~nxf" /f
+    )
+) else (
+    echo Skipping download of Google Fonts Noto.
 )
 timeout /t "1" /nobreak >nul
 
@@ -1442,6 +1454,6 @@ start /b "" cmd /c "cscript //nologo //e:vbscript %SystemRoot%\System32\slmgr.vb
 start /b "" cmd /c "cscript //nologo //e:vbscript %SystemRoot%\System32\slmgr.vbs /ato >nul 2>&1"
 timeout /t "1" /nobreak >nul
 
-echo Reboot the operating system.
+echo REBOOT THE OPERATING SYSTEM.
 timeout /t "1" /nobreak >nul
 shutdown /r /f /t "0"
