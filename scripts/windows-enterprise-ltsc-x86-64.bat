@@ -1410,17 +1410,18 @@ set "destFolder=%temp%\NotoFonts"
 set "extractedFolder=%destFolder%\notofonts.github.io-main"
 set "sourceFontsFolder=%extractedFolder%\fonts"
 set "targetFontsFolder=%temp%\NotoFonts\Fonts"
+set "fontsFolder=%windir%\Fonts"
 set /p "userChoice=Do you want to download Google Fonts Noto? (Y/N): "
 if /I "%userChoice%"=="Y" (
     echo Downloading Google Fonts Noto...
 if exist "%destFolder%" (
     rmdir /s /q "%destFolder%"
-    mkdir "%destFolder%"
 )
 if exist "%targetFontsFolder%" (
     rmdir /s /q "%targetFontsFolder%"
-    mkdir "%targetFontsFolder%"
 )
+mkdir "%targetFontsFolder%"
+mkdir "%destFolder%"
 powershell -Command "Invoke-WebRequest -Uri '%url%' -OutFile '%zipFile%'"
 powershell -Command "Expand-Archive -Path '%zipFile%' -DestinationPath '%destFolder%'"
 for /r "%sourceFontsFolder%" %%f in (*.otf *.ttf) do (
