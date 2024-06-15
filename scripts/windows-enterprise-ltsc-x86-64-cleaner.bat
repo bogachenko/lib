@@ -17,7 +17,7 @@ title Windows 10 Enterprise LTSC Cleaner
 ::          Tether (USDT) or USD Coin (USDC) uses ETH, TRX or TON addresses, depending on the type of chain chosen.
 
 echo GETTING SUPERUSER RIGHTS.
-timeout /t "5" /nobreak >nul
+timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 set "params=%*"
 cd /d "%~dp0"
@@ -39,10 +39,28 @@ rem Clipboard Cleaner
 echo off | clip
 
 echo Stop processes
-rem Windows Explorer
-taskkill /f /im explorer.exe
+echo STOPPING THE WINDOWS EXPLORER PROCESS.
+timeout /t "1" /nobreak >nul
+echo Running a script to stop the process The Windows Explorer.exe in the operating system.
+tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
+    taskkill /f /im explorer.exe
+) || (
+    echo The Windows Explorer process was not found.
+)
+timeout /t "1" /nobreak >nul
 rem Firefox
 taskkill /f /im firefox.exe
+
+echo STOPPING THE WINDOWS EXPLORER PROCESS.
+timeout /t "1" /nobreak >nul
+echo Running a script to stop the process The Windows Explorer.exe in the operating system.
+tasklist /fi "imagename eq firefox.exe" 2>nul | find /i "firefox.exe" && (
+    taskkill /f /im firefox.exe
+) || (
+    echo The Windows Explorer process was not found.
+)
+timeout /t "1" /nobreak >nul
+
 rem Discord
 taskkill /f /im discord.exe
 rem Steam
@@ -72,12 +90,17 @@ rem Windows Update Center
 net stop wuauserv
 
 echo Flush DNS Cache
+timeout /t "1" /nobreak >nul
 ipconfig /flushdns
+timeout /t "1" /nobreak >nul
 
 echo Deleting Recovery points
+timeout /t "1" /nobreak >nul
 vssadmin delete shadows /all /quiet
+timeout /t "1" /nobreak >nul
 
 echo Tor Browser
+timeout /t "1" /nobreak >nul
 for %%S in (
     "cookies.sqlite"
     "favicons.sqlite"
@@ -92,8 +115,10 @@ for %%S in (
 ) do (
     powershell.exe -Command "Remove-Item -Path '%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\%%~S' -Recurse -Force"
 )
+timeout /t "1" /nobreak >nul
 
 echo Firefox Browser
+timeout /t "1" /nobreak >nul
 for %%S in (
     "cookies.sqlite"
     "cookies.sqlite-shm"
@@ -136,8 +161,10 @@ for %%S in (
 powershell.exe -Command "Remove-Item -Path '%PROGRAMDATA%\Mozilla-*' -Recurse -Force"
 powershell.exe -Command "Remove-Item -Path '%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%USERNAME%' -Recurse -Force"
 powershell.exe -Command "Remove-Item -Path '%USERPROFILE%\AppData\LocalLow\Mozilla' -Recurse -Force"
+timeout /t "1" /nobreak >nul
 
 echo Thunderbird
+timeout /t "1" /nobreak >nul
 for %%S in (
     "Crash Reports"
     "Pending Pings"
@@ -170,11 +197,15 @@ for %%S in (
     powershell.exe -Command "Remove-Item -Path '%APPDATA%\Thunderbird\Profiles\%USERNAME%\%%~S' -Force"
 )
 rd "%LOCALAPPDATA%\Thunderbird\Profiles\%USERNAME%" /s /q
+timeout /t "1" /nobreak >nul
 
 echo DirectX
+timeout /t "1" /nobreak >nul
 rd "%LOCALAPPDATA%\D3DSCache" /s /q
+timeout /t "1" /nobreak >nul
 
 echo Discord
+timeout /t "1" /nobreak >nul
 for %%S in (
     "GPUCache"
     "Code Cache"
@@ -183,15 +214,26 @@ for %%S in (
     powershell.exe -Command "Remove-Item -Path '%APPDATA%\discord\%%~S' -Recurse -Force"
 )
 del "%LOCALAPPDATA%\Discord\*.log" /s /q
+timeout /t "1" /nobreak >nul
 
 echo Spotify
+timeout /t "1" /nobreak >nul
 del "%LOCALAPPDATA%\Spotify\Browser\*.log" /s /q
-rd "%LOCALAPPDATA%\Spotify\Browser\Cache" /s /q
-rd "%LOCALAPPDATA%\Spotify\Browser\databases" /s /q
-rd "%LOCALAPPDATA%\Spotify\Browser\GPUCache" /s /q
-rd "%LOCALAPPDATA%\Spotify\Browser\Service Worker" /s /q
-rd "%LOCALAPPDATA%\Spotify\Data" /s /q
-rd "%LOCALAPPDATA%\Spotify\Storage" /s /q
+for %%S in (
+    "Cache"
+    "databases"
+    "GPUCache"
+    "Service Worker"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%LOCALAPPDATA%\Spotify\Browser\%%~S' -Recurse -Force"
+)
+for %%S in (
+    "Data"
+    "Storage"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%LOCALAPPDATA%\Spotify\%%~S' -Recurse -Force"
+)
+timeout /t "1" /nobreak >nul
 
 echo Steam
 del "%PROGRAMFILES(x86)%\Steam\*.log" /s /q
@@ -323,20 +365,21 @@ rd "%APPDATA%\Telegram Desktop\tdata\dumps" /s /q
 rd "%APPDATA%\Telegram Desktop\tdata\user_data" /s /q
 
 echo Visual Studio Code
-rd "%APPDATA%\Code\logs" /s /q
-rd "%APPDATA%\Code\Cache" /s /q
-rd "%APPDATA%\Code\GPUCache" /s /q
 rd "%APPDATA%\Code\User\History" /s /q
-rd "%APPDATA%\Code\CachedData" /s /q
-rd "%APPDATA%\Code\Crashpad" /s /q
-rd "%APPDATA%\Code\Code Cache" /s /q
+for %%S in (
+    "logs"
+    "Cache"
+    "GPUCache"
+    "CachedData"
+    "Crashpad"
+    "Code Cache"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Code\%%~S' -Recurse -Force"
+)
 del "%APPDATA%\Microsoft VS Code\*.log" /s /q
 
 echo VLC media player
 rd "%APPDATA%\vlc\crashdump" /s /q
-
-echo Countdown
-timeout 5
 
 echo Start process
 rem Windows Explorer

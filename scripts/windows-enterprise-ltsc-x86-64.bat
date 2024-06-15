@@ -60,7 +60,7 @@ timeout /t "1" /nobreak >nul
 
 echo STOPPING THE WINDOWS EXPLORER PROCESS.
 timeout /t "1" /nobreak >nul
-echo Running a script to stop the process The Windows Explorer.exe in the operating system.
+echo Running a script to stop the process The Windows Explorer in the operating system.
 tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
     taskkill /f /im explorer.exe
 ) || (
