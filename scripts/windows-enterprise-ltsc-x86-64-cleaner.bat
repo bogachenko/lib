@@ -31,12 +31,9 @@ if errorlevel 1 (
         echo UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 !params!", "", "runas", 1
     ) >> "%temp%\getadmin.vbs"
     "%temp%\getadmin.vbs"
-    exit /B
+    exit /b
 )
 timeout /t "1" /nobreak >nul
-
-echo Running a script to clear the clipboard.
-echo off | clip
 
 echo STOPPING A PROCESSES IN THE OPERATING SYSTEM.
 timeout /t "1" /nobreak >nul
@@ -117,21 +114,25 @@ tasklist /fi "imagename eq thunderbird.exe" 2>nul | find /i "thunderbird.exe" &&
     echo Thunderbird process was not found.
 )
 
-echo Stop services
-rem Windows Update Center
+echo STOPPING A SERVICES IN THE OPERATING SYSTEM.
+timeout /t "1" /nobreak >nul
+echo Windows Update Center
 net stop wuauserv
+timeout /t "1" /nobreak >nul
 
-echo Flush DNS Cache
+echo Running a script to clear the clipboard.
+timeout /t "1" /nobreak >nul
+echo off | clip
+timeout /t "1" /nobreak >nul
+echo Running a script to clean up the DNS cache.
 timeout /t "1" /nobreak >nul
 ipconfig /flushdns
 timeout /t "1" /nobreak >nul
-
-echo Deleting Recovery points
+echo Running a script to delete recovery points.
 timeout /t "1" /nobreak >nul
 vssadmin delete shadows /all /quiet
 timeout /t "1" /nobreak >nul
-
-echo Tor Browser
+echo Running a script to clean up the Tor Browser.
 timeout /t "1" /nobreak >nul
 for %%S in (
     "cookies.sqlite"
@@ -139,18 +140,20 @@ for %%S in (
     "formhistory.sqlite"
     "places.sqlite"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\%%~S' -Force"
+    powershell -Command "Remove-Item -Path '%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\%%~S' -Force"
 )
 for %%S in (
     "datareporting"
     "shader-cache"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%APPDATA%\Tor Browser\Browser\TorBrowser\Data\Browser\profile.default\%%~S' -Recurse -Force"
 )
 timeout /t "1" /nobreak >nul
-
-echo Firefox Browser
+echo Running a script to clean up the Firefox browser.
 timeout /t "1" /nobreak >nul
+powershell -Command "Remove-Item -Path '%PROGRAMDATA%\Mozilla-*' -Recurse -Force"
+powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%USERNAME%' -Recurse -Force"
+powershell -Command "Remove-Item -Path '%USERPROFILE%\AppData\LocalLow\Mozilla' -Recurse -Force"
 for %%S in (
     "cookies.sqlite"
     "cookies.sqlite-shm"
@@ -165,7 +168,7 @@ for %%S in (
     "sessionCheckpoints.json"
     "SiteSecurityServiceState.txt"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\%%~S' -Force"
+    powershell -Command "Remove-Item -Path '%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\%%~S' -Force"
 )
 for %%S in (
     "shader-cache"
@@ -175,33 +178,30 @@ for %%S in (
     "minidumps"
     "personality-provider"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%APPDATA%\Mozilla\Firefox\Profiles\%USERNAME%\%%~S' -Recurse -Force"
 )
 for %%S in (
     "Background Tasks Profiles"
     "Crash Reports"
     "Pending Pings"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Mozilla\Firefox\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%APPDATA%\Mozilla\Firefox\%%~S' -Recurse -Force"
 )
 for %%S in (
     "Extensions"
     "SystemExtensionsDev"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Mozilla\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%APPDATA%\Mozilla\%%~S' -Recurse -Force"
 )
-powershell.exe -Command "Remove-Item -Path '%PROGRAMDATA%\Mozilla-*' -Recurse -Force"
-powershell.exe -Command "Remove-Item -Path '%LOCALAPPDATA%\Mozilla\Firefox\Profiles\%USERNAME%' -Recurse -Force"
-powershell.exe -Command "Remove-Item -Path '%USERPROFILE%\AppData\LocalLow\Mozilla' -Recurse -Force"
 timeout /t "1" /nobreak >nul
-
-echo Thunderbird
+echo Running a script to clean up the Thunderbird mail. 
 timeout /t "1" /nobreak >nul
+powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Thunderbird\Profiles\%USERNAME%' -Recurse -Force"
 for %%S in (
     "Crash Reports"
     "Pending Pings"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Thunderbird\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%APPDATA%\Thunderbird\%%~S' -Recurse -Force"
 )
 for %%S in (
     "crashes"
@@ -209,7 +209,7 @@ for %%S in (
     "datareporting"
     "shader-cache"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Thunderbird\Profiles\%USERNAME%\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%APPDATA%\Thunderbird\Profiles\%USERNAME%\%%~S' -Recurse -Force"
 )
 for %%S in (
     "favicons.sqlite"
@@ -226,48 +226,43 @@ for %%S in (
     "history.sqlite-wal"
     "formhistory.sqlite"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Thunderbird\Profiles\%USERNAME%\%%~S' -Force"
+    powershell -Command "Remove-Item -Path '%APPDATA%\Thunderbird\Profiles\%USERNAME%\%%~S' -Force"
 )
-rd "%LOCALAPPDATA%\Thunderbird\Profiles\%USERNAME%" /s /q
 timeout /t "1" /nobreak >nul
-
-echo DirectX
+echo Running a script to clean up the DirectX.
 timeout /t "1" /nobreak >nul
-rd "%LOCALAPPDATA%\D3DSCache" /s /q
+powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\D3DSCache' -Recurse -Force"
 timeout /t "1" /nobreak >nul
-
-echo Discord
+echo Running a script to clean up the Discord.
 timeout /t "1" /nobreak >nul
+powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Discord\*.log' -Force"
 for %%S in (
     "GPUCache"
     "Code Cache"
     "Cache"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%APPDATA%\discord\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%APPDATA%\discord\%%~S' -Recurse -Force"
 )
-del "%LOCALAPPDATA%\Discord\*.log" /s /q
 timeout /t "1" /nobreak >nul
-
-echo Spotify
+echo Running a script to clean up the Spotify.
 timeout /t "1" /nobreak >nul
-del "%LOCALAPPDATA%\Spotify\Browser\*.log" /s /q
+powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Spotify\Browser\*.log' -Force"
 for %%S in (
     "Cache"
     "databases"
     "GPUCache"
     "Service Worker"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%LOCALAPPDATA%\Spotify\Browser\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Spotify\Browser\%%~S' -Recurse -Force"
 )
 for %%S in (
     "Data"
     "Storage"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%LOCALAPPDATA%\Spotify\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Spotify\%%~S' -Recurse -Force"
 )
 timeout /t "1" /nobreak >nul
-
-echo Steam
+echo Running a script to clean up the Steam.
 timeout /t "1" /nobreak >nul
 del "%PROGRAMFILES(x86)%\Steam\*.log" /s /q
 rd "%LOCALAPPDATA%\Steam\htmlcache" /s /q
@@ -275,14 +270,13 @@ for %%S in (
     "logs"
     "dumps"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%PROGRAMFILES(x86)%\Steam\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%PROGRAMFILES(x86)%\Steam\%%~S' -Recurse -Force"
 )
 timeout /t "1" /nobreak >nul
-
-echo Chromium Browser
+echo Running a script to clean up the Chromium browser.
 timeout /t "1" /nobreak >nul
-del "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics-*" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics" /s /q
+powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics' -Recurse -Force"
+powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics-*' -Force"
 for %%S in (
     "Cache"
     "Code Cache"
@@ -306,7 +300,7 @@ for %%S in (
     "VideoDecodeStats"
     "WebrtcVideoStats"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%LOCALAPPDATA%\Chromium\User Data\Default\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Chromium\User Data\Default\%%~S' -Recurse -Force"
 )
 for %%S in (
     "Favicons-journal"
@@ -325,106 +319,105 @@ for %%S in (
     "Web Data-journal"
     "Web Data"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%LOCALAPPDATA%\Chromium\User Data\Default\%%~S' -Force"
+    powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Chromium\User Data\Default\%%~S' -Force"
 )
 timeout /t "1" /nobreak >nul
-
-echo AdGuard VPN
+echo Running a script to clean up the AdGuard VPN.
 timeout /t "1" /nobreak >nul
 for %%S in (
     "Logs"
     "Crashes"
     "Temp"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%PROGRAMDATA%\AdguardVpn\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%PROGRAMDATA%\AdguardVpn\%%~S' -Recurse -Force"
 )
 timeout /t "1" /nobreak >nul
-
-echo AdGuard
+echo Running a script to clean up the AdGuard.
 timeout /t "1" /nobreak >nul
 for %%S in (
     "Logs"
     "Crashes"
     "Temp"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%PROGRAMDATA%\Adguard\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%PROGRAMDATA%\Adguard\%%~S' -Recurse -Force"
 )
 timeout /t "1" /nobreak >nul
-
-echo qBittorrent
-rd "%LOCALAPPDATA%\qBittorrent" /s /q
-
-echo Rockstar Games Launcher
-del "%PROGRAMDATA%\Rockstar Games\Launcher\*.log" /s /q
-rd "%LOCALAPPDATA%\Rockstar Games\Launcher\CrashLogs" /s /q
-
-echo SquirrelTemp
-rd "%LOCALAPPDATA%\SquirrelTemp" /s /q
-
-echo GitHub Desktop
-rd "%LOCALAPPDATA%\GitHubDesktop\*.log" /s /q
-
-echo Windows
+echo Running a script to clean up the qBittorrent.
+timeout /t "1" /nobreak >nul
+powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\qBittorrent' -Recurse -Force"
+timeout /t "1" /nobreak >nul
+echo Running a script to clean up the Rockstar Games Launcher.
+timeout /t "1" /nobreak >nul
+powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Rockstar Games\Launcher\CrashLogs' -Recurse -Force"
+powershell -Command "Remove-Item -Path '%PROGRAMDATA%\Rockstar Games\Launcher\*.log' -Force"
+timeout /t "1" /nobreak >nul
+echo Running a script to clean up the SquirrelTemp.
+timeout /t "1" /nobreak >nul
+powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\SquirrelTemp' -Recurse -Force"
+timeout /t "1" /nobreak >nul
+echo Running a script to clean up the GitHub Desktop.
+timeout /t "1" /nobreak >nul
+powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\GitHubDesktop\*.log' -Force"
+timeout /t "1" /nobreak >nul
+echo Running a script to clean up the Windows.
 cleanmgr /sagerun:1 /s /q
-rd "%WINDIR%\Panther" /s /q
-rd "%WINDIR%\softwareDistribution" /s /q
-rd "%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization" /s /q
-rd "%WINDIR%\ServiceProfiles\NetworkService\AppData\LocalLow\Microsoft\CryptnetUrlCache" /s /q
-rd "%PROGRAMDATA%\USOShared\Logs" /s /q
-del "%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db" /s /q
-del "%PROGRAMDATA%\Microsoft\Search\Data\Applications\Windows\*.*" /s /q
-del "%WINDIR%\*.log" /s /q
-del "%WINDIR%\Debug\*.log" /s /q
-del "%WINDIR%\inf\*.log" /s /q
-powershell.exe -command "Remove-item '%LOCALAPPDATA%\Microsoft\CLR_*'" -Recurse
-powershell.exe -command "Remove-item '%WINDIR%\System32\sru\SRU*.*'" -Recurse
-rd "%APPDATA%\Microsoft\Windows\Recent" /s /q
-rd "%LOCALAPPDATA%\ElevatedDiagnostics" /s /q
-rd "%LOCALAPPDATA%\Microsoft\Windows\WebCache" /s /q
-rd "%LOCALAPPDATA%\Temp" /s /q
-rd "%PROGRAMDATA%\Microsoft\Diagnosis" /s /q
-rd "%PROGRAMDATA%\Microsoft\Windows Defender\" /s /q
-rd "%SYSTEMDRIVE%\$Recycle.bin" /s /q
-rd "%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache" /s /q
-rd "%WINDIR%\DiagTrack" /s /q
-rd "%WINDIR%\Installer" /s /q
-rd "%WINDIR%\Logs" /s /q
-del "%WINDIR%\Logs\waasmedic\*.etl" /s /q
-rd "%WINDIR%\Prefetch" /s /q
-rd "%WINDIR%\SoftwareDistribution" /s /q
-rd "%WINDIR%\Temp" /s /q
-rd "%LOCALAPPDATA%\Microsoft\Windows\Caches" /s /q
-rd "%LOCALAPPDATA%\Microsoft\Windows\Temporary Internet Files" /s /q
-rd "%WINDIR%\Offline Web Pages" /s /q
-rd "%PROGRAMDATA%\Microsoft\Windows\WER" /s /q
-del "%LOCALAPPDATA%\IconCache.db" /s /q
-rd "%LOCALAPPDATA%\cache" /s /q
-rd "%WINDIR%\LiveKernelReports" /s /q
-Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
-Dism.exe /online /Cleanup-Image /StartComponentCleanup
+dism /online /Cleanup-Image /StartComponentCleanup /ResetBase
+dism /online /Cleanup-Image /StartComponentCleanup
+powershell -command "Remove-item '%WINDIR%\*.log' -Force"
+powershell -command "Remove-item '%WINDIR%\Debug\*.log' -Force"
+powershell -command "Remove-item '%WINDIR%\inf\*.log' -Force"
+powershell -command "Remove-item '%PROGRAMDATA%\Microsoft\Search\Data\Applications\Windows\*.*' -Force"
+powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db' -Force"
+powershell -command "Remove-item '%LOCALAPPDATA%\IconCache.db' -Force"
+powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\CLR_*' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\System32\sru\SRU*.*' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\Panther' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\ServiceProfiles\NetworkService\AppData\LocalLow\Microsoft\CryptnetUrlCache' -Recurse -Force"
+powershell -command "Remove-item '%PROGRAMDATA%\USOShared\Logs' -Recurse -Force"
+powershell -command "Remove-item '%PROGRAMDATA%\Microsoft\Windows\WER' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\Offline Web Pages' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\Logs' -Recurse -Force"
+powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\Windows\Temporary Internet Files' -Recurse -Force"
+powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\Windows\Caches' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\LiveKernelReports' -Recurse -Force"
+powershell -command "Remove-item '%LOCALAPPDATA%\cache' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\Temp' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\SoftwareDistribution' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\Prefetch' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\Installer' -Recurse -Force"
+powershell -command "Remove-item '%WINDIR%\DiagTrack' -Recurse -Force"
+powershell -command "Remove-item '%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache' -Recurse -Force"
+powershell -command "Remove-item '%SYSTEMDRIVE%\$Recycle.bin' -Recurse -Force"
+powershell -command "Remove-item '%PROGRAMDATA%\Microsoft\Windows Defender' -Recurse -Force"
+powershell -command "Remove-item '%PROGRAMDATA%\Microsoft\Diagnosis' -Recurse -Force"
+powershell -command "Remove-item '%LOCALAPPDATA%\Temp' -Recurse -Force"
+powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\Windows\WebCache' -Recurse -Force"
+powershell -command "Remove-item '%LOCALAPPDATA%\ElevatedDiagnostics' -Recurse -Force"
+powershell -command "Remove-item '%APPDATA%\Microsoft\Windows\Recent' -Recurse -Force"
 
-echo Microsoft Office
-rd "%APPDATA%\Microsoft\Office" /s /q
-rd "%LOCALAPPDATA%\Microsoft\Office" /s /q
+echo Running a script to clean up the Microsoft Office.
+powershell -command "Remove-item '%APPDATA%\Microsoft\Office' -Recurse -Force"
+powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\Office' -Recurse -Force"
 
-echo Nvidia
+echo Running a script to clean up the NVIDIA.
 rd "%LOCALAPPDATA%\NVIDIA\DXCache" /s /q
 rd "%LOCALAPPDATA%\NVIDIA\GLCache" /s /q
 rd "%PROGRAMDATA%\NVIDIA Corporation" /s /q
 rd "%PROGRAMDATA%\NVIDIA" /s /q
 rd "%PROGRAMDATA%\NVIDIA Corporation\Installer2" /s /q
 
-echo Intel
+echo Running a script to clean up the Intel.
 rd "%PROGRAMDATA%\Intel" /s /q
 rd "%USERPROFILE%\AppData\LocalLow\Intel\ShaderCache" /s /q
 
-echo Telegram
-del "%APPDATA%\Telegram Desktop\log.txt" /s /q
-powershell.exe -command "Remove-item '%APPDATA%\Telegram Desktop\log_*.txt'" -Recurse
-rd "%APPDATA%\Telegram Desktop\tdata\dumps" /s /q
-rd "%APPDATA%\Telegram Desktop\tdata\user_data" /s /q
+echo Running a script to clean up the Telegram.
+powershell -command "Remove-item '%APPDATA%\Telegram Desktop\log.txt' -Force"
+powershell -command "Remove-item '%APPDATA%\Telegram Desktop\log_*.txt' -Force"
+powershell -command "Remove-item '%APPDATA%\Telegram Desktop\tdata\dumps' -Recurse -Force"
+powershell -command "Remove-item '%APPDATA%\Telegram Desktop\tdata\user_data' -Recurse -Force"
 
-echo Visual Studio Code
+echo Running a script to clean up the Visual Studio Code.
 rd "%APPDATA%\Code\User\History" /s /q
 for %%S in (
     "logs"
@@ -434,11 +427,11 @@ for %%S in (
     "Crashpad"
     "Code Cache"
 ) do (
-    powershell.exe -Command "Remove-Item -Path '%APPDATA%\Code\%%~S' -Recurse -Force"
+    powershell -Command "Remove-Item -Path '%APPDATA%\Code\%%~S' -Recurse -Force"
 )
 del "%APPDATA%\Microsoft VS Code\*.log" /s /q
 
-echo VLC media player
+echo Running a script to clean up the VLC media player.
 rd "%APPDATA%\vlc\crashdump" /s /q
 
 echo Start process
