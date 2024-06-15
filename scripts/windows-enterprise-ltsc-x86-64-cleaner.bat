@@ -4,7 +4,7 @@ title Windows 10 Enterprise LTSC Cleaner
 
 :: Windows 10 Enterprise LTSC Cleaner
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
-:: License: MIT license
+:: License: MIT license <https://raw.githubusercontent.com/bogachenko/lib/master/LICENSE.md>
 :: Last update: June 2024
 :: Donate:
 ::          Bitcoin (BTC) - 3JfwK6ULJ1xY8xjpu6uzpBKLm4ghkdSBzG
@@ -35,55 +35,87 @@ if errorlevel 1 (
 )
 timeout /t "1" /nobreak >nul
 
-rem Clipboard Cleaner
+echo Running a script to clear the clipboard.
 echo off | clip
 
-echo Stop processes
-echo STOPPING THE WINDOWS EXPLORER PROCESS.
+echo STOPPING A PROCESSES IN THE OPERATING SYSTEM.
 timeout /t "1" /nobreak >nul
-echo Running a script to stop the process The Windows Explorer.exe in the operating system.
+echo Running a script to stop the process The Windows Explorer in the operating system.
 tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
     taskkill /f /im explorer.exe
 ) || (
     echo The Windows Explorer process was not found.
 )
 timeout /t "1" /nobreak >nul
-rem Firefox
-taskkill /f /im firefox.exe
-
-echo STOPPING THE WINDOWS EXPLORER PROCESS.
-timeout /t "1" /nobreak >nul
-echo Running a script to stop the process The Windows Explorer.exe in the operating system.
+echo Running a script to stop the process Firefox in the operating system.
 tasklist /fi "imagename eq firefox.exe" 2>nul | find /i "firefox.exe" && (
     taskkill /f /im firefox.exe
 ) || (
-    echo The Windows Explorer process was not found.
+    echo Firefox process was not found.
 )
 timeout /t "1" /nobreak >nul
-
-rem Discord
-taskkill /f /im discord.exe
-rem Steam
-taskkill /f /im steam.exe
-rem Spotify
-taskkill /f /im spotify.exe
-rem Chromium
-taskkill /f /im chrome.exe
-rem AdGuard
-taskkill /f /im adguard.exe
-rem AdGuard VPN
-taskkill /f /im adguardvpn.exe
-rem Telegram
-taskkill /f /im telegram.exe
-rem Thunderbird
-taskkill /f /im thunderbird.exe
-rem Windows Security Health Service
-taskkill /f /im SecurityHealthService.exe
-taskkill /f /im SecurityHealthSystray.exe
-rem Microsoft Compatibility Telemetry
-taskkill /f /im compattelrunner.exe
-rem Microsoft SmartScreen
-taskkill /f /im smartscreen.exe
+echo Running a script to stop the process Discord in the operating system.
+tasklist /fi "imagename eq discord.exe" 2>nul | find /i "discord.exe" && (
+    taskkill /f /im discord.exe
+) || (
+    echo Discord process was not found.
+)
+timeout /t "1" /nobreak >nul
+echo Running a script to stop the process Steam in the operating system.
+tasklist /fi "imagename eq steam.exe" 2>nul | find /i "steam.exe" && (
+    taskkill /f /im steam.exe
+) || (
+    echo Steam process was not found.
+)
+timeout /t "1" /nobreak >nul
+echo Running a script to stop the process Spotify in the operating system.
+tasklist /fi "imagename eq spotify.exe" 2>nul | find /i "spotify.exe" && (
+    taskkill /f /im spotify.exe
+) || (
+    echo Spotify process was not found.
+)
+timeout /t "1" /nobreak >nul
+echo Running a script to stop the process Chromium in the operating system.
+tasklist /fi "imagename eq chromium.exe" 2>nul | find /i "chromium.exe" && (
+    taskkill /f /im chromium.exe
+) || (
+    echo Chromium process was not found.
+)
+timeout /t "1" /nobreak >nul
+echo Running a script to stop the process Google Chrome in the operating system.
+tasklist /fi "imagename eq chrome.exe" 2>nul | find /i "chrome.exe" && (
+    taskkill /f /im chrome.exe
+) || (
+    echo Google Chrome process was not found.
+)
+timeout /t "1" /nobreak >nul
+echo Running a script to stop the process AdGuard in the operating system.
+tasklist /fi "imagename eq adguard.exe" 2>nul | find /i "adguard.exe" && (
+    taskkill /f /im adguard.exe
+) || (
+    echo AdGuard process was not found.
+)
+timeout /t "1" /nobreak >nul
+echo Running a script to stop the process AdGuard VPN in the operating system.
+tasklist /fi "imagename eq adguardvpn.exe" 2>nul | find /i "adguardvpn.exe" && (
+    taskkill /f /im adguardvpn.exe
+) || (
+    echo AdGuard VPN process was not found.
+)
+timeout /t "1" /nobreak >nul
+echo Running a script to stop the process Telegram in the operating system.
+tasklist /fi "imagename eq telegram.exe" 2>nul | find /i "telegram.exe" && (
+    taskkill /f /im telegram.exe
+) || (
+    echo Telegram process was not found.
+)
+timeout /t "1" /nobreak >nul
+echo Running a script to stop the process Thunderbird in the operating system.
+tasklist /fi "imagename eq thunderbird.exe" 2>nul | find /i "thunderbird.exe" && (
+    taskkill /f /im thunderbird.exe
+) || (
+    echo Thunderbird process was not found.
+)
 
 echo Stop services
 rem Windows Update Center
@@ -236,60 +268,88 @@ for %%S in (
 timeout /t "1" /nobreak >nul
 
 echo Steam
+timeout /t "1" /nobreak >nul
 del "%PROGRAMFILES(x86)%\Steam\*.log" /s /q
 rd "%LOCALAPPDATA%\Steam\htmlcache" /s /q
-rd "%PROGRAMFILES(x86)%\Steam\dumps" /s /q
-rd "%PROGRAMFILES(x86)%\Steam\logs" /s /q
+for %%S in (
+    "logs"
+    "dumps"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%PROGRAMFILES(x86)%\Steam\%%~S' -Recurse -Force"
+)
+timeout /t "1" /nobreak >nul
 
 echo Chromium Browser
+timeout /t "1" /nobreak >nul
 del "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics-*" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Favicons-journal" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Favicons" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\heavy_ad_intervention_opt_out.db-journal" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\heavy_ad_intervention_opt_out.db" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\History-journal" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\History" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Network Action Predictor-journal" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Network Action Predictor" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Shortcuts-journal" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Shortcuts" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Top Sites-journal" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Top Sites" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Visited Links" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Web Data-journal" /s /q
-del "%LOCALAPPDATA%\Chromium\User Data\Default\Web Data" /s /q
 rd "%LOCALAPPDATA%\Chromium\User Data\BrowserMetrics" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\Cache" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\Code Cache" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\commerce_subscription_db" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\coupon_db" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\databases" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\DawnCache" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\Extension State" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\Feature Engagement Tracker" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\GPUCache" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\IndexedDB" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\Local Storage" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\Network" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\optimization_guide_hint_cache_store" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\optimization_guide_model_metadata_store" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\Platform Notifications" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\Session Storage" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\Sessions" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\shared_proto_db" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\Site Characteristics Database" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\VideoDecodeStats" /s /q
-rd "%LOCALAPPDATA%\Chromium\User Data\Default\WebrtcVideoStats" /s /q
+for %%S in (
+    "Cache"
+    "Code Cache"
+    "commerce_subscription_db"
+    "coupon_db"
+    "databases"
+    "DawnCache"
+    "Extension State"
+    "Feature Engagement Tracker"
+    "GPUCache"
+    "IndexedDB"
+    "Local Storage"
+    "Network"
+    "optimization_guide_hint_cache_store"
+    "optimization_guide_model_metadata_store"
+    "Platform Notifications"
+    "Session Storage"
+    "Sessions"
+    "shared_proto_db"
+    "Site Characteristics Database"
+    "VideoDecodeStats"
+    "WebrtcVideoStats"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%LOCALAPPDATA%\Chromium\User Data\Default\%%~S' -Recurse -Force"
+)
+for %%S in (
+    "Favicons-journal"
+    "Favicons"
+    "heavy_ad_intervention_opt_out.db-journal"
+    "heavy_ad_intervention_opt_out.db"
+    "History-journal"
+    "History"
+    "Network Action Predictor-journal"
+    "Network Action Predictor"
+    "Shortcuts-journal"
+    "Shortcuts"
+    "Top Sites-journal"
+    "Top Sites"
+    "Visited Links"
+    "Web Data-journal"
+    "Web Data"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%LOCALAPPDATA%\Chromium\User Data\Default\%%~S' -Force"
+)
+timeout /t "1" /nobreak >nul
 
 echo AdGuard VPN
-rd "%PROGRAMDATA%\AdguardVpn\Logs" /s /q
-rd "%PROGRAMDATA%\AdguardVpn\Crashes" /s /q
-rd "%PROGRAMDATA%\AdguardVpn\Temp" /s /q
+timeout /t "1" /nobreak >nul
+for %%S in (
+    "Logs"
+    "Crashes"
+    "Temp"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%PROGRAMDATA%\AdguardVpn\%%~S' -Recurse -Force"
+)
+timeout /t "1" /nobreak >nul
 
 echo AdGuard
-rd "%PROGRAMDATA%\Adguard\Logs" /s /q
-rd "%PROGRAMDATA%\Adguard\Temp" /s /q
-rd "%PROGRAMDATA%\Adguard\Crashes" /s /q
+timeout /t "1" /nobreak >nul
+for %%S in (
+    "Logs"
+    "Crashes"
+    "Temp"
+) do (
+    powershell.exe -Command "Remove-Item -Path '%PROGRAMDATA%\Adguard\%%~S' -Recurse -Force"
+)
+timeout /t "1" /nobreak >nul
 
 echo qBittorrent
 rd "%LOCALAPPDATA%\qBittorrent" /s /q
