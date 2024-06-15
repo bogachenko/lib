@@ -44,7 +44,7 @@ if errorlevel 1 (
         echo UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 !params!", "", "runas", 1
     ) >> "%temp%\getadmin.vbs"
     "%temp%\getadmin.vbs"
-    exit /B
+    exit /b
 )
 set "url=https://github.com/M2Team/NanaRun/releases/download/1.0.18.0/NanaRun_1.0_Preview2_1.0.18.0.zip"
 set "zipFile=%temp%\NanaRun_1.0_Preview2_1.0.18.0.zip"
@@ -161,7 +161,6 @@ timeout /t "1" /nobreak >nul
 echo CHECKING THE SETTINGS FOR THE LIST IN WINDOWS TASK SCHEDULER.
 timeout /t "1" /nobreak >nul
 echo Running a script to disable Windows Defender in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance"
@@ -191,7 +190,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable diagnostics in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
@@ -224,7 +222,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable Customer Experience Improvement in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Autochk\Proxy"
@@ -256,7 +253,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable telemetry in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
@@ -285,7 +281,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable the creation of digital fingerprints of the disk in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\DiskFootprint\Diagnostics"
@@ -312,7 +307,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable Family Safety Mode in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Shell\FamilySafetyMonitor"
@@ -339,7 +333,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable maintenance and management of backup using the File History feature in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\FileHistory\File History (maintenance mode)"
@@ -365,7 +358,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable network diagnostic tools and network information gathering in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\NetTrace\GatherNetworkInfo"
@@ -391,7 +383,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable Xbox in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\XblGameSave\XblGameSaveTask"
@@ -417,7 +408,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable the automatic cleanup of content related to Retail Demo mode in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\RetailDemo\CleanupOfflineContent"
@@ -443,7 +433,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable error reporting in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Windows Error Reporting\QueueReporting"
@@ -469,7 +458,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable location notifications and the Windows action dialog in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Location\Notifications"
@@ -496,7 +484,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable device information in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Device Information\Device"
@@ -523,7 +510,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable the Office ClickToRun Service Monitor in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Office\Office ClickToRun Service Monitor"
@@ -549,7 +535,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable Sysmain tasks in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Sysmain\ResPriStaticDbSync"
@@ -576,7 +561,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable the Mobile Broadband Accounts task in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\Mobile Broadband Accounts\MNO Metadata Parser"
@@ -602,7 +586,6 @@ for %%T in (
 endlocal
 timeout /t "1" /nobreak >nul
 echo Running a script to disable the Data Usage Subscription Management in the Task Scheduler.
-timeout /t "1" /nobreak >nul
 setlocal enabledelayedexpansion
 for %%T in (
     "Microsoft\Windows\DUSM\dusmtask"
@@ -788,7 +771,6 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsof
 reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableEnhancedNotifications" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "DisableBlockAtFirstSeen" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection" /v "UILockdown" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows Defender Security Center\Virus and threat protection" /v "UILockdown" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Reporting" /v "DisableGenericRePorts" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f
@@ -973,12 +955,20 @@ reg add "HKCU\Software\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy" /v
 reg add "HKLM\Software\Microsoft\PolicyManager\default\Privacy\AllowInputPersonalization" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d "0" /f
 echo Running a script to disable inking and typing personalization.
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+    "RestrictImplicitInkCollection"
+    "RestrictImplicitTextCollection"
+    ) do reg add "%%H\Software\Microsoft\InputPersonalization" /v %%~S /t REG_DWORD /d "1" /f
+)
+for %%H in (HKCU HKLM) do (
+    for %%S in (
+    "RestrictImplicitInkCollection"
+    "RestrictImplicitTextCollection"
+    ) do reg add "%%H\Software\Policies\Microsoft\InputPersonalization" /v %%~S /t REG_DWORD /d "1" /f
+)
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\HandwritingErrorReports" /v "PreventHandwritingErrorReports" /t REG_DWORD /d "1" /f
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\Windows\TabletPC" /v "PreventHandwritingDataSharing" /t REG_DWORD /d "1" /f
-for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "1" /f
-for %%H in (HKCU HKLM) do reg add "%%H\Software\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "1" /f
-for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "1" /f
-for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPolicy" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\InputPersonalization\TrainedDataStore" /v "HarvestContacts" /t REG_DWORD /d "0" /f
 echo Running a script to disable sending additional diagnostic data.
@@ -1080,6 +1070,7 @@ reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DW
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
 echo Running a script to disable Windows Search.
+dism.exe /online /disable-feature /FeatureName:searchengine-client-package /NoRestart
 for %%H in (HKCU HKLM) do (
     for %%S in (
     "DisableWebSearch"
