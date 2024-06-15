@@ -1,9 +1,9 @@
 @echo off
 title Windows 10 Enterprise LTSC
 
-:: Windows 10 Enterprise LTSC build 19044.4412 x86_64
+:: Windows 10 Enterprise LTSC build 19044.4529 x86_64
 :: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
-:: License: MIT license
+:: License: MIT license <https://raw.githubusercontent.com/bogachenko/lib/master/LICENSE.md>
 :: Last update: June 2024
 :: Donate:
 ::          Bitcoin (BTC) - 3JfwK6ULJ1xY8xjpu6uzpBKLm4ghkdSBzG
