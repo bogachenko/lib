@@ -120,6 +120,8 @@ echo Windows Update Center
 net stop wuauserv
 timeout /t "1" /nobreak >nul
 
+echo STARTING THE SCRIPT.
+timeout /t "1" /nobreak >nul
 echo Running a script to clear the clipboard.
 timeout /t "1" /nobreak >nul
 echo off | clip
@@ -379,10 +381,6 @@ powershell -command "Remove-item '%PROGRAMDATA%\Microsoft\Windows\WER' -Recurse 
 powershell -command "Remove-item '%LOCALAPPDATA%\cache' -Recurse -Force"
 powershell -command "Remove-item '%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache' -Recurse -Force"
 powershell -command "Remove-item '%SYSTEMDRIVE%\$Recycle.bin' -Recurse -Force"
-powershell -command "Remove-item '%PROGRAMDATA%\Microsoft\Windows Defender' -Recurse -Force"
-powershell -command "Remove-item '%PROGRAMDATA%\Microsoft\Diagnosis' -Recurse -Force"
-powershell -command "Remove-item '%LOCALAPPDATA%\Temp' -Recurse -Force"
-powershell -command "Remove-item '%LOCALAPPDATA%\ElevatedDiagnostics' -Recurse -Force"
 powershell -command "Remove-item '%APPDATA%\Microsoft\Windows\Recent' -Recurse -Force"
 for %%S in (
     "DiagTrack"
@@ -403,6 +401,18 @@ for %%S in (
     "Caches"
 ) do (
     powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Microsoft\Windows\%%~S' -Recurse -Force"
+)
+for %%S in (
+    "Temp"
+    "ElevatedDiagnostics"
+) do (
+    powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\%%~S' -Recurse -Force"
+)
+for %%S in (
+    "Diagnosis"
+    "Windows Defender"
+) do (
+    powershell -Command "Remove-Item -Path '%PROGRAMDATA%\Microsoft\%%~S' -Recurse -Force"
 )
 timeout /t "1" /nobreak >nul
 echo Running a script to clean up the Microsoft Office.
@@ -475,5 +485,5 @@ echo Windows Update Center
 net start wuauserv
 timeout /t "1" /nobreak >nul
 
-echo Shutdown
+echo ENDING THE SCRIPT.
 exit
