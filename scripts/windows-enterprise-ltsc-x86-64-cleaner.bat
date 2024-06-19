@@ -360,6 +360,7 @@ timeout /t "1" /nobreak >nul
 powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\GitHubDesktop\*.log' -Force"
 timeout /t "1" /nobreak >nul
 echo Running a script to clean up the Windows.
+timeout /t "1" /nobreak >nul
 cleanmgr /sagerun:1 /s /q
 dism /online /Cleanup-Image /StartComponentCleanup /ResetBase
 dism /online /Cleanup-Image /StartComponentCleanup
@@ -403,10 +404,14 @@ for %%S in (
 ) do (
     powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Microsoft\Windows\%%~S' -Recurse -Force"
 )
+timeout /t "1" /nobreak >nul
 echo Running a script to clean up the Microsoft Office.
+timeout /t "1" /nobreak >nul
 powershell -command "Remove-item '%APPDATA%\Microsoft\Office' -Recurse -Force"
 powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\Office' -Recurse -Force"
+timeout /t "1" /nobreak >nul
 echo Running a script to clean up the NVIDIA.
+timeout /t "1" /nobreak >nul
 powershell -command "Remove-item '%PROGRAMDATA%\NVIDIA Corporation' -Recurse -Force"
 powershell -command "Remove-item '%PROGRAMDATA%\NVIDIA' -Recurse -Force"
 for %%S in (
@@ -415,11 +420,14 @@ for %%S in (
 ) do (
     powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\NVIDIA\%%~S' -Recurse -Force"
 )
+timeout /t "1" /nobreak >nul
 echo Running a script to clean up the Intel.
+timeout /t "1" /nobreak >nul
 powershell -command "Remove-item '%PROGRAMDATA%\Intel' -Recurse -Force"
 powershell -command "Remove-item '%USERPROFILE%\AppData\LocalLow\Intel\ShaderCache' -Recurse -Force"
-
+timeout /t "1" /nobreak >nul
 echo Running a script to clean up the Telegram.
+timeout /t "1" /nobreak >nul
 for %%S in (
     "log.txt"
     "log_*.txt"
@@ -432,7 +440,9 @@ for %%S in (
 ) do (
     powershell -Command "Remove-Item -Path '%APPDATA%\Telegram Desktop\tdata\%%~S' -Recurse -Force"
 )
+timeout /t "1" /nobreak >nul
 echo Running a script to clean up the Visual Studio Code.
+timeout /t "1" /nobreak >nul
 powershell -Command "Remove-Item -Path '%APPDATA%\Microsoft VS Code\*.log' -Force"
 powershell -command "Remove-item '%APPDATA%\Code\User\History' -Recurse -Force"
 for %%S in (
@@ -445,16 +455,25 @@ for %%S in (
 ) do (
     powershell -Command "Remove-Item -Path '%APPDATA%\Code\%%~S' -Recurse -Force"
 )
+timeout /t "1" /nobreak >nul
 echo Running a script to clean up the VLC media player.
 powershell -Command "Remove-Item -Path '%APPDATA%\vlc\crashdump' -Recurse -Force"
+timeout /t "1" /nobreak >nul
 
-echo Start process
-rem Windows Explorer
-start explorer.exe
+echo STARTING A PROCESSES IN THE OPERATING SYSTEM.
+timeout /t "1" /nobreak >nul
+echo Running a script to stop the process The Windows Explorer in the operating system.
+tasklist /fi "imagename eq explorer.exe" 2>nul | find /i "explorer.exe" && (
+    start explorer.exe
+) || (
+    echo The Windows Explorer process was not found.
+)
 
-echo Start services
-rem Windows Update Center
+echo STARTING A SERVICES IN THE OPERATING SYSTEM.
+timeout /t "1" /nobreak >nul
+echo Windows Update Center
 net start wuauserv
+timeout /t "1" /nobreak >nul
 
 echo Shutdown
 exit
