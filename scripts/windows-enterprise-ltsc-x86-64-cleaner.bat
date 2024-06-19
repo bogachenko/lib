@@ -371,54 +371,70 @@ powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\Windows\Explorer\*.db
 powershell -command "Remove-item '%LOCALAPPDATA%\IconCache.db' -Force"
 powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\CLR_*' -Recurse -Force"
 powershell -command "Remove-item '%WINDIR%\System32\sru\SRU*.*' -Recurse -Force"
-powershell -command "Remove-item '%WINDIR%\Panther' -Recurse -Force"
 powershell -command "Remove-item '%WINDIR%\ServiceProfiles\NetworkService\AppData\Local\Microsoft\Windows\DeliveryOptimization' -Recurse -Force"
 powershell -command "Remove-item '%WINDIR%\ServiceProfiles\NetworkService\AppData\LocalLow\Microsoft\CryptnetUrlCache' -Recurse -Force"
 powershell -command "Remove-item '%PROGRAMDATA%\USOShared\Logs' -Recurse -Force"
 powershell -command "Remove-item '%PROGRAMDATA%\Microsoft\Windows\WER' -Recurse -Force"
-powershell -command "Remove-item '%WINDIR%\Offline Web Pages' -Recurse -Force"
-powershell -command "Remove-item '%WINDIR%\Logs' -Recurse -Force"
-powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\Windows\Temporary Internet Files' -Recurse -Force"
-powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\Windows\Caches' -Recurse -Force"
-powershell -command "Remove-item '%WINDIR%\LiveKernelReports' -Recurse -Force"
 powershell -command "Remove-item '%LOCALAPPDATA%\cache' -Recurse -Force"
-powershell -command "Remove-item '%WINDIR%\Temp' -Recurse -Force"
-powershell -command "Remove-item '%WINDIR%\SoftwareDistribution' -Recurse -Force"
-powershell -command "Remove-item '%WINDIR%\Prefetch' -Recurse -Force"
-powershell -command "Remove-item '%WINDIR%\Installer' -Recurse -Force"
-powershell -command "Remove-item '%WINDIR%\DiagTrack' -Recurse -Force"
 powershell -command "Remove-item '%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache' -Recurse -Force"
 powershell -command "Remove-item '%SYSTEMDRIVE%\$Recycle.bin' -Recurse -Force"
 powershell -command "Remove-item '%PROGRAMDATA%\Microsoft\Windows Defender' -Recurse -Force"
 powershell -command "Remove-item '%PROGRAMDATA%\Microsoft\Diagnosis' -Recurse -Force"
 powershell -command "Remove-item '%LOCALAPPDATA%\Temp' -Recurse -Force"
-powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\Windows\WebCache' -Recurse -Force"
 powershell -command "Remove-item '%LOCALAPPDATA%\ElevatedDiagnostics' -Recurse -Force"
 powershell -command "Remove-item '%APPDATA%\Microsoft\Windows\Recent' -Recurse -Force"
-
+for %%S in (
+    "DiagTrack"
+    "Installer"
+    "Prefetch"
+    "SoftwareDistribution"
+    "Temp"
+    "LiveKernelReports"
+    "Logs"
+    "Offline Web Pages"
+    "Panther"
+) do (
+    powershell -Command "Remove-Item -Path '%WINDIR%\%%~S' -Recurse -Force"
+)
+for %%S in (
+    "WebCache"
+    "Temporary Internet Files"
+    "Caches"
+) do (
+    powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\Microsoft\Windows\%%~S' -Recurse -Force"
+)
 echo Running a script to clean up the Microsoft Office.
 powershell -command "Remove-item '%APPDATA%\Microsoft\Office' -Recurse -Force"
 powershell -command "Remove-item '%LOCALAPPDATA%\Microsoft\Office' -Recurse -Force"
-
 echo Running a script to clean up the NVIDIA.
-rd "%LOCALAPPDATA%\NVIDIA\DXCache" /s /q
-rd "%LOCALAPPDATA%\NVIDIA\GLCache" /s /q
-rd "%PROGRAMDATA%\NVIDIA Corporation" /s /q
-rd "%PROGRAMDATA%\NVIDIA" /s /q
-rd "%PROGRAMDATA%\NVIDIA Corporation\Installer2" /s /q
-
+powershell -command "Remove-item '%PROGRAMDATA%\NVIDIA Corporation' -Recurse -Force"
+powershell -command "Remove-item '%PROGRAMDATA%\NVIDIA' -Recurse -Force"
+for %%S in (
+    "DXCache"
+    "GLCache"
+) do (
+    powershell -Command "Remove-Item -Path '%LOCALAPPDATA%\NVIDIA\%%~S' -Recurse -Force"
+)
 echo Running a script to clean up the Intel.
-rd "%PROGRAMDATA%\Intel" /s /q
-rd "%USERPROFILE%\AppData\LocalLow\Intel\ShaderCache" /s /q
+powershell -command "Remove-item '%PROGRAMDATA%\Intel' -Recurse -Force"
+powershell -command "Remove-item '%USERPROFILE%\AppData\LocalLow\Intel\ShaderCache' -Recurse -Force"
 
 echo Running a script to clean up the Telegram.
-powershell -command "Remove-item '%APPDATA%\Telegram Desktop\log.txt' -Force"
-powershell -command "Remove-item '%APPDATA%\Telegram Desktop\log_*.txt' -Force"
-powershell -command "Remove-item '%APPDATA%\Telegram Desktop\tdata\dumps' -Recurse -Force"
-powershell -command "Remove-item '%APPDATA%\Telegram Desktop\tdata\user_data' -Recurse -Force"
-
+for %%S in (
+    "log.txt"
+    "log_*.txt"
+) do (
+    powershell -Command "Remove-Item -Path '%APPDATA%\Telegram Desktop\%%~S' -Force"
+)
+for %%S in (
+    "dumps"
+    "user_data"
+) do (
+    powershell -Command "Remove-Item -Path '%APPDATA%\Telegram Desktop\tdata\%%~S' -Recurse -Force"
+)
 echo Running a script to clean up the Visual Studio Code.
-rd "%APPDATA%\Code\User\History" /s /q
+powershell -Command "Remove-Item -Path '%APPDATA%\Microsoft VS Code\*.log' -Force"
+powershell -command "Remove-item '%APPDATA%\Code\User\History' -Recurse -Force"
 for %%S in (
     "logs"
     "Cache"
@@ -429,10 +445,8 @@ for %%S in (
 ) do (
     powershell -Command "Remove-Item -Path '%APPDATA%\Code\%%~S' -Recurse -Force"
 )
-del "%APPDATA%\Microsoft VS Code\*.log" /s /q
-
 echo Running a script to clean up the VLC media player.
-rd "%APPDATA%\vlc\crashdump" /s /q
+powershell -Command "Remove-Item -Path '%APPDATA%\vlc\crashdump' -Recurse -Force"
 
 echo Start process
 rem Windows Explorer
