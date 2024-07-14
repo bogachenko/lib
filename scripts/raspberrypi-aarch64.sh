@@ -2,18 +2,63 @@
 
 # Raspberry Pi aarch64
 # Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
-# https://raw.githubusercontent.com/bogachenko/lib/master/scripts/raspberrypi-aarch64.sh
+# License: MIT license <https://raw.githubusercontent.com/bogachenko/lib/master/LICENSE.md>
+# Last update: July 2024
+# Donate:
+#          Bitcoin (BTC) - 1PvKpxpGRiw83afJi2kWFUXwSdxpFXLUW9
+#          Bitcoin Cash (BCH) - 1hE3asiyEzVoMPQifKq8c34yAgVE1BquX
+#          Ethereum (ETH) - 0xb08eE5bC90C2fCAFE453b7d536f158215Cca979A
+#          Ethereum Classic (ETC) - 0x908E4623Ba8a0518F2CCAb9b4123B336AE4e0078
+#          Tron (TRX) - THXmTuAbnMrUWFXPJn92YkWbEzjBDGAEXZ
+#          Toncoin (TON) - UQDohNKO4GJj4VGDNwK2GYXtnvWbwgiECYB6V6aijfS2RY28
+#          Dogecoin (DOGE) - DFuMmJb8DstHZQpqaCtQaeW5D6CVZHvqFa
+#          Litecoin (LTC) - LfW2NSBZ3UwG7Sm9MWKLjEdVt45XVZ1je2
+#          Solana (SOL) - 9oboHCvKTcwc47eFyhuYpwYcsyyvybv4qsspsbn1q9gA
+#          Ripple (XRP) - rUPys7DwSu9BPSKJNcX9NknjrMHiD6KZmL
+#          Binance Coin (BNB) uses the ETH address.
+#          Tether (USDT) uses TRX, ETH, BNB, TON or SOL addresses, depending on the type of chain chosen.
+#          USD Coin (USDC) uses TRX, ETH, BNB or SOL addresses, depending on the type of chain chosen.
+#          Binance USD (BUSD) uses TRX, ETH, BNB addresses, depending on the type of chain chosen.
+
+echo NETWORK INFORMATION RETRIEVAL.
+echo Running a script to get information about the network in the operating system.
+if ping -c 1 "1.1.1.1" >/dev/null; then
+    echo "Internet connection detected. Proceeding with the script."
+else
+    echo "No internet connection detected. Exiting script."
+    exit 1
+fi
+
+echo SUPERUSER RIGHTS RETRIEVAL.
+if [[ $(id -u) -ne 0 ]]; then
+    echo "Running a script to obtain superuser rights in the operating system."
+    exit 1
+fi
 
 echo 'Updating the package list.'
 sudo apt update;sudo apt upgrade
 
 echo 'Installing the core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes openssh-server xorg xserver-xorg x11-utils x11-xserver-utils xfonts-base xterm console-cyrillic xinit mesa-utils htop python3 python3-pip zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor xdg-utils xss-lock cmake plymouth xdg-desktop-portal xdg-user-dirs e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs jfsutils nilfs-tools ntfs-3g ca-certificates ssl-cert iptables iw vim git pwgen wget curl lshw bind9 dnsmasq hostapd encfs cryfs whois dnsutils ntp
+sudo apt install --no-install-recommends --no-install-suggests --yes \
+    openssh-server xorg xserver-xorg x11-utils x11-xserver-utils \
+    xfonts-base xterm console-cyrillic xinit mesa-utils htop python3 python3-pip \
+    zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor \
+    xdg-utils xss-lock cmake plymouth xdg-desktop-portal xdg-user-dirs \
+    e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs \
+    jfsutils nilfs-tools ntfs-3g ca-certificates ssl-cert iptables iw vim git pwgen \
+    wget curl lshw bind9 dnsmasq hostapd encfs cryfs whois dnsutils ntp
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo 'Installing the sub-core packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd lz4 lrzip arj bzip2 xz-utils i2pd nyx tor obfs4proxy privoxy fonts-ubuntu fonts-noto-color-emoji fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
+sudo apt install --no-install-recommends --no-install-suggests --yes \
+    wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils \
+    pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd \
+    lz4 lrzip arj bzip2 xz-utils i2pd nyx tor obfs4proxy privoxy fonts-ubuntu fonts-noto-color-emoji \
+    fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 echo 'Installing the extra packages.'
-sudo apt install --no-install-recommends --no-install-suggests --yes lynx chromium vlc dmz-cursor-theme sddm i3 i3lock gvfs rofi dunst libnotify-bin scrot rxvt-unicode speedtest-cli retroarch yt-dlp code qbittorrent transmission-cli systemd-resolved usb-modeswitch modemmanager network-manager ppp wireshark
+sudo apt install --no-install-recommends --no-install-suggests --yes \
+    lynx chromium vlc dmz-cursor-theme sddm i3 i3lock gvfs rofi dunst libnotify-bin \
+    scrot rxvt-unicode speedtest-cli retroarch yt-dlp code qbittorrent transmission-cli \
+    systemd-resolved usb-modeswitch modemmanager network-manager ppp wireshark
 
 echo 'Enabling services.'
 sudo systemctl restart systemd-resolved.service
