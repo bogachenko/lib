@@ -61,28 +61,38 @@ sudo apt install --no-install-recommends --no-install-suggests --yes \
     systemd-resolved usb-modeswitch modemmanager network-manager ppp wireshark
 
 echo 'Enabling services.'
-sudo systemctl restart systemd-resolved.service
-sudo systemctl enable NetworkManager.service
-sudo systemctl enable ModemManager.service
-sudo systemctl enable apparmor.service
-sudo systemctl enable i2pd.service
-sudo systemctl enable ntpd.service
-sudo systemctl enable ssh.service
-sudo systemctl enable ufw.service
-sudo systemctl enable tor.service
-sudo systemctl enable privoxy.service
-sudo systemctl enable gpm.service
-sudo systemctl enable bluetooth.service
-sudo systemctl enable ifplugd.service
-sudo systemctl enable apache2.service
-sudo systemctl enable sddm.service;sudo dpkg-reconfigure sddm
+enable_services=(
+  NetworkManager
+  ModemManager
+  apparmor
+  i2pd
+  ntpd
+  ssh
+  ufw
+  tor
+  privoxy
+  gpm
+  bluetooth
+  ifplugd
+  apache2
+  sddm
+)
+disable_services=(
+  dnsmasq
+  hostapd
+  bind9
+  named
+  mpd
+)
+for service in "${enable_services[@]}"; do
+  sudo systemctl enable "${service}.service"
+done
+for service in "${disable_services[@]}"; do
+  sudo systemctl disable "${service}.service"
+done
 systemctl --user enable --now pipewire.socket;systemctl --user enable --now pipewire-pulse.socket;systemctl --user enable --now wireplumber.service
 sudo /opt/AdGuardHome/AdGuardHome -s stop
-sudo systemctl disable dnsmasq.service
-sudo systemctl disable hostapd.service
-sudo systemctl disable bind9.service
-sudo systemctl disable named.service
-sudo systemctl disable mpd.service
+sudo systemctl restart systemd-resolved.service
 
 echo 'Enabling firewall rules.'
 sudo rm -r /etc/ufw/applications.d/*
@@ -162,7 +172,7 @@ sudo sed -i 's/Listen 80/Listen 8082/g' /etc/apache2/ports.conf
 # Configuring APT files
 curl -o ~/00-apt-conf https://raw.githubusercontent.com/bogachenko/lib/master/config/raspberrypi-aarch64/00-apt-conf;sudo mv ~/00-apt-conf /etc/apt/apt.conf.d/00-apt-conf
 # Configuring DM files
-sudo rm /etc/systemd/system/display-manager.service;sudo ln -s /lib/systemd/system/sddm.service /etc/systemd/system/display-manager.service
+sudo dpkg-reconfigure sddm;sudo rm /etc/systemd/system/display-manager.service;sudo ln -s /lib/systemd/system/sddm.service /etc/systemd/system/display-manager.service
 
 echo 'Reboot the system'
 sudo reboot -f
