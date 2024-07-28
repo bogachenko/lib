@@ -46,19 +46,18 @@ sudo apt install --no-install-recommends --no-install-suggests --yes \
     xfonts-base xterm console-cyrillic xinit mesa-utils htop python3 python3-pip \
     zsh ufw net-tools dialog ifplugd netctl perl ruby php gpm apache2 apparmor \
     xdg-utils xss-lock cmake plymouth xdg-desktop-portal xdg-user-dirs \
-    e2fsprogs xfsprogs reiserfsprogs fatresize dosfstools udftools f2fs-tools exfatprogs \
-    jfsutils nilfs-tools ntfs-3g ca-certificates ssl-cert iptables iw vim git pwgen \
-    wget curl lshw bind9 dnsmasq hostapd encfs cryfs whois dnsutils ntp
+    ca-certificates ssl-cert iptables iw vim git pwgen \
+    wget curl lshw bind9 dnsmasq hostapd encfs cryfs whois ntp
 curl -s -S -L https://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh -s -- -v
 echo 'Installing the sub-core packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes \
     wireplumber pipewire pipewire-jack pipewire-alsa pipewire-pulse alsa-utils \
-    pipewire-audio-client-libraries ffmpeg mpd ranger zip unrar p7zip unzip lzop zstd \
-    lz4 lrzip arj bzip2 xz-utils i2pd nyx tor obfs4proxy privoxy fonts-ubuntu fonts-noto-color-emoji \
+    pipewire-audio-client-libraries ffmpeg ranger zip unrar p7zip unzip \
+    i2pd nyx tor obfs4proxy privoxy fonts-ubuntu fonts-noto-color-emoji \
     fonts-noto-mono fonts-noto fonts-liberation fonts-dejavu
 echo 'Installing the extra packages.'
 sudo apt install --no-install-recommends --no-install-suggests --yes \
-    lynx chromium vlc dmz-cursor-theme sddm i3 i3lock gvfs rofi dunst libnotify-bin \
+    lynx chromium vlc mpd dmz-cursor-theme sddm i3 gvfs rofi dunst libnotify-bin \
     scrot rxvt-unicode speedtest-cli retroarch yt-dlp code qbittorrent transmission-cli \
     systemd-resolved usb-modeswitch modemmanager network-manager ppp wireshark
 
