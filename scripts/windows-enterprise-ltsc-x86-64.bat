@@ -154,6 +154,7 @@ echo Running a script to disable Windows Error Logging Services.
 for %%S in (
     "WerSvc"
     "wercplsupport"
+    "WpnService"
 ) do (
     "%sudo%" reg add "HKLM\System\CurrentControlSet\Services\%%~S" /v "Start" /t REG_DWORD /d "4" /f
     "%sudo%" sc stop "%%~S"
@@ -1360,7 +1361,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "L
 echo Running a script to disable the People icon on the taskbar in the operating system.
 for %%H in (HKCU HKLM) do reg add "%%H\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "HidePeopleBar" /t REG_DWORD /d "1" /f
 echo Running a script to clean up unnecessary items in Settings in the operating system.
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:cortana;cortana-language;cortana-moredetails;cortana-notifications;cortana-permissions;cortana-windowssearch;gaming-broadcasting;gaming-gamebar;gaming-gamedvr;gaming-gamemode;gaming-trueplay;gaming-xboxnetworking;mobile-devices;mobile-devices-addphone;mobile-devices-addphone-direct" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "SettingsPageVisibility" /t REG_SZ /d "hide:cortana;cortana-language;cortana-moredetails;cortana-notifications;cortana-permissions;cortana-windowssearch;gaming-broadcasting;gaming-gamebar;gaming-gamedvr;gaming-gamemode;gaming-trueplay;gaming-xboxnetworking;mobile-devices;mobile-devices-addphone;mobile-devices-addphone-direct;windowsdefender" /f
 echo Running a script to configure the Windows Spotlight.
 for %%H in (HKCU HKLM) do (
     for %%S in (
