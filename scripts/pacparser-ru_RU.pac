@@ -1,62 +1,26 @@
 // Proxy Auto-Configuration Parser ru_RU
-// Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
-// https://raw.githubusercontent.com/bogachenko/lib/master/scripts/pacparser-ru_RU.pac
+// License: MIT license <https://raw.githubusercontent.com/bogachenko/lib/master/LICENSE.md>
+// Last update: March 2025
+// Bitcoin (BTC) - bc1qnmderzmag45pa3a0jyaqah654x0055n6y8madh
+// Bitcoin Cash (BCH) - qzptqmjr0vrj053wgcxa5yesdlejk973xq9xctmxcg
+// Binance Coin (BNB) - 0xE4869C3140134522383E316d329612bC886F85E2
+// Ethereum (ETH) - 0xE4869C3140134522383E316d329612bC886F85E2
+// Ethereum Classic (ETC) - 0x4A11511a9C69eA1CFa8B1135c9B8A3B27c84eE55
+// Tron (TRX) - TW8ocDJLPTnVFG4Karb7zctbBfjFaZfuJn
+// Toncoin (TON) - UQA5s93oUhxmmkaivrZim1VOh9v-D6CI15jlk80FP6wWtYrw
+// Dogecoin (DOGE) - D7BHKJ4ymU5uZKrju5BbYQpSfdENc5qtr1
+// Litecoin (LTC) - ltc1q3t9hmgqyze8qlrw56rxepyw8ll44jcl7uc8z4p
+// Solana (SOL) - 5fsRA5NiQKX5GLzatbmYS7UbZ9Q2LMqdCH7pBgtrXDJM
+// Ripple (XRP) - rnEWArfEDm4yFJeG7xnvDCkW7GKperxf6t
+// Dash (DASH) - XkQFy1UfKCCpiSw391A5YYTEYEKYvxVoxE
+// Cardano (ADA) - addr1q8yjcner4yq7kgd0gleq4qf0gae2xemvvpu790nhfk7a3y8gje4zxphcq0kyg3ry5yvgtzy2huhd49l9rdwmh6khmm4se2er3a
+// Zcash (ZEC) - t1N8QRJg6jFt2m92DyFkYVDEv36ZK3JnQP2
 
 var hasOwnProperty = Object.hasOwnProperty;
 function FindProxyForURL(url, host) {
     var proxy = 'PROXY proxy-nossl.antizapret.prostovpn.org:29976; DIRECT;';
     var domains = {
-        "torproject.org": 1,
-        "facebook.com": 1,
-        "twimg.com": 1,
-        "twitter.com": 1,
-        "cdninstagram.com": 1,
-        "instagram.com": 1,
-        "ggpht.com": 1,
-        "navalny.com": 1,
-        "newtimes.ru": 1,
-        "kasparov.ru": 1,
-        "tvrain.tv": 1,
-        "meduza.io": 1,
-        "bellingcat.com": 1,
-        "voanews.com": 1,
-        "dw.com": 1,
-        "sakhalin.info": 1,
-        "tvfreedom.io": 1,
-        "unian.ua": 1,
-        "doxa.team": 1,
-        "rutracker.org": 1,
-        "rutor.org": 1,
-        "bobfilm.org": 1,
-        "kinozal.tv": 1,
-        "seedoff.net": 1,
-        "thepiratebay.org": 1,
-        "1337x.to": 1,
-        "btdig.com": 1,
-        "myrotvorets.center": 1,
-        "intel.com": 1,
-        "spotify.com": 1,
-        "prostovpn.org": 1,
-        "hdkinoteatr.com": 1,
-        "myzuka.club": 1,
-        "archive.is": 1,
-        "t.co": 1,
-        "fbcdn.net": 1,
-        "facebook.net": 1,
-        "x.com": 1,
-        "adguard.com": 1,
-        "adguard-vpn.com": 1,
-        "sakh.com": 1,
-        "fb.com": 1,
-        "ubisoft.com": 1,
-        "eneba.com": 1,
-        "4pda.ru": 1,
-        "nexta.tv": 1,
-        "linkedin.com": 1,
-        "licdn.com": 1,
-        "badoo.com": 1,
-        "bitcoin.org": 1,
-        "microsoft.com": 1
+        "127.0.0.1": 1
     };
     if (dnsDomainIs(host, ".onion"))
         return "SOCKS5 localhost:9050";

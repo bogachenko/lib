@@ -2,11 +2,10 @@
 
 title Windows 10 Enterprise LTSC Cleaner
 
-:: Windows 10 Enterprise LTSC Cleaner
-:: Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
-:: License: MIT license <https://raw.githubusercontent.com/bogachenko/lib/master/LICENSE.md>
-:: Last update: August 2024
-:: Donate:
+::  Windows 10 Enterprise LTSC Cleaner
+::  Author: Bogachenko Vyacheslav <bogachenkove@gmail.com>
+::  License: MIT license <https://raw.githubusercontent.com/bogachenko/lib/master/LICENSE.md>
+::  Last update: March 2025
 ::  Bitcoin (BTC) - bc1qnmderzmag45pa3a0jyaqah654x0055n6y8madh
 ::  Bitcoin Cash (BCH) - qzptqmjr0vrj053wgcxa5yesdlejk973xq9xctmxcg
 ::  Binance Coin (BNB) 0xE4869C3140134522383E316d329612bC886F85E2
@@ -21,8 +20,6 @@ title Windows 10 Enterprise LTSC Cleaner
 ::  Dash (DASH) - XkQFy1UfKCCpiSw391A5YYTEYEKYvxVoxE
 ::  Cardano (ADA) - addr1q8yjcner4yq7kgd0gleq4qf0gae2xemvvpu790nhfk7a3y8gje4zxphcq0kyg3ry5yvgtzy2huhd49l9rdwmh6khmm4se2er3a
 ::  Zcash (ZEC) - t1N8QRJg6jFt2m92DyFkYVDEv36ZK3JnQP2
-::  Tether (USDT) uses TRX, ETH, BNB, TON or SOL addresses, depending on the type of chain chosen.
-::  USD Coin (USDC) uses TRX, ETH, BNB or SOL addresses, depending on the type of chain chosen.
 
 echo GETTING SUPERUSER RIGHTS.
 timeout /t "1" /nobreak >nul
