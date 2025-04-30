@@ -38,27 +38,23 @@ echo 'Updating the package list.'
 sudo pacman -Syyuu
 
 echo 'Installing the core packages.'
-sudo pacman -S --needed --noconfirm xorg xorg-server xorg-xinit man-db xterm xorg-fonts-cyrillic \
+sudo pacman -S --noconfirm xorg xorg-server xorg-xinit man-db xterm xorg-fonts-cyrillic \
     xorg-fonts-misc xorg-drivers python python-pip lib32-mesa mesa-utils lib32-mesa-utils mesa-libgl \
     ufw openssh net-tools dialog ifplugd netctl lua go wpa_supplicant perl ruby php gpm apache apparmor \
     xdg-utils xss-lock cmake plymouth xdg-desktop-portal xdg-user-dirs iw iwd git wget curl lshw bind \
     dnsmasq hostapd whois ntp encfs cryfs systemd-resolvconf htop vim dhcpcd dhclient
 echo 'Installing the sub-core packages.'
-sudo pacman -S --needed --noconfirm wireplumber pipewire lib32-pipewire pipewire-jack lib32-pipewire-jack \
+sudo pacman -S --noconfirm wireplumber pipewire lib32-pipewire pipewire-jack lib32-pipewire-jack \
     pipewire-alsa pipewire-pulse alsa-utils alsa-plugins lib32-alsa-plugins ffmpeg ranger gtk2 gtk3 gtk4 \
     zip unrar p7zip unzip i2pd nyx tor privoxy noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation \
-    qt5-base qt6-base qt5-multimedia qt6-multimedia qt6-multimedia-ffmpeg jre-openjdk-headless
+    qt5-base qt6-base jre-openjdk-headless
 echo 'Installing the extra packages.'
-sudo pacman -S --needed --noconfirm vlc mpd firefox firefox-i18n-ru thunderbird thunderbird-i18n-ru chromium gimp \
-    steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko sddm i3 gvfs rofi dmenu dunst libnotify \
-    scrot rxvt-unicode speedtest-cli pwgen libreoffice-fresh libreoffice-fresh-ru discord telegram-desktop yt-dlp code colord \
-    qbittorrent ppp wireshark-qt usb_modeswitch modemmanager plasma-desktop kdeplasma-addons konsole plasma-pa plasma-nm dolphin dolphin-plugins \
-    ffmpegthumbs plasma-vault plasma-firewall bluedevil bluez bluez-utils bluez-cups cups system-config-printer plasma-systemmonitor kget \
-    kfind kdialog ksystemlog kgamma kcolorchooser colord-kde partitionmanager sddm-kcm ktimer kclock kjournald
+sudo pacman -S --noconfirm vlc mpd firefox firefox-i18n-ru thunderbird thunderbird-i18n-ru chromium gimp \
+    steam steam-native-runtime retroarch libretro wine wine-mono wine-gecko ly i3 picom gvfs rofi dunst libnotify \
+    scrot rxvt-unicode speedtest-cli pwgen libreoffice-fresh libreoffice-fresh-ru discord telegram-desktop yt-dlp code \
+    qbittorrent ppp
 
 echo 'Installing the Arch User Repository.'
 cd /tmp;git clone https://aur.archlinux.org/package-query.git;git clone https://aur.archlinux.org/yaourt.git;cd package-query/;makepkg -si;cd ..;cd yaourt/;makepkg -si
-yaourt -S --needed --noconfirm ttf-ms-fonts obfs4proxy xcursor-dmz
+yaourt -S --needed --noconfirm xcursor-dmz
 yaourt -Syua
-
-# base base-devel linux linux-headers nano dhcpcd grub
