@@ -371,19 +371,7 @@ user_pref("toolkit.winRegisterApplicationRestart", false);
 //      3 = Блокировать куки с не посещенных сайтов
 //      4 = Блокировать межсайтовые отслеживающие куки
 //      5 = Блокировать межсайтовые отслеживающие куки, а также изолировать другие межсайтовые отслеживающие куки
-user_pref("network.cookie.cookieBehavior", 4);
-
-// Storage API
-// [NOTE] Disables another way for sites to store their data on the users personal computer.
-// API Хранилища
-// [ЗАМЕТКА] Отключает еще один способ для сайтов хранить свои данные на персональном компьютере пользователя.
-user_pref("dom.storageManager.enabled", false);
-
-// Additional analytics sent to the web server
-// [NOTE] HTTP-data leaking from UserAgent to the server, especially when leaving the page.
-// Дополнительная аналитика, отправленная на веб-сервер
-// [ЗАМЕТКА] HTTP-данные утекающих от UserAgent на сервер, особенно при покидании страницы.
-user_pref("beacon.enabled", false);
+user_pref("network.cookie.cookieBehavior", 0);
 
 // Collecting HTML video statistics
 // Сбор HTML-видеостатистики
@@ -502,12 +490,6 @@ user_pref("network.IDN_show_punycode", true);
 // API для обработки файлов
 // [ЗАМЕТКА] Отвечает за доступ к более низкоуровневым файловым операциям.
 user_pref("dom.fileHandle.enabled", false);
-
-// Device storage API
-// [NOTE] Responsible for access to the file system, this API allows the browser to read and/or write to the users files.
-// API хранилища устройств
-// [ЗАМЕТКА] Отвечает за доступ к файловой системе, данный API позволяет браузеру самостоятельно читать и/или писать в файлах пользователя.
-user_pref("device.storage.enabled", false);
 
 // Bookmark save format
 //      TRUE = Save to HTML
