@@ -267,10 +267,6 @@ user_pref("browser.promo.focus.enabled", false);
 user_pref("browser.promo.pin.enabled", false);
 user_pref("identity.sendtabpromo.url", "");
 
-// PingCentre telemetry
-// Телеметрия ПингЦентра
-user_pref("browser.ping-centre.telemetry", false);
-
 // Recommended themes and extensions
 // Рекомендованные темы и расширения
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
@@ -307,7 +303,6 @@ user_pref("services.sync.engine.tabs", false);
 // Веб-уведомления
 // [ЗАМЕТКА] Данные отсылаются на сайт(ы) не открытые в данный момент в браузере.
 user_pref("dom.webnotifications.enabled", false);
-user_pref("dom.webnotifications.serviceworker.enabled", false);
 user_pref("dom.webnotifications.requireuserinteraction", false);
 user_pref("dom.push.enabled", false);
 user_pref("dom.push.connection.enabled", false);
@@ -326,10 +321,6 @@ user_pref("browser.cache.disk.capacity", 0);
 //      TRUE = Хранить их до тех пор, пока браузер не закроется
 //      FALSE = Хранить их
 user_pref("permissions.memory_only", true);
-
-// Offline cache
-// Автономный кэш
-user_pref("browser.cache.offline.enable", false);
 
 // Storing extra session data
 //      0 = Everywhere
@@ -371,26 +362,11 @@ user_pref("toolkit.winRegisterApplicationRestart", false);
 //      3 = Блокировать куки с не посещенных сайтов
 //      4 = Блокировать межсайтовые отслеживающие куки
 //      5 = Блокировать межсайтовые отслеживающие куки, а также изолировать другие межсайтовые отслеживающие куки
-user_pref("network.cookie.cookieBehavior", 0);
+user_pref("network.cookie.cookieBehavior", 4);
 
 // Collecting HTML video statistics
 // Сбор HTML-видеостатистики
 user_pref("media.video_stats.enabled", false);
-
-// Types of content
-// Типы содержимого
-user_pref("gecko.handlerService.schemes.mailto.0.name", "");
-user_pref("gecko.handlerService.schemes.mailto.0.uriTemplate", "");
-user_pref("gecko.handlerService.schemes.mailto.1.name", "");
-user_pref("gecko.handlerService.schemes.mailto.1.uriTemplate", "");
-user_pref("gecko.handlerService.schemes.mailto.2.name", "");
-user_pref("gecko.handlerService.schemes.mailto.2.uriTemplate", "");
-user_pref("gecko.handlerService.schemes.mailto.3.name", "");
-user_pref("gecko.handlerService.schemes.mailto.3.uriTemplate", "");
-
-// Sending telemetry data and website address, about where and how the plugin failed
-// Отправка телеметрических данных и адреса сайта, о том, где и как произошел сбой плагина
-user_pref("dom.ipc.plugins.reportCrashURL", false);
 
 // Autocomplete user name and password
 // Aвтоматическое заполнение имени пользователя и пароля
@@ -437,16 +413,6 @@ user_pref("network.predictor.enable-prefetch", false);
 // Ограничения WebExtension для определенных доменов Mozilla
 user_pref("extensions.webextensions.restrictedDomains", "");
 
-// Install add-ons without signatures
-// Установка дополнений без подписей
-user_pref("xpinstall.signatures.required", false);
-
-// Service Workers
-// [NOTE] "Service workers" essentially act as proxy servers that sit between web apps, and the browser and network, are event driven, and can control the web page/site it is associated with, intercepting and modifying navigation and resource requests, and caching resources. This heavily loads the system resources and takes up most of the RAM.
-// Service Workers
-// [ЗАМЕТКА] "Service workers" по существу действуют как прокси-серверы, которые находятся между веб-приложениями, браузером и сетью, управляются событиями и могут управлять веб-страницей или сайтом, с которыми они связаны, перехватывать и изменять запросы навигации и ресурсов, а также кэшировать ресурсы. Это сильно нагружает ресурсы системы и занимает большую часть оперативной памяти.
-user_pref("dom.serviceWorkers.enabled", false);
-
 // Thumbnails of visited pages
 //      TRUE = Page thumbnails will not be created
 //      FALSE = Page thumbnails will be created
@@ -459,10 +425,6 @@ user_pref("browser.pagethumbnails.capturing_disabled", true);
 // Тур по интерфейсу пользователя
 user_pref("browser.uitour.enabled", false);
 
-// Web channel whitelist
-// Белый список веб-каналов
-user_pref("webchannel.allowObject.urlWhitelist", "");
-
 // Block pop-ups
 // Блокировать всплывающие окна
 user_pref("dom.disable_open_during_load", true);
@@ -471,7 +433,7 @@ user_pref("dom.disable_window_move_resize", true);
 
 // Maximum number of pop-ups
 // Максимальное количество всплывающих окон
-user_pref("dom.popup_maximum", 3);
+user_pref("dom.popup_maximum", 5);
 
 // Limit events that can trigger a popup
 // Ограничить события, которые могут вызвать всплывающее окно
@@ -484,12 +446,6 @@ user_pref("permissions.manager.defaultsUrl", "");
 // Force punycode for internationalized domain names
 // Принудительное использование Юникода для интернационализированных доменных имен
 user_pref("network.IDN_show_punycode", true);
-
-// File handle API
-// [NOTE] Responsible for accessing lower-level file operations.
-// API для обработки файлов
-// [ЗАМЕТКА] Отвечает за доступ к более низкоуровневым файловым операциям.
-user_pref("dom.fileHandle.enabled", false);
 
 // Bookmark save format
 //      TRUE = Save to HTML
@@ -605,10 +561,6 @@ user_pref("browser.contentblocking.report.monitor.enabled", false);
 // Studies
 user_pref("app.shield.optoutstudies.enabled", false);
 
-// Predicting the domains of the url in the address bar
-// Предугадывание доменов URL-адреса в адресной строке
-user_pref("browser.fixup.alternate.enabled", false);
-
 // Display all parts of a URL in the address bar
 // Отображение все частей URL-адреса в адресной строке
 user_pref("browser.urlbar.trimURLs", false);
@@ -623,10 +575,8 @@ user_pref("geo.enabled", false);
 
 // Search region
 // Регион поиска
-user_pref("browser.search.region", "US");
 user_pref("geo.provider.network.url", "");
 user_pref("geo.provider.ms-windows-location", false);
-user_pref("geo.provider.use_gpsd", false);
 user_pref("browser.region.network.url", "");
 user_pref("browser.region.update.enabled", false);
 
@@ -694,4 +644,3 @@ user_pref("doh-rollout.clearModeOnShutdown", false);
 // Автоматический страниц перевод в Firefox
 user_pref("browser.translations.automaticallyPopup", false);
 user_pref("browser.translations.enable", false);
-user_pref("browser.translations.panelShown", false);
